@@ -1,0 +1,88 @@
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Profiles\AllianceGarrisonLevel3.xml
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Profiles\AllianceGarrison.xml
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Profiles\HordeGarrison.xml
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Properties\Resources.resx
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControlDebugEntry.resx
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.CraftingProfession.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Cache.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Disenchant.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.ItemInteraction.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Move.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Salvage.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.SellRepair.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.TargetUnit.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.WorkOrders.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Missions.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.FinalizePlots.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Herb.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Mine.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Prechecks.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Quests.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Enums\CombatAbilities.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\GarrisonManager.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\FollowerAbility.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\Building.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Enums\BuildingType.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Enums\PlotSize.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\ReagentInfo.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\WorkOrder.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Enums\WorkOrderType.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\CacheStaticLookUp.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\CacheCollection.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Config.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Config.Designer.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Coroutines.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\Follower.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\GarrisonBase.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\LuaCommands.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\LuaCommands.Followers.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\LuaCommands.Mission.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\LuaEvents.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Objects\Mission.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Movement.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MovementCache.Alliance.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MovementCache.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MovementCache.Horde.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Properties\AssemblyInfo.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Properties\Resources.Designer.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Garrison\Enums\RewardTypes.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Settings.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControlDebugEntry.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControlDebugEntry.designer.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Addon\Herbfunk.lua
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Addon\Herbfunk.toc
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\GarrisonBase.dll
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\GarrisonBase.pdb
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\Herbfunk.GarrisonBase.Config.resources
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\Herbfunk.GarrisonBase.Properties.Resources.resources
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\Herbfunk.GarrisonBase.UserControlDebugEntry.resources
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\GarrisonBase.csproj.GenerateResource.Cache
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\GarrisonBase.dll
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\GarrisonBase.pdb
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\Objects\CGossipQuestEntry.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\Objects\FrameInfo.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\Objects\GossipFrameInfo.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\Objects\QuestFrameInfo.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\Objects\CPlayerQuest.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Quest\QuestManager.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Enums\BlacklistType.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Objects\C_WoWItem.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Objects\C_WoWGameObject.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Objects\C_WoWObject.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Objects\C_WoWUnit.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\ObjectCacheManager.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Player\Player.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Player\PlayerProfessions.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Player\PlayerInventory.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Cache\Enums\WoWObjectTypes.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\Behavior.Mail.cs
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\Herbfunk.GarrisonBase.MailAddNewItem.resources
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MailAddNewItem.resx
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MailAddNewItem.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\MailAddNewItem.Designer.cs
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\Herbfunk.GarrisonBase.UserControl_MissionReward.resources
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControl_MissionReward.resx
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControl_MissionReward.cs
+C:\Users\Amault\Desktop\hb\Bots\GarrisonBase\UserControl_MissionReward.Designer.cs
+C:\Users\Amault\Documents\Visual Studio 2013\Projects\GarisonBase\GarisonBase\obj\Debug\GarrisonBase.csprojResolveAssemblyReference.cache

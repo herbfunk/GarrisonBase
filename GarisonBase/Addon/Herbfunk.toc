@@ -1,0 +1,11 @@
+## Version: v10012
+## Interface: 60000
+## Title: Herbfunk
+## Notes: None!
+## Author: Herbfunk
+
+## LoadOnDemand: 1
+## LoadWith: Blizzard_GarrisonUI
+## Dependencies: Blizzard_GarrisonUI
+
+Herbfunk.lua
