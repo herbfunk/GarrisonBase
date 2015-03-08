@@ -110,7 +110,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             {WorkOrderType.Tailoring, "Tailoring Work Order"},
             {WorkOrderType.WarMill, "War Mill Work Order"},
             {WorkOrderType.DwarvenBunker, "Dwarven Bunker Work Order"},
-            {WorkOrderType.Barn, "Barn Work Order"}
+            {WorkOrderType.Barn, "Barn Work Order"},
+            {WorkOrderType.None, "Crate"}
         };
         
         #endregion
@@ -163,16 +164,16 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         * 87121 - Blackrock Ore
         * 
         * Alliance
-        * 87207 - ?
+        * 87207 - Draenic Dust
         * 87208 - Fireweed
         * 87209 - Frostweed
         * 87210 - Raw Beast Hide
         * 87211 - True Iron Ore
-        * 87212 - ?
+        * 87212 - Talador Orchid
         * 87213 - Sumptuous Fur
         * 87214 - Starflower
         * 87215 - Nagrand Arrowbloom
-        * 87216 - ?
+        * 87216 - Gorgrond Flytrap
         * 87217 - Blackrock Ore
         */
 

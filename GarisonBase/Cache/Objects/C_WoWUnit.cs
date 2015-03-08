@@ -1,4 +1,5 @@
 ﻿using System;
+using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx.CommonBot;
 using Styx.WoWInternals.WoWObjects;
@@ -23,11 +24,7 @@ namespace Herbfunk.GarrisonBase.Cache
 
             return base.IsStillValid();
         }
-        public override bool RequiresUpdate
-        {
-            get { return _requiresUpdate; }
-        }
-        private bool _requiresUpdate = true;
+
 
         public override bool Update()
         {
@@ -39,20 +36,49 @@ namespace Herbfunk.GarrisonBase.Cache
                 else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
                 {
                     SubType = WoWObjectTypes.GarrisonCommandTable;
-                    _requiresUpdate = false;
+                    //IgnoreRemoval = true;
+                    RequiresUpdate = false;
                 }
                 else if (CacheStaticLookUp.MineQuestMobIDs.Contains(Entry) ||
                          CacheStaticLookUp.HerbQuestMobIDs.Contains(Entry))
                 {
                     Targeting.Instance.TargetList.Add(ref_WoWUnit);
                     LootTargeting.Instance.TargetList.Add(ref_WoWUnit);
+                    LootDistance = 5f;
                     _shouldLoot = true;
+                }
+                else if (Entry == GarrisonManager.PrimalTraderID)
+                {
+                    SubType = WoWObjectTypes.PrimalTrader;
+                    RequiresUpdate = false;
                 }
             }
             Location = ref_WoWUnit.Location;
             IsDead=ref_WoWUnit.IsDead;
-            if (IsDead && _shouldLoot) LootTargeting.Instance.TargetList.Add(ref_WoWUnit);
             Lootable = ref_WoWUnit.Lootable;
+
+            if (IsDead)
+            {
+                if (Lootable && _shouldLoot)
+                {
+                    LootTargeting.Instance.TargetList.Add(ref_WoWUnit);
+
+                    if (ObjectCacheManager.ShouldLoot)
+                    {
+                        if (ObjectCacheManager.LootableObject == null ||
+                            (!ObjectCacheManager.LootableObject.Equals(this) &&
+                             ObjectCacheManager.LootableObject.CentreDistance > CentreDistance))
+                        {
+                            if (ref_WoWUnit.InLineOfSight)
+                                ObjectCacheManager.LootableObject = this;
+                        }
+                    }
+                }
+                else
+                {
+                    RequiresUpdate = false;
+                }
+            }
 
             return true;
         }

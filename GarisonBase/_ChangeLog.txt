@@ -1,0 +1,10 @@
+﻿v1.0.1.0
+
+Mailing Behaviors
+	-Getting mail will now be more human like.
+	-Sending mail for specific items will make sure to keep the on count set and send only the extra.
+
+Added a Blacklist for Object Cache entry ids for common found NPCs and Game objects that should always be ignored.
+Current Loot Object will now be set based on distance (nearest will always be chosen if possible)
+Added Exchange Primal Trader Behavior (only one possible item can be set for exchanging)
+Crafting Profession behavior for engineering will now check for forge and move if possible.

@@ -8,18 +8,24 @@ namespace Herbfunk.GarrisonBase
     {
         internal static readonly WoWPoint HordeSmallPlot18SafePoint = new WoWPoint(5644.31, 4518.49, 119.22);
         internal static readonly WoWPoint HordeSmallPlot18Entrance = new WoWPoint(5642.857, 4514.143, 119.9609);
-
+        internal static readonly WoWPoint HordeSmallPlot18WorkOrderPoint = new WoWPoint(5650.948,4511.86,119.2701);
+        
         internal static readonly WoWPoint HordeSmallPlot19SafePoint = new WoWPoint(5650.921, 4543.233, 119.1478);
         internal static readonly WoWPoint HordeSmallPlot19Entrance = new WoWPoint(5660.101, 4546.847, 120.1033);
-
+        internal static readonly WoWPoint HordeSmallPlot19WorkOrderPoint = new WoWPoint(5654.194,4552.898,119.2681);
+        
         internal static readonly WoWPoint HordeSmallPlot20SafePoint = new WoWPoint(5628.176, 4521.718, 119.26);
         internal static readonly WoWPoint HordeSmallPlot20Entrance = new WoWPoint(5622.267, 4514.931, 119.9431);
-
+        internal static readonly WoWPoint HordeSmallPlot20WorkOrderPoint = new WoWPoint(5628.583, 4510.27, 119.2702);
+        
         internal static readonly WoWPoint HordeMediumPlot22SafePoint = new WoWPoint(5551.187, 4521.895, 131.1648);
         internal static readonly WoWPoint HordeMediumPlot22Entrance = new WoWPoint(5540.719, 4521.523, 132.2882);
+        internal static readonly WoWPoint HordeMediumPlot22WorkOrderPoint = new WoWPoint(5544.464,4516.489,132.2224);
         
+        //
         internal static readonly WoWPoint HordeMediumPlot25SafePoint = new WoWPoint(5678.497, 4484.875, 130.1029);
         internal static readonly WoWPoint HordeMediumPlot25Entrance = new WoWPoint(5683.659, 4484.063, 131.0837);
+        internal static readonly WoWPoint HordeMediumPlot25WorkOrderPoint = new WoWPoint(5685.945,4488.408,131.0202);
         
         internal static readonly WoWPoint HordeLargePlot23SafePoint = new WoWPoint(5588.029, 4483.632, 130.3161);
         internal static readonly WoWPoint HordeLargePlot23Entrance = new WoWPoint(5585.418, 4476.083, 130.671);
@@ -29,6 +35,10 @@ namespace Herbfunk.GarrisonBase
         
         internal static readonly WoWPoint HordeMineSafePoint = new WoWPoint(5474.757, 4443.908, 144.6317);
         internal static readonly WoWPoint HordeHerbSafePoint = new WoWPoint(5416.397, 4562.327, 138.6368);
+
+        internal static readonly WoWPoint HordePrimalTraderLevel2 = new WoWPoint(5627.185,4463.037,130.2032);
+        internal static readonly WoWPoint HordePrimalTraderLevel3 = new WoWPoint(5578.712,4389.038,136.4498);
+
 
         private static readonly Vector2 Horde_Garrison_North0 = new Vector2(5730.992f, 4517.743f);
         private static readonly Vector2 Horde_Garrison_North1 = new Vector2(5709.716f, 4447.305f);

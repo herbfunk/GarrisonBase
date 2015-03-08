@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bots.Grind;
+using Bots.Professionbuddy.Dynamic;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
@@ -12,6 +13,7 @@ using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.CommonBot.Routines;
+using Styx.Pathing;
 using Styx.TreeSharp;
 using Styx.WoWInternals;
 
@@ -76,23 +78,12 @@ namespace Herbfunk.GarrisonBase
                 _herbQuest.Initalize();
             }
 
-            if (await DeathBehavior.ExecuteCoroutine())
-                return true;
 
-            if (StyxWoW.Me.Combat && await CombatBehavior.ExecuteCoroutine())
-                return true;
+            //if (!StyxWoW.Me.IsAlive || StyxWoW.Me.Combat || RoutineManager.Current.NeedRest)
+            //    return false;
 
-            if (await VendorBehavior.ExecuteCoroutine())
+            if (await PreCheckCoroutines())
                 return true;
-
-            if (await CheckLootFrame())
-                return true;
-
-            if (await LootBehavior.ExecuteCoroutine())
-                return true;
-
-            if (!StyxWoW.Me.IsAlive || StyxWoW.Me.Combat || RoutineManager.Current.NeedRest)
-                return false;
 
             if (await PreChecks.BehaviorRoutine()) 
                 return true;
@@ -114,6 +105,20 @@ namespace Herbfunk.GarrisonBase
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
 
                 GarrisonManager.Initalize();
+
+                if (!LuaEvents.LuaAddonInjected)
+                {
+                    if (LuaCommands.TestLuaInjectionCode())
+                    {//Prevent multiple injections by checking simple function return!
+                        LuaEvents.LuaAddonInjected = true;
+                    }
+                    else
+                    {
+                        await LuaEvents.InjectLuaAddon();
+                        return true;
+                    }
+                }
+
                 return true;
             }
 
@@ -191,9 +196,6 @@ namespace Herbfunk.GarrisonBase
             //Insert new missions behavior at beginning!
             Behaviors.Clear();
             CurrentBehavior = null;
-
-            
-            
 
             //Move to entrance!
             Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
@@ -319,6 +321,9 @@ namespace Herbfunk.GarrisonBase
             //Sell and Repair
             Behaviors.Add(new Behaviors.BehaviorSellRepair(GarrisonManager.SellRepairNpcId, MovementCache.SellRepairNpcLocation));
 
+            //Primal Spirit Exchange
+            Behaviors.Add(new Behaviors.BehaviorPrimalTrader());
+
             //Send any mail..
             Behaviors.Add(new Behaviors.BehaviorSendMail());
 
@@ -380,7 +385,87 @@ namespace Herbfunk.GarrisonBase
             if (await LootBehavior.ExecuteCoroutine())
                 return true;
 
+            if (await LootObject())
+                return true;
+
+            if (await CheckLootFrame())
+                return true;
+
             return false;
+        }
+
+        private static Movement _lootMovement;
+        internal static async Task<bool> LootObject()
+        {
+            if (ObjectCacheManager.ShouldUpdateObjectCollection)
+                ObjectCacheManager.UpdateCache();
+
+            if (!ObjectCacheManager.ShouldLoot || ObjectCacheManager.LootableObject == null)
+            {
+                _lootMovement = null;
+                return false;
+            }
+
+            if (!ObjectCacheManager.LootableObject.IsStillValid())
+            {
+                ObjectCacheManager.LootableObject.RequiresUpdate = false;
+                _lootMovement = null;
+                return false;
+            }
+
+            if (_lootMovement == null)
+            {
+                _lootMovement = new Movement(ObjectCacheManager.LootableObject.Location,
+                    ObjectCacheManager.LootableObject.LootDistance);
+            }
+            else if (_lootMovement.CurrentMovementQueue.Count == 0)
+            {
+                _lootMovement = new Movement(ObjectCacheManager.LootableObject.Location,
+                    ObjectCacheManager.LootableObject.LootDistance-=0.25f);
+            }
+
+            TreeRoot.StatusText = String.Format("Behavior Looting Movement {0}", ObjectCacheManager.LootableObject.Name);
+            MoveResult result = await _lootMovement.MoveTowards();
+
+            if (ObjectCacheManager.LootableObject.WithinInteractRange)
+            {
+                TreeRoot.StatusText = String.Format("Behavior Looting {0}", ObjectCacheManager.LootableObject.Name);
+                if (StyxWoW.Me.IsMoving)
+                {
+                    await CommonCoroutines.StopMoving();
+                }
+
+                await CommonCoroutines.SleepForLagDuration();
+                await Coroutine.Sleep(StyxWoW.Random.Next(1001, 1999));
+
+                if (ObjectCacheManager.LootableObject.IsStillValid())
+                {
+                    bool success = await CommonCoroutines.WaitForLuaEvent(
+                    "LOOT_OPENED",
+                    7500,
+                    () => LuaEvents.LootOpened,
+                    ObjectCacheManager.LootableObject.Interact);
+
+                    if (success)
+                    {
+                        ObjectCacheManager.LootableObject.RequiresUpdate = false;
+                        _lootMovement = null;
+                    }
+                }
+
+                return true;
+            }
+
+
+            if (result == MoveResult.Failed)
+            {
+                TreeRoot.StatusText = String.Format("Behavior Looting Movement FAILED for {0}", ObjectCacheManager.LootableObject.Name);
+                ObjectCacheManager.LootableObject.RequiresUpdate = false;
+                _lootMovement = null;
+                return false;
+            }
+
+            return true;
         }
         
 

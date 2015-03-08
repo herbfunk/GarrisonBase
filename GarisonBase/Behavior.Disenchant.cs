@@ -26,7 +26,7 @@ namespace Herbfunk.GarrisonBase
                            GarrisonManager.Buildings[BuildingType.EnchantersStudy].EntranceMovementPoint},
                     GarrisonManager.DisenchantingEntryId)
             {
-                _finalmovement = new Movement(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint, 3f);
+                _finalmovement = new Movement(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint, 6f);
             }
             public override Func<bool> Criteria
             {
@@ -36,15 +36,18 @@ namespace Herbfunk.GarrisonBase
                         Player.Inventory.GetBagItemsDisenchantable().Count > 0;
                 }
             }
-            public C_WoWGameObject GarrisonResourceCacheObject
+            public C_WoWGameObject DisenchantingObject
             {
                 get { return ObjectCacheManager.GetWoWGameObjects(GarrisonManager.DisenchantingEntryId).FirstOrDefault(); }
             }
             public override async Task<bool> Movement()
             {
-                if (GarrisonResourceCacheObject != null)
+                var items = Player.Inventory.GetBagItemsDisenchantable();
+                if (items.Count == 0) return false;
+
+                if (DisenchantingObject != null)
                 {
-                    if (GarrisonResourceCacheObject.GetCursor == WoWCursorType.InteractCursor)
+                    if (DisenchantingObject.GetCursor == WoWCursorType.InteractCursor)
                     {
                         return false;
                     }
@@ -54,7 +57,7 @@ namespace Herbfunk.GarrisonBase
                 if (await base.Movement()) return true;
 
                 TreeRoot.StatusText = String.Format("Behavior {0} Movement2", Type.ToString());
-                if (GarrisonResourceCacheObject == null)
+                if (DisenchantingObject == null)
                 {
                     //Error Cannot find object!
                     IsDone = true;
@@ -64,7 +67,7 @@ namespace Herbfunk.GarrisonBase
                 //Move to the interaction object (within 6.7f)
                 if (_movement == null)
                 {
-                    _movement = new Movement(GarrisonResourceCacheObject.Location, 6.7f);
+                    _movement = new Movement(DisenchantingObject.Location, 6.7f);
                 }
 
                 return await _movement.MoveTo();
@@ -112,7 +115,7 @@ namespace Herbfunk.GarrisonBase
                                             "CURRENT_SPELL_CAST_CHANGED", 
                                             StyxWoW.Random.Next(555,2002), 
                                             null,
-                                            GarrisonResourceCacheObject.Interact);
+                                            DisenchantingObject.Interact);
 
 
                 await CommonCoroutines.SleepForRandomUiInteractionTime();

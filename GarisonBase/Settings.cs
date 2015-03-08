@@ -40,7 +40,6 @@ namespace Herbfunk.GarrisonBase
     {
         internal static BaseSettings CurrentSettings = new BaseSettings();
 
-        public int MissionMinimumSucessRate { get; set; }
 
         public int ReservedGarrisonResources { get; set; }
         public int MissionRewardPriorityGarrison { get; set; }
@@ -121,6 +120,12 @@ namespace Herbfunk.GarrisonBase
         public bool BehaviorRepairSell { get; set; }
         public bool BehaviorSalvaging { get; set; }
 
+
+        public bool HBRelog_SkipToNextTask { get; set; }
+
+        public bool ExchangePrimalSpirits { get; set; }
+        public string PrimalSpiritItem { get; set; }
+
         public BaseSettings()
         {
             MailAutoSend = false;
@@ -153,7 +158,6 @@ namespace Herbfunk.GarrisonBase
             BehaviorRepairSell = true;
             BehaviorSalvaging = true;
 
-            MissionMinimumSucessRate = 100;
             ReservedGarrisonResources = 0;
 
             MissionRewardPriorityContracts = 5;
@@ -179,6 +183,11 @@ namespace Herbfunk.GarrisonBase
             MissionRewardSuccessCharacterItems = 100;
             MissionRewardSuccessContracts = 100;
             MissionRewardSuccessRushOrders = 100;
+
+            HBRelog_SkipToNextTask = true;
+
+            ExchangePrimalSpirits = false;
+            PrimalSpiritItem = string.Empty;
             
             LastCheckedHerbString = "0001-01-01T00:00:00";
             LastCheckedMineString = "0001-01-01T00:00:00";

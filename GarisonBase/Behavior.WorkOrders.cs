@@ -27,30 +27,23 @@ namespace Herbfunk.GarrisonBase
             }
             public override void Initalize()
             {
-                if (Building.BuildingPolygon != null && !Building.BuildingPolygon.LocationInsidePolygon(StyxWoW.Me.Location))
-                    MovementPoints.Insert(0, Building.BuildingPolygon.Entrance);
+                //if (Building.BuildingPolygon != null && !Building.BuildingPolygon.LocationInsidePolygon(StyxWoW.Me.Location))
+                //    MovementPoints.Insert(0, Building.BuildingPolygon.Entrance);
 
                 base.Initalize();
             }
 
             public Building Building { get; set; }
-            public override C_WoWObject InteractionObject
-            {
-                get
-                {
-                    if (_interactionObject == null)
-                        _interactionObject = ObjectCacheManager.GetWoWObjects(Building.WorkOrderObjectName).FirstOrDefault();
-                    else if (!_interactionObject.IsValid)
-                        _interactionObject = null;
-                    return _interactionObject;
-                }
-                set { _interactionObject = value; }
-            }
-            private C_WoWObject _interactionObject;
 
             public C_WoWGameObject WorkOrderObject
             {
-                get { return ObjectCacheManager.GetWoWGameObjects(Building.WorkOrderObjectName).FirstOrDefault(); }
+                get
+                {
+                    C_WoWGameObject obj;
+                    obj=ObjectCacheManager.GetWoWGameObjects(Building.WorkOrderObjectName).FirstOrDefault() ??
+                        ObjectCacheManager.GetWoWGameObjects("Crate").FirstOrDefault();
+                    return obj;
+                }
             }
 
             public override Func<bool> Criteria
@@ -155,8 +148,8 @@ namespace Herbfunk.GarrisonBase
 
             public override void Initalize()
             {
-                if (Building.BuildingPolygon != null && !Building.BuildingPolygon.LocationInsidePolygon(StyxWoW.Me.Location))
-                    MovementPoints.Insert(0, Building.BuildingPolygon.Entrance);
+                //if (Building.BuildingPolygon != null && !Building.BuildingPolygon.LocationInsidePolygon(StyxWoW.Me.Location))
+                //    MovementPoints.Insert(0, Building.BuildingPolygon.Entrance);
 
                 MovementPoints.Add(Building.EntranceMovementPoint);
 

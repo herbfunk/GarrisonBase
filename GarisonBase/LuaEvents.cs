@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
+using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Properties;
 using Herbfunk.GarrisonBase.Quest;
 using Herbfunk.GarrisonBase.Quest.Objects;
+using Styx;
 using Styx.CommonBot.Frames;
 using Styx.WoWInternals;
 
@@ -61,6 +64,7 @@ namespace Herbfunk.GarrisonBase
         public static event LuaEventFired OnGarrisonMissionNpcClosed;
         public static event LuaEventFired OnGarrisonLandingPageShow;
         public static event LuaEventFired OnGarrisonMissionFinished;
+        public static event LuaEventFired OnGarrisonBuildingActivatable;
         public static void GARRISON_MISSION_STARTED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission Started!") + "\r\n{0}", args.ToString());
@@ -99,6 +103,12 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.DebugLuaEvent("LuaEvent: GARRISON_MISSION_FINISHED");
             if (OnGarrisonMissionFinished != null) OnGarrisonMissionFinished();
         }
+        public static void GARRISON_BUILDING_ACTIVATABLE(object sender, LuaEventArgs args)
+        {
+            GarrisonBase.DebugLuaEvent("LuaEvent: GARRISON_BUILDING_ACTIVATABLE");
+            if (OnGarrisonBuildingActivatable != null) OnGarrisonBuildingActivatable();
+        }
+        //
 
         public static event LuaEventFired OnShipmentCrafterOpened;
         public static event LuaEventFired OnShipmentCrafterClosed;
@@ -320,6 +330,7 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.AttachEvent("GARRISON_MISSION_NPC_OPENED", GARRISON_MISSION_NPC_OPENED);
             Lua.Events.AttachEvent("GARRISON_MISSION_NPC_CLOSED", GARRISON_MISSION_NPC_CLOSED);
             Lua.Events.AttachEvent("GARRISON_SHOW_LANDING_PAGE", GARRISON_SHOW_LANDING_PAGE);
+            Lua.Events.AttachEvent("GARRISON_BUILDING_ACTIVATABLE", GARRISON_BUILDING_ACTIVATABLE);
 
             Lua.Events.AttachEvent("SHIPMENT_CRAFTER_OPENED", SHIPMENT_CRAFTER_OPENED);
             Lua.Events.AttachEvent("SHIPMENT_CRAFTER_CLOSED", SHIPMENT_CRAFTER_CLOSED);
@@ -380,6 +391,7 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.DetachEvent("GARRISON_MISSION_NPC_OPENED", GARRISON_MISSION_NPC_OPENED);
             Lua.Events.DetachEvent("GARRISON_MISSION_NPC_CLOSED", GARRISON_MISSION_NPC_CLOSED);
             Lua.Events.DetachEvent("GARRISON_SHOW_LANDING_PAGE", GARRISON_SHOW_LANDING_PAGE);
+            Lua.Events.DetachEvent("GARRISON_BUILDING_ACTIVATABLE", GARRISON_BUILDING_ACTIVATABLE);
 
             Lua.Events.DetachEvent("SHIPMENT_CRAFTER_OPENED", SHIPMENT_CRAFTER_OPENED);
             Lua.Events.DetachEvent("SHIPMENT_CRAFTER_CLOSED", SHIPMENT_CRAFTER_CLOSED);
@@ -427,11 +439,14 @@ namespace Herbfunk.GarrisonBase
 
         internal static bool LuaAddonInjected = false;
 
-        internal static void InjectLuaAddon()
+        internal static async Task<bool> InjectLuaAddon()
         {
             GarrisonBase.Log("Injecting Lua Code");
+
+            await Coroutine.Yield();
             Lua.DoString(Resources.LuaString);
-            LuaAddonInjected = true;
+            await Coroutine.Sleep(1000);
+            return false;
         }
     }
 }

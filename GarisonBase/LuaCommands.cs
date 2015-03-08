@@ -20,7 +20,9 @@ namespace Herbfunk.GarrisonBase
             GarrisonMissionFrame_MissionTab_MissionPage_StartMissionButton,
             GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton,
             GarrisonMissionFrame_MissionComplete_NextMissionButton,
-
+            InboxNextPageButton,
+            InboxPrevPageButton,
+            OpenMailFrameCloseButton,
         }
 
         public static bool IsButtonEnabled(ButtonNames name)
@@ -175,6 +177,29 @@ namespace Herbfunk.GarrisonBase
             return ret;
         }
 
+        public static void PickupContainerItem(int bagIndex, int bagSlot)
+        {
+            GarrisonBase.Debug("LuaCommand: PickupContainerItem {0} / {1}", bagIndex, bagSlot);
+            Lua.DoString(String.Format("PickupContainerItem(\"{0}\"" + ", \"{1}\");", bagIndex, bagSlot));
+        }
+        public static bool CursorHasItem()
+        {
+            GarrisonBase.Debug("LuaCommand: CursorHasItem");
+            return Lua.GetReturnValues(String.Format("return CursorHasItem()"))[0].ToInt32()==1;
+        }
+
+        public static void ClearCursor()
+        {
+            GarrisonBase.Debug("LuaCommand: ClearCursor");
+            Lua.DoString("ClearCursor()");
+        }
+
+        public static void SplitContainerItem(int bagindex, int bagslot, int count)
+        {
+            GarrisonBase.Debug("LuaCommand: SplitContainerItem {0} / {1} - Count {2}", bagindex, bagslot, count);
+            Lua.DoString(String.Format("SplitContainerItem(\"{0}\"" + ", \"{1}\"" + ", \"{2}\");", bagindex, bagslot, count));
+        }
+
         public static void UseContainerItem(int bag, int index)
         {
             //
@@ -193,6 +218,23 @@ namespace Herbfunk.GarrisonBase
             return ret;
         }
 
+        public static bool OpenMailFrameIsVisible()
+        {
+            GarrisonBase.Debug("LuaCommand: OpenMailFrameIsVisible");
+            string t = Lua.GetReturnValues("return tostring(OpenMailFrame:IsVisible())")[0];
+            bool ret = t.ToBoolean();
+            return ret;
+        }
+        public static void AutoLootMailItem(int index)
+        {
+            GarrisonBase.Debug("LuaCommand: AutoLootMailItem {0}", index);
+            Lua.DoString(String.Format("AutoLootMailItem(\"{0}\")", index));
+        }
+        public static bool HasNewMail()
+        {
+            GarrisonBase.Debug("LuaCommand: HasNewMail");
+            return Lua.GetReturnValues(String.Format("return HasNewMail()"))[0].ToInt32() == 1;
+        }
         public static void ClickMailItemButton(int index)
         {
             //
@@ -200,11 +242,12 @@ namespace Herbfunk.GarrisonBase
             Lua.DoString(String.Format("MailItem{0}Button:Click()", index));
         }
 
-        public static void ClickMailboxNextPageButton()
+        public static void ClickOpenMailAttachmentButton(int index)
         {
-            GarrisonBase.Debug("LuaCommand: ClickMailboxNextPageButton");
-            Lua.DoString(String.Format("InboxNextPageButton:Click()"));
+            GarrisonBase.Debug("LuaCommand: ClickOpenMailAttachmentButton {0}", index);
+            Lua.DoString(String.Format("OpenMailAttachmentButton{0}:Click()", index));
         }
+
         public static void ClickSendMailButton()
         {
             GarrisonBase.Debug("LuaCommand: SetSendMailRecipient");
@@ -212,7 +255,7 @@ namespace Herbfunk.GarrisonBase
         }
         public static void SetSendMailRecipient(string name)
         {
-            GarrisonBase.Debug("LuaCommand: SetSendMailRecipient {0}", name);
+            GarrisonBase.Debug("LuaCommand: SetSendMailRecipient");
             Lua.DoString(String.Format("SendMailNameEditBox:SetText(\"{0}\")", name));
         }
         public static bool IsSendMailFrameVisible()

@@ -14,6 +14,7 @@ namespace Herbfunk.GarrisonBase.Cache
         GarrisonCommandTable=64,
         GarrisonWorkOrderNpc=128,
         Mailbox = 256,
-        Unknown = 512,
+        PrimalTrader = 512,
+        Unknown = 1024,
     }
 }

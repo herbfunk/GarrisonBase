@@ -3,6 +3,7 @@ using System.Linq;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Styx;
 using Styx.CommonBot.Profiles;
 
 namespace Herbfunk.GarrisonBase.Garrison
@@ -16,6 +17,7 @@ namespace Herbfunk.GarrisonBase.Garrison
     public static class GarrisonManager
     {
 
+        public static int GarrisonLevel { get; set; }
         public static int CommandTableEntryId { get; set; }
         public static int SellRepairNpcId { get; set; }
         public static int GarrisonResourceCacheEntryId { get; set; }
@@ -29,6 +31,10 @@ namespace Herbfunk.GarrisonBase.Garrison
         /// Buildings contains a forge (blacksmithing)
         /// </summary>
         public static bool HasForge { get; set; }
+        public static BuildingType ForgeBuilding { get; set; }
+
+        public static int PrimalTraderID { get; set; }
+        public static WoWPoint PrimalTraderPoint { get; set; }
 
         internal static bool Initalized = false;
         internal static void Initalize()
@@ -39,6 +45,8 @@ namespace Herbfunk.GarrisonBase.Garrison
 
             if (!Player.IsAlliance)
             {
+                GarrisonLevel = Player.MapID == 1153? 3: Player.MapID == 1330 ? 2: 1;
+
                 CommandTableEntryId = Player.MapID == 1153 ? 85805 : 86031;
                 //1153 == level 3 garrison
                 //1330 == level 2 garrison
@@ -46,17 +54,24 @@ namespace Herbfunk.GarrisonBase.Garrison
                 GarrisonResourceCacheEntryId = 237191;
                 //237720
                 SellRepairNpcId = 76872;
+                PrimalTraderID = 84967;
+                PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.HordePrimalTraderLevel2: MovementCache.HordePrimalTraderLevel3;
 
                 ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\HordeGarrison.xml", false);
             }
             else
             {
+                GarrisonLevel = Player.MapID == 1159 ? 3 : Player.MapID == 1331 ? 2 : 1;
+
                 CommandTableEntryId = Player.MapID == 1331 ? 84224 : 84698;
                 //1331 == level 2 garrison
                 //1159 == level 3 garrison
                 
                 GarrisonResourceCacheEntryId = 236916;
                 SellRepairNpcId = 81346;
+                PrimalTraderID = 84246;
+                PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.AlliancePrimalTraderLevel2 : MovementCache.AlliancePrimalTraderLevel3;
+
 
                 if (Player.MapID == 1331)
                     ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrison.xml", false);
@@ -131,6 +146,7 @@ namespace Herbfunk.GarrisonBase.Garrison
             Buildings.Clear();
             HasDisenchant = false;
             HasForge = false;
+            ForgeBuilding = BuildingType.Unknown;
 
             RefreshBuildingIDs();
 
@@ -140,7 +156,16 @@ namespace Herbfunk.GarrisonBase.Garrison
                 var b = new Building(id);
                 Buildings.Add(b.Type, b);
                 if (b.Type == BuildingType.TheForge && !b.IsBuilding && !b.CanActivate)
+                {
                     HasForge = true;
+                    ForgeBuilding = BuildingType.TheForge;
+                }
+                if (b.Type == BuildingType.EngineeringWorks && !b.IsBuilding && !b.CanActivate)
+                {
+                    HasForge = true;
+                    ForgeBuilding = BuildingType.EngineeringWorks;
+                }
+
                 if (b.Type == BuildingType.EnchantersStudy && !b.IsBuilding && !b.CanActivate)
                 {
                     HasDisenchant = true;
@@ -174,6 +199,57 @@ namespace Herbfunk.GarrisonBase.Garrison
                 Buildings.Add(BuildingType.HerbGarden, new Building("29"));
         }
 
+        public enum PrimalTraderItemTypes
+        {
+            SorcerousAir,
+            SorcerousFire,
+            SorcerousEarth,
+            SorcerousWater,
+            SavageBlood, 
+            AlchemicalCatalyst,
+            TruesteelIngot,
+            GearspringParts,
+            WarPaints,
+            TaladiteCrystal,
+            BurnishedLeather,
+            HexweaveCloth,
+        }
+        public class PrimalTraderItem
+        {
+            public PrimalTraderItemTypes Type { get; set; }
+            public string Name { get; set; }
+            public int Cost { get; set; }
 
+            public PrimalTraderItem(PrimalTraderItemTypes type, string name, int cost)
+            {
+                Type = type;
+                Name = name;
+                Cost = cost;
+            }
+        }
+
+        public static readonly List<PrimalTraderItem> PrimalTraderItems = new List<PrimalTraderItem>
+        {
+            new PrimalTraderItem(PrimalTraderItemTypes.SorcerousAir, "Sorcerous Air", 25),
+            new PrimalTraderItem(PrimalTraderItemTypes.SorcerousEarth, "Sorcerous Earth", 25),
+            new PrimalTraderItem(PrimalTraderItemTypes.SorcerousFire, "Sorcerous Fire", 25),
+            new PrimalTraderItem(PrimalTraderItemTypes.SorcerousWater, "Sorcerous Water", 25),
+
+            new PrimalTraderItem(PrimalTraderItemTypes.SavageBlood, "Savage Blood", 50),
+
+            new PrimalTraderItem(PrimalTraderItemTypes.AlchemicalCatalyst, "Alchemical Catalyst", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.TruesteelIngot, "Truesteel Ingot", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.GearspringParts, "Gearspring Parts", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.WarPaints, "War Paints", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.TaladiteCrystal, "Taladite Crystal", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.BurnishedLeather, "Burnished Leather", 10),
+            new PrimalTraderItem(PrimalTraderItemTypes.HexweaveCloth, "Hexweave Cloth", 10),
+        };
+
+        /*
+         * Primal Trader EntryID
+         * Horde - 84967
+         * Alliance - 84246
+         */
     }
 }

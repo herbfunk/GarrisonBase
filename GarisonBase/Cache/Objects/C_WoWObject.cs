@@ -14,6 +14,13 @@ namespace Herbfunk.GarrisonBase.Cache
         public string Name { get; set; }
         public WoWObjectType Type { get; set; }
         public BlacklistType BlacklistType { get; set; }
+        public bool IgnoreRemoval { get; set; }
+        public virtual float LootDistance
+        {
+            get { return _lootDistance; }
+            set { _lootDistance = value; }
+        }
+        private float _lootDistance=7f;
         public virtual WoWObjectTypes SubType
         {
             get { return _subType; }
@@ -61,7 +68,7 @@ namespace Herbfunk.GarrisonBase.Cache
             if (ref_WoWObject == null || !ref_WoWObject.IsValid || ref_WoWObject.BaseAddress == IntPtr.Zero)
             {
                 NeedsRemoved = true;
-                BlacklistType= BlacklistType.Guid;
+                //BlacklistType= BlacklistType.Guid;
                 return false;
             }
             return true;
@@ -75,7 +82,7 @@ namespace Herbfunk.GarrisonBase.Cache
                 if (ref_WoWObject == null || !ref_WoWObject.IsValid || ref_WoWObject.BaseAddress == IntPtr.Zero)
                 {
                     NeedsRemoved = true;
-                    BlacklistType = BlacklistType.Guid;
+                    //BlacklistType = BlacklistType.Guid;
                     return false;
                 }
                 return true;
@@ -86,11 +93,12 @@ namespace Herbfunk.GarrisonBase.Cache
             return true;
         }
 
-        public virtual bool RequiresUpdate
+        private bool _requiresUpdate = true;
+        public bool RequiresUpdate
         {
-            get { return false; }
+            get { return _requiresUpdate; }
+            set { _requiresUpdate = value; }
         }
-
         public bool InLineOfSight
         {
             get
@@ -108,16 +116,35 @@ namespace Herbfunk.GarrisonBase.Cache
                 return ref_WoWObject.WithinInteractRange;
             }
         }
+
+
+
+
         public void Interact()
         {
             if (!IsStillValid()) return;
             ref_WoWObject.Interact();
         }
 
+        public override bool Equals(object obj)
+        {
+            //Check for null and compare run-time types. 
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                C_WoWObject p = (C_WoWObject)obj;
+                return Guid == p.Guid;
+            }
+        }
+
 
         public override string ToString()
         {
-            return String.Format("[{0}] {1} [{2}] {3} [{4}]\r\n" +
+            return String.Format("{0}, //{1}\r\n" +
+                                 "[{2}] {3} [{4}]\r\n" +
                                  "{5} ({6})",
                                  Entry,Name,Guid, Type, SubType, Location, CentreDistance);
         }

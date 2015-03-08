@@ -74,6 +74,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             
         public WoWPoint SafeMovementPoint { get; set; }
         public WoWPoint EntranceMovementPoint { get; set; }
+        public WoWPoint WorkOrderShipmentPoint { get; set; }
 
         public uint FirstQuestID { get; set; }
         public bool FirstQuestCompleted { get; set; }

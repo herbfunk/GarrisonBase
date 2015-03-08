@@ -99,6 +99,7 @@ namespace Herbfunk.GarrisonBase
             private int _interactattempts = 0;
 
             private WaitTimer _commandtableCompletemissionsWaittimer = WaitTimer.FiveSeconds;
+            private int _Waitmilliseconds = 5000;
             private Mission _currentMission = null;
             public override async Task<bool> Interaction()
             {
@@ -113,9 +114,10 @@ namespace Herbfunk.GarrisonBase
                 }
 
                 if (!_commandtableCompletemissionsWaittimer.IsFinished)
-                    return true;
+                {
+                    await Coroutine.Sleep(_Waitmilliseconds);
+                }
 
-                
                 //Check if the first dialog is visible..
                 if (LuaCommands.IsGarrisonMissionCompleteDialogVisible())
                 {
@@ -177,6 +179,7 @@ namespace Herbfunk.GarrisonBase
                 }
 
                 _commandtableCompletemissionsWaittimer = WaitTimer.OneSecond;
+                _Waitmilliseconds = 1000;
 
                 if (_currentMission == null)
                 {
@@ -354,13 +357,14 @@ namespace Herbfunk.GarrisonBase
                     //Cache.AvailableMissions = Cache.AvailableMissions.OrderByDescending(m => m.ItemLevel).ThenByDescending(m => m.Level).ThenBy(m => m.Duration).ThenByDescending(m => m.Name).ToList();
                     GarrisonManager.AvailableMissions = GarrisonManager.AvailableMissions.OrderByDescending(m => m.Priority).ToList();
 
-                    foreach (var m in GarrisonManager.AvailableMissions)
-                    {
-                        GarrisonBase.Log("Mission: {0}", m.ToString());
-                    }
+                    //foreach (var m in GarrisonManager.AvailableMissions)
+                    //{
+                    //    GarrisonBase.Log("Mission: {0}", m.ToString());
+                    //}
                 }
 
                 //Find our next mission.. if any.
+                double _successChance = 0;
                 if (_currentMission == null)
                 {
                     int[] followerIds;
@@ -370,8 +374,8 @@ namespace Herbfunk.GarrisonBase
                         var mission = GarrisonManager.AvailableMissions[i];
                         if (mission.Priority>0 && mission.Cost <= Player.AvailableGarrisonResource)
                         {
-                            var successChance = LuaCommands.GetMissionBestSuccessAttempt(mission.Id, out followerIds);
-                            if (successChance < mission.SuccessRate)
+                            _successChance = LuaCommands.GetMissionBestSuccessAttempt(mission.Id, out followerIds);
+                            if (_successChance < mission.SuccessRate)
                             {
                                 removalList.Add(i);
                                 continue;
@@ -397,7 +401,8 @@ namespace Herbfunk.GarrisonBase
                 if (_currentMission != null)
                 {
                     TreeRoot.StatusText = "[GarrisonBase] Starting new mission " + _currentMission.Name;
-                    GarrisonBase.Log("Starting Mission {0}", _currentMission.Name);
+                    GarrisonBase.Log("Starting Mission {0} Rewards {1} Priority {2} Success {3}",
+                        _currentMission.Name, _currentMission.RewardTypes, _currentMission.Priority, _successChance);
 
 
 

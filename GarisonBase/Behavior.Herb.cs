@@ -37,6 +37,7 @@ namespace Herbfunk.GarrisonBase
             }
             public override void Initalize()
             {
+
                 if (MovementCache.Garden != null && !MovementCache.Garden.LocationInsidePolygon(StyxWoW.Me.Location))
                     MovementPoints.Insert(0, MovementCache.Garden.Entrance);
 
@@ -166,32 +167,34 @@ namespace Herbfunk.GarrisonBase
                         return true;
                 }
 
+                ObjectCacheManager.ShouldLoot = true;
+
                 if (GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted)
                 {
-                    if (_nearestHerb == null || !_nearestHerb.IsStillValid())
-                    {
-                        _nearestHerb = NearestHerb;
-                    }
-                    else if (_nearestHerb.Guid != NearestHerb.Guid)
-                    {
-                        _nearestHerb = NearestHerb;
-                    }
-                    else if (_nearestHerb.IsStillValid() && _nearestHerb.InLineOfSight)
-                    {
-                        if (_herbmovement == null || _herbmovement.CurrentMovementQueue.Count == 0)
-                            _herbmovement = new Movement(_nearestHerb.Location, 5f);
-                    }
+                    //if (_nearestHerb == null || !_nearestHerb.IsStillValid())
+                    //{
+                    //    _nearestHerb = NearestHerb;
+                    //}
+                    //else if (_nearestHerb.Guid != NearestHerb.Guid)
+                    //{
+                    //    _nearestHerb = NearestHerb;
+                    //}
+                    //else if (_nearestHerb.IsStillValid() && _nearestHerb.InLineOfSight)
+                    //{
+                    //    if (_herbmovement == null || _herbmovement.CurrentMovementQueue.Count == 0)
+                    //        _herbmovement = new Movement(_nearestHerb.Location, 5f);
+                    //}
 
-                    if (_nearestHerb != null)
-                    {
-                        if (_herbmovement != null && _herbmovement.CurrentMovementQueue.Count > 0)
-                        {
-                            if (await HarvestHerb(_nearestHerb))
-                                return true;
-                        }
+                    //if (_nearestHerb != null)
+                    //{
+                    //    if (_herbmovement != null && _herbmovement.CurrentMovementQueue.Count > 0)
+                    //    {
+                    //        if (await HarvestHerb(_nearestHerb))
+                    //            return true;
+                    //    }
 
-                        return true;
-                    }
+                    //    return true;
+                    //}
                 }
                 else
                 {
@@ -235,6 +238,8 @@ namespace Herbfunk.GarrisonBase
 
                 BaseSettings.CurrentSettings.LastCheckedHerbString = LuaCommands.GetGameTime().ToString("yyyy-MM-ddTHH:mm:ss");
                 BaseSettings.SerializeToXML(BaseSettings.CurrentSettings);
+                ObjectCacheManager.ShouldLoot = false;
+
                 return false;
             }
 

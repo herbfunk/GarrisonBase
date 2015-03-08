@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Media;
+using Bots.Professionbuddy.Dynamic;
+using Buddy.Coroutines;
 using CommonBehaviors.Actions;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
@@ -10,12 +13,14 @@ using Styx.Common;
 using Styx.CommonBot;
 using Styx.Helpers;
 using Styx.TreeSharp;
+using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase
 {
     public class GarrisonBase : BotBase
     {
-        internal static readonly Version Version = new Version(1,0,0,0);
+        public static HBRelogApi HbRelogApi;
+        internal static readonly Version Version = new Version(1,0,1,0);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {
@@ -41,6 +46,7 @@ namespace Herbfunk.GarrisonBase
         public override void Start()
         {
             Debug("BotEvent OnStart");
+            HbRelogApi = new HBRelogApi();
             Coroutines.Reset();
 
             if (!LuaEvents.LuaEventsAttached)
@@ -62,6 +68,14 @@ namespace Herbfunk.GarrisonBase
             LuaEvents.ResetFrameVariables();
 
             TreeRoot.Stop();
+
+            if (BaseSettings.CurrentSettings.HBRelog_SkipToNextTask)
+            {
+                if (HbRelogApi.IsConnected)
+                {
+                    HbRelogApi.SkipCurrentTask(HbRelogApi.CurrentProfileName);
+                }
+            }
         }
 
         public override void Initialize()

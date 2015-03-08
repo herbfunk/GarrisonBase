@@ -41,6 +41,8 @@ namespace Herbfunk.GarrisonBase
             }
             public override void Initalize()
             {
+                ObjectCacheManager.ShouldLoot = true;
+
                 if ((!Player.MinimapZoneText.Contains("Mine") || !Player.MinimapZoneText.Contains("Excavation"))
                     && (MovementCache.Mine != null && !MovementCache.Mine.LocationInsidePolygon(StyxWoW.Me.Location)))
                     MovementPoints.Insert(0, MovementCache.Mine.Entrance);
@@ -158,31 +160,31 @@ namespace Herbfunk.GarrisonBase
                     }
                 }
 
-                if (GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted)
-                {
-                    if (_nearestOre == null || !_nearestOre.IsStillValid())
-                    {
-                        _nearestOre = NearestOre;
-                    }
-                    else if (_nearestOre.Guid != NearestOre.Guid)
-                    {
-                        _nearestOre = NearestOre;
-                    }
-                    else if (_nearestOre.IsStillValid() && _nearestOre.InLineOfSight)
-                    {
-                        if (_oremovement == null || _oremovement.CurrentMovementQueue.Count == 0)
-                            _oremovement = new Movement(_nearestOre.Location, 6f);
-                    }
+                //if (GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted)
+                //{
+                //    if (_nearestOre == null || !_nearestOre.IsStillValid())
+                //    {
+                //        _nearestOre = NearestOre;
+                //    }
+                //    else if (_nearestOre.Guid != NearestOre.Guid)
+                //    {
+                //        _nearestOre = NearestOre;
+                //    }
+                //    else if (_nearestOre.IsStillValid() && _nearestOre.InLineOfSight)
+                //    {
+                //        if (_oremovement == null || _oremovement.CurrentMovementQueue.Count == 0)
+                //            _oremovement = new Movement(_nearestOre.Location, 6f);
+                //    }
 
-                    if (_nearestOre != null)
-                    {
-                        if (_oremovement != null && _oremovement.CurrentMovementQueue.Count > 0)
-                        {
-                            if (await MineOre())
-                                return true;
-                        }
-                    }
-                }
+                //    if (_nearestOre != null)
+                //    {
+                //        if (_oremovement != null && _oremovement.CurrentMovementQueue.Count > 0)
+                //        {
+                //            if (await MineOre())
+                //                return true;
+                //        }
+                //    }
+                //}
 
 
                 if (_movementQueue.Count == 0)
@@ -208,6 +210,8 @@ namespace Herbfunk.GarrisonBase
 
                 BaseSettings.CurrentSettings.LastCheckedMineString = LuaCommands.GetGameTime().ToString("yyyy-MM-ddTHH:mm:ss");
                 BaseSettings.SerializeToXML(BaseSettings.CurrentSettings);
+                ObjectCacheManager.ShouldLoot = false;
+
                 return false;
             }
 

@@ -24,7 +24,7 @@ namespace Herbfunk.GarrisonBase
             }
             public override Func<bool> Criteria
             {
-                get { return () => BaseSettings.CurrentSettings.MailAutoGet && LuaCommands.IsMiniMapMailIconVisible(); }
+                get { return () => BaseSettings.CurrentSettings.MailAutoGet && LuaCommands.HasNewMail(); }
             }
             public override void Initalize()
             {
@@ -83,27 +83,134 @@ namespace Herbfunk.GarrisonBase
                     return false;
                 }
 
+                RefreshInboxMailItemsCollection();
+
+                if (InboxMailItems.Count > 0)
+                {
+                    if (!LuaEvents.MailOpen)
+                        return true;
+
+                    if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                    {
+                        //We need to reset back to first page!
+                        while (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                        {
+                            LuaCommands.ClickButton(LuaCommands.ButtonNames.InboxPrevPageButton);
+                            await CommonCoroutines.SleepForRandomUiInteractionTime();
+                        }
+                    }
+
+                    int highestInboxPageIndex = 1;
+                    foreach (var item in InboxMailItems)
+                    {
+                        if (item.InboxPageIndex > highestInboxPageIndex)
+                            highestInboxPageIndex = item.InboxPageIndex;
+                    }
+
+                    if (highestInboxPageIndex>1)
+                    {
+                        //We want to loot mail that is not on the first page..
+                        if (!LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                        {
+                            for (int i = 1; i < highestInboxPageIndex; i++)
+                            {//Click next page until we are at the correct page.
+                                LuaCommands.ClickButton(LuaCommands.ButtonNames.InboxNextPageButton);
+                                await CommonCoroutines.SleepForRandomUiInteractionTime();
+                            }
+                        }
+                    }
+
+                    //Now get all items on the same page.. order by highest index first (last item)
+                    var itemsToGet =
+                        InboxMailItems.Where(i => i.InboxPageIndex == highestInboxPageIndex)
+                            .OrderByDescending(i => i.Index)
+                            .ToList();
+
+                    foreach (var inboxMailItem in itemsToGet)
+                    {
+                        //Open the mail item..
+                        LuaCommands.ClickMailItemButton(inboxMailItem.RealIndex);
+                        await CommonCoroutines.SleepForRandomUiInteractionTime();
+
+                        if (LuaCommands.OpenMailFrameIsVisible())
+                        {
+                            //Click the attachments..
+                            for (int i = 0; i < inboxMailItem.ItemCount; i++)
+                            {
+                                LuaCommands.ClickOpenMailAttachmentButton(i+1);
+                                await CommonCoroutines.SleepForRandomUiInteractionTime();
+                            }
+
+                            //Close the open mail frame (if visible..)
+                            if (LuaCommands.OpenMailFrameIsVisible())
+                            {
+                                LuaCommands.ClickButton(LuaCommands.ButtonNames.OpenMailFrameCloseButton);
+                                await CommonCoroutines.SleepForRandomUiInteractionTime();
+                            }
+                        }
+
+                        //LuaCommands.AutoLootMailItem(inboxMailItem.Index);
+                        //await CommonCoroutines.SleepForRandomUiInteractionTime();
+                    }
+
+                    return true;
+                }
+
+                return false;
+            }
+
+
+
+            private class InboxMailItem
+            {
+                public int Index { get; set; }
+                public int ItemCount { get; set; }
+                public string Sender { get; set; }
+                public string Subject { get; set; }
+
+                public readonly int InboxPageIndex;
+                public readonly int RealIndex;
+
+                public InboxMailItem(int index, int itemcount, string sender, string subject)
+                {
+                    Index = index;
+                    ItemCount = itemcount;
+                    Sender = sender;
+                    Subject = subject;
+
+                    InboxPageIndex = GetMailItemPageIndex(Index);
+                    RealIndex = index;
+                    if (InboxPageIndex > 1) RealIndex = index - ((InboxPageIndex - 1)*7);
+                }
+
+                private int GetMailItemPageIndex(int mailItemIndex)
+                {
+                    int remainder;
+                    int result = Math.DivRem(mailItemIndex, 7, out remainder);
+                    if (remainder > 0) result++;
+                    return result;
+                }
+
+                public override string ToString()
+                {
+                    return String.Format("Subject {0} Sender {1}\r\n" +
+                                         "Index {2} (RealIndex {3}) PageIndex {4}",
+                        Subject, Sender, Index, RealIndex, InboxPageIndex);
+                }
+            }
+
+            private List<InboxMailItem> InboxMailItems = new List<InboxMailItem>();
+
+            private void RefreshInboxMailItemsCollection()
+            {
+                InboxMailItems.Clear();
                 foreach (var inboxMailItem in MailFrame.Instance.GetAllMails())
                 {
                     if (inboxMailItem.ItemCount > 0)
                     {
-                        //int index = inboxMailItem.Index;
-                        //if (index > 7)
-                        //{
-                        //    index -= 7;
-                        //    LuaCommands.ClickMailboxNextPageButton();
-                        //    await CommonCoroutines.SleepForRandomReactionTime();
-                        //}
-
-                        //LuaCommands.ClickMailItemButton(index);
-                        //await CommonCoroutines.SleepForRandomReactionTime();
-
-                        await inboxMailItem.TakeAttachedItemsCoroutine();
-                        return true;
+                        InboxMailItems.Add(new InboxMailItem(inboxMailItem.Index, inboxMailItem.ItemCount, inboxMailItem.Sender, inboxMailItem.Subject));
                     }
                 }
-
-                return false;
             }
 
             public override async Task<bool> BehaviorRoutine()
@@ -163,14 +270,14 @@ namespace Herbfunk.GarrisonBase
                     return false;
                 }
 
-                if (Mailbox.CentreDistance < 6)
+                if (Mailbox.WithinInteractRange)
                 {
                     Mailbox.Interact();
                     return true;
                 }
 
                 if (_movement == null)
-                    _movement = new Movement(Mailbox.Location, 6f);
+                    _movement = new Movement(Mailbox.Location, 5f);
 
                 await _movement.MoveTo();
                 return true;
@@ -191,8 +298,8 @@ namespace Herbfunk.GarrisonBase
 
                 foreach (var keypair in _mailingDictionary)
                 {
-                    GarrisonBase.Log("Found {0} items to mail to {1}", keypair.Value.Count, keypair.Key);
-                    await SendMail(keypair.Key, keypair.Value);
+                    GarrisonBase.Log("Found {0} items to mail", keypair.Value.Count);
+                    bool success = await SendMail(keypair.Key, keypair.Value);
                     await Coroutine.Yield();
                     return true;
                 }
@@ -208,7 +315,46 @@ namespace Herbfunk.GarrisonBase
 
                 foreach (var cWoWItem in items)
                 {
+                    if (!LuaEvents.MailOpen) return false;
+                    
                     if (count > 11) break;
+
+                    if (BaseSettings.CurrentSettings.MailSendItems.Any(i => i.EntryId == cWoWItem.Entry && i.OnCount > 0))
+                    {
+                        var mailItemInfo = BaseSettings.CurrentSettings.MailSendItems.FirstOrDefault(i => i.EntryId == cWoWItem.Entry);
+
+                        if (mailItemInfo != null)
+                        {
+                            int excessCount = (int)cWoWItem.StackCount - mailItemInfo.OnCount;
+
+                            if (excessCount > 0)
+                            {
+                                GarrisonBase.Log("Send Mail Spliting Item {0} to send count {1}", cWoWItem.Name,excessCount);
+                                int freeBagIndex, freeBagSlot;
+                                bool foundFreeSpot = Player.Inventory.FindFreeBagSlot(out freeBagIndex, out freeBagSlot);
+
+                                if (foundFreeSpot)
+                                {
+                                    GarrisonBase.Log("Send Mail Split Item Moving to Bag Index {0} Slot {1}", freeBagIndex, freeBagSlot);
+
+                                    bool success=await SplitItem(cWoWItem, excessCount, freeBagIndex, freeBagSlot);
+
+                                    if (success)
+                                    {
+                                        GarrisonBase.Log("Attaching item {0} to mail", cWoWItem.Name);
+                                        LuaCommands.UseContainerItem(freeBagIndex, freeBagSlot + 1);
+                                        await CommonCoroutines.SleepForRandomUiInteractionTime();
+                                        await Coroutine.Sleep(StyxWoW.Random.Next(1250, 2223));
+                                        count++;
+                                    }
+
+                                    LuaCommands.ClearCursor();
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+
                     GarrisonBase.Log("Attaching item {0} to mail", cWoWItem.Name);
                     LuaCommands.UseContainerItem(cWoWItem.BagIndex+1, cWoWItem.BagSlot+1);
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
@@ -218,15 +364,47 @@ namespace Herbfunk.GarrisonBase
 
                 if (!_setRecipient)
                 {
+                    if (!LuaEvents.MailOpen) return false;
                     LuaCommands.SetSendMailRecipient(recipient);
                     _setRecipient = true;
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                 }
 
+                if (!LuaEvents.MailOpen) return false;
                 LuaCommands.ClickSendMailButton();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 await Coroutine.Sleep(StyxWoW.Random.Next(1250, 2223));
                 _setRecipient = false;
+                return true;
+            }
+
+            private async Task<bool> SplitItem(C_WoWItem item, int Count, int BagIndex, int BagSlot)
+            {
+                if (!LuaCommands.CursorHasItem())
+                {
+                    //Split Item..
+                    bool pickup=
+                        await CommonCoroutines.WaitForLuaEvent("CURSOR_UPDATE", 
+                        2500, 
+                        null, 
+                        () => LuaCommands.SplitContainerItem(item.BagIndex + 1, item.BagSlot + 1, Count));
+
+                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+
+                    if (pickup)
+                    {
+                        //Select Empty Bag Slot
+                        await CommonCoroutines.WaitForLuaEvent(
+                            "CURSOR_UPDATE", 
+                            2500, 
+                            null, 
+                            () => LuaCommands.PickupContainerItem(BagIndex, BagSlot + 1));
+
+                        await CommonCoroutines.SleepForRandomUiInteractionTime();
+                        return true;
+                    }
+                }
+
                 return false;
             }
 
@@ -320,6 +498,8 @@ namespace Herbfunk.GarrisonBase
             }
             public override async Task<bool> BehaviorRoutine()
             {
+                if (IsDone) return false;
+
                 if (await base.BehaviorRoutine()) return true;
 
                 if (await Movement()) return true;

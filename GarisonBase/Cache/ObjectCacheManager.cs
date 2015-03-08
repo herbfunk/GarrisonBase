@@ -9,6 +9,8 @@ namespace Herbfunk.GarrisonBase.Cache
 {
     public static class ObjectCacheManager
     {
+        internal static C_WoWObject LootableObject { get; set; }
+       
         internal static bool CheckFlag(WoWObjectTypes property, WoWObjectTypes flag)
         {
             return (property & flag) != 0;
@@ -22,6 +24,14 @@ namespace Herbfunk.GarrisonBase.Cache
                 return DateTime.Now.Subtract(_lastUpdatedCacheCollection).TotalMilliseconds > 150;
             }
         }
+
+        public static bool ShouldLoot
+        {
+            get { return _shouldLoot; }
+            set { _shouldLoot = value; }
+        }
+        private static bool _shouldLoot = false;
+
         private static int UpdateLoopCounter;
         private static List<WoWGuid> _blacklistedGuids=new List<WoWGuid>();
         private static List<uint> _blacklistedEntryIds = new List<uint>(); 
@@ -29,6 +39,9 @@ namespace Herbfunk.GarrisonBase.Cache
         {
             Player.Update();
 
+            LootableObject = null;
+
+            GarrisonBase.Debug("Updating Object Cache");
             List<WoWGuid> GuidsSeenThisLoop = new List<WoWGuid>();
             using (StyxWoW.Memory.AcquireFrame())
             {
@@ -43,6 +56,7 @@ namespace Herbfunk.GarrisonBase.Cache
 
                     uint tmp_Entry = obj.Entry;
                     if (_blacklistedEntryIds.Contains(tmp_Entry)) continue;
+                    if (Blacklist.BlacklistEntryIDs.Contains(tmp_Entry)) continue;
 
                     C_WoWObject wowObj;
                     if (!ObjectCollection.TryGetValue(tmp_Guid, out wowObj))
@@ -74,7 +88,7 @@ namespace Herbfunk.GarrisonBase.Cache
                         }
                     }
 
-                    if (!wowObj.IsStillValid())
+                    if (!wowObj.IsStillValid() && !wowObj.IgnoreRemoval)
                     {
                         wowObj.NeedsRemoved = true;
                         wowObj.BlacklistType= BlacklistType.Guid;
@@ -103,8 +117,7 @@ namespace Herbfunk.GarrisonBase.Cache
             {
                 UpdateLoopCounter = 0;
                 //Now flag any objects not seen for 5 loops. Gold/Globe only 1 loop.
-                foreach (var item in ObjectCollection.Values.Where(CO =>
-                    CO.LoopsUnseen >= 5))
+                foreach (var item in ObjectCollection.Values.Where(CO => !CO.IgnoreRemoval && CO.LoopsUnseen >= 5))
                 {
                     item.NeedsRemoved = true;
                 }
@@ -126,7 +139,7 @@ namespace Herbfunk.GarrisonBase.Cache
             {
                 //Remove flagged objects
                 var RemovalObjs = (from objs in ObjectCollection.Values
-                                   where objs.NeedsRemoved
+                                   where objs.NeedsRemoved && !objs.IgnoreRemoval
                                    select objs.Guid).ToList();
 
                 foreach (var item in RemovalObjs)

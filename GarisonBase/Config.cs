@@ -17,11 +17,8 @@ namespace Herbfunk.GarrisonBase
             InitializeComponent();
             try
             {
-
-                trackBar_MissionMinimumSuccess.Value = BaseSettings.CurrentSettings.MissionMinimumSucessRate;
-                label_MissionMinimumSuccess.Text = BaseSettings.CurrentSettings.MissionMinimumSucessRate.ToString() + "%";
-                trackBar_MissionMinimumSuccess.ValueChanged += trackBar_MissionMinimumSuccess_SliderChanged;
-
+                checkBox_HBRelogSkipTask.Checked = BaseSettings.CurrentSettings.HBRelog_SkipToNextTask;
+                checkBox_HBRelogSkipTask.CheckedChanged += checkBox_HBRelogSkipToNextTask_CheckedChanged;
 
                 trackBar_ReservedGarrisonResources.Value = BaseSettings.CurrentSettings.ReservedGarrisonResources;
                 label_ReservedGarrisonResources.Text = BaseSettings.CurrentSettings.ReservedGarrisonResources.ToString(CultureInfo.InvariantCulture);
@@ -241,11 +238,42 @@ namespace Herbfunk.GarrisonBase
                     ListViewItem lvi = new ListViewItem(entry);
                     listView_MailItems.Items.Add(lvi);
                 }
+
+                checkBox_ExchangePrimalSpirits.Checked = BaseSettings.CurrentSettings.ExchangePrimalSpirits;
+                checkBox_ExchangePrimalSpirits.CheckedChanged += checkBox_ExchangePrimalSpirits_CheckedChanged;
+
+                comboBox_PrimalSpiritItems.Items.Clear();
+                var primalTraderIndex = -1;
+                var index = 0;
+                foreach (var item in GarrisonManager.PrimalTraderItems)
+                {
+                    comboBox_PrimalSpiritItems.Items.Add(item.Name);
+                    if (BaseSettings.CurrentSettings.PrimalSpiritItem == item.Name)
+                        primalTraderIndex = index;
+                    index++;
+                }
+                comboBox_PrimalSpiritItems.SelectedIndex = primalTraderIndex;
+                comboBox_PrimalSpiritItems.SelectedIndexChanged += comboBox_PrimalSpiritItems_SelectedIndexChanged;
             }
             catch (Exception)
             {
 
             }
+        }
+        private void comboBox_PrimalSpiritItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox_PrimalSpiritItems.SelectedIndex > -1)
+            {
+                BaseSettings.CurrentSettings.PrimalSpiritItem = comboBox_PrimalSpiritItems.SelectedItem.ToString();
+            }
+        }
+        private void checkBox_ExchangePrimalSpirits_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.ExchangePrimalSpirits = !BaseSettings.CurrentSettings.ExchangePrimalSpirits;
+        }
+        private void checkBox_HBRelogSkipToNextTask_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.HBRelog_SkipToNextTask = !BaseSettings.CurrentSettings.HBRelog_SkipToNextTask;
         }
         private void textBox_MailRare_TextChanged(object sender, EventArgs e)
         {
@@ -344,14 +372,6 @@ namespace Herbfunk.GarrisonBase
             BaseSettings.CurrentSettings.BehaviorWorkOrderStartup = !BaseSettings.CurrentSettings.BehaviorWorkOrderStartup;
         }
 
-
-        private void trackBar_MissionMinimumSuccess_SliderChanged(object sender, EventArgs e)
-        {
-            TrackBar slider_sender = (TrackBar)sender;
-            int Value = (int)slider_sender.Value;
-            BaseSettings.CurrentSettings.MissionMinimumSucessRate = Value;
-            label_MissionMinimumSuccess.Text = Value.ToString() + "%";
-        }
         private void trackBar_ReservedGarrisonResources_SliderChanged(object sender, EventArgs e)
         {
             TrackBar slider_sender = (TrackBar)sender;
@@ -373,22 +393,31 @@ namespace Herbfunk.GarrisonBase
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            LBDebug.Controls.Clear();
+
             foreach (var b in GarrisonManager.Buildings.Values)
             {
                 LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
             }
+
+            LBDebug.Focus();
         }
 
         private void button3_Click_1(object sender, EventArgs e)
         {
+            LBDebug.Controls.Clear();
+
             foreach (var b in Coroutines.Behaviors)
             {
                 LBDebug.Controls.Add(new UserControlDebugEntry(String.Format("{0} {1}", b.Type, b.CheckCriteria())));
             }
+
+            LBDebug.Focus();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            LBDebug.Controls.Clear();
 
 
             LBDebug.Controls.Add(
@@ -403,6 +432,8 @@ namespace Herbfunk.GarrisonBase
             {
                 LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
             }
+
+            LBDebug.Focus();
         }
 
         private void button1_Click(object sender, EventArgs e)

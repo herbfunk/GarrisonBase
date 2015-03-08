@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\..\Desktop\hb\Bots\GarrisonBase\</OutputPath>
+    <OutputPath>..\..\..\..\Desktop\hb\Bots\GarrisonBase\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,18 +25,19 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\..\..\Desktop\hb\Bots\GarrisonBase\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <OutputPath>..\..\..\..\Desktop\hb\Bots\GarrisonBase\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GreyMagic">
-      <HintPath>..\..\..\..\..\Desktop\hb\GreyMagic.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\hb\GreyMagic.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Honorbuddy">
-      <HintPath>..\..\..\..\..\Desktop\hb\Honorbuddy.exe</HintPath>
+      <HintPath>..\..\..\..\Desktop\hb\Honorbuddy.exe</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -45,13 +46,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Tripper.Tools">
-      <HintPath>..\..\..\..\..\Desktop\hb\Tripper.Tools.dll</HintPath>
+      <HintPath>..\..\..\..\Desktop\hb\Tripper.Tools.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -80,6 +79,10 @@
       <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
     <Compile Include="Behavior.Move.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Behavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Behavior.PrimalTrader.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
@@ -122,6 +125,9 @@
     <Compile Include="Behavior.Quests.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Behavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Cache\Blacklist.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Cache\Enums\BlacklistType.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -293,6 +299,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="_ChangeLog.txt" />
     <None Include="Addon\Herbfunk.lua">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -308,8 +315,8 @@
     <Content Include="Profiles\HordeGarrison.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="ReadMe.txt" />
-    <Content Include="ToDo.txt" />
+    <Content Include="_ReadMe.txt" />
+    <Content Include="_ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config.resx">

@@ -8,7 +8,7 @@ namespace Herbfunk.GarrisonBase
     {
         public class BehaviorMove : Behavior
         {
-            public override BehaviorType Type { get { return BehaviorType.None; } }
+            public override BehaviorType Type { get { return BehaviorType.MoveTo; } }
 
             public BehaviorMove(WoWPoint loc, float distance=10f)
             {
@@ -25,10 +25,9 @@ namespace Herbfunk.GarrisonBase
             {
                 if (IsDone) return false;
 
-                foreach (var o in Bots.Quest.QuestManager.Objectives)
-                {
-                    Logging.Write(o.ToString());
-                }
+                if (await base.BehaviorRoutine()) return true;
+
+
                 if (await _movement.MoveTo())
                     return true;
 

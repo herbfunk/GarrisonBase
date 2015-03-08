@@ -49,13 +49,13 @@ namespace Herbfunk.GarrisonBase
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (Skill == SkillLine.Blacksmithing)
+                if (Skill == SkillLine.Blacksmithing || Skill == SkillLine.Engineering)
                 {
                     if (!GarrisonManager.HasForge)
                         return false;
 
                     if (_movement==null)
-                        _movement=new Movement(GarrisonManager.Buildings[BuildingType.TheForge].EntranceMovementPoint, 5f);
+                        _movement=new Movement(GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].EntranceMovementPoint, 5f);
 
                     if (await _movement.MoveTo())
                         return true;

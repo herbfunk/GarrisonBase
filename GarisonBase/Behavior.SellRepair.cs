@@ -49,8 +49,8 @@ namespace Herbfunk.GarrisonBase
                 {
                     MerchantFrame.Instance.SellItem(item.ref_WoWItem);
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
-                    await CommonCoroutines.SleepForLagDuration();
-                    await Coroutine.Sleep(StyxWoW.Random.Next(256, 712));
+                   // await CommonCoroutines.SleepForLagDuration();
+                    // await Coroutine.Sleep(StyxWoW.Random.Next(256, 712));
                 }
 
                 return false;

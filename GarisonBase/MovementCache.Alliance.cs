@@ -29,6 +29,10 @@ namespace Herbfunk.GarrisonBase
         internal static readonly WoWPoint AllianceHerbSafePoint = new WoWPoint(1854.805, 145.9212, 78.29183);
         internal static readonly WoWPoint AllianceMineSafePoint = new WoWPoint(1909.829, 92.21799, 83.52757);
 
+        internal static readonly WoWPoint AlliancePrimalTraderLevel2 = new WoWPoint(1849.894,242.8204,76.63979);
+        internal static readonly WoWPoint AlliancePrimalTraderLevel3 = new WoWPoint(1919.877,324.0956,88.96598);
+
+
         internal static readonly WoWPoint AllianceSellRepairNpc = new WoWPoint(1860.432, 260.8574, 76.63974);
 
         internal static readonly WoWPoint AllianceGarrisonEntrance = new WoWPoint(1924.372, 296.1701, 88.966);

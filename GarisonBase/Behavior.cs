@@ -34,6 +34,7 @@ namespace Herbfunk.GarrisonBase
             MoveTo,
             Disenchanting,
             Mail,
+            PrimalTrader,
         }
 
         public abstract class Behavior
@@ -57,12 +58,30 @@ namespace Herbfunk.GarrisonBase
                 if (criteria != null) _criteria = criteria; else _criteria += () => true;
             }
 
+            /// <summary>
+            /// Checks if this behavior meets the defined requirements to run
+            /// This check will occur only once!
+            /// </summary>
+            /// <returns></returns>
+            public virtual Func<bool> Criteria
+            {
+                get { return _criteria; }
+                set { _criteria = value; }
+            }
+            private Func<bool> _criteria;
+
+            /// <summary>
+            /// This occurs only once to initalize any variable only after the Criteria check occurs and passes.
+            /// </summary>
             public virtual void Initalize()
             {
                 StartMovement = new Movement(MovementPoints.ToArray());
                 EndMovement = new Movement(MovementPoints.ToArray().Reverse().ToArray());
             }
 
+            /// <summary>
+            /// A convient way to end the behavior!
+            /// </summary>
             public virtual bool IsDone { get; set; }
             public virtual BehaviorType Type { get{return BehaviorType.None;} }
             public int InteractionEntryId { get; set; }
@@ -83,16 +102,7 @@ namespace Herbfunk.GarrisonBase
                 return await Coroutines.PreCheckCoroutines();
             }
 
-            /// <summary>
-            /// Checks if this behavior meets the defined requirements to run
-            /// </summary>
-            /// <returns></returns>
-            public virtual Func<bool> Criteria
-            {
-                get { return _criteria; }
-                set { _criteria = value; }
-            }
-            private Func<bool> _criteria;
+
 
             public bool CheckCriteria()
             {

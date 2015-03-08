@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bots.Grind;
 using Styx;
 using Styx.CommonBot.Inventory;
 using Styx.WoWInternals;
@@ -13,12 +14,24 @@ namespace Herbfunk.GarrisonBase.Cache
         public Dictionary<WoWGuid, C_WoWItem> BankItems = new Dictionary<WoWGuid, C_WoWItem>();
         public Dictionary<WoWGuid, C_WoWItem> BankReagentItems = new Dictionary<WoWGuid, C_WoWItem>();
         public List<WoWGuid> EquipmentManagerItemGuids = new List<WoWGuid>();
-        public int TotalBagSlots { get; set; }
+        public int[] BagContainerTotalSlots { get; set; }
+
+        public int TotalBagSlots
+        {
+            get
+            {
+                return BagContainerTotalSlots.Sum();
+            }
+        }
 
         public int TotalFreeSlots
         {
             get { return TotalBagSlots - BagItems.Count; }
         }
+        public double LowestEquippedDurability { get; set; }
+
+        public const int PrimalSpiritEntryId = 120945;
+
         public PlayerInventory()
         {
             RefreshEquipmentManagerItemGuids();
@@ -27,6 +40,7 @@ namespace Herbfunk.GarrisonBase.Cache
             UpdateBankItems();
             UpdateBankReagentItems();
             ItemDisenchantingBlacklistedGuids.AddRange(EquipmentManagerItemGuids);
+            RefreshLowestDurabilityPercent();
 
             GarrisonBase.Log(DebugString);
 
@@ -37,11 +51,13 @@ namespace Herbfunk.GarrisonBase.Cache
             get { return String.Format("Total Bag Slots {0} / Free Slots {1}\r\n" +
                                        "Total Bag Items {2}\r\n" +
                                        "Total Bank Items {3}\r\n" +
-                                       "Total Reagent Bank Items {4}\r\n",
+                                       "Total Reagent Bank Items {4}\r\n" +
+                                       "Lowest Durability Item {5}",
                                        TotalBagSlots,TotalFreeSlots,
                                        BagItems.Count,
                                        BankItems.Count,
-                                       BankReagentItems.Count);
+                                       BankReagentItems.Count,
+                                       LowestEquippedDurability);
             }
         }
 
@@ -50,6 +66,21 @@ namespace Herbfunk.GarrisonBase.Cache
             if (ShouldUpdateBagItems) UpdateBagItems();
             if (ShouldUpdateBankItems) UpdateBankItems();
             if (ShouldUpdateBankReagentItems) UpdateBankReagentItems();
+        }
+
+        internal void RefreshLowestDurabilityPercent()
+        {
+            LowestEquippedDurability = 100;
+            using (StyxWoW.Memory.AcquireFrame())
+            {
+                foreach (var woWItem in StyxWoW.Me.Inventory.Equipped.Items)
+                {
+                    if (woWItem == null) continue;
+                    double durability = woWItem.DurabilityPercent;
+                    if (durability < LowestEquippedDurability)
+                        LowestEquippedDurability = durability;
+                }
+            }
         }
         
         internal void RefreshEquipmentManagerItemGuids()
@@ -75,14 +106,12 @@ namespace Herbfunk.GarrisonBase.Cache
         };
         internal void RefreshBackpackContainerInfo()
         {
-            TotalBagSlots = 16;
-
+            BagContainerTotalSlots = new[] {16, 0, 0, 0, 0};
             for (int i = 1; i < 5; i++)
             {
                 bool ignored = LuaCommands.GetBagSlotFlag(i, 1);
                 IgnoredBackpackBags[i - 1] = ignored;
-
-                TotalBagSlots += LuaCommands.GetNumberContainerSlots(i);
+                BagContainerTotalSlots[i] = LuaCommands.GetNumberContainerSlots(i);
             }
         }
         //-1 Base Backpack Bag
@@ -100,6 +129,7 @@ namespace Herbfunk.GarrisonBase.Cache
                 }
             }
 
+            
             ShouldUpdateBagItems = false;
         }
         public bool ShouldUpdateBagItems = true;
@@ -137,6 +167,26 @@ namespace Herbfunk.GarrisonBase.Cache
         public bool ShouldUpdateBankReagentItems = true;
 
 
+        public bool FindFreeBagSlot(out int bagIndex , out int bagSlot )
+        {
+            bagIndex = -1;
+            bagSlot = -1;
+
+            for (int i = 0; i < 5; i++)
+            {
+                var bagItemSlots = BagItems.Values.Where(item => item.BagIndex+1 == i).Select(item => item.BagSlot).ToList();
+                for (int j = 0; j < BagContainerTotalSlots[i]; j++)
+                {
+                    if (bagItemSlots.Contains(j)) continue;
+                    bagIndex = i;
+                    bagSlot = j;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public List<C_WoWItem> GetCraftingReagentsById(int id)
         {
             var bagItems = BagItems.Values.Where(i => i.Entry == id).ToArray();
@@ -173,7 +223,7 @@ namespace Herbfunk.GarrisonBase.Cache
                 .Where(i =>
                     !i.IsOpenable &&
                     i.ConsumableClass == WoWItemConsumableClass.None &&
-                    i.RequiredLevel > 0 && i.RequiredLevel < 90 &&
+                    i.RequiredLevel > 0 && (i.RequiredLevel < 90 || (i.RequiredLevel==90 && i.Level == 429)) &&
                     (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                     !i.IsSoulbound &&
                     !EquipmentManagerItemGuids.Contains(i.Guid))
@@ -200,14 +250,25 @@ namespace Herbfunk.GarrisonBase.Cache
             List<C_WoWItem> retList = new List<C_WoWItem>();
             return BagItems.Values.Where(i => !i.IsSoulbound).ToList();
         }
+
         public List<C_WoWItem> GetBankItemsBOE()
         {
             return BankItems.Values.Where(i => !i.IsSoulbound).ToList();
+        }
+        public List<C_WoWItem> GetBankItemsById(int id)
+        {
+            return BankItems.Values.Where(i => i.Entry == id).ToList();
+        }
+
+        public List<C_WoWItem> GetReagentBankItemsById(int id)
+        {
+            return BankReagentItems.Values.Where(i => i.Entry == id).ToList();
         }
         public List<C_WoWItem> GetReagentBankItemsBOE()
         {
             return BankReagentItems.Values.Where(i => !i.IsSoulbound).ToList();
         }
+
         public List<C_WoWItem> GetBagItemsBOEByQuality(WoWItemQuality quality)
         {
             List<C_WoWItem> retList = new List<C_WoWItem>(GetBagItemsBOE());
@@ -245,7 +306,7 @@ namespace Herbfunk.GarrisonBase.Cache
 
             foreach (var mailSendItem in BaseSettings.CurrentSettings.MailSendItems)
             {
-                var items = GetBagItemsById(mailSendItem.EntryId).Where(i => i.StackCount >= mailSendItem.OnCount).ToList();
+                var items = GetBagItemsById(mailSendItem.EntryId).Where(i => i.StackCount > mailSendItem.OnCount).ToList();
                 if (items.Count > 0)
                 {
                     foreach (var item in items )

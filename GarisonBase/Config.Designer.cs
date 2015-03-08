@@ -31,12 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.flowLayoutPanel_MissionRewards = new System.Windows.Forms.FlowLayoutPanel();
             this.label12 = new System.Windows.Forms.Label();
             this.label_ReservedGarrisonResources = new System.Windows.Forms.Label();
             this.trackBar_ReservedGarrisonResources = new System.Windows.Forms.TrackBar();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label_MissionMinimumSuccess = new System.Windows.Forms.Label();
-            this.trackBar_MissionMinimumSuccess = new System.Windows.Forms.TrackBar();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox_Behavior_StartMissions = new System.Windows.Forms.CheckBox();
@@ -97,11 +95,14 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel_MissionRewards = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.checkBox_HBRelogSkipTask = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox_PrimalSpiritItems = new System.Windows.Forms.ComboBox();
+            this.checkBox_ExchangePrimalSpirits = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MissionMinimumSuccess)).BeginInit();
             this.tabPage3.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.tabPage4.SuspendLayout();
@@ -113,12 +114,15 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabPage5.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -134,9 +138,6 @@
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.label_ReservedGarrisonResources);
             this.tabPage1.Controls.Add(this.trackBar_ReservedGarrisonResources);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.label_MissionMinimumSuccess);
-            this.tabPage1.Controls.Add(this.trackBar_MissionMinimumSuccess);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -145,11 +146,18 @@
             this.tabPage1.Text = "Missions";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // flowLayoutPanel_MissionRewards
+            // 
+            this.flowLayoutPanel_MissionRewards.Location = new System.Drawing.Point(12, 173);
+            this.flowLayoutPanel_MissionRewards.Name = "flowLayoutPanel_MissionRewards";
+            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(717, 375);
+            this.flowLayoutPanel_MissionRewards.TabIndex = 12;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(321, 14);
+            this.label12.Location = new System.Drawing.Point(9, 103);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(200, 17);
             this.label12.TabIndex = 11;
@@ -159,7 +167,7 @@
             // 
             this.label_ReservedGarrisonResources.AutoSize = true;
             this.label_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ReservedGarrisonResources.Location = new System.Drawing.Point(561, 34);
+            this.label_ReservedGarrisonResources.Location = new System.Drawing.Point(249, 123);
             this.label_ReservedGarrisonResources.Name = "label_ReservedGarrisonResources";
             this.label_ReservedGarrisonResources.Size = new System.Drawing.Size(21, 24);
             this.label_ReservedGarrisonResources.TabIndex = 10;
@@ -168,7 +176,7 @@
             // trackBar_ReservedGarrisonResources
             // 
             this.trackBar_ReservedGarrisonResources.LargeChange = 100;
-            this.trackBar_ReservedGarrisonResources.Location = new System.Drawing.Point(324, 34);
+            this.trackBar_ReservedGarrisonResources.Location = new System.Drawing.Point(12, 123);
             this.trackBar_ReservedGarrisonResources.Maximum = 10000;
             this.trackBar_ReservedGarrisonResources.Name = "trackBar_ReservedGarrisonResources";
             this.trackBar_ReservedGarrisonResources.Size = new System.Drawing.Size(231, 42);
@@ -176,39 +184,6 @@
             this.trackBar_ReservedGarrisonResources.TabIndex = 9;
             this.trackBar_ReservedGarrisonResources.TickFrequency = 500;
             this.trackBar_ReservedGarrisonResources.Value = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(171, 17);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Minimum Mission Success";
-            // 
-            // label_MissionMinimumSuccess
-            // 
-            this.label_MissionMinimumSuccess.AutoSize = true;
-            this.label_MissionMinimumSuccess.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_MissionMinimumSuccess.Location = new System.Drawing.Point(245, 34);
-            this.label_MissionMinimumSuccess.Name = "label_MissionMinimumSuccess";
-            this.label_MissionMinimumSuccess.Size = new System.Drawing.Size(48, 24);
-            this.label_MissionMinimumSuccess.TabIndex = 6;
-            this.label_MissionMinimumSuccess.Text = "75%";
-            // 
-            // trackBar_MissionMinimumSuccess
-            // 
-            this.trackBar_MissionMinimumSuccess.LargeChange = 25;
-            this.trackBar_MissionMinimumSuccess.Location = new System.Drawing.Point(8, 34);
-            this.trackBar_MissionMinimumSuccess.Maximum = 100;
-            this.trackBar_MissionMinimumSuccess.Minimum = 1;
-            this.trackBar_MissionMinimumSuccess.Name = "trackBar_MissionMinimumSuccess";
-            this.trackBar_MissionMinimumSuccess.Size = new System.Drawing.Size(231, 42);
-            this.trackBar_MissionMinimumSuccess.SmallChange = 10;
-            this.trackBar_MissionMinimumSuccess.TabIndex = 5;
-            this.trackBar_MissionMinimumSuccess.TickFrequency = 25;
-            this.trackBar_MissionMinimumSuccess.Value = 10;
             // 
             // tabPage3
             // 
@@ -823,12 +798,57 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click_1);
             // 
-            // flowLayoutPanel_MissionRewards
+            // tabPage5
             // 
-            this.flowLayoutPanel_MissionRewards.Location = new System.Drawing.Point(12, 109);
-            this.flowLayoutPanel_MissionRewards.Name = "flowLayoutPanel_MissionRewards";
-            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(717, 439);
-            this.flowLayoutPanel_MissionRewards.TabIndex = 12;
+            this.tabPage5.Controls.Add(this.groupBox2);
+            this.tabPage5.Controls.Add(this.checkBox_HBRelogSkipTask);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage5.Size = new System.Drawing.Size(737, 583);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Misc";
+            this.tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_HBRelogSkipTask
+            // 
+            this.checkBox_HBRelogSkipTask.AutoSize = true;
+            this.checkBox_HBRelogSkipTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_HBRelogSkipTask.Location = new System.Drawing.Point(8, 6);
+            this.checkBox_HBRelogSkipTask.Name = "checkBox_HBRelogSkipTask";
+            this.checkBox_HBRelogSkipTask.Size = new System.Drawing.Size(245, 24);
+            this.checkBox_HBRelogSkipTask.TabIndex = 14;
+            this.checkBox_HBRelogSkipTask.Text = "HBRelog Skip to Next Task";
+            this.checkBox_HBRelogSkipTask.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.checkBox_ExchangePrimalSpirits);
+            this.groupBox2.Controls.Add(this.comboBox_PrimalSpiritItems);
+            this.groupBox2.Location = new System.Drawing.Point(8, 36);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(245, 82);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Primal Trader";
+            // 
+            // comboBox_PrimalSpiritItems
+            // 
+            this.comboBox_PrimalSpiritItems.FormattingEnabled = true;
+            this.comboBox_PrimalSpiritItems.Location = new System.Drawing.Point(6, 52);
+            this.comboBox_PrimalSpiritItems.Name = "comboBox_PrimalSpiritItems";
+            this.comboBox_PrimalSpiritItems.Size = new System.Drawing.Size(233, 21);
+            this.comboBox_PrimalSpiritItems.TabIndex = 0;
+            // 
+            // checkBox_ExchangePrimalSpirits
+            // 
+            this.checkBox_ExchangePrimalSpirits.AutoSize = true;
+            this.checkBox_ExchangePrimalSpirits.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_ExchangePrimalSpirits.Name = "checkBox_ExchangePrimalSpirits";
+            this.checkBox_ExchangePrimalSpirits.Size = new System.Drawing.Size(136, 17);
+            this.checkBox_ExchangePrimalSpirits.TabIndex = 1;
+            this.checkBox_ExchangePrimalSpirits.Text = "Exchange Primal Spirits";
+            this.checkBox_ExchangePrimalSpirits.UseVisualStyleBackColor = true;
             // 
             // Config
             // 
@@ -845,7 +865,6 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MissionMinimumSuccess)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
@@ -863,6 +882,10 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -876,9 +899,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label_MissionMinimumSuccess;
-        private System.Windows.Forms.TrackBar trackBar_MissionMinimumSuccess;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.FlowLayoutPanel LBDebug;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -938,6 +958,11 @@
         private System.Windows.Forms.TextBox textBox_MailItem_Name;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_MissionRewards;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox checkBox_ExchangePrimalSpirits;
+        private System.Windows.Forms.ComboBox comboBox_PrimalSpiritItems;
+        private System.Windows.Forms.CheckBox checkBox_HBRelogSkipTask;
 
     }
 }

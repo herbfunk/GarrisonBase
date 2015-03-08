@@ -46,6 +46,8 @@ namespace Herbfunk.GarrisonBase
         SorcerousFire = 113261,
         SorcerousWater = 113262,
         SorcerousEarth = 113263,
+
+        SavageBlood = 118472,
         
 
         //bop
@@ -53,7 +55,7 @@ namespace Herbfunk.GarrisonBase
         DraenicSeeds = 116053,
         Timber = 114781,
     }
-    public static partial class CacheStaticLookUp
+    public static class CacheStaticLookUp
     {
 
 
@@ -81,21 +83,10 @@ namespace Herbfunk.GarrisonBase
         internal static bool InitalizedCache = false;
         internal static void Update()
         {
-            if (!LuaEvents.LuaAddonInjected)
-            {
-                if (LuaCommands.TestLuaInjectionCode())
-                {//Prevent multiple injections by checking simple function return!
-                    LuaEvents.LuaAddonInjected = true;
-                }
-                else
-                {
-                    LuaEvents.InjectLuaAddon();
-                }
-            }
             Player.Initalize();
             MovementCache.Initalize(Player.IsAlliance);
             QuestManager.RefreshQuestLog();
-
+            Cache.Blacklist.Initalize(Player.IsAlliance);
             InitalizedCache = true;
         }
 

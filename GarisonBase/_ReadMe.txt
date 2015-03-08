@@ -26,7 +26,7 @@ Vendoring
 Questing for new buildings (first workorders, mines, herbs)
 Daily Profession Crafting for Draenor
 Get mail attachments and send mail.
-
+Exchange Primal Spirits.
 
 Support and Issues
 Only Garrison Level 2/3. (Sorry no newbie garrisons)
