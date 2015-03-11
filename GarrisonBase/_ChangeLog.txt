@@ -1,0 +1,36 @@
+﻿v1.1.0.0
+
+Behaviors
+	*Added Trade Post and War Mill Work Order Behavior
+		-Settings for each reagent can be enabled/disabled in Config.
+		-alliance war mill level 3 is not yet supported.
+	*Completing Missions now has wait timer which pauses and should no longer continue checking completed missions.
+	*Mining and Herbing no longer activates looting until behavior is actually running.
+	*Mining and Herbing behaviors will now occur after mission complete, mail, and cache behaviors.
+
+Object Cache
+	*Added property list ValidTargetingObjects
+	*Added method to update/check current lootable object
+	C_WoWObject
+		-Line of Sight testing now uses custom method to evaluate.
+		-Added ValidForTargeting virtual property to determine if targetable.
+		-Added WaitTimer "IgnoreTimer" which is checked during ValidForTargeting.
+		-Added InteractRange property and Method WithinInteractRange which is a copy of HB method but using the new InteractRange property.
+
+Settings and Config
+	*Each work order type is now ignorable.
+	*Added Work Order tab and Misc tab to Config
+	*Added setting for behavior looting garrison cache.
+	*Added settings for disenchanting (quality, max itemlevel, and soulbound)
+	*Added settings for vendoring (quality)
+
+
+v1.0.1.0
+Mailing Behaviors
+	-Getting mail will now be more human like.
+	-Sending mail for specific items will make sure to keep the on count set and send only the extra.
+
+Added a Blacklist for Object Cache entry ids for common found NPCs and Game objects that should always be ignored.
+Current Loot Object will now be set based on distance (nearest will always be chosen if possible)
+Added Exchange Primal Trader Behavior (only one possible item can be set for exchanging)
+Crafting Profession behavior for engineering will now check for forge and move if possible.
