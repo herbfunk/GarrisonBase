@@ -33,7 +33,7 @@ namespace Herbfunk.GarrisonBase
                 {
                     return () => (BaseSettings.CurrentSettings.BehaviorLootCache &&
                                     GarrisonResourceCacheObject != null &&
-                                    GarrisonResourceCacheObject.ref_WoWObject.IsValid);
+                                    GarrisonResourceCacheObject.RefWoWObject.IsValid);
                 }
             }
 
@@ -55,7 +55,7 @@ namespace Herbfunk.GarrisonBase
 
             public override async Task<bool> Interaction()
             {
-                if (GarrisonResourceCacheObject != null && GarrisonResourceCacheObject.ref_WoWObject.IsValid && GarrisonResourceCacheObject.GetCursor == WoWCursorType.InteractCursor)
+                if (GarrisonResourceCacheObject != null && GarrisonResourceCacheObject.RefWoWObject.IsValid && GarrisonResourceCacheObject.GetCursor == WoWCursorType.InteractCursor)
                 {
                     GarrisonResourceCacheObject.Interact();
                     await CommonCoroutines.SleepForRandomUiInteractionTime();

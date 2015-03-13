@@ -11,10 +11,12 @@ using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
+using Styx.Common;
 using Styx.Common.Helpers;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
+using Styx.CommonBot.POI;
 using Styx.CommonBot.Routines;
 using Styx.Pathing;
 using Styx.TreeSharp;
@@ -66,24 +68,7 @@ namespace Herbfunk.GarrisonBase
             if (!CacheStaticLookUp.InitalizedCache)
             {
                 CacheStaticLookUp.Update();
-
-                if (Player.IsAlliance)
-                {
-                    _mineQuest = new Behaviors.BehaviorMine(MovementCache.Alliance_Mine_LevelOne);
-                    _herbQuest = new Behaviors.BehaviorHerb(MovementCache.Alliance_Herb_LevelOne);
-                }
-                else
-                {
-                    _mineQuest = new Behaviors.BehaviorMine(MovementCache.Horde_Mine_LevelOne);
-                    _herbQuest = new Behaviors.BehaviorHerb(MovementCache.Horde_Herb_LevelOne);
-                }
-                _mineQuest.Initalize();
-                _herbQuest.Initalize();
             }
-
-
-            //if (!StyxWoW.Me.IsAlive || StyxWoW.Me.Combat || RoutineManager.Current.NeedRest)
-            //    return false;
 
             if (await PreCheckCoroutines())
                 return true;
@@ -127,23 +112,23 @@ namespace Herbfunk.GarrisonBase
 
             if (ObjectCacheManager.ShouldUpdateObjectCollection) ObjectCacheManager.UpdateCache();
 
-            if (!_checkedFirstQuests)
-            {
-                if (!GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && Player.Level >= 92)
-                {
-                    if (await _mineQuest.BehaviorRoutine())
-                        return true;
-                }
+            //if (!_checkedFirstQuests)
+            //{
+            //    if (!GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && Player.Level >= 92)
+            //    {
+            //        if (await _mineQuest.BehaviorRoutine())
+            //            return true;
+            //    }
 
-                if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted && Player.Level >= 96)
-                {
-                    if (await _herbQuest.BehaviorRoutine())
-                        return true;
-                }
+            //    if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted && Player.Level >= 96)
+            //    {
+            //        if (await _herbQuest.BehaviorRoutine())
+            //            return true;
+            //    }
 
 
-                _checkedFirstQuests = true;
-            }
+            //    _checkedFirstQuests = true;
+            //}
             
 
             if (!_initalizedBehaviorList)
@@ -180,6 +165,7 @@ namespace Herbfunk.GarrisonBase
                     GarrisonBase.Debug("Behavior {0} returned false!", CurrentBehavior.Type);
                     Behaviors.RemoveAt(0);
                     CurrentBehavior = null;
+                    ObjectCacheManager.ResetLootCombatEntryLists();
                 }
 
                 return true;
@@ -243,7 +229,85 @@ namespace Herbfunk.GarrisonBase
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
                     Behaviors.Add(behaviorArray);
                 }
-                else if(b.Type != BuildingType.Mines && b.Type != BuildingType.HerbGarden)
+                else if (b.Type == BuildingType.Storehouse)
+                {
+                    var pickup = new Behaviors.BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+
+                    List<WoWPoint> _hotSpots = new List<WoWPoint>
+                    {
+                        MovementCache.GarrisonEntrance,
+
+                        MovementCache.GardenPlot63SafePoint,
+                        MovementCache.MinePlot59SafePoint,
+
+                        MovementCache.MediumPlot22SafePoint,
+                        MovementCache.LargePlot23SafePoint,
+                        MovementCache.LargePlot24SafePoint,
+                        MovementCache.MediumPlot25SafePoint,
+
+                        MovementCache.SmallPlot18SafePoint,
+                        MovementCache.SmallPlot19SafePoint,
+                        MovementCache.SmallPlot20SafePoint,
+                    };
+
+                    var looting = new Behaviors.BehaviorQuestLootKill(b.FirstQuestID, _hotSpots.ToArray(), true);
+                    var turnin = new Behaviors.BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+
+                    var behaviorArray = new Behaviors.BehaviorArray(new Behaviors.Behavior[] { pickup, looting, turnin });
+                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                    Behaviors.Add(behaviorArray);
+                }
+                else if (b.Type == BuildingType.Lumbermill)
+                {
+                    var pickup = new Behaviors.BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                   
+                    WoWPoint movementPoint;
+                    if (Player.IsAlliance)
+                        movementPoint = new WoWPoint(1555.087, 173.8229, 72.59766);
+                    else
+                        movementPoint = new WoWPoint(6082.979, 4795.821, 149.1655);
+
+                    var looting = new Behaviors.BehaviorQuestLootKill(b.FirstQuestID, new[] { movementPoint }, new uint[] { 234021, 233922 }, true);
+                    var turnin = new Behaviors.BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var behaviorArray = new Behaviors.BehaviorArray(new Behaviors.Behavior[] { pickup, looting, turnin });
+                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                    Behaviors.Add(behaviorArray);
+                }
+                else if (b.Type == BuildingType.Mines)
+                {
+                    var pickup = new Behaviors.BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                   
+                    var looting = new Behaviors.BehaviorQuestLootKill(
+                        b.FirstQuestID, 
+                        Player.IsAlliance?
+                        MovementCache.Alliance_Mine_LevelOne.ToArray():
+                        MovementCache.Horde_Mine_LevelOne.ToArray(),
+                        true);
+
+                    var turnin = new Behaviors.BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+
+                    var behaviorArray = new Behaviors.BehaviorArray(new Behaviors.Behavior[] { pickup, looting, turnin });
+                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                    Behaviors.Add(behaviorArray);
+                }
+                else if (b.Type == BuildingType.HerbGarden)
+                {
+                    var pickup = new Behaviors.BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+
+                    var looting = new Behaviors.BehaviorQuestLootKill(
+                        b.FirstQuestID,
+                        Player.IsAlliance ?
+                        MovementCache.Alliance_Herb_LevelOne.ToArray() :
+                        MovementCache.Horde_Herb_LevelOne.ToArray(),
+                        false);
+
+                    var turnin = new Behaviors.BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+
+                    var behaviorArray = new Behaviors.BehaviorArray(new Behaviors.Behavior[] { pickup, looting, turnin });
+                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                    Behaviors.Add(behaviorArray);
+                }
+                else
                 {
                     var pickup = new Behaviors.BehaviorQuestPickup(b.FirstQuestID, b.SafeMovementPoint, b.QuestNpcID);
                     var workorder = new Behaviors.BehaviorQuestWorkOrder(b);
@@ -332,6 +396,7 @@ namespace Herbfunk.GarrisonBase
                         }
                         else
                         {
+                            //Behaviors.Add(new Behaviors.BehaviorWorkOrderRush(b));
                             Behaviors.Add(new Behaviors.BehaviorWorkOrderPickUp(b));
                             Behaviors.Add(new Behaviors.BehaviorWorkOrderStartUp(b));
                             if (b.Type == BuildingType.EnchantersStudy)
@@ -406,6 +471,9 @@ namespace Herbfunk.GarrisonBase
             if (await DeathBehavior.ExecuteCoroutine())
                 return true;
 
+            if (!StyxWoW.Me.Combat && await EngageObject()) 
+                return true;
+
             if (StyxWoW.Me.Combat && await CombatBehavior.ExecuteCoroutine())
                 return true;
 
@@ -424,6 +492,77 @@ namespace Herbfunk.GarrisonBase
             return false;
         }
 
+        private static Movement _combatMovement;
+        internal static async Task<bool> EngageObject()
+        {
+            if (ObjectCacheManager.ShouldUpdateObjectCollection)
+                ObjectCacheManager.UpdateCache();
+
+            if (!ObjectCacheManager.ShouldKill || ObjectCacheManager.CombatObject == null)
+            {
+                _combatMovement = null;
+                return false;
+            }
+
+            if (!ObjectCacheManager.CombatObject.ValidForCombat)
+            {
+                _combatMovement = null;
+                return false;
+            }
+
+            
+            if (ObjectCacheManager.CombatObject.Distance <= Targeting.PullDistance)
+            {
+                TreeRoot.StatusText = String.Format("Behavior Combat {0}", ObjectCacheManager.CombatObject.Name);
+
+                if (ObjectCacheManager.CombatObject.IsValid)
+                {
+                    if (StyxWoW.Me.CurrentTarget == null || StyxWoW.Me.CurrentTarget.Guid != ObjectCacheManager.CombatObject.Guid)
+                    {
+                        BotPoi.Current = new BotPoi(ObjectCacheManager.CombatObject.RefWoWUnit, PoiType.Kill);
+                        ObjectCacheManager.CombatObject.RefWoWUnit.Target();
+                    }
+
+
+                    if (RoutineManager.Current.PullBuffBehavior != null)
+                        await RoutineManager.Current.PullBuffBehavior.ExecuteCoroutine();
+
+                    if (RoutineManager.Current.PullBehavior != null)
+                        await RoutineManager.Current.PullBehavior.ExecuteCoroutine();
+
+                    return true;
+                }
+
+                return true;
+            }
+
+            if (_combatMovement == null)
+            {
+                _combatMovement = new Movement(ObjectCacheManager.CombatObject.Location,
+                    RoutineManager.Current.PullDistance.HasValue ? (float)RoutineManager.Current.PullDistance.Value :
+                    ObjectCacheManager.CombatObject.InteractRange);
+            }
+            else if (_combatMovement.CurrentMovementQueue.Count == 0)
+            {
+                _combatMovement = new Movement(ObjectCacheManager.CombatObject.Location,
+                    ObjectCacheManager.CombatObject.InteractRange -= 0.25f);
+            }
+
+            TreeRoot.StatusText = String.Format("Behavior Combat Movement {0}", ObjectCacheManager.CombatObject.Name);
+            MoveResult result = await _combatMovement.MoveTo_Result();
+
+            if (result == MoveResult.Failed)
+            {
+                GarrisonBase.Debug("Behavior Combat Movement FAILED for {0}", ObjectCacheManager.LootableObject.Name);
+                ObjectCacheManager.LootableObject.IgnoredTimer = WaitTimer.TenSeconds;
+                ObjectCacheManager.LootableObject = null;
+                _lootMovement = null;
+                return false;
+            }
+
+            return true;
+        }
+
         private static Movement _lootMovement;
         internal static async Task<bool> LootObject()
         {
@@ -439,6 +578,7 @@ namespace Herbfunk.GarrisonBase
             if (!ObjectCacheManager.LootableObject.IsValid)
             {
                 _lootMovement = null;
+                ObjectCacheManager.LootableObject.NeedsRemoved = true;
                 return false;
             }
 

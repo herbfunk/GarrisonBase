@@ -28,12 +28,12 @@ namespace Herbfunk.GarrisonBase
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (await base.Movement()) return true;
+                
 
-                if (InteractionObject == null)
+                if (InteractionObject == null || !InteractionObject.IsValid || !InteractionObject.LineOfSight)
                 {
-                    //Failed!
-                    return false;
+                    await StartMovement.MoveTo();
+                    return true;
                 }
 
                 if (!LuaEvents.MerchantFrameOpen)

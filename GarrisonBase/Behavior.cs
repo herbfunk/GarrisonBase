@@ -18,6 +18,7 @@ namespace Herbfunk.GarrisonBase
         {
             None,
 
+            WorkOrderRush,
             WorkOrderPickUp,
             WorkOrderStartUp,
             Salvage,
@@ -31,6 +32,7 @@ namespace Herbfunk.GarrisonBase
             QuestPickup,
             QuestTurnin,
             QuestAbandon,
+            QuestLootKill,
             ProfessionCrafting,
             SellRepair,
             MoveTo,
@@ -172,7 +174,7 @@ namespace Herbfunk.GarrisonBase
 
                 foreach (var b in Behaviors)
                 {
-                    if (await b.BehaviorRoutine())
+                    if (!b.IsDone && await b.BehaviorRoutine())
                         return true;
                 }
 

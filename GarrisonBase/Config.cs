@@ -339,7 +339,9 @@ namespace Herbfunk.GarrisonBase
                 //debug
                 checkBox_Debug_FakeStartWorkOrder.Checked = BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
                 checkBox_Debug_FakeStartWorkOrder.CheckedChanged += checkBox_Debug_FakeStartWorkOrder_CheckedChanged;
-                
+
+                checkBox_Debug_FakeFinishQuest.Checked = BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST;
+                checkBox_Debug_FakeFinishQuest.CheckedChanged += checkBox_Debug_FakeFinishQuest_CheckedChanged;
             }
             catch (Exception)
             {
@@ -555,7 +557,10 @@ namespace Herbfunk.GarrisonBase
         {
             BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER = !BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
         }
-       
+        private void checkBox_Debug_FakeFinishQuest_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST = !BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST;
+        }
         private void Config_Load(object sender, EventArgs e)
         {
 

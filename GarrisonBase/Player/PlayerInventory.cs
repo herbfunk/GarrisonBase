@@ -226,7 +226,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     .Where(i =>
                         !i.IsOpenable &&
                         i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && (i.RequiredLevel < 90 || (i.RequiredLevel == 90 && i.Level == 429)) &&
+                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
                         (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                         !i.IsSoulbound &&
                         !EquipmentManagerItemGuids.Contains(i.Guid))
@@ -240,7 +240,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     .Where(i =>
                         !i.IsOpenable &&
                         i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && (i.RequiredLevel < 90 || (i.RequiredLevel == 90 && i.Level == 429)) &&
+                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
                         (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                         !i.IsSoulbound &&
                         !EquipmentManagerItemGuids.Contains(i.Guid))
@@ -254,7 +254,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     .Where(i =>
                         !i.IsOpenable &&
                         i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && (i.RequiredLevel < 90 || (i.RequiredLevel == 90 && i.Level == 429)) &&
+                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
                         (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                         !i.IsSoulbound &&
                         !EquipmentManagerItemGuids.Contains(i.Guid))
@@ -309,7 +309,12 @@ namespace Herbfunk.GarrisonBase.Cache
         public List<C_WoWItem> GetBagItemsBOE()
         {
             List<C_WoWItem> retList = new List<C_WoWItem>();
-            return BagItems.Values.Where(i => !i.IsSoulbound).ToList();
+            return BagItems.Values.Where(i => 
+                 !i.IsOpenable &&
+                 i.ConsumableClass == WoWItemConsumableClass.None && 
+                 !i.IsSoulbound && 
+                 (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
+                 !EquipmentManagerItemGuids.Contains(i.Guid)).ToList();
         }
 
         public List<C_WoWItem> GetBankItemsBOE()

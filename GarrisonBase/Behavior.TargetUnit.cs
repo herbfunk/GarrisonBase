@@ -35,7 +35,7 @@ namespace Herbfunk.GarrisonBase
                 if (_units.Count > 0)
                 {
                     TreeRoot.StatusText = String.Format("Behavior Targeting Unit {0}", _units[0].Name);
-                    _units[0].ref_WoWUnit.Target();
+                    _units[0].RefWoWUnit.Target();
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                     return true;
                 }

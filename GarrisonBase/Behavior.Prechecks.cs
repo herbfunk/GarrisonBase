@@ -70,8 +70,8 @@ namespace Herbfunk.GarrisonBase
                     return true;
                 }
 
-                
 
+                IsDone = true;
                 return false;
             }
 

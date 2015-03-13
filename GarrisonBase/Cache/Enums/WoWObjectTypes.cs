@@ -5,6 +5,7 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
     [Flags]
     public enum WoWObjectTypes
     {
+        Unknown=0,
         Unit=1,
         OreVein=2,
         Herb=4,
@@ -15,6 +16,6 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
         GarrisonWorkOrderNpc=128,
         Mailbox = 256,
         PrimalTrader = 512,
-        Unknown = 1024,
+        RepairVendor = 1024,
     }
 }

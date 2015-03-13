@@ -55,6 +55,9 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(1899.638, 50.47875, 49.03188),
             new WoWPoint(1923.146, 49.2985, 44.78643),
             new WoWPoint(1922.795, 68.88879, 38.1831),
+
+            new WoWPoint(1913.671, 70.46033, 33.45458),
+
             new WoWPoint(1916.361, 82.01344, 31.24682),
             new WoWPoint(1913.865, 109.0081, 26.28172),
             new WoWPoint(1885.752, 116.5619, 23.6226),
@@ -81,6 +84,9 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(1899.638, 50.47875, 49.03188),
             new WoWPoint(1923.146, 49.2985, 44.78643),
             new WoWPoint(1922.795, 68.88879, 38.1831),
+
+            new WoWPoint(1913.671, 70.46033, 33.45458),
+
             new WoWPoint(1916.361, 82.01344, 31.24682),
             new WoWPoint(1913.865, 109.0081, 26.28172),
             new WoWPoint(1885.752, 116.5619, 23.6226),
@@ -119,6 +125,9 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(1899.638, 50.47875, 49.03188),
             new WoWPoint(1923.146, 49.2985, 44.78643),
             new WoWPoint(1922.795, 68.88879, 38.1831),
+
+            new WoWPoint(1913.671, 70.46033, 33.45458),
+
             new WoWPoint(1916.361, 82.01344, 31.24682),
             new WoWPoint(1913.865, 109.0081, 26.28172),
             new WoWPoint(1885.752, 116.5619, 23.6226),

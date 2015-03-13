@@ -429,7 +429,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 case BuildingType.Stables:
                     break;
                 case BuildingType.Lumbermill:
-                    break;
+                    return isAlly ? 36189 : 36137;
                 case BuildingType.Barn:
                     break;
                 case BuildingType.FrostwallTavern:
@@ -455,7 +455,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 case BuildingType.AlchemyLab:
                     return isAlly ? 36641 : 37568;
                 case BuildingType.Storehouse:
-                    break;
+                    return isAlly ? 37087 : 37060;
                 case BuildingType.SalvageYard:
                     return isAlly ? 37086 : 37045;
                 case BuildingType.HerbGarden:
@@ -486,7 +486,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 case BuildingType.Stables:
                     break;
                 case BuildingType.Lumbermill:
-                    break;
+                    return isAlly ? 84248 : 84247;
                 case BuildingType.Barn:
                     break;
                 case BuildingType.FrostwallTavern:
@@ -512,7 +512,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 case BuildingType.AlchemyLab:
                     return isAlly ? 77363 : 79813;
                 case BuildingType.Storehouse:
-                    break;
+                    return isAlly ? 84857 : 79862;
                 case BuildingType.SalvageYard:
                     return isAlly ? 77378 : 79857;
                 case BuildingType.HerbGarden:

@@ -150,6 +150,7 @@ namespace Herbfunk.GarrisonBase
         
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
+        public bool DEBUG_FAKEFINISHQUEST { get; set; }
 
         public BaseSettings()
         {
@@ -233,6 +234,7 @@ namespace Herbfunk.GarrisonBase
             VendorRareItems = false;
 
             DEBUG_FAKESTARTWORKORDER = false;
+            DEBUG_FAKEFINISHQUEST = false;
 
             LastCheckedHerbString = "0001-01-01T00:00:00";
             LastCheckedMineString = "0001-01-01T00:00:00";

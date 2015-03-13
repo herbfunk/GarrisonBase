@@ -101,6 +101,7 @@ namespace Herbfunk.GarrisonBase
         public static void GARRISON_MISSION_FINISHED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: GARRISON_MISSION_FINISHED");
+            GarrisonManager.UpdateMissionIds();
             if (OnGarrisonMissionFinished != null) OnGarrisonMissionFinished();
         }
         public static void GARRISON_BUILDING_ACTIVATABLE(object sender, LuaEventArgs args)

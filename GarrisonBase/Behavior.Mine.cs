@@ -37,8 +37,9 @@ namespace Herbfunk.GarrisonBase
                 get
                 {
                     return () =>
-                        ((!GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && Player.Level >= 92 && BaseSettings.CurrentSettings.BehaviorQuests)||
-                        (GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) && BaseSettings.CurrentSettings.BehaviorMineGather));
+                        (GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && 
+                        LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) && 
+                        BaseSettings.CurrentSettings.BehaviorMineGather);
                 }
             }
             public override void Initalize()
@@ -61,96 +62,102 @@ namespace Herbfunk.GarrisonBase
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (await base.StartMovement.MoveTo()) return true;
+                if (await StartMovement.MoveTo()) return true;
 
                 ObjectCacheManager.ShouldLoot = true;
 
                 #region Quest
-                if (!GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted)
-                {
-                    if (!QuestManager.QuestContainedInQuestLog(GarrisonManager.Buildings[BuildingType.Mines].FirstQuestID))
-                    {
-                        TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup", Type.ToString());
+                //if (!GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted)
+                //{
+                //    if (!QuestManager.QuestContainedInQuestLog(GarrisonManager.Buildings[BuildingType.Mines].FirstQuestID))
+                //    {
+                //        //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup", Type.ToString());
 
-                        //Move to quest giver..
-                        if (_movement == null)
-                            _movement = new Movement(MovementCache.MinePlot59SafePoint, 10f);
+                //        //Move to quest giver..
+                //        if (_movement == null)
+                //            _movement = new Movement(MovementCache.MinePlot59SafePoint, 10f);
 
-                        if (await _movement.MoveTo())
-                            return true;
+                //        if (await _movement.MoveTo())
+                //            return true;
 
-                        //QUEST_ACCEPTED
-                        if (!LuaEvents.QuestFrameOpen)
-                        {
-                            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.Mines].QuestNpcID);
-                            if (_npc != null && _npc.IsValid)
-                            {
-                                if (_npc.WithinInteractRange)
-                                {
-                                    TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Interact", Type.ToString());
-                                    _npc.Interact();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    return true;
-                                }
+                //        //QUEST_ACCEPTED
+                //        if (!LuaEvents.QuestFrameOpen)
+                //        {
+                //            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.Mines].QuestNpcID);
+                //            if (_npc != null && _npc.IsValid)
+                //            {
+                //                if (_npc.WithinInteractRange)
+                //                {
+                //                    //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Interact", Type.ToString());
+                //                    _npc.Interact();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    return true;
+                //                }
 
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Moveto", Type.ToString());
-                                await CommonCoroutines.MoveTo(_npc.Location);
-                                return true;
-                            }
-                        }
-                        else
-                        {
-                            if (QuestFrame.Instance.IsVisible)
-                            {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Accept Quest", Type.ToString());
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Moveto", Type.ToString());
+                //                await CommonCoroutines.MoveTo(_npc.Location);
+                //                return true;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            if (QuestFrame.Instance.IsVisible)
+                //            {
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Accept Quest", Type.ToString());
 
-                                QuestFrame.Instance.AcceptQuest();
-                                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                            }
-                            return true;
-                        }
+                //                QuestFrame.Instance.AcceptQuest();
+                //                await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //            }
+                //            return true;
+                //        }
 
-                    }
-                    else if (QuestManager.GetQuestFromQuestLog(GarrisonManager.Buildings[BuildingType.Mines].FirstQuestID).IsCompleted)
-                    {
-                        TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
+                //    }
+                //    else if (QuestManager.GetQuestFromQuestLog(GarrisonManager.Buildings[BuildingType.Mines].FirstQuestID).IsCompleted)
+                //    {
+                //        //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
 
-                        if (!LuaEvents.QuestFrameOpen)
-                        {
-                            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.Mines].QuestNpcID);
-                            if (_npc != null && _npc.IsValid)
-                            {
-                                if (_npc.WithinInteractRange)
-                                {
-                                    TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact", Type.ToString());
-                                    _npc.Interact();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    return true;
-                                }
+                //        if (!LuaEvents.QuestFrameOpen)
+                //        {
+                //            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.Mines].QuestNpcID);
+                //            if (_npc != null && _npc.IsValid)
+                //            {
+                //                if (_npc.WithinInteractRange)
+                //                {
+                //                    //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact", Type.ToString());
+                //                    _npc.Interact();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    return true;
+                //                }
 
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC MoveTo", Type.ToString());
-                                await CommonCoroutines.MoveTo(_npc.Location);
-                                return true;
-                            }
-                        }
-                        else
-                        {
-                            if (QuestFrame.Instance.IsVisible)
-                            {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC MoveTo", Type.ToString());
+                //                await CommonCoroutines.MoveTo(_npc.Location);
+                //                return true;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            if (QuestFrame.Instance.IsVisible)
+                //            {
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
+                //                if (!BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST)
+                //                {
+                //                    QuestFrame.Instance.CompleteQuest();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted = true;
+                //                    await Coroutine.Sleep(5000);
+                //                    GarrisonManager.RefreshBuildings();
+                //                }
 
-                                QuestFrame.Instance.CompleteQuest();
-                                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted = true;
-                                await Coroutine.Sleep(5000);
-                                GarrisonManager.RefreshBuildings();
-                            }
-                            return true;
-                        }
-                    }
-                }
+                //                return false;
+                //            }
+                //            return true;
+                //        }
+                //    }
+                //}
                 
                 #endregion
+
+                ObjectCacheManager.UpdateLootableTarget();
 
                 if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
                 {

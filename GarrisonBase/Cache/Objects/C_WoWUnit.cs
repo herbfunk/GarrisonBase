@@ -10,10 +10,23 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 {
     public class C_WoWUnit : C_WoWObject
     {
+
+        public WoWUnit RefWoWUnit;
+        public override void UpdateReference(WoWObject obj)
+        {
+            base.UpdateReference(obj);
+            RefWoWUnit = obj.ToUnit();
+        }
+
+        public bool IsDead { get; set; }
+        public bool Attackable { get; set; }
+        public bool Lootable { get; set; }
+
+
         public C_WoWUnit(WoWUnit obj)
             : base(obj)
         {
-            ref_WoWUnit = obj;
+            RefWoWUnit = obj;
 
             if (SubType == WoWObjectTypes.Unknown)
             {
@@ -22,58 +35,66 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 {
                     SubType = WoWObjectTypes.GarrisonWorkOrderNpc;
                     InteractRange = 5.4f;
+                    IgnoresRemoval = true;
                 }
                 else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
                 {
                     SubType = WoWObjectTypes.GarrisonCommandTable;
                     InteractRange = 4.55f;
+                    IgnoresRemoval = true;
                 }
                 else if (CacheStaticLookUp.MineQuestMobIDs.Contains(Entry) ||
                          CacheStaticLookUp.HerbQuestMobIDs.Contains(Entry))
                 {
-                    Targeting.Instance.TargetList.Add(ref_WoWUnit);
-                    LootTargeting.Instance.TargetList.Add(ref_WoWUnit);
                     InteractRange = 5f;
-                    _shouldLoot = true;
+                    ShouldLoot = true;
+                    ShouldKill = true;
                 }
                 else if (Entry == GarrisonManager.PrimalTraderID)
                 {
                     SubType = WoWObjectTypes.PrimalTrader;
+                    IgnoresRemoval = true;
+                }
+                else if (Entry == GarrisonManager.SellRepairNpcId)
+                {
+                    SubType= WoWObjectTypes.RepairVendor;
+                    IgnoresRemoval = true;
+                }
+                else if (ObjectCacheManager.KillableEntryIds.Contains(Entry))
+                {
+                    ShouldKill = true;
+                    ShouldLoot = true;
                 }
             }
         }
 
-        public readonly WoWUnit ref_WoWUnit;
-        public bool IsDead { get; set; }
-        public bool Lootable { get; set; }
-        private bool _shouldLoot { get; set; }
-
-
-
-
+  
         public override bool Update()
         {
-            base.Update();
-            Location = ref_WoWUnit.Location;
-            IsDead=ref_WoWUnit.IsDead;
+            if (!base.Update()) return false;
+            
+            
+
+            Location = RefWoWUnit.Location;
+            IsDead=RefWoWUnit.IsDead;
 
 
             if (IsDead)
             {
-                if (_shouldLoot)
+                if (ShouldLoot)
                 {
-                    Lootable = ref_WoWUnit.Lootable;
+                    Lootable = RefWoWUnit.Lootable;
                 }
-                else
-                {
-                    RequiresUpdate = false;
-                }
+            }
+            else if(ShouldKill)
+            {
+                Attackable = RefWoWUnit.Attackable;
             }
 
             return true;
         }
 
-        public override bool ValidForTargeting
+        public override bool ValidForLooting
         {
             get
             {
@@ -81,18 +102,33 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
                 if (IsDead && !Lootable) return false;
 
-                if (!_shouldLoot || !LineOfSight) return false;
+                if (!ShouldLoot || !LineOfSight) return false;
 
                 return true;
             }
         }
+
+        public override bool ValidForCombat
+        {
+            get
+            {
+                if (!base.ValidForCombat) return false;
+
+                if (IsDead || !Attackable) return false;
+
+                if (!ShouldKill || !LineOfSight) return false;
+
+                return true;
+            }
+        }
+
 
         public override string ToString()
         {
             return String.Format("{0}\r\n" +
                                  "IsDead {1} Lootable {2} ShouldLoot {3}",
                                     base.ToString(),
-                                    IsDead, Lootable, _shouldLoot);
+                                    IsDead, Lootable, ShouldLoot);
         }
     }
 }

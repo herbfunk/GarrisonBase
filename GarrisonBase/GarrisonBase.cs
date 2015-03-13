@@ -20,7 +20,7 @@ namespace Herbfunk.GarrisonBase
     public class GarrisonBase : BotBase
     {
         public static HBRelogApi HbRelogApi;
-        internal static readonly Version Version = new Version(1,1,0,0);
+        internal static readonly Version Version = new Version(1,1,1,0);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {
@@ -88,6 +88,7 @@ namespace Herbfunk.GarrisonBase
         public override void OnSelected()
         {
             Debug("BotEvent OnSelected");
+            Log("Selected GarrisonBase v{0}", Version.ToString());
             BaseSettings.LoadSettings();
             Player.Initalize();
         }

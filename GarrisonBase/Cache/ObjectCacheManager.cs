@@ -12,8 +12,10 @@ namespace Herbfunk.GarrisonBase.Cache
 {
     public static class ObjectCacheManager
     {
-        public static List<C_WoWObject> ValidTargetingObjects = new List<C_WoWObject>();
+        public static List<C_WoWObject> ValidLootableObjects = new List<C_WoWObject>();
+        public static List<C_WoWUnit> ValidCombatObjects = new List<C_WoWUnit>();
         internal static C_WoWObject LootableObject { get; set; }
+        internal static C_WoWUnit CombatObject { get; set; }
         internal static bool FoundOreObject { get; set; }
         internal static bool FoundHerbObject { get; set; }
        
@@ -31,12 +33,17 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
 
-        public static bool ShouldLoot
+        public static bool ShouldLoot { get; set; }
+        public static bool ShouldKill { get; set; }
+
+        public static List<uint> LootableEntryIds = new List<uint>();
+        public static List<uint> KillableEntryIds = new List<uint>();
+
+        public static void ResetLootCombatEntryLists()
         {
-            get { return _shouldLoot; }
-            set { _shouldLoot = value; }
+            LootableEntryIds.Clear();
+            KillableEntryIds.Clear();
         }
-        private static bool _shouldLoot = false;
 
         private static int UpdateLoopCounter;
         private static List<WoWGuid> _blacklistedGuids=new List<WoWGuid>();
@@ -48,7 +55,7 @@ namespace Herbfunk.GarrisonBase.Cache
             FoundOreObject = false;
             FoundHerbObject = false;
 
-            GarrisonBase.Debug("Updating Object Cache");
+            //GarrisonBase.Debug("Updating Object Cache");
             List<WoWGuid> GuidsSeenThisLoop = new List<WoWGuid>();
             using (StyxWoW.Memory.AcquireFrame())
             {
@@ -95,11 +102,9 @@ namespace Herbfunk.GarrisonBase.Cache
                         }
                     }
 
-                    if (!wowObj.IsValid && !wowObj.IgnoreRemoval)
+                    if (!wowObj.IsValid && wowObj.IgnoresRemoval)
                     {
-                        wowObj.NeedsRemoved = true;
-                        wowObj.IgnoredTimer = WaitTimer.ThirtySeconds;
-                        continue;
+                        wowObj.UpdateReference(obj);
                     }
 
                     wowObj.LoopsUnseen = 0;
@@ -123,7 +128,7 @@ namespace Herbfunk.GarrisonBase.Cache
             {
                 UpdateLoopCounter = 0;
                 //Now flag any objects not seen for 5 loops. Gold/Globe only 1 loop.
-                foreach (var item in ObjectCollection.Values.Where(CO => !CO.IgnoreRemoval && CO.LoopsUnseen >= 5))
+                foreach (var item in ObjectCollection.Values.Where(CO => CO.LoopsUnseen >= 5 && !CO.IgnoresRemoval))
                 {
                     item.NeedsRemoved = true;
                 }
@@ -131,12 +136,16 @@ namespace Herbfunk.GarrisonBase.Cache
                 CheckForCacheRemoval();
             }
 
-            ValidTargetingObjects = ObjectCollection.Values.Where(obj => obj.ValidForTargeting).OrderBy(obj => obj.Distance).ToList();
-            UpdateLootableTarget();
+            if (ShouldLoot) UpdateLootableTarget();
+            if (ShouldKill) UpdateCombatTarget();
+
             _lastUpdatedCacheCollection = DateTime.Now;
         }
 
-        private static void UpdateLootableTarget()
+        /// <summary>
+        /// Refreshes Lootable Objects and Current Lootable Object to be used with Coroutines.LootObject() method
+        /// </summary>
+        internal static void UpdateLootableTarget()
         {
             if (LootableObject != null)
             {
@@ -147,9 +156,33 @@ namespace Herbfunk.GarrisonBase.Cache
                     return;
             }
 
-            foreach (var target in ValidTargetingObjects)
+            ValidLootableObjects = ObjectCollection.Values.Where(obj => obj.ValidForLooting).OrderBy(obj => obj.Distance).ToList();
+
+            foreach (var target in ValidLootableObjects)
             {
                 LootableObject = target;
+                break;
+            }
+        }
+        /// <summary>
+        /// Refreshes Combat Objects and Current Combat Object to be used with Coroutines.EngageObject() method
+        /// </summary>
+        internal static void UpdateCombatTarget()
+        {
+            if (CombatObject != null)
+            {
+                //Test if lootable object should remain current..
+                if (!CombatObject.ValidForCombat)
+                    CombatObject = null;
+                else
+                    return;
+            }
+
+            ValidCombatObjects = ObjectCollection.Values.OfType<C_WoWUnit>().Where(obj => obj.ValidForCombat).OrderBy(obj => obj.Distance).ToList();
+
+            foreach (var target in ValidCombatObjects)
+            {
+                CombatObject = target;
                 break;
             }
         }
@@ -165,7 +198,7 @@ namespace Herbfunk.GarrisonBase.Cache
             {
                 //Remove flagged objects
                 var RemovalObjs = (from objs in ObjectCollection.Values
-                                   where objs.NeedsRemoved && !objs.IgnoreRemoval
+                                   where objs.NeedsRemoved 
                                    select objs.Guid).ToList();
 
                 foreach (var item in RemovalObjs)
@@ -188,6 +221,12 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
         internal static List<WoWGuid> BlacklistGuiDs = new List<WoWGuid>();
+
+        static ObjectCacheManager()
+        {
+            ShouldLoot = false;
+        }
+
         public static C_WoWObject GetWoWObject(uint entryId)
         {
             var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistGuiDs.Contains(obj.Guid));

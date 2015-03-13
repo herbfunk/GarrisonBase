@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bots.Grind;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Enums;
@@ -13,6 +14,7 @@ using Styx;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
+using Styx.CommonBot.POI;
 using Styx.CommonBot.Routines;
 using Styx.WoWInternals.WoWObjects;
 
@@ -34,8 +36,9 @@ namespace Herbfunk.GarrisonBase
                 get
                 {
                     return () =>
-                        ((!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted && Player.Level>=96 && BaseSettings.CurrentSettings.BehaviorQuests) ||
-                        (GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted && LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedHerb) && BaseSettings.CurrentSettings.BehaviorHerbGather));
+                        (GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted &&
+                        LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedHerb) && 
+                        BaseSettings.CurrentSettings.BehaviorHerbGather);
                 }
             }
             public override void Initalize()
@@ -58,124 +61,117 @@ namespace Herbfunk.GarrisonBase
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (await base.StartMovement.MoveTo()) return true;
+                if (await StartMovement.MoveTo()) return true;
 
                 #region Quest
-                if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted)
-                {
-                    //Move to quest giver..
-                    if (_movement == null)
-                        _movement = new Movement(MovementCache.GardenPlot63SafePoint, 10f);
+                //if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted)
+                //{
+                //    //Move to quest giver..
+                //    if (_movement == null)
+                //        _movement = new Movement(MovementCache.GardenPlot63SafePoint, 10f);
 
-                    if (await _movement.MoveTo())
-                        return true;
+                //    if (await _movement.MoveTo())
+                //        return true;
 
-                    if (!QuestManager.QuestContainedInQuestLog(GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestID))
-                    {
-                        TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup", Type.ToString());
+                //    if (!QuestManager.QuestContainedInQuestLog(GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestID))
+                //    {
+                //        //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup", Type.ToString());
 
-                        //QUEST_ACCEPTED
-                        if (!LuaEvents.QuestFrameOpen)
-                        {
-                            C_WoWObject _npc =ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.HerbGarden].QuestNpcID);
+                //        //QUEST_ACCEPTED
+                //        if (!LuaEvents.QuestFrameOpen)
+                //        {
+                //            C_WoWObject _npc =ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.HerbGarden].QuestNpcID);
                          
-                            if (_npc != null && _npc.ref_WoWObject.IsValid)
-                            {
+                //            if (_npc != null && _npc.ref_WoWObject.IsValid)
+                //            {
 
-                                if (_npc.WithinInteractRange)
-                                {
-                                    TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Interact", Type.ToString());
-                                    _npc.Interact();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    return true;
-                                }
+                //                if (_npc.WithinInteractRange)
+                //                {
+                //                    //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Interact", Type.ToString());
+                //                    _npc.Interact();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    return true;
+                //                }
 
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Moveto", Type.ToString());
-                                await CommonCoroutines.MoveTo(_npc.Location);
-                                return true;
-                            }
-                        }
-                        else
-                        {
-                            if (QuestFrame.Instance.IsVisible)
-                            {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Accept Quest", Type.ToString());
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Moveto", Type.ToString());
+                //                await CommonCoroutines.MoveTo(_npc.Location);
+                //                return true;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            if (QuestFrame.Instance.IsVisible)
+                //            {
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Accept Quest", Type.ToString());
 
-                                QuestFrame.Instance.AcceptQuest();
-                                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                            }
-                            return true;
-                        }
+                //                QuestFrame.Instance.AcceptQuest();
+                //                await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //            }
+                //            return true;
+                //        }
 
-                    }
-                    else if (QuestManager.GetQuestFromQuestLog(GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestID).IsCompleted)
-                    {
-                        TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
+                //    }
+                //    else if (QuestManager.GetQuestFromQuestLog(GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestID).IsCompleted)
+                //    {
+                //        //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
+                        
+                //        ObjectCacheManager.ShouldKill = false;
 
-                        if (!LuaEvents.QuestFrameOpen)
-                        {
-                            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.HerbGarden].QuestNpcID);
-                            if (_npc != null && _npc.IsValid)
-                            {
+                //        if (!LuaEvents.QuestFrameOpen)
+                //        {
+                //            C_WoWObject _npc = ObjectCacheManager.GetWoWObject(GarrisonManager.Buildings[BuildingType.HerbGarden].QuestNpcID);
+                //            if (_npc != null && _npc.IsValid)
+                //            {
 
-                                if (_npc.WithinInteractRange)
-                                {
-                                    TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact", Type.ToString());
-                                    _npc.Interact();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    return true;
-                                }
+                //                if (_npc.WithinInteractRange)
+                //                {
+                //                    //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact", Type.ToString());
+                //                    _npc.Interact();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    return true;
+                //                }
 
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC MoveTo", Type.ToString());
-                                await CommonCoroutines.MoveTo(_npc.Location);
-                                return true;
-                            }
-                        }
-                        else
-                        {
-                            if (QuestFrame.Instance.IsVisible)
-                            {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC MoveTo", Type.ToString());
+                //                await CommonCoroutines.MoveTo(_npc.Location);
+                //                return true;
+                //            }
+                //        }
+                //        else
+                //        {
+                //            if (QuestFrame.Instance.IsVisible)
+                //            {
+                //                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
+                //                if (!BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST)
+                //                {
+                //                    QuestFrame.Instance.CompleteQuest();
+                //                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                //                    GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted = true;
+                //                    await Coroutine.Sleep(5000);
+                //                    GarrisonManager.RefreshBuildings();
+                //                }
 
-                                QuestFrame.Instance.CompleteQuest();
-                                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted = true;
-                                await Coroutine.Sleep(5000);
-                                GarrisonManager.RefreshBuildings();
-                            }
-                            return true;
-                        }
-                    }
-                }
-                
+                //                return false;
+                //            }
+
+                //            return true;
+                //        }
+                //    }
+                //}
+
+                //if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted)
+                //{
+                //    ObjectCacheManager.ShouldKill = true;
+                //    ObjectCacheManager.UpdateCombatTarget();
+                //    return true;
+                //}
+
                 #endregion
 
-                if (!GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted)
-                {
-                    var nearestQuestNpc = NearestQuestNPC;
-                    if (nearestQuestNpc != null && nearestQuestNpc.IsValid && nearestQuestNpc.LineOfSight)
-                    {
 
-                        if (StyxWoW.Me.CurrentTarget==null || StyxWoW.Me.CurrentTarget.Guid != nearestQuestNpc.Guid)
-                        {
-                            nearestQuestNpc.ref_WoWUnit.Target();
-                            await CommonCoroutines.SleepForRandomUiInteractionTime();
-                            if (!StyxWoW.Me.IsAutoAttacking)
-                            {
-                                StyxWoW.Me.ToggleAttack();
-                                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                            }
-
-                            Targeting.Instance.TargetList.Add(nearestQuestNpc.ref_WoWUnit);
-                        }
-
-                        await RoutineManager.Current.CombatBehavior.ExecuteCoroutine();
-                        return true;
-                    }
-                }
 
 
                 ObjectCacheManager.ShouldLoot = true;
+                ObjectCacheManager.UpdateLootableTarget();
 
                 if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
                 {

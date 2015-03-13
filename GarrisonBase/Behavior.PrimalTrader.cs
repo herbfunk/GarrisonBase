@@ -90,10 +90,10 @@ namespace Herbfunk.GarrisonBase
                     {
                         count += (int)cWoWItem.StackCount;
                     }
-                    foreach (var cWoWItem in Player.Inventory.GetReagentBankItemsById(PlayerInventory.PrimalSpiritEntryId))
-                    {
-                        count += (int)cWoWItem.StackCount;
-                    }
+                    //foreach (var cWoWItem in Player.Inventory.GetReagentBankItemsById(PlayerInventory.PrimalSpiritEntryId))
+                    //{
+                    //    count += (int)cWoWItem.StackCount;
+                    //}
 
                     return count;
                 }

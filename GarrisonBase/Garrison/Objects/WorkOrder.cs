@@ -16,6 +16,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public int Maximum { get; set; }
         public int Pending { get; set; }
         public int Pickup { get; set; }
+        public CacheStaticLookUp.RushOrders RushOrderItemType { get; set; }
         public Tuple<CraftingReagents, int>[] Currency { get; set; }
 
         public WorkOrder(string buildingId, BuildingType buildingType, WorkOrderType workorderType,
@@ -28,6 +29,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             Currency = currency;
             Pending = pending;
             Pickup = pickup;
+            RushOrderItemType = GetRushOrderItem(Type);
         }
 
         public long TotalWorkorderStartups()
@@ -42,10 +44,15 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
         public void Refresh()
         {
-            WorkOrder ret = LuaCommands.GetWorkOrder(BuildingId);
-            Maximum = ret.Maximum;
-            Pending = ret.Pending;
-            Pickup = ret.Pickup;
+            string plotid;
+            int shipcap, shipmax, shipready;
+            bool isbuilding, canactivate;
+
+            LuaCommands.GetBuildingInfo(BuildingId, out plotid, out canactivate, out shipcap, out shipready, out shipmax, out isbuilding);
+
+            Maximum = shipcap;
+            Pending = shipready;
+            Pickup = shipmax;
         }
 
         public override string ToString()
@@ -75,6 +82,44 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             All = BlackrockOre|TrueIronOre|DraenicDust|SumptuousFur|RawBeastHide|Starflower|Frostweed|Fireweed|GorgrondFlytrap|NagrandArrowbloom|TaladorOrchid,
         }
 
+        public static CacheStaticLookUp.RushOrders GetRushOrderItem(WorkOrderType type)
+        {
+            switch (type)
+            {
+                case WorkOrderType.Enchanting:
+                    return CacheStaticLookUp.RushOrders.EnchantersStudy;
+                case WorkOrderType.Inscription:
+                    return CacheStaticLookUp.RushOrders.Scribe;
+                case WorkOrderType.Mining:
+                    return CacheStaticLookUp.RushOrders.Mines;
+                case WorkOrderType.Herbalism:
+                    return CacheStaticLookUp.RushOrders.HerbGarden;
+                case WorkOrderType.Blacksmith:
+                    return CacheStaticLookUp.RushOrders.Forge;
+                //case WorkOrderType.Lumbermill:
+                //    return 
+                //case WorkOrderType.Tradepost:
+                //    break;
+                case WorkOrderType.Alchemy:
+                    return CacheStaticLookUp.RushOrders.AlchemyLab;
+                case WorkOrderType.Engineering:
+                    return CacheStaticLookUp.RushOrders.Engineering;
+                case WorkOrderType.Jewelcrafting:
+                    return CacheStaticLookUp.RushOrders.Gem;
+                case WorkOrderType.Tailoring:
+                    return CacheStaticLookUp.RushOrders.Tailoring;
+                case WorkOrderType.Leatherworking:
+                    return CacheStaticLookUp.RushOrders.Tannery;
+                case WorkOrderType.WarMillDwarvenBunker:
+                    return CacheStaticLookUp.RushOrders.WarMill;
+                case WorkOrderType.DwarvenBunker:
+                    break;
+                case WorkOrderType.Barn:
+                    return CacheStaticLookUp.RushOrders.Barn;
+            }
+
+            return CacheStaticLookUp.RushOrders.None;
+        }
 
         public static TradePostReagentTypes GetTradePostNPCReagent(int npcID)
         {

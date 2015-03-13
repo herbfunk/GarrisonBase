@@ -13,6 +13,7 @@ namespace Herbfunk.GarrisonBase.Cache
         internal static uint MapID = 0;
         internal static bool IsAlliance = false;
         internal static int Level = 0;
+        internal static WoWClass Class= WoWClass.None;
         internal static int GarrisonResource = 0;
 
         internal static WoWPoint Location = WoWPoint.Zero;
@@ -35,6 +36,7 @@ namespace Herbfunk.GarrisonBase.Cache
             IsAlliance = StyxWoW.Me.IsAlliance;
             Level = StyxWoW.Me.Level;
             Location = StyxWoW.Me.Location;
+            Class = StyxWoW.Me.Class;
             TraceLinePosition = StyxWoW.Me.GetTraceLinePos();
             Inventory = new PlayerInventory();
             Professions = new PlayerProfessions();
@@ -104,5 +106,8 @@ namespace Herbfunk.GarrisonBase.Cache
             }
             return s;
         }
+
+
+
     }
 }

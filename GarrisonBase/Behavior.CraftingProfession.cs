@@ -55,7 +55,7 @@ namespace Herbfunk.GarrisonBase
                         return false;
 
                     if (_movement==null)
-                        _movement=new Movement(GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].EntranceMovementPoint, 5f);
+                        _movement=new Movement(GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].EntranceMovementPoint, 2f);
 
                     if (await _movement.MoveTo())
                         return true;

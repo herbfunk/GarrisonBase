@@ -69,8 +69,8 @@ namespace Herbfunk.GarrisonBase
                 Plot23_Warmill_Level2 = Alliance_WarMill_Plot23_Level2;
                 Plot24_Warmill_Level2 = Alliance_WarMill_Plot24_Level2;
 
-                Plot23_Warmill_Level3 = Alliance_WarMill_Plot23_Level3;
-                Plot24_Warmill_Level3 = Alliance_WarMill_Plot24_Level3;
+                Plot23_Warmill_Level3 = Alliance_WarMill_Plot23_Level2;//Alliance_WarMill_Plot23_Level3;
+                Plot24_Warmill_Level3 = Alliance_WarMill_Plot24_Level2;//Alliance_WarMill_Plot24_Level3;
 
                 Plot22_TradePost_Level1 = Alliance_Plot22_TradePost_Level1;
                 Plot25_TradePost_Level1 = Alliance_Plot25_TradePost_Level1;

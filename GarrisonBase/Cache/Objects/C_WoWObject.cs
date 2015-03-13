@@ -17,14 +17,40 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 {
     public abstract class C_WoWObject
     {
-        public readonly WoWObject ref_WoWObject;
-        public WoWPoint Location { get; set; }
+        protected C_WoWObject(WoWObject obj)
+        {
+            RefWoWObject = obj;
+            Location = obj.Location;
+            Guid = obj.Guid;
+            Entry = obj.Entry;
+            Name = obj.Name;
+            Type = obj.Type;
+            BlacklistType = BlacklistType.None;
+            LineOfSight = new CachedValue<bool>(() => TestLineOfSight(this));
 
+        }
+
+
+
+        public WoWObject RefWoWObject;
+        /// <summary>
+        /// Used to update the object reference to the HB WoWObject. (Used for cached objects that ignore removal)
+        /// </summary>
+        /// <param name="obj"></param>
+        public virtual void UpdateReference(WoWObject obj)
+        {
+            RefWoWObject = obj;
+        }
+
+        public WoWPoint Location { get; set; }
         public WoWGuid Guid { get; set; }
         public uint Entry { get; set; }
         public string Name { get; set; }
         public WoWObjectType Type { get; set; }
         public BlacklistType BlacklistType { get; set; }
+        public bool ShouldLoot { get; set; }
+        public bool ShouldKill { get; set; }
+
         public WaitTimer IgnoredTimer
         {
             get { return _ignoredTimer; }
@@ -35,14 +61,14 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
         }
         private WaitTimer _ignoredTimer= new WaitTimer(new TimeSpan(0,0,0,0,0));
-
-        public bool IgnoreRemoval { get; set; }
+        public bool IgnoresRemoval { get; set; }
         public float InteractRange
         {
             get { return _interactRange; }
             set { _interactRange = value; }
         }
         private float _interactRange=4f;
+
         public WoWObjectTypes SubType
         {
             get { return _subType; }
@@ -74,7 +100,8 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 return Location.Z - Player.Location.Z;
             }
         }
-        public int LoopsUnseen { get; set; }
+
+        
         ///<summary>
         ///Flag that determines if the object should be removed from the collection.
         ///</summary>
@@ -93,18 +120,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
         internal bool removal_;
 
-        protected C_WoWObject(WoWObject obj)
-        {
-            ref_WoWObject = obj;
-            Location = obj.Location;
-            Guid = obj.Guid;
-            Entry = obj.Entry;
-            Name = obj.Name;
-            Type = obj.Type;
-            BlacklistType= BlacklistType.None;
-            LineOfSight = new CachedValue<bool>(() => TestLineOfSight(this));
-
-        }
+        public int LoopsUnseen { get; set; }
 
 
         public virtual bool IsValid
@@ -112,18 +128,23 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             get
             {
                 //Check Object
-                return ref_WoWObject != null && 
-                    ref_WoWObject.IsValid && 
-                    ref_WoWObject.BaseAddress != IntPtr.Zero;
+                ObjectValidCheck = RefWoWObject != null && 
+                    RefWoWObject.IsValid && 
+                    RefWoWObject.BaseAddress != IntPtr.Zero;
+
+                return ObjectValidCheck;
             }
         }
+        internal bool ObjectValidCheck=true;
 
         /// <summary>
-        /// Method that updates any values about the object.
+        /// This is used to reset and update values that need to reference the actual WoWObject.
         /// </summary>
         /// <returns></returns>
         public virtual bool Update()
         {
+            if (!IsValid) return false;
+            LineOfSight.Reset();
             return true;
         }
 
@@ -136,8 +157,11 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!IsValid)
                 {
-                    NeedsRemoved = true;
-                    IgnoredTimer = WaitTimer.ThirtySeconds;
+                    if (!IgnoresRemoval)
+                    {
+                        NeedsRemoved = true;
+                        IgnoredTimer = WaitTimer.ThirtySeconds;
+                    }
                     return false;
                 }
 
@@ -146,11 +170,63 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     return false;
                 }
 
-                LineOfSight.Reset();
+                return true;
+            }
+        }
+
+        /// <summary>
+        /// Determines if object should be considered for looting.
+        /// </summary>
+        public virtual bool ValidForLooting
+        {
+            get
+            {
+                if (!IsValid)
+                {
+                    if (!IgnoresRemoval)
+                    {
+                        NeedsRemoved = true;
+                        IgnoredTimer = WaitTimer.ThirtySeconds;
+                    }
+                    return false;
+                }
+
+                if (!IgnoredTimer.IsFinished)
+                {
+                    return false;
+                }
 
                 return true;
             }
         }
+
+        /// <summary>
+        /// Determines if object should be considered for combat.
+        /// </summary>
+        public virtual bool ValidForCombat
+        {
+            get
+            {
+                if (!IsValid)
+                {
+                    if (!IgnoresRemoval)
+                    {
+                        NeedsRemoved = true;
+                        IgnoredTimer = WaitTimer.ThirtySeconds;
+                    }
+
+                    return false;
+                }
+
+                if (!IgnoredTimer.IsFinished)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
 
         private bool _requiresUpdate = true;
         public bool RequiresUpdate
@@ -176,7 +252,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public void Interact()
         {
             if (!IsValid) return;
-            ref_WoWObject.Interact();
+            RefWoWObject.Interact();
         }
 
         public CachedValue<bool> LineOfSight;
@@ -209,6 +285,9 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
         internal static bool TestLineOfSight(C_WoWObject obj)
         {
+            if (obj.LineofsightResult && obj.Distance <= obj.InteractRange)
+                return true;
+
             if (!obj._lineofSightWaitTimer.IsFinished && (obj.Distance>20f || obj.LineofSightWaitTimer.TimeLeft.TotalMilliseconds>750))
                 return obj.LineofsightResult;
             
@@ -267,11 +346,13 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                                  "[{2}] {3} [{4}]\r\n" +
                                  "{5} ({6})\r\n" +
                                  "LOS {7} ( {8} ) Tested {9}ms\r\n" +
-                                 "Valid Target {10}",
+                                 "Valid {10}\r\n" +
+                                 "Update {11}",
                                  Entry,Name,Guid, Type, SubType,
                                  Location, Distance, 
                                  LineofsightResult, _lineofsightPoint.ToString(), LineofSightWaitTimer.TimeLeft.TotalMilliseconds,
-                                 ValidForTargeting);
+                                 ObjectValidCheck,
+                                 RequiresUpdate);
         }
 
 

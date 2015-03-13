@@ -20,6 +20,8 @@ namespace Herbfunk.GarrisonBase.Cache
                 BlacklistEntryIDs.UnionWith(_blacklistEntryIds_Horde);
         }
 
+        #region Alliance Blacklist Collection
+
         private static readonly HashSet<uint> _blacklistEntryIds_Alliance = new HashSet<uint>
         {
             //NPCs
@@ -38,6 +40,8 @@ namespace Herbfunk.GarrisonBase.Cache
             82333, //Mine Guard
             85730, //Lunarfall Rifleman
             89298, //Lunarfall Rifleman
+            85737, //Lunarfall Rifleman
+            89259, //Lunarfall Laborer
             82586, //Porter
             85736, //Lunarfall Smith
             85722, //Rat
@@ -66,7 +70,11 @@ namespace Herbfunk.GarrisonBase.Cache
             233547, //Grave
             233548, //Grave
             227915, //Forge
+            232535, //Forge
+            232530, //Forge
             227910, //Anvil
+            237612, //Anvil
+            237611, //Anvil
             227917, //Iron Bar
             228550, //Bench Clamp
             227693, //Book Stack
@@ -74,13 +82,16 @@ namespace Herbfunk.GarrisonBase.Cache
             240593, //Doodad_FirewoodPile05
             240594, //Doodad_FirewoodPile06
             237407, //Gate
-            232535, //Forge
-            237612, //Anvil
-            237611, //Anvil
+            237408, //Gate
+            230865, //List of Ingredients
+            232529, //Thermal Anvil
             230121, //Bonfire
             228594, //Enchanting Supplies
             228583, //Alchemy Kit
-
+            232297, //Campfire
+            237316, //Garrison - Armory - Alliance - V2 - Small Cannon
+            237317, //Garrison - Armory - Alliance - V2 - Small Cannon
+            237318, //Garrison - Armory - Alliance - V2 - Small Cannon
 
             232380, //Monument Base
             233177, //Monument Base
@@ -90,6 +101,11 @@ namespace Herbfunk.GarrisonBase.Cache
             239033, //Monument
 
             //Garrison
+            232283, //Medium Plot
+            232282, //Small Plot
+            232270, //Small Plot
+            237223, //Fishing Shack
+            232286, //Garden House
             230985, //Garrison Building Alliance Fishing V1
             230987, //Garrison Building Alliance Fishing V2
             230989, //Garrison Building Alliance Fishing V3
@@ -102,11 +118,9 @@ namespace Herbfunk.GarrisonBase.Cache
             224854, //Garrison Building Alliance Storehouse V1
             234678, //Garrison Building Alliance Storehouse V2
             234679, //Garrison Building Alliance Storehouse V3
-
             227179, //Garrison Building Alchemy Level 1
             227590, //Garrison Building Alchemy Level 2
             227591, //Garrison Building Alchemy Level 3
-            
             224548, //Garrison Building Armory V1
             224549, //Garrison Building Armory V2
             224550, //Garrison Building Armory V3
@@ -177,6 +191,10 @@ namespace Herbfunk.GarrisonBase.Cache
             230493, //Garrison Building Workshop V2
             230494, //Garrison Building Workshop V3
         };
+        
+        #endregion
+
+        #region Horde Blacklist Collection
 
         private static readonly HashSet<uint> _blacklistEntryIds_Horde = new HashSet<uint>
         {
@@ -345,6 +363,8 @@ namespace Herbfunk.GarrisonBase.Cache
             230490, //Garrison Building Horde Workshop V2
             230491, //Garrison Building Horde Workshop V3
         };
+        
+        #endregion
 
         private static readonly HashSet<uint> _blacklistEntryIds = new HashSet<uint>
         {

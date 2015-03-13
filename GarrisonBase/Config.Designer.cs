@@ -46,6 +46,23 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_TradePostReagents = new System.Windows.Forms.FlowLayoutPanel();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_Vendor_Junk = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Common = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Uncommon = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Rare = new System.Windows.Forms.CheckBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBox_Disenchanting_EpicSoulbound = new System.Windows.Forms.CheckBox();
+            this.checkBox_Disenchanting_RareSoulbound = new System.Windows.Forms.CheckBox();
+            this.textBox_Disenchanting_EpicLevel = new System.Windows.Forms.TextBox();
+            this.checkBox_Disenchanting_Epic = new System.Windows.Forms.CheckBox();
+            this.textBox_Disenchanting_RareLevel = new System.Windows.Forms.TextBox();
+            this.checkBox_Disenchanting_RareItems = new System.Windows.Forms.CheckBox();
+            this.checkBox_Disenchanting_UncommonItems = new System.Windows.Forms.CheckBox();
+            this.textBox_Disenchanting_UncommonLevel = new System.Windows.Forms.TextBox();
+            this.checkBox_Disenchanting_UncommonSoulbound = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_MiscBehaviors = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox_Behavior_RepairSell = new System.Windows.Forms.CheckBox();
@@ -55,6 +72,7 @@
             this.checkBox_Behavior_Quests = new System.Windows.Forms.CheckBox();
             this.checkBox_Behavior_MineGather = new System.Windows.Forms.CheckBox();
             this.checkBox_Behavior_HerbGather = new System.Windows.Forms.CheckBox();
+            this.checkBox_Behavior_LootCache = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox_ExchangePrimalSpirits = new System.Windows.Forms.CheckBox();
             this.comboBox_PrimalSpiritItems = new System.Windows.Forms.ComboBox();
@@ -106,26 +124,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.checkBox_Behavior_LootCache = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox_Debug_FakeStartWorkOrder = new System.Windows.Forms.CheckBox();
-            this.groupBox11 = new System.Windows.Forms.GroupBox();
-            this.textBox_Disenchanting_UncommonLevel = new System.Windows.Forms.TextBox();
-            this.checkBox_Disenchanting_UncommonItems = new System.Windows.Forms.CheckBox();
-            this.checkBox_Disenchanting_RareItems = new System.Windows.Forms.CheckBox();
-            this.textBox_Disenchanting_RareLevel = new System.Windows.Forms.TextBox();
-            this.checkBox_Disenchanting_Epic = new System.Windows.Forms.CheckBox();
-            this.textBox_Disenchanting_EpicLevel = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.checkBox_Disenchanting_UncommonSoulbound = new System.Windows.Forms.CheckBox();
-            this.checkBox_Disenchanting_RareSoulbound = new System.Windows.Forms.CheckBox();
-            this.checkBox_Disenchanting_EpicSoulbound = new System.Windows.Forms.CheckBox();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Vendor_Junk = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Common = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Uncommon = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Rare = new System.Windows.Forms.CheckBox();
+            this.checkBox_Debug_FakeFinishQuest = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox10.SuspendLayout();
@@ -135,6 +136,9 @@
             this.groupBox8.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.groupBox11.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.flowLayoutPanel_MiscBehaviors.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -148,9 +152,6 @@
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.groupBox11.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -345,6 +346,208 @@
             this.tabPage5.Text = "Misc";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
+            this.groupBox12.Location = new System.Drawing.Point(375, 322);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(189, 130);
+            this.groupBox12.TabIndex = 25;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Vendoring";
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
+            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
+            this.flowLayoutPanel4.TabIndex = 0;
+            // 
+            // checkBox_Vendor_Junk
+            // 
+            this.checkBox_Vendor_Junk.AutoSize = true;
+            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
+            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
+            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
+            this.checkBox_Vendor_Junk.TabIndex = 2;
+            this.checkBox_Vendor_Junk.Text = "Junk";
+            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Common
+            // 
+            this.checkBox_Vendor_Common.AutoSize = true;
+            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
+            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
+            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
+            this.checkBox_Vendor_Common.TabIndex = 3;
+            this.checkBox_Vendor_Common.Text = "Common";
+            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Uncommon
+            // 
+            this.checkBox_Vendor_Uncommon.AutoSize = true;
+            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
+            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
+            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
+            this.checkBox_Vendor_Uncommon.TabIndex = 4;
+            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
+            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Rare
+            // 
+            this.checkBox_Vendor_Rare.AutoSize = true;
+            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
+            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
+            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_Vendor_Rare.TabIndex = 5;
+            this.checkBox_Vendor_Rare.Text = "Rare";
+            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.label1);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_EpicSoulbound);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareSoulbound);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_EpicLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_Epic);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_RareLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareItems);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonItems);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_UncommonLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
+            this.groupBox11.Location = new System.Drawing.Point(8, 322);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(361, 130);
+            this.groupBox11.TabIndex = 24;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Disenchanting";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Location = new System.Drawing.Point(109, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Max Item Level";
+            // 
+            // checkBox_Disenchanting_EpicSoulbound
+            // 
+            this.checkBox_Disenchanting_EpicSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_EpicSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(184, 100);
+            this.checkBox_Disenchanting_EpicSoulbound.Name = "checkBox_Disenchanting_EpicSoulbound";
+            this.checkBox_Disenchanting_EpicSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_EpicSoulbound.TabIndex = 9;
+            this.checkBox_Disenchanting_EpicSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_EpicSoulbound.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Disenchanting_RareSoulbound
+            // 
+            this.checkBox_Disenchanting_RareSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_RareSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(184, 68);
+            this.checkBox_Disenchanting_RareSoulbound.Name = "checkBox_Disenchanting_RareSoulbound";
+            this.checkBox_Disenchanting_RareSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_RareSoulbound.TabIndex = 8;
+            this.checkBox_Disenchanting_RareSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_RareSoulbound.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_EpicLevel
+            // 
+            this.textBox_Disenchanting_EpicLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(119, 96);
+            this.textBox_Disenchanting_EpicLevel.MaxLength = 3;
+            this.textBox_Disenchanting_EpicLevel.Name = "textBox_Disenchanting_EpicLevel";
+            this.textBox_Disenchanting_EpicLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_EpicLevel.TabIndex = 5;
+            this.textBox_Disenchanting_EpicLevel.WordWrap = false;
+            this.textBox_Disenchanting_EpicLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
+            // 
+            // checkBox_Disenchanting_Epic
+            // 
+            this.checkBox_Disenchanting_Epic.AutoSize = true;
+            this.checkBox_Disenchanting_Epic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_Epic.ForeColor = System.Drawing.Color.Purple;
+            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(6, 98);
+            this.checkBox_Disenchanting_Epic.Name = "checkBox_Disenchanting_Epic";
+            this.checkBox_Disenchanting_Epic.Size = new System.Drawing.Size(58, 21);
+            this.checkBox_Disenchanting_Epic.TabIndex = 4;
+            this.checkBox_Disenchanting_Epic.Text = "Epic";
+            this.checkBox_Disenchanting_Epic.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_RareLevel
+            // 
+            this.textBox_Disenchanting_RareLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(119, 64);
+            this.textBox_Disenchanting_RareLevel.MaxLength = 3;
+            this.textBox_Disenchanting_RareLevel.Name = "textBox_Disenchanting_RareLevel";
+            this.textBox_Disenchanting_RareLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_RareLevel.TabIndex = 3;
+            this.textBox_Disenchanting_RareLevel.WordWrap = false;
+            this.textBox_Disenchanting_RareLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
+            // 
+            // checkBox_Disenchanting_RareItems
+            // 
+            this.checkBox_Disenchanting_RareItems.AutoSize = true;
+            this.checkBox_Disenchanting_RareItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_RareItems.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(7, 66);
+            this.checkBox_Disenchanting_RareItems.Name = "checkBox_Disenchanting_RareItems";
+            this.checkBox_Disenchanting_RareItems.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_Disenchanting_RareItems.TabIndex = 2;
+            this.checkBox_Disenchanting_RareItems.Text = "Rare";
+            this.checkBox_Disenchanting_RareItems.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Disenchanting_UncommonItems
+            // 
+            this.checkBox_Disenchanting_UncommonItems.AutoSize = true;
+            this.checkBox_Disenchanting_UncommonItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_UncommonItems.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(7, 33);
+            this.checkBox_Disenchanting_UncommonItems.Name = "checkBox_Disenchanting_UncommonItems";
+            this.checkBox_Disenchanting_UncommonItems.Size = new System.Drawing.Size(106, 21);
+            this.checkBox_Disenchanting_UncommonItems.TabIndex = 1;
+            this.checkBox_Disenchanting_UncommonItems.Text = "Uncommon";
+            this.checkBox_Disenchanting_UncommonItems.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_UncommonLevel
+            // 
+            this.textBox_Disenchanting_UncommonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(119, 31);
+            this.textBox_Disenchanting_UncommonLevel.MaxLength = 3;
+            this.textBox_Disenchanting_UncommonLevel.Name = "textBox_Disenchanting_UncommonLevel";
+            this.textBox_Disenchanting_UncommonLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_UncommonLevel.TabIndex = 0;
+            this.textBox_Disenchanting_UncommonLevel.WordWrap = false;
+            this.textBox_Disenchanting_UncommonLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
+            // 
+            // checkBox_Disenchanting_UncommonSoulbound
+            // 
+            this.checkBox_Disenchanting_UncommonSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_UncommonSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(184, 35);
+            this.checkBox_Disenchanting_UncommonSoulbound.Name = "checkBox_Disenchanting_UncommonSoulbound";
+            this.checkBox_Disenchanting_UncommonSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_UncommonSoulbound.TabIndex = 7;
+            this.checkBox_Disenchanting_UncommonSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_UncommonSoulbound.UseVisualStyleBackColor = true;
+            // 
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.flowLayoutPanel_MiscBehaviors);
@@ -456,6 +659,18 @@
             this.checkBox_Behavior_HerbGather.TabIndex = 21;
             this.checkBox_Behavior_HerbGather.Text = "Gather Herbs";
             this.checkBox_Behavior_HerbGather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_LootCache
+            // 
+            this.checkBox_Behavior_LootCache.AutoSize = true;
+            this.checkBox_Behavior_LootCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_LootCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(157, 63);
+            this.checkBox_Behavior_LootCache.Name = "checkBox_Behavior_LootCache";
+            this.checkBox_Behavior_LootCache.Size = new System.Drawing.Size(191, 24);
+            this.checkBox_Behavior_LootCache.TabIndex = 23;
+            this.checkBox_Behavior_LootCache.Text = "Loot Garrison Cache";
+            this.checkBox_Behavior_LootCache.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -952,21 +1167,10 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // checkBox_Behavior_LootCache
-            // 
-            this.checkBox_Behavior_LootCache.AutoSize = true;
-            this.checkBox_Behavior_LootCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_LootCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(157, 63);
-            this.checkBox_Behavior_LootCache.Name = "checkBox_Behavior_LootCache";
-            this.checkBox_Behavior_LootCache.Size = new System.Drawing.Size(191, 24);
-            this.checkBox_Behavior_LootCache.TabIndex = 23;
-            this.checkBox_Behavior_LootCache.Text = "Loot Garrison Cache";
-            this.checkBox_Behavior_LootCache.UseVisualStyleBackColor = true;
-            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.checkBox_Debug_FakeStartWorkOrder);
+            this.flowLayoutPanel2.Controls.Add(this.checkBox_Debug_FakeFinishQuest);
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -985,208 +1189,17 @@
             this.checkBox_Debug_FakeStartWorkOrder.Text = "Fake Start Work Order";
             this.checkBox_Debug_FakeStartWorkOrder.UseVisualStyleBackColor = true;
             // 
-            // groupBox11
+            // checkBox_Debug_FakeFinishQuest
             // 
-            this.groupBox11.Controls.Add(this.label1);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_EpicSoulbound);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareSoulbound);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_EpicLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_Epic);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_RareLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareItems);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonItems);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_UncommonLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
-            this.groupBox11.Location = new System.Drawing.Point(8, 322);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(361, 130);
-            this.groupBox11.TabIndex = 24;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Disenchanting";
-            // 
-            // textBox_Disenchanting_UncommonLevel
-            // 
-            this.textBox_Disenchanting_UncommonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(119, 31);
-            this.textBox_Disenchanting_UncommonLevel.MaxLength = 3;
-            this.textBox_Disenchanting_UncommonLevel.Name = "textBox_Disenchanting_UncommonLevel";
-            this.textBox_Disenchanting_UncommonLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_UncommonLevel.TabIndex = 0;
-            this.textBox_Disenchanting_UncommonLevel.WordWrap = false;
-            this.textBox_Disenchanting_UncommonLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
-            // 
-            // checkBox_Disenchanting_UncommonItems
-            // 
-            this.checkBox_Disenchanting_UncommonItems.AutoSize = true;
-            this.checkBox_Disenchanting_UncommonItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_UncommonItems.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(7, 33);
-            this.checkBox_Disenchanting_UncommonItems.Name = "checkBox_Disenchanting_UncommonItems";
-            this.checkBox_Disenchanting_UncommonItems.Size = new System.Drawing.Size(106, 21);
-            this.checkBox_Disenchanting_UncommonItems.TabIndex = 1;
-            this.checkBox_Disenchanting_UncommonItems.Text = "Uncommon";
-            this.checkBox_Disenchanting_UncommonItems.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Disenchanting_RareItems
-            // 
-            this.checkBox_Disenchanting_RareItems.AutoSize = true;
-            this.checkBox_Disenchanting_RareItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_RareItems.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(7, 66);
-            this.checkBox_Disenchanting_RareItems.Name = "checkBox_Disenchanting_RareItems";
-            this.checkBox_Disenchanting_RareItems.Size = new System.Drawing.Size(62, 21);
-            this.checkBox_Disenchanting_RareItems.TabIndex = 2;
-            this.checkBox_Disenchanting_RareItems.Text = "Rare";
-            this.checkBox_Disenchanting_RareItems.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Disenchanting_RareLevel
-            // 
-            this.textBox_Disenchanting_RareLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(119, 64);
-            this.textBox_Disenchanting_RareLevel.MaxLength = 3;
-            this.textBox_Disenchanting_RareLevel.Name = "textBox_Disenchanting_RareLevel";
-            this.textBox_Disenchanting_RareLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_RareLevel.TabIndex = 3;
-            this.textBox_Disenchanting_RareLevel.WordWrap = false;
-            this.textBox_Disenchanting_RareLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
-            // 
-            // checkBox_Disenchanting_Epic
-            // 
-            this.checkBox_Disenchanting_Epic.AutoSize = true;
-            this.checkBox_Disenchanting_Epic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_Epic.ForeColor = System.Drawing.Color.Purple;
-            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(6, 98);
-            this.checkBox_Disenchanting_Epic.Name = "checkBox_Disenchanting_Epic";
-            this.checkBox_Disenchanting_Epic.Size = new System.Drawing.Size(58, 21);
-            this.checkBox_Disenchanting_Epic.TabIndex = 4;
-            this.checkBox_Disenchanting_Epic.Text = "Epic";
-            this.checkBox_Disenchanting_Epic.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Disenchanting_EpicLevel
-            // 
-            this.textBox_Disenchanting_EpicLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(119, 96);
-            this.textBox_Disenchanting_EpicLevel.MaxLength = 3;
-            this.textBox_Disenchanting_EpicLevel.Name = "textBox_Disenchanting_EpicLevel";
-            this.textBox_Disenchanting_EpicLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_EpicLevel.TabIndex = 5;
-            this.textBox_Disenchanting_EpicLevel.WordWrap = false;
-            this.textBox_Disenchanting_EpicLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(109, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Max Item Level";
-            // 
-            // checkBox_Disenchanting_UncommonSoulbound
-            // 
-            this.checkBox_Disenchanting_UncommonSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_UncommonSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(184, 35);
-            this.checkBox_Disenchanting_UncommonSoulbound.Name = "checkBox_Disenchanting_UncommonSoulbound";
-            this.checkBox_Disenchanting_UncommonSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_UncommonSoulbound.TabIndex = 7;
-            this.checkBox_Disenchanting_UncommonSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_UncommonSoulbound.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Disenchanting_RareSoulbound
-            // 
-            this.checkBox_Disenchanting_RareSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_RareSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(184, 68);
-            this.checkBox_Disenchanting_RareSoulbound.Name = "checkBox_Disenchanting_RareSoulbound";
-            this.checkBox_Disenchanting_RareSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_RareSoulbound.TabIndex = 8;
-            this.checkBox_Disenchanting_RareSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_RareSoulbound.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Disenchanting_EpicSoulbound
-            // 
-            this.checkBox_Disenchanting_EpicSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_EpicSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(184, 100);
-            this.checkBox_Disenchanting_EpicSoulbound.Name = "checkBox_Disenchanting_EpicSoulbound";
-            this.checkBox_Disenchanting_EpicSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_EpicSoulbound.TabIndex = 9;
-            this.checkBox_Disenchanting_EpicSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_EpicSoulbound.UseVisualStyleBackColor = true;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
-            this.groupBox12.Location = new System.Drawing.Point(375, 322);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(189, 130);
-            this.groupBox12.TabIndex = 25;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Vendoring";
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
-            this.flowLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
-            this.flowLayoutPanel4.TabIndex = 0;
-            // 
-            // checkBox_Vendor_Junk
-            // 
-            this.checkBox_Vendor_Junk.AutoSize = true;
-            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
-            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
-            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
-            this.checkBox_Vendor_Junk.TabIndex = 2;
-            this.checkBox_Vendor_Junk.Text = "Junk";
-            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Common
-            // 
-            this.checkBox_Vendor_Common.AutoSize = true;
-            this.checkBox_Vendor_Common.Enabled = false;
-            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
-            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
-            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
-            this.checkBox_Vendor_Common.TabIndex = 3;
-            this.checkBox_Vendor_Common.Text = "Common";
-            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Uncommon
-            // 
-            this.checkBox_Vendor_Uncommon.AutoSize = true;
-            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
-            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
-            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
-            this.checkBox_Vendor_Uncommon.TabIndex = 4;
-            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
-            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Rare
-            // 
-            this.checkBox_Vendor_Rare.AutoSize = true;
-            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
-            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
-            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
-            this.checkBox_Vendor_Rare.TabIndex = 5;
-            this.checkBox_Vendor_Rare.Text = "Rare";
-            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
+            this.checkBox_Debug_FakeFinishQuest.AutoSize = true;
+            this.checkBox_Debug_FakeFinishQuest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Debug_FakeFinishQuest.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Debug_FakeFinishQuest.Location = new System.Drawing.Point(197, 3);
+            this.checkBox_Debug_FakeFinishQuest.Name = "checkBox_Debug_FakeFinishQuest";
+            this.checkBox_Debug_FakeFinishQuest.Size = new System.Drawing.Size(155, 21);
+            this.checkBox_Debug_FakeFinishQuest.TabIndex = 18;
+            this.checkBox_Debug_FakeFinishQuest.Text = "Fake Finish Quest";
+            this.checkBox_Debug_FakeFinishQuest.UseVisualStyleBackColor = true;
             // 
             // Config
             // 
@@ -1211,6 +1224,11 @@
             this.groupBox6.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.PerformLayout();
@@ -1232,11 +1250,6 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1340,6 +1353,7 @@
         private System.Windows.Forms.CheckBox checkBox_Vendor_Common;
         private System.Windows.Forms.CheckBox checkBox_Vendor_Uncommon;
         private System.Windows.Forms.CheckBox checkBox_Vendor_Rare;
+        private System.Windows.Forms.CheckBox checkBox_Debug_FakeFinishQuest;
 
     }
 }

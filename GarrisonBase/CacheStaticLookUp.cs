@@ -73,6 +73,12 @@ namespace Herbfunk.GarrisonBase
             85412, 85411, 85410, 85408, 85409, 85407,
         };
 
+        internal static List<uint> StoreHouseQuestIDs = new List<uint>
+        {
+            237257,
+            237039
+        };
+
         internal static readonly int MinersCoffeeItemId = 118897;
         internal static readonly int MinersCoffeeSpellId = 176049;
         internal static readonly int PreservedMiningPickItemId = 118903;
@@ -379,17 +385,42 @@ namespace Herbfunk.GarrisonBase
         //118474 = Supreme Manual of Dance
         //118475 = Hearthstone Strategy Guide
         //122275 = Sun-touched Feather of Rukhmar
-
+        public enum RushOrders
+        {
+            None,
+            EnchantersStudy=122590,
+            AlchemyLab=122576,
+            Forge=122595,
+            Tailoring=122594,
+            Gem=122592,
+            Tannery=122596,
+            Scribe=122593,
+            Engineering=122591,
+            HerbGarden = 122496,
+            Mines = 122502,
+            Barn = 122307,
+            WarMill = 122491,
+            GladiatorsSanctum = 122487,
+            WorkShop = 122501,
+        }
         public static readonly List<int> ItemRewards_RushOrders = new List<int>
         {
-            122590, //Enchanter's Study
-            122576, //Alchemy Lab
-            122595, //Forge
-            122594, //Tailoring
-            122592, //Gem
-            122596, //Tannery
-            122593, //Scribe
-            122591, //Engineering
+            (int)RushOrders.AlchemyLab,
+            (int)RushOrders.EnchantersStudy,
+            (int)RushOrders.Forge,
+            (int)RushOrders.Tailoring,
+            (int)RushOrders.Gem,
+            (int)RushOrders.Tannery,
+            (int)RushOrders.Scribe,
+            (int)RushOrders.Engineering,
+            //122590, //Enchanter's Study
+            //122576, //Alchemy Lab
+            //122595, //Forge
+            //122594, //Tailoring
+            //122592, //Gem
+            //122596, //Tannery
+            //122593, //Scribe
+            //122591, //Engineering
         };
     }
 }

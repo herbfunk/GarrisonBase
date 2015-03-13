@@ -66,6 +66,7 @@ namespace Herbfunk.GarrisonBase
                 {
                     //Error Cannot find object!
                     Building.CheckedWorkOrderPickUp = true;
+                    Building.WorkOrder.Refresh();
                     return false;
                 }
 
@@ -78,8 +79,9 @@ namespace Herbfunk.GarrisonBase
                     {
                         //Nothing to pickup!
                         Building.CheckedWorkOrderPickUp = true;
-                        Building.WorkOrder.Pending -= Building.WorkOrder.Pickup;
-                        Building.WorkOrder.Pickup = 0;
+                        await Coroutine.Sleep(StyxWoW.Random.Next(755, 1449));
+                        await Coroutine.Yield();
+                        Building.WorkOrder.Refresh();
                         return false;
                     }
 
@@ -99,7 +101,7 @@ namespace Herbfunk.GarrisonBase
 
                 //Move to the interaction object
                 if (_movement == null || _movement.CurrentMovementQueue.Count==0)
-                    _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange);
+                    _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange-0.25f);
                 
                 await _movement.MoveTo();
 
@@ -212,7 +214,7 @@ namespace Herbfunk.GarrisonBase
 
 
 
-            private int InteractionAttempts = 0;
+            private int _interactionAttempts = 0;
             public override async Task<bool> Movement()
             {
                 if (Building.CheckedWorkOrderStartUp || WorkOrderObject == null)
@@ -229,12 +231,12 @@ namespace Herbfunk.GarrisonBase
                     if (StyxWoW.Me.IsMoving)  await CommonCoroutines.StopMoving();
                     await CommonCoroutines.SleepForLagDuration();
 
-                    if (InteractionAttempts > 3)
+                    if (_interactionAttempts > 3)
                     {
                         GarrisonBase.Log("Interaction Attempts for {0} has exceeded 3! Preforming movement..",
                             WorkOrderObject.Name);
                         _movement = new Movement(Building.EntranceMovementPoint, 6.7f);
-                        InteractionAttempts = 0;
+                        _interactionAttempts = 0;
                         return true;
                     }
 
@@ -243,32 +245,46 @@ namespace Herbfunk.GarrisonBase
                         //Workorder frame is displayed!
                         return false;
                     }
-                    InteractionAttempts++;
+                    _interactionAttempts++;
                     WorkOrderObject.Interact();
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                     return true;
                 }
 
-                if (_specialMovement != null && _specialMovement.CurrentMovementQueue.Count > 0)
-                {
+                if (_specialMovement != null)
+                {//Special Movement for navigating inside buildings using Click To Move
 
-                    var nearestPoint = Herbfunk.GarrisonBase.Movement.FindNearestPoint(WorkOrderObject.Location, _specialMovement.CurrentMovementQueue.ToList());
-                    var result = await _specialMovement.ClickToMove_Result(false);
-
-                    if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
+                    if (_specialMovement.CurrentMovementQueue.Count > 0)
                     {
+                        //find the nearest point to the npc in our special movement queue 
+                        var nearestPoint = Herbfunk.GarrisonBase.Movement.FindNearestPoint(WorkOrderObject.Location, _specialMovement.CurrentMovementQueue.ToList());
+                        //click to move.. but don't dequeue
+                        var result = await _specialMovement.ClickToMove_Result(false);
+
+                        if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
+                        {
+                            //force dequeue now since its not nearest point
+                            if (result == MoveResult.ReachedDestination)
+                                _specialMovement.ForceDequeue(true);
+
+                            return true;
+                        }
+
+
+                        //Last position was nearest and we reached our destination.. so lets finish special movement!
                         if (result == MoveResult.ReachedDestination)
-                            _specialMovement.ForceDequeue(true);
-                        
+                        {
+                            _specialMovement.DequeueAll(false);
+                        }
+                    }
+                    
+
+                    if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
+                        _movement = new Movement(WorkOrderObject.Location, 4f);
+
+                    //since we are navigating inside building.. we must continue to use CTM
+                    if (await _movement.ClickToMove())
                         return true;
-                    }
-
-
-                    ////Last position was nearest and we reached our destination.. so lets finish special movement!
-                    if (result == MoveResult.ReachedDestination)
-                    {
-                        _specialMovement.DequeueAll(false);
-                    }
                 }
 
                 if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
@@ -303,13 +319,18 @@ namespace Herbfunk.GarrisonBase
                         Building.CheckedWorkOrderStartUp = true;
                         if (_specialMovement!=null) _specialMovement.UseDeqeuedPoints(true);
                         GarrisonBase.Log("Order Button Disabled!");
+                        Building.WorkOrder.Refresh();
                         return false;
                     }
 
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
-                    LuaCommands.ClickStartOrderButton();
-                    await Coroutine.Yield();
 
+                    if (Building.Type == BuildingType.WarMillDwarvenBunker)
+                        LuaCommands.ClickStartOrderButton();
+                    else
+                        LuaCommands.ClickStartAllOrderButton();
+
+                    await Coroutine.Yield();
                     return true;
                 }
                 return false;
@@ -318,6 +339,56 @@ namespace Herbfunk.GarrisonBase
             public override string GetStatusText
             {
                 get { return base.GetStatusText + Building.Type.ToString(); }
+            }
+        }
+
+        public class BehaviorWorkOrderRush : Behavior
+        {
+            public override BehaviorType Type { get { return BehaviorType.WorkOrderRush; } }
+
+            public BehaviorWorkOrderRush(Building building)
+            {
+                Building = building;
+            }
+            public Building Building { get; set; }
+
+            public override Func<bool> Criteria
+            {
+                get
+                {
+                    return
+                        () =>
+                            Building.WorkOrder != null &&
+                            Building.WorkOrder.Type != WorkOrderType.None &&
+                            (Building.WorkOrder.Pending-Building.WorkOrder.Pickup) >= 5 &&
+                            Player.Inventory.GetBagItemsById((int) Building.WorkOrder.RushOrderItemType).Count > 0;
+                }
+            }
+
+            public override async Task<bool> BehaviorRoutine()
+            {
+                if (IsDone) return false;
+
+                if (await base.BehaviorRoutine()) return true;
+                
+                if (Building.WorkOrder.Pending - Building.WorkOrder.Pickup <= 5) return false;
+
+                var rushOrderItems = Player.Inventory.GetBagItemsById((int) Building.WorkOrder.RushOrderItemType);
+                if (rushOrderItems.Count > 0)
+                {
+                    var item = rushOrderItems[0];
+                    await CommonCoroutines.WaitForLuaEvent(
+                             "BAG_UPDATE",
+                             10000,
+                             () => false,
+                             item.Interact);
+                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                    await Coroutine.Sleep(3500);
+                    Building.WorkOrder.Refresh();
+                    return true;
+                }
+
+                return false;
             }
         }
     }

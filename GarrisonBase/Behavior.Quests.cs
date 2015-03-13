@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -32,11 +34,7 @@ namespace Herbfunk.GarrisonBase
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (QuestManager.QuestLogFull())
-                    return false;
-
-                //if (LuaCommands.IsQuestFlaggedCompleted(QuestID.ToString()))
-                //    return false;
+                if (QuestManager.QuestLogFull()) return false;
 
                 if (!QuestManager.QuestContainedInQuestLog(QuestID))
                 {
@@ -62,26 +60,19 @@ namespace Herbfunk.GarrisonBase
                         {
                             if (InteractionObject.WithinInteractRange)
                             {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Interact", Type.ToString());
                                 InteractionObject.Interact();
                                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                                 return true;
                             }
 
-                            TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Moveto", Type.ToString());
                             await CommonCoroutines.MoveTo(InteractionObject.Location);
                             return true;
                         }
-
-                        if (await base.Movement())
-                            return true;
                     }
                     else
                     {
                         if (QuestFrame.Instance.IsVisible)
                         {
-                            TreeRoot.StatusText = String.Format("Behavior {0} Quest Pickup NPC Accept Quest", Type.ToString());
-
                             QuestFrame.Instance.AcceptQuest();
                             await CommonCoroutines.SleepForRandomUiInteractionTime();
                             await CommonCoroutines.SleepForLagDuration();
@@ -91,7 +82,7 @@ namespace Herbfunk.GarrisonBase
                     }
                 }
 
-
+                IsDone = true;
                 return false;
             }
         }
@@ -109,87 +100,82 @@ namespace Herbfunk.GarrisonBase
                 buildingType = type;
             }
 
-
+            private Movement _npcMovement;
             public override async Task<bool> BehaviorRoutine()
             {
                 if (IsDone) return false;
 
                 if (await base.BehaviorRoutine()) return true;
 
-                if (QuestManager.QuestContainedInQuestLog(QuestID))
+                if (!QuestManager.QuestContainedInQuestLog(QuestID)) return false;
+                if (!QuestManager.GetQuestFromQuestLog(QuestID).IsCompleted) return false;
+
+                if (await StartMovement.MoveTo()) return true;
+                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
+
+                if (LuaEvents.GossipFrameOpen)
                 {
-                    if (QuestManager.GetQuestFromQuestLog(QuestID).IsCompleted)
+                    int index = QuestManager.GetActiveQuestIndexFromGossipFrame(QuestID);
+                    if (index == -1)
                     {
-                        TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
-
-                        if (LuaEvents.GossipFrameOpen)
-                        {
-                            int index = QuestManager.GetActiveQuestIndexFromGossipFrame(QuestID);
-                            if (index == -1)
-                            {
-                                GarrisonBase.Err("Failed to find quest {0} in gossip frame!", QuestID);
-                                return false;
-                            }
-                            GossipFrame.Instance.SelectActiveGossipQuest(index);
-                            await CommonCoroutines.SleepForRandomUiInteractionTime();
-                            return true;
-                        }
-
-                        if (!LuaEvents.QuestFrameOpen)
-                        {
-
-                            if (InteractionObject != null && InteractionObject.IsValid)
-                            {
-                                if (InteractionObject.WithinInteractRange)
-                                {
-                                    TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact",
-                                        Type.ToString());
-                                    InteractionObject.Interact();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    return true;
-                                }
-
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC MoveTo",
-                                    Type.ToString());
-                                await CommonCoroutines.MoveTo(InteractionObject.Location);
-                                return true;
-                            }
-
-                            if (await base.Movement())
-                                return true;
-                        }
-                        else
-                        {
-                            if (QuestFrame.Instance.IsVisible)
-                            {
-                                TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
-
-                                if (LuaEvents.QuestFrameType == QuestFrameTypes.Progress)
-                                {
-                                    QuestFrame.Instance.ClickContinue();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    await Coroutine.Sleep(5000);
-                                }
-                                else if (LuaEvents.QuestFrameType == QuestFrameTypes.Complete)
-                                {
-                                    GarrisonBase.Log("Completing Quest!");
-                                    QuestFrame.Instance.CompleteQuest();
-                                    await CommonCoroutines.SleepForRandomUiInteractionTime();
-                                    await Coroutine.Sleep(5000);
-
-                                    if (GarrisonManager.Buildings.ContainsKey(buildingType))
-                                        GarrisonManager.Buildings[buildingType].FirstQuestCompleted = true;
-
-                                    return false;
-                                }
-                            }
-                            return true;
-                        }
+                        GarrisonBase.Err("Failed to find quest {0} in gossip frame!", QuestID);
+                        return false;
                     }
+                    GossipFrame.Instance.SelectActiveGossipQuest(index);
+                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                    return true;
                 }
 
+                if (!LuaEvents.QuestFrameOpen)
+                {
+                    if (InteractionObject == null || !InteractionObject.IsValid)
+                    {
+                        //NPC object not found!
+                        GarrisonBase.Err("Could not find valid NPC");
+                        return false;
+                    }
 
-                return false;
+                    if (_npcMovement == null) 
+                        _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange-0.25f);
+
+                    await _npcMovement.MoveTo();
+
+
+                    if (!InteractionObject.WithinInteractRange) return true;
+
+                    //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Interact",Type.ToString());
+                    if (StyxWoW.Me.IsMoving) await CommonCoroutines.StopMoving();
+
+                    InteractionObject.Interact();
+                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+
+                    return true;
+                }
+
+                if (!QuestFrame.Instance.IsVisible) return true;
+                //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
+
+                switch (LuaEvents.QuestFrameType)
+                {
+                    case QuestFrameTypes.Progress:
+                        QuestFrame.Instance.ClickContinue();
+                        await CommonCoroutines.SleepForRandomUiInteractionTime();
+                        await Coroutine.Sleep(5000);
+                        break;
+                    case QuestFrameTypes.Complete:
+                        GarrisonBase.Log("Completing Quest!");
+                        if (!BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST)
+                        {
+                            QuestFrame.Instance.CompleteQuest();
+                            await CommonCoroutines.SleepForRandomUiInteractionTime();
+                            await Coroutine.Sleep(5000);
+
+                            if (GarrisonManager.Buildings.ContainsKey(buildingType))
+                                GarrisonManager.Buildings[buildingType].FirstQuestCompleted = true;
+                        }
+                        return false;
+                }
+                return true;
             }
         }
 
@@ -301,6 +287,84 @@ namespace Herbfunk.GarrisonBase
                 return false;
             }
 
+        }
+
+        public class BehaviorQuestLootKill : Behavior
+        {
+            public override BehaviorType Type { get { return BehaviorType.QuestLootKill; } }
+
+            public BehaviorQuestLootKill(uint questId, WoWPoint[] hotspots, bool looting) : this(questId, hotspots, new uint[0], looting)
+            {
+            }
+
+            public BehaviorQuestLootKill(uint questId, WoWPoint[] hotspots, uint[] ids, bool looting)
+            {
+                _questId = questId;
+                _objectIds.AddRange(ids);
+                _hotSpots.AddRange(hotspots);
+                _lootingBehavior = looting;
+            }
+
+            private readonly uint _questId;
+            private readonly List<uint> _objectIds = new List<uint>();
+            private readonly List<WoWPoint> _hotSpots = new List<WoWPoint>();
+            private readonly bool _lootingBehavior;
+
+            public override void Initalize()
+            {
+                _hotSpotMovement = new Movement(_hotSpots.ToArray());
+
+                if (_lootingBehavior) 
+                    ObjectCacheManager.LootableEntryIds.AddRange(_objectIds);
+                else
+                    ObjectCacheManager.KillableEntryIds.AddRange(_objectIds);
+
+                base.Initalize();
+            }
+
+            private Movement _hotSpotMovement;
+
+            public override async Task<bool> BehaviorRoutine()
+            {
+                if (IsDone) return false;
+
+                if (await base.BehaviorRoutine()) return true;
+
+                if (!QuestManager.QuestContainedInQuestLog(_questId))
+                {
+                    IsDone = true;
+                    return false;
+                }
+
+                if (QuestManager.GetQuestFromQuestLog(_questId).IsCompleted)
+                {
+                    if (_lootingBehavior) 
+                        ObjectCacheManager.ShouldLoot = false;
+                    else 
+                        ObjectCacheManager.ShouldKill = false;
+
+                    IsDone = true;
+                    return false;
+                }
+
+                if (_lootingBehavior)
+                {
+                    ObjectCacheManager.ShouldLoot = true;
+                    ObjectCacheManager.UpdateLootableTarget();
+                }
+                else
+                {
+                    ObjectCacheManager.ShouldKill = true;
+                    ObjectCacheManager.UpdateCombatTarget();
+                }
+
+                if (_hotSpotMovement.CurrentMovementQueue.Count==0)
+                    _hotSpotMovement.UseDeqeuedPoints(true);
+
+                await _hotSpotMovement.MoveTo();
+
+                return true;
+            }
         }
     }
 }

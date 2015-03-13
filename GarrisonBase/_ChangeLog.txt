@@ -1,5 +1,21 @@
-﻿v1.1.0.0
+﻿v1.1.1.0
 
+Added Combat Coroutine method to handle objects that should be engaged.
+Sending BOE items via Mail will now only consider armor or weapon items.
+Store House and Lumbermill first quest is now supported!
+Starting work orders will now use the All button. (except for warmill for garrison reserved check)
+Primal trader behavior no longer counts primal spirits from reagent bank.
+Alliance Warmill Level 3 should now navigate properly for work order startups.
+
+Object Cache
+	*Added property list ValidCombatObjects
+	*Added method to update/check current combat object
+	C_WoWObject
+		-Added IgnoresRemoval property for objects that should remain in cache regardless of validness.
+		-Added method to update WoWObject reference property for invalid objects.
+
+
+v1.1.0.0
 Behaviors
 	*Added Trade Post and War Mill Work Order Behavior
 		-Settings for each reagent can be enabled/disabled in Config.
