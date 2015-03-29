@@ -79,5 +79,69 @@ namespace Herbfunk.GarrisonBase.Properties {
                 return ResourceManager.GetString("LuaString", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to local wipe = wipe 
+        ///local next = next 
+        ///local pairs = pairs 
+        ///local GARRISON_CURRENCY = GARRISON_CURRENCY 
+        ///local GarrisonMissionFrame = GarrisonMissionFrame 
+        ///local After = C_Timer.After 
+        ///local GARRISON_FOLLOWER_IN_PARTY = GARRISON_FOLLOWER_IN_PARTY 
+        ///local GetFramesRegisteredForEvent = GetFramesRegisteredForEvent 
+        ///local CANCEL = CANCEL 
+        ///local HybridScrollFrame_GetOffset = HybridScrollFrame_GetOffset 
+        ///local GetCurrencyInfo = GetCurrencyInfo 
+        ///local MissionPageFollowers = GarrisonMissionFrame.MissionTab [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string LuaStringAddon {
+            get {
+                return ResourceManager.GetString("LuaStringAddon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to local button = gmm_buttons[button_name] 
+        ///   if button then button:Click() end 
+        ///end.
+        /// </summary>
+        internal static string LuaStringAddonClickButton {
+            get {
+                return ResourceManager.GetString("LuaStringAddonClickButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to local filtered_followers, filtered_followers_count = GetFilteredFollowers() 
+        ///	C_Garrison.GetAvailableMissions(available_missions) 
+        ///   local mission 
+        ///   for idx = 1, #available_missions do 
+        ///      if available_missions[idx].missionID == mission_id then 
+        ///         mission = available_missions[idx] 
+        ///         break 
+        ///      end 
+        ///   end 
+        ///
+        ///
+        ///
+        ///   FindBestFollowersForMission(mission, filtered_followers, &quot;mission_list&quot;) 
+        ///   return top[1] 
+        ///end.
+        /// </summary>
+        internal static string LuaStringAddonSuccess {
+            get {
+                return ResourceManager.GetString("LuaStringAddonSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to return 1 
+        ///end.
+        /// </summary>
+        internal static string LuaStringAddonTest {
+            get {
+                return ResourceManager.GetString("LuaStringAddonTest", resourceCulture);
+            }
+        }
     }
 }

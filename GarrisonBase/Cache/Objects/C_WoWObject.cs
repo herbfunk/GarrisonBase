@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Documents;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Styx;
-using Styx.Common;
 using Styx.Common.Helpers;
 using Styx.Helpers;
-using Styx.Pathing;
 using Styx.WoWInternals;
 using Styx.WoWInternals.World;
 using Styx.WoWInternals.WoWObjects;
-using MathEx = Tripper.Tools.Math.MathEx;
 
 namespace Herbfunk.GarrisonBase.Cache.Objects
 {
@@ -27,7 +22,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             Type = obj.Type;
             BlacklistType = BlacklistType.None;
             LineOfSight = new CachedValue<bool>(() => TestLineOfSight(this));
-
+            Collision = new CachedValue<bool>(() => TestCollision(this));
         }
 
 
@@ -50,6 +45,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public BlacklistType BlacklistType { get; set; }
         public bool ShouldLoot { get; set; }
         public bool ShouldKill { get; set; }
+        public bool IsQuestNpc { get; set; }
 
         public WaitTimer IgnoredTimer
         {
@@ -79,14 +75,14 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         //
         public double Distance
         {
-            get { return Player.Location.Distance(Location); }
+            get { return Character.Player.Location.Distance(Location); }
         }
 
         public double DistanceSqr
         {
             get
             {
-                return Player.Location.DistanceSqr(Location);
+                return Character.Player.Location.DistanceSqr(Location);
             }
         }
 
@@ -94,10 +90,10 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         {
             get
             {
-                if (Player.Location.Z>Location.Z)
-                    return Player.Location.Z - Location.Z;
+                if (Character.Player.Location.Z>Location.Z)
+                    return Character.Player.Location.Z - Location.Z;
 
-                return Location.Z - Player.Location.Z;
+                return Location.Z - Character.Player.Location.Z;
             }
         }
 
@@ -145,6 +141,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         {
             if (!IsValid) return false;
             LineOfSight.Reset();
+            Collision.Reset();
             return true;
         }
 
@@ -228,13 +225,13 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
 
 
-        private bool _requiresUpdate = true;
+        
         public bool RequiresUpdate
         {
             get { return _requiresUpdate; }
             set { _requiresUpdate = value; }
         }
-
+        private bool _requiresUpdate = true;
 
         public bool WithinInteractRange
         {
@@ -255,8 +252,10 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             RefWoWObject.Interact();
         }
 
-        public CachedValue<bool> LineOfSight;
+        public CachedValue<bool> LineOfSight, Collision;
         internal bool LineofsightResult = false;
+        internal bool CollisionResult = false;
+
         public WoWPoint LineofsightPoint
         {
             get
@@ -283,16 +282,30 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
         private WaitTimer _lineofSightWaitTimer=WaitTimer.FiveSeconds;
 
+        public WaitTimer CollisionWaitTimer
+        {
+            get
+            {
+                return _collisionWaitTimer;
+            }
+            set
+            {
+                _collisionWaitTimer = value;
+                _collisionWaitTimer.Reset();
+            }
+        }
+        private WaitTimer _collisionWaitTimer = WaitTimer.FiveSeconds;
+
         internal static bool TestLineOfSight(C_WoWObject obj)
         {
             if (obj.LineofsightResult && obj.Distance <= obj.InteractRange)
                 return true;
 
-            if (!obj._lineofSightWaitTimer.IsFinished && (obj.Distance>20f || obj.LineofSightWaitTimer.TimeLeft.TotalMilliseconds>750))
+            if (!obj._lineofSightWaitTimer.IsFinished && (obj.Distance>30f || obj.LineofSightWaitTimer.TimeLeft.TotalMilliseconds>750))
                 return obj.LineofsightResult;
             
 
-            var neededFacing=WoWMathHelper.CalculateNeededFacing(Player.Location, obj.Location);
+            var neededFacing=WoWMathHelper.CalculateNeededFacing(Character.Player.Location, obj.Location);
 
             var testPoints = new List<WoWPoint>
             {
@@ -309,7 +322,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
             foreach (var testPoint in testPoints)
             {
-                if (GameWorld.IsInLineOfSight(Player.TraceLinePosition,testPoint.Add(0f,0f,1.24f)))
+                if (GameWorld.IsInLineOfSight(Character.Player.TraceLinePosition,testPoint.Add(0f,0f,1.24f)))
                 {
                     obj.LineofsightResult = true;
                     obj._lineofsightPoint = testPoint;
@@ -322,7 +335,20 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             return obj.LineofsightResult;
         }
 
+        internal static bool TestCollision(C_WoWObject obj)
+        {
+            if (obj.CollisionResult && obj.Distance <= obj.InteractRange)
+                return true;
 
+            if (!obj._collisionWaitTimer.IsFinished && (obj.Distance > 30f || obj.CollisionWaitTimer.TimeLeft.TotalMilliseconds > 750))
+                return obj.CollisionResult;
+
+            var result = GameWorld.TraceLine(Character.Player.TraceLinePosition, obj.Location, TraceLineHitFlags.DoodadCollision);
+            obj.CollisionResult = result;
+
+            obj.CollisionWaitTimer.Reset();
+            return result;
+        }
  
 
         public override bool Equals(object obj)
@@ -346,13 +372,15 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                                  "[{2}] {3} [{4}]\r\n" +
                                  "{5} ({6})\r\n" +
                                  "LOS {7} ( {8} ) Tested {9}ms\r\n" +
+                                 "Collision {12} Tested {13}ms\r\n" +
                                  "Valid {10}\r\n" +
                                  "Update {11}",
                                  Entry,Name,Guid, Type, SubType,
                                  Location, Distance, 
                                  LineofsightResult, _lineofsightPoint.ToString(), LineofSightWaitTimer.TimeLeft.TotalMilliseconds,
                                  ObjectValidCheck,
-                                 RequiresUpdate);
+                                 RequiresUpdate,
+                                 CollisionResult, CollisionWaitTimer.TimeLeft.TotalMilliseconds);
         }
 
 

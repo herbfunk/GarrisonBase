@@ -20,6 +20,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public int Level { get; set; }
         public bool IsOpenable { get; set; }
         public bool IsSoulbound { get; set; }
+        public bool IsAccountBound { get;set; }
 
         public readonly WoWItem ref_WoWItem;
         public C_WoWItem(WoWItem item)
@@ -144,7 +145,16 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 IsSoulbound = true;
             }
-           
+
+            try
+            {
+                IsAccountBound = item.IsAccountBound;
+            }
+            catch
+            {
+                IsAccountBound = true;
+            }
+            
 
         }
 

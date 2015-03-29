@@ -2,6 +2,7 @@
 {
     public enum CombatAbilities
     {
+        Unknown,
         DangerZones = 6,
         DeadlyMinions=9,
         GroupDamage=3,

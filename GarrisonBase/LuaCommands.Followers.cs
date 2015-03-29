@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Herbfunk.GarrisonBase.Garrison.Objects;
-using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
 

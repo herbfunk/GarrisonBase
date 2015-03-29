@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Windows.Documents;
 using System.Xml.Serialization;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -38,35 +36,51 @@ namespace Herbfunk.GarrisonBase
         }
     }
 
+    public class MissionSettings
+    {
+       // public RewardTypes RewardType { get; set; }
+        public int SuccessRate { get; set; }
+        public int Priority { get; set; }
+        public int MinimumLevel { get; set; }
+
+        public MissionSettings()
+        {
+           // RewardType= RewardTypes.None;
+            SuccessRate = 100;
+            Priority = 0;
+            MinimumLevel = 90;
+        }
+
+        public MissionSettings(RewardTypes type, int success, int priority, int minlevel)
+        {
+           // RewardType = type;
+            SuccessRate = success;
+            Priority = priority;
+            MinimumLevel = minlevel;
+        }
+    }
+
     public class BaseSettings
     {
         internal static BaseSettings CurrentSettings = new BaseSettings();
 
+        public MissionSettings GarrisonResources { get; set; }
+        public MissionSettings Gold { get; set; }
+        public MissionSettings FollowerExperience { get; set; }
+        public MissionSettings ApexisCrystal { get; set; }
+        public MissionSettings Items { get; set; }
+        public MissionSettings FollowerTokens { get; set; }
+        public MissionSettings FollowerTraits { get; set; }
+        public MissionSettings FollowerRetraining { get; set; }
+        public MissionSettings FollowerContracts { get; set; }
+        public MissionSettings CharacterTokens { get; set; }
+        public MissionSettings RushOrders { get; set; }
+        public MissionSettings SealOfTemperedFate { get; set; }
+        public MissionSettings HonorPoints { get; set; }
+
 
         public int ReservedGarrisonResources { get; set; }
-        public int MissionRewardPriorityGarrison { get; set; }
-        public int MissionRewardPriorityGold { get; set; }
-        public int MissionRewardPriorityXp { get; set; }
-        public int MissionRewardPriorityApexis { get; set; }
-        public int MissionRewardPriorityItems { get; set; }
-        public int MissionRewardPriorityFollowerTokens { get; set; }
-        public int MissionRewardPriorityFollowerTraits { get; set; }
-        public int MissionRewardPriorityFollowerRetraining { get; set; }
-        public int MissionRewardPriorityCharacterItems { get; set; }
-        public int MissionRewardPriorityContracts { get; set; }
-        public int MissionRewardPriorityRushOrders { get; set; }
-
-        public int MissionRewardSuccessFollowerTokens { get; set; }
-        public int MissionRewardSuccessGarrison { get; set; }
-        public int MissionRewardSuccessGold { get; set; }
-        public int MissionRewardSuccessXp { get; set; }
-        public int MissionRewardSuccessApexis { get; set; }
-        public int MissionRewardSuccessItems { get; set; }
-        public int MissionRewardSuccessFollowerTraits { get; set; }
-        public int MissionRewardSuccessFollowerRetraining { get; set; }
-        public int MissionRewardSuccessCharacterItems { get; set; }
-        public int MissionRewardSuccessContracts { get; set; }
-        public int MissionRewardSuccessRushOrders { get; set; }
+        
 
         public bool MailAutoSend { get; set; }
         public bool MailAutoGet { get; set; }
@@ -147,13 +161,30 @@ namespace Herbfunk.GarrisonBase
         public bool VendorCommonItems { get; set; }
         public bool VendorUncommonItems { get; set; }
         public bool VendorRareItems { get; set; }
-        
+
+        public List<int> ProfessionSpellIds { get; set; }
+        public int MinimumBagSlotsFree { get; set; }
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
+        public bool DEBUG_IGNOREHEARTHSTONE { get; set; }
 
         public BaseSettings()
         {
+            GarrisonResources = new MissionSettings(RewardTypes.Garrison, 100, 6, 90);
+            Gold = new MissionSettings(RewardTypes.Gold, 100, 4, 90);
+            FollowerExperience = new MissionSettings(RewardTypes.XP, 100, 0, 90);
+            ApexisCrystal = new MissionSettings(RewardTypes.ApexisCrystal, 100, 3, 90);
+            Items = new MissionSettings(RewardTypes.Items, 100, 1, 90);
+            FollowerTokens = new MissionSettings(RewardTypes.FollowerToken, 100, 3, 90);
+            FollowerTraits = new MissionSettings(RewardTypes.FollowerTrait, 100, 3, 90);
+            FollowerRetraining = new MissionSettings(RewardTypes.RetrainingCertificate, 100, 3, 90);
+            FollowerContracts = new MissionSettings(RewardTypes.FollowerContract, 100, 5, 90);
+            CharacterTokens = new MissionSettings(RewardTypes.CharacterToken, 100, 2, 90);
+            RushOrders = new MissionSettings(RewardTypes.RushOrder, 100, 5, 90);
+            SealOfTemperedFate = new MissionSettings(RewardTypes.SealOfTemperedFate, 100, 6, 90);
+            HonorPoints = new MissionSettings(RewardTypes.HonorPoints, 100, 4, 90);
+
             MailAutoSend = false;
             MailAutoGet = false;
 
@@ -186,31 +217,6 @@ namespace Herbfunk.GarrisonBase
             BehaviorLootCache = true;
 
             ReservedGarrisonResources = 0;
-
-            MissionRewardPriorityContracts = 5;
-            MissionRewardPriorityGarrison = 5;
-            MissionRewardPriorityGold = 4;
-            MissionRewardPriorityItems = 3;
-            MissionRewardPriorityFollowerTokens = 3;
-            MissionRewardPriorityFollowerTraits = 2;
-            MissionRewardPriorityFollowerRetraining = 3;
-            MissionRewardPriorityCharacterItems = 3;
-            MissionRewardPriorityApexis = 2;
-            MissionRewardPriorityRushOrders = 2;
-            MissionRewardPriorityXp = 0;
-
-            MissionRewardSuccessFollowerTokens = 100;
-            MissionRewardSuccessGarrison = 100;
-            MissionRewardSuccessGold = 100;
-            MissionRewardSuccessXp = 100;
-            MissionRewardSuccessApexis = 100;
-            MissionRewardSuccessItems = 100;
-            MissionRewardSuccessFollowerTraits = 100;
-            MissionRewardSuccessFollowerRetraining = 100;
-            MissionRewardSuccessCharacterItems = 100;
-            MissionRewardSuccessContracts = 100;
-            MissionRewardSuccessRushOrders = 100;
-
             HBRelog_SkipToNextTask = true;
 
             ExchangePrimalSpirits = false;
@@ -233,8 +239,14 @@ namespace Herbfunk.GarrisonBase
             VendorUncommonItems = true;
             VendorRareItems = false;
 
+            //var professionSpellIds =new List<int>();
+            //PlayerProfessions.ProfessionDailyCooldownSpellIds.Values.ForEach(professionSpellIds.AddRange);
+            ProfessionSpellIds = new List<int>();
+            MinimumBagSlotsFree = 4;
+
             DEBUG_FAKESTARTWORKORDER = false;
             DEBUG_FAKEFINISHQUEST = false;
+            DEBUG_IGNOREHEARTHSTONE = false;
 
             LastCheckedHerbString = "0001-01-01T00:00:00";
             LastCheckedMineString = "0001-01-01T00:00:00";
@@ -246,11 +258,12 @@ namespace Herbfunk.GarrisonBase
             //Check for Config file
             if (!File.Exists(settingsPath))
             {
-                Herbfunk.GarrisonBase.GarrisonBase.Log("No config file found, now creating a new config from defaults at: " + settingsPath);
+                GarrisonBase.Log("No settings file found, now creating a new config from defaults at: " + settingsPath);
                 SerializeToXML(CurrentSettings);
             }
 
             CurrentSettings = DeserializeFromXML(settingsPath);
+            GarrisonBase.Log("Settings Loaded!");
         }
         public static void SerializeToXML(BaseSettings settings)
         {

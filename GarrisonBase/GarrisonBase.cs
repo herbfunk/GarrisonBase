@@ -1,26 +1,25 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using System.Threading;
+using System.Text;
 using System.Windows.Forms;
 using System.Windows.Media;
 using Bots.Professionbuddy.Dynamic;
-using Buddy.Coroutines;
 using CommonBehaviors.Actions;
 using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Garrison;
 using Styx.Common;
 using Styx.CommonBot;
 using Styx.Helpers;
 using Styx.TreeSharp;
-using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase
 {
     public class GarrisonBase : BotBase
     {
         public static HBRelogApi HbRelogApi;
-        internal static readonly Version Version = new Version(1,1,1,0);
+        internal static readonly Version Version = new Version(1,2,0,0);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {
@@ -34,7 +33,7 @@ namespace Herbfunk.GarrisonBase
 
         public override Composite Root
         {
-             get { return _root ?? (_root = new ActionRunCoroutine(ctx => Coroutines.RootLogic())); }
+             get { return _root ?? (_root = new ActionRunCoroutine(ctx => BehaviorManager.RootLogic())); }
         }
         private Composite _root;
 
@@ -47,7 +46,7 @@ namespace Herbfunk.GarrisonBase
         {
             Debug("BotEvent OnStart");
             HbRelogApi = new HBRelogApi();
-            Coroutines.Reset();
+            CacheStaticLookUp.Reset();
 
             if (!LuaEvents.LuaEventsAttached)
                 LuaEvents.AttachLuaEventHandlers();
@@ -62,9 +61,10 @@ namespace Herbfunk.GarrisonBase
             if (LuaEvents.LuaEventsAttached)
                 LuaEvents.DetachLuaEventHandlers();
 
-            Coroutines._initalizedBehaviorList = false;
-            Coroutines.Behaviors.ForEach(b => b.IsDone = true);
+            BehaviorManager.Reset();
+  
             CacheStaticLookUp.InitalizedCache = false;
+            ObjectCacheManager.ResetCache();
             GarrisonManager.Initalized = false;
             LuaEvents.ResetFrameVariables();
 
@@ -90,7 +90,7 @@ namespace Herbfunk.GarrisonBase
             Debug("BotEvent OnSelected");
             Log("Selected GarrisonBase v{0}", Version.ToString());
             BaseSettings.LoadSettings();
-            Player.Initalize();
+            Character.Player.Initalize();
         }
 
         public override void OnDeselected()
@@ -102,7 +102,7 @@ namespace Herbfunk.GarrisonBase
         
         public override Form ConfigurationForm
         {
-            get { return new Config(); }
+            get { return new Config.Config(); }
         }
 
 
@@ -143,6 +143,22 @@ namespace Herbfunk.GarrisonBase
             }
 
             return true;
+        }
+
+        private static readonly Random Rand = new Random();
+        public static string RandomString
+        {
+            get
+            {
+                int size = Rand.Next(6, 15);
+                var sb = new StringBuilder(size);
+                for (int i = 0; i < size; i++)
+                {
+                    // random upper/lowercase character using ascii code
+                    sb.Append((char)(Rand.Next(2) == 1 ? Rand.Next(65, 91) + 32 : Rand.Next(65, 91)));
+                }
+                return sb.ToString();
+            }
         }
      
     }

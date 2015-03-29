@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 
@@ -36,7 +34,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         {
             if (Type == WorkOrderType.WarMillDwarvenBunker)
             {
-                int garrisonResources = Player.AvailableGarrisonResource;
+                int garrisonResources = Character.Player.AvailableGarrisonResource;
                 return garrisonResources >= 20 ? garrisonResources / 20 : 0;
             }
             return GetTotalWorkorderStartups(Currency);
@@ -480,7 +478,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             long buyableCount = 0;
             foreach (var c in currency)
             {
-                List<C_WoWItem> items = Player.Inventory.GetCraftingReagentsById((int)c.Item1);
+                List<C_WoWItem> items = Character.Player.Inventory.GetCraftingReagentsById((int)c.Item1);
                 if (items.Count == 0)
                 {
                     return 0;

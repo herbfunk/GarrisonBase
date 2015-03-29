@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
-using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Properties;
 using Herbfunk.GarrisonBase.Quest;
 using Herbfunk.GarrisonBase.Quest.Objects;
-using Styx;
 using Styx.CommonBot.Frames;
 using Styx.WoWInternals;
 
@@ -42,6 +39,8 @@ namespace Herbfunk.GarrisonBase
         public static bool GossipFrameOpen { get; set; }
         public static bool TradeSkillFrameOpen { get; set; }
         public static bool MerchantFrameOpen { get; set; }
+        public static bool TaxiMapOpen { get; set; }
+
 
         public static void ResetFrameVariables()
         {
@@ -53,6 +52,7 @@ namespace Herbfunk.GarrisonBase
             GossipFrameOpen = false;
             TradeSkillFrameOpen = false;
             MerchantFrameOpen = false;
+            TaxiMapOpen = false;
         }
 
         public delegate void LuaEventFired();
@@ -193,6 +193,7 @@ namespace Herbfunk.GarrisonBase
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_ACCEPTED");
             QuestLogChangeType = QuestLogChangeType.Accepted;
+            QuestFrameOpen = false;
             if (OnQuestAccepted != null) OnQuestAccepted();
         }
         public static void QUEST_WATCH_UPDATE(object sender, LuaEventArgs args)
@@ -256,19 +257,19 @@ namespace Herbfunk.GarrisonBase
         public static void BAG_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: BAG_UPDATE");
-            Player.Inventory.ShouldUpdateBagItems = true;
+            Character.Player.Inventory.ShouldUpdateBagItems = true;
             if (OnBagUpdate != null) OnBagUpdate();
         }
         public static void PLAYERBANKSLOTS_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: PLAYERBANKSLOTS_CHANGED");
-            Player.Inventory.ShouldUpdateBankItems = true;
+            Character.Player.Inventory.ShouldUpdateBankItems = true;
             if (OnPlayerBankSlotsChanged != null) OnPlayerBankSlotsChanged();
         }
         public static void PLAYERREAGENTBANKSLOTS_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: PLAYERREAGENTBANKSLOTS_CHANGED");
-            Player.Inventory.ShouldUpdateBankReagentItems = true;
+            Character.Player.Inventory.ShouldUpdateBankReagentItems = true;
             if (OnPlayerReagentsBankSlotsChanged != null) OnPlayerReagentsBankSlotsChanged();
         }
 
@@ -276,15 +277,22 @@ namespace Herbfunk.GarrisonBase
         public static void ZONE_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: ZONE_CHANGED");
-            Player.ShouldUpdateMinimapZoneText = true;
+            
             if (OnZoneChanged != null) OnZoneChanged();
         }
-
+        public static event LuaEventFired OnZoneChangedNewArea;
+        public static void ZONE_CHANGED_NEW_AREA(object sender, LuaEventArgs args)
+        {
+            GarrisonBase.DebugLuaEvent("LuaEvent: ZONE_CHANGED_NEW_AREA");
+            
+            if (OnZoneChangedNewArea != null) OnZoneChangedNewArea();
+        }
+        //
         public static event LuaEventFired OnCurrentSpellCastChanged;
         public static void CURRENT_SPELL_CAST_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: CURRENT_SPELL_CAST_CHANGED");
-            Player.ShouldUpdateCurrentPendingCursorSpellId = true;
+           
             if (OnCurrentSpellCastChanged != null) OnCurrentSpellCastChanged();
         }
 
@@ -292,7 +300,7 @@ namespace Herbfunk.GarrisonBase
         public static void UI_ERROR_MESSAGE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: UI_ERROR_MESSAGE");
-            Player.LastErrorMessage.Reset();
+
             if (OnUiErrorMessage != null) OnUiErrorMessage();
         }
 
@@ -300,7 +308,7 @@ namespace Herbfunk.GarrisonBase
         public static void CURRENCY_DISPLAY_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: CURRENCY_DISPLAY_UPDATE");
-            Player.ShouldUpdateGarrisonResource = true;
+           
             if (OnCurrencyDisplayUpdate != null) OnCurrencyDisplayUpdate();
         }
 
@@ -319,6 +327,21 @@ namespace Herbfunk.GarrisonBase
             if (OnMailClosed != null) OnMailClosed();
         }
 
+        public static event LuaEventFired OnTaxiMapOpened;
+        public static void TAXIMAP_OPENED(object sender, LuaEventArgs args)
+        {
+            GarrisonBase.DebugLuaEvent("LuaEvent: TAXIMAP_OPENED");
+            TaxiMapOpen = true;
+            if (OnTaxiMapOpened != null) OnTaxiMapOpened();
+        }
+        public static event LuaEventFired OnTaxiMapClosed;
+        public static void TAXIMAP_CLOSED(object sender, LuaEventArgs args)
+        {
+            GarrisonBase.DebugLuaEvent("LuaEvent: TAXIMAP_CLOSED");
+            TaxiMapOpen = false;
+            if (OnTaxiMapClosed != null) OnTaxiMapClosed();
+        }
+        //
         internal static bool LuaEventsAttached = false;
         internal static void AttachLuaEventHandlers()
         {
@@ -357,6 +380,7 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.AttachEvent("PLAYERBANKSLOTS_CHANGED", PLAYERBANKSLOTS_CHANGED);
             Lua.Events.AttachEvent("PLAYERREAGENTBANKSLOTS_CHANGED", PLAYERREAGENTBANKSLOTS_CHANGED);
             Lua.Events.AttachEvent("ZONE_CHANGED", ZONE_CHANGED);
+            Lua.Events.AttachEvent("ZONE_CHANGED_NEW_AREA", ZONE_CHANGED_NEW_AREA);
 
             Lua.Events.AttachEvent("MERCHANT_SHOW", MERCHANT_SHOW);
             Lua.Events.AttachEvent("MERCHANT_CLOSED", MERCHANT_CLOSED);
@@ -370,6 +394,10 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.AttachEvent("MAIL_SHOW", MAIL_SHOW);
             Lua.Events.AttachEvent("MAIL_CLOSED", MAIL_CLOSED);
 
+            Lua.Events.AttachEvent("TAXIMAP_OPENED", TAXIMAP_OPENED);
+            Lua.Events.AttachEvent("TAXIMAP_CLOSED", TAXIMAP_CLOSED);
+
+            //
             //GARRISON_BUILDING_ACTIVATABLE
             //CINEMATIC_START
             //CINEMATIC_STOP
@@ -420,6 +448,7 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.DetachEvent("PLAYERREAGENTBANKSLOTS_CHANGED", PLAYERREAGENTBANKSLOTS_CHANGED);
 
             Lua.Events.DetachEvent("ZONE_CHANGED", ZONE_CHANGED);
+            Lua.Events.DetachEvent("ZONE_CHANGED_NEW_AREA", ZONE_CHANGED_NEW_AREA);
 
             Lua.Events.DetachEvent("MERCHANT_SHOW", MERCHANT_SHOW);
             Lua.Events.DetachEvent("MERCHANT_CLOSED", MERCHANT_CLOSED);
@@ -433,19 +462,37 @@ namespace Herbfunk.GarrisonBase
             Lua.Events.DetachEvent("MAIL_SHOW", MAIL_SHOW);
             Lua.Events.DetachEvent("MAIL_CLOSED", MAIL_CLOSED);
 
+            Lua.Events.DetachEvent("TAXIMAP_OPENED", TAXIMAP_OPENED);
+            Lua.Events.DetachEvent("TAXIMAP_CLOSED", TAXIMAP_CLOSED);
+
 
             LuaEventsAttached = false;
 
         }
 
         internal static bool LuaAddonInjected = false;
+        internal static string TestFunctionString = GarrisonBase.RandomString;
+        internal static string SuccessFunctionString = GarrisonBase.RandomString;
+        internal static string ClickFunctionString = GarrisonBase.RandomString;
 
         internal static async Task<bool> InjectLuaAddon()
         {
             GarrisonBase.Log("Injecting Lua Code");
 
+            String luaCode = String.Format("{0} " +
+                                           "function {4}() {1} " +
+                                           "function {5}(button_name) {2} " +
+                                           "function {6}(mission_id) {3}", 
+                Resources.LuaStringAddon,
+                Resources.LuaStringAddonTest,
+                Resources.LuaStringAddonClickButton, 
+                Resources.LuaStringAddonSuccess,
+                TestFunctionString,
+                ClickFunctionString,
+                SuccessFunctionString);
+
             await Coroutine.Yield();
-            Lua.DoString(Resources.LuaString);
+            Lua.DoString(luaCode);
             await Coroutine.Sleep(1000);
             return false;
         }

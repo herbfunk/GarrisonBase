@@ -1,15 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
-using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Quest;
 using Styx;
-using Styx.Common;
-using Styx.CommonBot;
-using Styx.CommonBot.Frames;
-using Styx.CommonBot.Profiles;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 
@@ -89,10 +83,10 @@ namespace Herbfunk.GarrisonBase
         internal static bool InitalizedCache = false;
         internal static void Update()
         {
-            Player.Initalize();
-            MovementCache.Initalize(Player.IsAlliance);
+            Character.Player.Initalize();
+            MovementCache.Initalize(Character.Player.IsAlliance);
             QuestManager.RefreshQuestLog();
-            Cache.Blacklist.Initalize(Player.IsAlliance);
+            Cache.Blacklist.Initalize(Character.Player.IsAlliance);
             InitalizedCache = true;
         }
 
@@ -140,7 +134,22 @@ namespace Herbfunk.GarrisonBase
             return ObjectManager.GetObjectsOfType<WoWUnit>().Where(obj => ids.Contains(obj.Entry) && !Blacklist_GUIDs.Contains(obj.Guid) && obj.IsValid && !obj.IsDead).ToList();
         }
 
-
+        internal static readonly List<uint> RepairVendorIds = new List<uint>
+        {
+            //Horde
+            76872,
+            //Alliance
+            81346,
+        };
+        internal static readonly List<uint> PrimalTraderIds = new List<uint>
+        {
+            84967,//Horde
+            84246,//Alliance
+        };
+        internal static readonly List<uint> FollowerEntryIds = new List<uint>
+        {
+           83820, //High Centurion Tormmok
+        };
         internal static readonly List<uint> MineDeposits = new List<uint>
         {
             232544, //True Iron

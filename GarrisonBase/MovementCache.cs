@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
 
 namespace Herbfunk.GarrisonBase
@@ -19,6 +22,7 @@ namespace Herbfunk.GarrisonBase
                 GardenPlot63SafePoint = HordeHerbSafePoint;
                 MinePlot59SafePoint = HordeMineSafePoint;
                 SellRepairNpcLocation = HordeSellRepairNpc;
+                FlightPathNpcLocation = HordeFlightPathNpc;
                 GarrisonEntrance = HordeGarrisonEntrance;
 
                 SmallPlot18Entrance = HordeSmallPlot18Entrance;
@@ -28,21 +32,6 @@ namespace Herbfunk.GarrisonBase
                 MediumPlot25Entrance = HordeMediumPlot25Entrance;
                 LargePlot23Entrance = HordeLargePlot23Entrance;
                 LargePlot24Entrance = HordeLargePlot24Entrance;
-
-                Plot22_TradePost_Level1 = Horde_Plot22_TradePost_Level1;
-                Plot25_TradePost_Level1 = Horde_Plot25_TradePost_Level1;
-
-                Plot22_TradePost_Level2 = Horde_Plot22_TradePost_Level2;
-                Plot25_TradePost_Level2 = Horde_Plot25_TradePost_Level2;
-
-                Plot22_TradePost_Level3 = Horde_Plot22_TradePost_Level3;
-                Plot25_TradePost_Level3 = Horde_Plot25_TradePost_Level3;
-
-                Plot23_Warmill_Level2 = Horde_Plot23_WarMill_Level2;
-                Plot24_Warmill_Level2 = Horde_Plot24_WarMill_Level2;
-
-                Plot24_Warmill_Level3 = Horde_Plot24_WarMill_Level3;
-                Plot23_Warmill_Level3 = Horde_Plot23_WarMill_Level3;
             }
             else
             {
@@ -56,6 +45,7 @@ namespace Herbfunk.GarrisonBase
                 GardenPlot63SafePoint = AllianceHerbSafePoint;
                 MinePlot59SafePoint = AllianceMineSafePoint;
                 SellRepairNpcLocation = AllianceSellRepairNpc;
+                FlightPathNpcLocation = AllianceFlightPathNpc;
                 GarrisonEntrance = AllianceGarrisonEntrance;
 
                 SmallPlot18Entrance = AllianceSmallPlot18Entrance;
@@ -65,21 +55,6 @@ namespace Herbfunk.GarrisonBase
                 MediumPlot25Entrance = AllianceMediumPlot25Entrance;
                 LargePlot23Entrance = AllianceLargePlot23Entrance;
                 LargePlot24Entrance = AllianceLargePlot24Entrance;
-
-                Plot23_Warmill_Level2 = Alliance_WarMill_Plot23_Level2;
-                Plot24_Warmill_Level2 = Alliance_WarMill_Plot24_Level2;
-
-                Plot23_Warmill_Level3 = Alliance_WarMill_Plot23_Level2;//Alliance_WarMill_Plot23_Level3;
-                Plot24_Warmill_Level3 = Alliance_WarMill_Plot24_Level2;//Alliance_WarMill_Plot24_Level3;
-
-                Plot22_TradePost_Level1 = Alliance_Plot22_TradePost_Level1;
-                Plot25_TradePost_Level1 = Alliance_Plot25_TradePost_Level1;
-
-                Plot22_TradePost_Level2 = Alliance_Plot22_TradePost_Level2;
-                Plot25_TradePost_Level2 = Alliance_Plot25_TradePost_Level2;
-
-                Plot22_TradePost_Level3 = Alliance_Plot22_TradePost_Level3;
-                Plot25_TradePost_Level3 = Alliance_Plot25_TradePost_Level3;
             }
 
 
@@ -139,7 +114,489 @@ namespace Herbfunk.GarrisonBase
             return WoWPoint.Zero;
         }
 
+        internal static List<WoWPoint> GetSpecialMovementPoints(Building building)
+        {
+            return GetSpecialMovementPoints(building.Type, building.PlotId, building.Level, Player.IsAlliance);
+        }
+        internal static List<WoWPoint> GetSpecialMovementPoints(BuildingType type, int plotId, int level, bool alliance)
+        {
+            switch (type)
+            {
+                case BuildingType.SalvageYard:
+                    if (alliance)
+                    {
+                        if (plotId == 18) return new List<WoWPoint> {AllianceSalvageYardPlot18};
+                        if (plotId == 19) return new List<WoWPoint> { AllianceSalvageYardPlot19 };
+                        if (plotId == 20) return new List<WoWPoint> { AllianceSalvageYardPlot20 };
+                    }
+                    else
+                    {
+                        if (plotId == 18) return new List<WoWPoint> { HordeSalvageYardPlot18 };
+                        if (plotId == 19) return new List<WoWPoint> { HordeSalvageYardPlot19 };
+                        if (plotId == 20) return new List<WoWPoint> { HordeSalvageYardPlot20 };
+                    }
+                    break;
+                case BuildingType.WarMillDwarvenBunker:
+                    if (alliance)
+                    {
+                        if (plotId == 23)
+                        {
+                            if (level == 2) return Alliance_WarMill_Plot23_Level2;
+                            if (level == 3) return Alliance_WarMill_Plot23_Level2;
+                        }
+                        if (plotId == 24)
+                        {
+                            if (level == 2) return Alliance_WarMill_Plot24_Level2;
+                            if (level == 3) return Alliance_WarMill_Plot24_Level2;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 23)
+                        {
+                            if (level == 2) return Horde_Plot23_WarMill_Level2;
+                            if (level == 3) return Horde_Plot23_WarMill_Level3;
+                        }
+                        if (plotId == 24)
+                        {
+                            if (level == 2) return Horde_Plot24_WarMill_Level2;
+                            if (level == 3) return Horde_Plot24_WarMill_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.TradingPost:
+                     if (alliance)
+                    {
+                        if (plotId == 22)
+                        {
+                            if (level == 1) return Alliance_Plot22_TradePost_Level1;
+                            if (level == 2) return Alliance_Plot22_TradePost_Level2;
+                            if (level == 3) return Alliance_Plot22_TradePost_Level3;
+                        }
+                        if (plotId == 25)
+                        {
+                            if (level == 1) return Alliance_Plot25_TradePost_Level1;
+                            if (level == 2) return Alliance_Plot25_TradePost_Level2;
+                            if (level == 3) return Alliance_Plot25_TradePost_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 22)
+                        {
+                            if (level == 1) return Horde_Plot22_TradePost_Level1;
+                            if (level == 2) return Horde_Plot22_TradePost_Level2;
+                            if (level == 3) return Horde_Plot22_TradePost_Level3;
+                        }
+                        if (plotId == 25)
+                        {
+                            if (level == 1) return Horde_Plot25_TradePost_Level1;
+                            if (level == 2) return Horde_Plot25_TradePost_Level2;
+                            if (level == 3) return Horde_Plot25_TradePost_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.ScribesQuarters:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_ScribesQuarter_Level1;
+                            if (level == 2) return Alliance_Plot18_ScribesQuarter_Level2;
+                            if (level == 3) return Alliance_Plot18_ScribesQuarter_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_ScribesQuarter_Level1;
+                            if (level == 2) return Alliance_Plot19_ScribesQuarter_Level2;
+                            if (level == 3) return Alliance_Plot19_ScribesQuarter_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_ScribesQuarter_Level1;
+                            if (level == 2) return Alliance_Plot20_ScribesQuarter_Level2;
+                            if (level == 3) return Alliance_Plot20_ScribesQuarter_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_ScribesQuarter_Level1;
+                            if (level == 2) return Horde_Plot18_ScribesQuarter_Level2;
+                            if (level == 3) return Horde_Plot18_ScribesQuarter_Level2;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_ScribesQuarter_Level1;
+                            if (level == 2) return Horde_Plot19_ScribesQuarter_Level2;
+                            if (level == 3) return Horde_Plot19_ScribesQuarter_Level2;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_ScribesQuarter_Level1;
+                            if (level == 2) return Horde_Plot20_ScribesQuarter_Level2;
+                            if (level == 3) return Horde_Plot20_ScribesQuarter_Level2;
+                        }
+                    }
+                    break;
+                case BuildingType.TailoringEmporium:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_TailoringEmporium_Level1;
+                            if (level == 2) return Alliance_Plot18_TailoringEmporium_Level2;
+                            if (level == 3) return Alliance_Plot18_TailoringEmporium_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_TailoringEmporium_Level1;
+                            if (level == 2) return Alliance_Plot19_TailoringEmporium_Level2;
+                            if (level == 3) return Alliance_Plot19_TailoringEmporium_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_TailoringEmporium_Level1;
+                            if (level == 2) return Alliance_Plot20_TailoringEmporium_Level2;
+                            if (level == 3) return Alliance_Plot20_TailoringEmporium_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_TailoringEmporium_Level1;
+                            if (level == 2) return Horde_Plot18_TailoringEmporium_Level2;
+                            if (level == 3) return Horde_Plot18_TailoringEmporium_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_TailoringEmporium_Level1;
+                            if (level == 2) return Horde_Plot19_TailoringEmporium_Level2;
+                            if (level == 3) return Horde_Plot19_TailoringEmporium_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_TailoringEmporium_Level1;
+                            if (level == 2) return Horde_Plot20_TailoringEmporium_Level2;
+                            if (level == 3) return Horde_Plot20_TailoringEmporium_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.TheTannery:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_Tannery_Level1;
+                            if (level == 2) return Alliance_Plot18_Tannery_Level2;
+                            if (level == 3) return Alliance_Plot18_Tannery_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_Tannery_Level1;
+                            if (level == 2) return Alliance_Plot19_Tannery_Level2;
+                            if (level == 3) return Alliance_Plot19_Tannery_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_Tannery_Level1;
+                            if (level == 2) return Alliance_Plot20_Tannery_Level2;
+                            if (level == 3) return Alliance_Plot20_Tannery_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_Tannery_Level1;
+                            if (level == 2) return Horde_Plot18_Tannery_Level2;
+                            if (level == 3) return Horde_Plot18_Tannery_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_Tannery_Level1;
+                            if (level == 2) return Horde_Plot19_Tannery_Level2;
+                            if (level == 3) return Horde_Plot19_Tannery_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_Tannery_Level1;
+                            if (level == 2) return Horde_Plot20_Tannery_Level2;
+                            if (level == 3) return Horde_Plot20_Tannery_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.TheForge:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_Forge_Level1;
+                            if (level == 2) return Alliance_Plot18_Forge_Level2;
+                            if (level == 3) return Alliance_Plot18_Forge_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_Forge_Level1;
+                            if (level == 2) return Alliance_Plot19_Forge_Level2;
+                            if (level == 3) return Alliance_Plot19_Forge_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_Forge_Level1;
+                            if (level == 2) return Alliance_Plot20_Forge_Level2;
+                            if (level == 3) return Alliance_Plot20_Forge_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_Forge_Level1;
+                            if (level == 2) return Horde_Plot18_Forge_Level2;
+                            if (level == 3) return Horde_Plot18_Forge_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_Forge_Level1;
+                            if (level == 2) return Horde_Plot19_Forge_Level2;
+                            if (level == 3) return Horde_Plot19_Forge_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_Forge_Level1;
+                            if (level == 2) return Horde_Plot20_Forge_Level2;
+                            if (level == 3) return Horde_Plot20_Forge_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.EnchantersStudy:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_EnchantersStudy_Level1;
+                            if (level == 2) return Alliance_Plot18_EnchantersStudy_Level2;
+                            if (level == 3) return Alliance_Plot18_EnchantersStudy_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_EnchantersStudy_Level1;
+                            if (level == 2) return Alliance_Plot19_EnchantersStudy_Level2;
+                            if (level == 3) return Alliance_Plot19_EnchantersStudy_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_EnchantersStudy_Level1;
+                            if (level == 2) return Alliance_Plot20_EnchantersStudy_Level2;
+                            if (level == 3) return Alliance_Plot20_EnchantersStudy_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_EnchantersStudy_Level1;
+                            if (level == 2) return Horde_Plot18_EnchantersStudy_Level2;
+                            if (level == 3) return Horde_Plot18_EnchantersStudy_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_EnchantersStudy_Level1;
+                            if (level == 2) return Horde_Plot19_EnchantersStudy_Level2;
+                            if (level == 3) return Horde_Plot19_EnchantersStudy_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_EnchantersStudy_Level1;
+                            if (level == 2) return Horde_Plot20_EnchantersStudy_Level2;
+                            if (level == 3) return Horde_Plot20_EnchantersStudy_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.EngineeringWorks:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_EngineeringWorks_Level1;
+                            if (level == 2) return Alliance_Plot18_EngineeringWorks_Level2;
+                            if (level == 3) return Alliance_Plot18_EngineeringWorks_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_EngineeringWorks_Level1;
+                            if (level == 2) return Alliance_Plot19_EngineeringWorks_Level2;
+                            if (level == 3) return Alliance_Plot19_EngineeringWorks_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_EngineeringWorks_Level1;
+                            if (level == 2) return Alliance_Plot20_EngineeringWorks_Level2;
+                            if (level == 3) return Alliance_Plot20_EngineeringWorks_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_EngineeringWorks_Level1;
+                            if (level == 2) return Horde_Plot18_EngineeringWorks_Level2;
+                            if (level == 3) return Horde_Plot18_EngineeringWorks_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_EngineeringWorks_Level1;
+                            if (level == 2) return Horde_Plot19_EngineeringWorks_Level2;
+                            if (level == 3) return Horde_Plot19_EngineeringWorks_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_EngineeringWorks_Level1;
+                            if (level == 2) return Horde_Plot20_EngineeringWorks_Level2;
+                            if (level == 3) return Horde_Plot20_EngineeringWorks_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.GemBoutique:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_GemBoutique_Level1;
+                            if (level == 2) return Alliance_Plot18_GemBoutique_Level2;
+                            if (level == 3) return Alliance_Plot18_GemBoutique_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_GemBoutique_Level1;
+                            if (level == 2) return Alliance_Plot19_GemBoutique_Level2;
+                            if (level == 3) return Alliance_Plot19_GemBoutique_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_GemBoutique_Level1;
+                            if (level == 2) return Alliance_Plot20_GemBoutique_Level2;
+                            if (level == 3) return Alliance_Plot20_GemBoutique_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_GemBoutique_Level1;
+                            if (level == 2) return Horde_Plot18_GemBoutique_Level2;
+                            if (level == 3) return Horde_Plot18_GemBoutique_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_GemBoutique_Level1;
+                            if (level == 2) return Horde_Plot19_GemBoutique_Level2;
+                            if (level == 3) return Horde_Plot19_GemBoutique_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_GemBoutique_Level1;
+                            if (level == 2) return Horde_Plot20_GemBoutique_Level2;
+                            if (level == 3) return Horde_Plot20_GemBoutique_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.AlchemyLab:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_AlchemyLab_Level1;
+                            if (level == 2) return Alliance_Plot18_AlchemyLab_Level2;
+                            if (level == 3) return Alliance_Plot18_AlchemyLab_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_AlchemyLab_Level1;
+                            if (level == 2) return Alliance_Plot19_AlchemyLab_Level2;
+                            if (level == 3) return Alliance_Plot19_AlchemyLab_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_AlchemyLab_Level1;
+                            if (level == 2) return Alliance_Plot20_AlchemyLab_Level2;
+                            if (level == 3) return Alliance_Plot20_AlchemyLab_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_AlchemyLab_Level1;
+                            if (level == 2) return Horde_Plot18_AlchemyLab_Level2;
+                            if (level == 3) return Horde_Plot18_AlchemyLab_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_AlchemyLab_Level1;
+                            if (level == 2) return Horde_Plot19_AlchemyLab_Level2;
+                            if (level == 3) return Horde_Plot19_AlchemyLab_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_AlchemyLab_Level1;
+                            if (level == 2) return Horde_Plot20_AlchemyLab_Level2;
+                            if (level == 3) return Horde_Plot20_AlchemyLab_Level3;
+                        }
+                    }
+                    break;
+                case BuildingType.Storehouse:
+                    if (alliance)
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Alliance_Plot18_StoreHouse_Level1;
+                            if (level == 2) return Alliance_Plot18_StoreHouse_Level2;
+                            if (level == 3) return Alliance_Plot18_StoreHouse_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Alliance_Plot19_StoreHouse_Level1;
+                            if (level == 2) return Alliance_Plot19_StoreHouse_Level2;
+                            if (level == 3) return Alliance_Plot19_StoreHouse_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Alliance_Plot20_StoreHouse_Level1;
+                            if (level == 2) return Alliance_Plot20_StoreHouse_Level2;
+                            if (level == 3) return Alliance_Plot20_StoreHouse_Level3;
+                        }
+                    }
+                    else
+                    {
+                        if (plotId == 18)
+                        {
+                            if (level == 1) return Horde_Plot18_StoreHouse_Level1;
+                            if (level == 2) return Horde_Plot18_StoreHouse_Level2;
+                            if (level == 3) return Horde_Plot18_StoreHouse_Level3;
+                        }
+                        if (plotId == 19)
+                        {
+                            if (level == 1) return Horde_Plot19_StoreHouse_Level1;
+                            if (level == 2) return Horde_Plot19_StoreHouse_Level2;
+                            if (level == 3) return Horde_Plot19_StoreHouse_Level3;
+                        }
+                        if (plotId == 20)
+                        {
+                            if (level == 1) return Horde_Plot20_StoreHouse_Level1;
+                            if (level == 2) return Horde_Plot20_StoreHouse_Level2;
+                            if (level == 3) return Horde_Plot20_StoreHouse_Level3;
+                        }
+                    }
+                    break;
+              
+            }
 
+            return null;
+        }
 
         //MediumPlot22
 
@@ -213,6 +670,14 @@ namespace Herbfunk.GarrisonBase
         }
         private static WoWPoint _sellRepairNpcLocation;
 
+        public static WoWPoint FlightPathNpcLocation
+        {
+            get { return _flightPathNpcLocation; }
+            set { _flightPathNpcLocation = value; }
+        }
+        private static WoWPoint _flightPathNpcLocation;
+
+
         public static WoWPoint GarrisonEntrance
         {
             get { return _garrisonEntrance; }
@@ -230,15 +695,6 @@ namespace Herbfunk.GarrisonBase
         public static WoWPoint LargePlot24Entrance { get; set; }
 
 
-        public static List<WoWPoint> Plot24_Warmill_Level2 { get; set; }
-        public static List<WoWPoint> Plot23_Warmill_Level2 { get; set; }
-        public static List<WoWPoint> Plot24_Warmill_Level3 { get; set; }
-        public static List<WoWPoint> Plot23_Warmill_Level3 { get; set; }
-        public static List<WoWPoint> Plot22_TradePost_Level1 { get; set; }
-        public static List<WoWPoint> Plot25_TradePost_Level1 { get; set; }
-        public static List<WoWPoint> Plot22_TradePost_Level2 { get; set; }
-        public static List<WoWPoint> Plot25_TradePost_Level2 { get; set; }
-        public static List<WoWPoint> Plot22_TradePost_Level3 { get; set; }
-        public static List<WoWPoint> Plot25_TradePost_Level3 { get; set; }
+
     }
 }

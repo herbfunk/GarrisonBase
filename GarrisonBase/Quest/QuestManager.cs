@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Quest.Objects;
 using Styx.Common;
 using Styx.CommonBot.Frames;
@@ -23,9 +20,9 @@ namespace Herbfunk.GarrisonBase.Quest
             }
         }
 
-        public static bool QuestLogFull()
+        public static bool QuestLogFull
         {
-            return QuestLog.Count >= 25;
+            get { return QuestLog.Count >= 25; }
         }
         public static bool QuestContainedInQuestLog(uint id)
         {

@@ -1,4 +1,31 @@
-﻿v1.1.1.0
+﻿v1.2.0.0
+
+Lua Injected "Addon" now uses randomized strings for the global functions.
+Replaced most Lua Calls for Follower and Mission initalizing with honorbuddy garrison API.
+
+
+Behaviors
+	-Added RunCondition which is evaluated every loop and will finish behavior when false.
+	-Added Dispose method which is used once after behavior "IsDone".
+
+
+Cache
+	-Added new List class for entry ids (Combat, Looting, QuestNPCs)
+	-Added Combat and Looting Distances (for ignoring far objects)
+
+Config and Settings
+	-Added profession daily settings for individual crafting
+	-Added setting for Max free slots in Bags (for vendoring)
+	-Mission Settings now include Minimum Level.
+
+Major refactoring of code
+	-Behavior class has been extracted into seperate files and is no longer partial and moved into Coroutines\Behaviors folder.
+	-Coroutines Class has been renamed to BehaviorManager and moved into Coroutines Folder.
+	-Moved other files around..
+
+
+
+v1.1.1.0
 
 Added Combat Coroutine method to handle objects that should be engaged.
 Sending BOE items via Mail will now only consider armor or weapon items.

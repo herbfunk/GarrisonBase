@@ -46,7 +46,7 @@ namespace Herbfunk.GarrisonBase
         public static bool TestLuaInjectionCode()
         {
             GarrisonBase.Debug("LuaCommand: TestLuaInjectionCode");
-            string lua = String.Format("return GarrisonBaseTest()");
+            string lua = String.Format("return {0}()", LuaEvents.TestFunctionString);
             List<string> retvalues = Lua.GetReturnValues(lua);
             return retvalues != null;
         }
@@ -93,7 +93,7 @@ namespace Herbfunk.GarrisonBase
         public static void AssignFollowers()
         {
             GarrisonBase.Debug("LuaCommand: AssignFollowers");
-            string lua = "GMM_Click('MissionPage1')";
+            string lua = String.Format("{0}('MissionPage1')", LuaEvents.ClickFunctionString);
             Lua.DoString(lua);
         }
         public static void OpenMission(int missionId)
@@ -312,7 +312,7 @@ namespace Herbfunk.GarrisonBase
 
         public static void GetBuildingInfo(string buildingId, out string plotId, out bool canActivate, out int shipCap, out int shipReady, out int shipTotal, out bool isBuilding)
         {
-            GarrisonBase.Debug("LuaCommand: GetBuildingInfo {0}", buildingId);
+            
             String lua =
                 "C_Garrison.RequestLandingPageShipmentInfo();" +
                 "local RetInfo = {}; Temp = {}; local buildings = C_Garrison.GetBuildings();" +
@@ -359,6 +359,11 @@ namespace Herbfunk.GarrisonBase
             shipCap = Convert.ToInt32(shipmentsCap);
             shipReady = Convert.ToInt32(shipmentsReady);
             shipTotal = Convert.ToInt32(shipmentsTotal);
+
+            GarrisonBase.Debug("LuaCommand: GetBuildingInfo {0} canActivate {1} " +
+                               "isBuilding {2} shipmentsReady {3} shipmentsTotal {4} " +
+                               "shipmentsCap {5}",
+                               buildingId, canActivate, isBuilding, shipmentsReady, shipmentsTotal, shipmentsCap);
         }
         public static List<string> GetBuildingIds()
         {

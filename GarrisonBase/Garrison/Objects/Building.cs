@@ -1,6 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx;
 using Styx.Helpers;
@@ -45,7 +46,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             {
                 if (Type == BuildingType.TradingPost && _workorderNpcEntryid==-1)
                 {
-                    uint[] entryIds = Player.IsAlliance
+                    uint[] entryIds = Character.Player.IsAlliance
                         ? WorkOrder.AllianceTradePostNpcIds.ToArray()
                         : WorkOrder.HordeTradePostNpcIds.ToArray();
 
@@ -62,7 +63,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public WoWPoint SafeMovementPoint { get; set; }
         public WoWPoint EntranceMovementPoint { get; set; }
         public WoWPoint WorkOrderShipmentPoint { get; set; }
-
+        public List<WoWPoint> SpecialMovementPoints { get; set; }
         public uint FirstQuestID { get; set; }
         public bool FirstQuestCompleted { get; set; }
         public int QuestNpcID { get; set; }
@@ -96,7 +97,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             {
                 WorkOrderObjectEntryId = WorkOrder.WorkOrderPickupEntryIds[WorkOrderType];
                 WorkOrderObjectName = WorkOrder.WorkOrderPickupNames[WorkOrderType];
-                if (WorkOrderType == WorkOrderType.WarMillDwarvenBunker && Player.IsAlliance )
+                if (WorkOrderType == WorkOrderType.WarMillDwarvenBunker && Character.Player.IsAlliance )
                     WorkOrderObjectName = WorkOrder.WorkOrderPickupNames[WorkOrderType.DwarvenBunker];
             }
             else
@@ -105,7 +106,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 WorkOrderObjectName = String.Empty;
             }
 
-            WorkOrderNPCEntryId = WorkOrder.GetWorkOrderNpcEntryId(Type, Player.IsAlliance);
+            WorkOrderNPCEntryId = WorkOrder.GetWorkOrderNpcEntryId(Type, Character.Player.IsAlliance);
 
 
             if (GarrisonManager.BuildingIDs.Contains(ID))
@@ -135,11 +136,11 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 EntranceMovementPoint = MovementCache.GetBuildingEntranceMovementPoint(_plotId);
                 _workorder = new WorkOrder(ID, Type, WorkOrderType, 0,
                        WorkOrder.GetWorkOrderItemAndQuanityRequired(WorkOrderType));
-
             }
 
+            SpecialMovementPoints = MovementCache.GetSpecialMovementPoints(Type,PlotId,Level, Player.IsAlliance);
 
-            int firstquestID = GetBuildingFirstQuestId(Type, Player.IsAlliance);
+            int firstquestID = GetBuildingFirstQuestId(Type, Character.Player.IsAlliance);
             if (firstquestID > 0)
             {
                 FirstQuestID = Convert.ToUInt32(firstquestID);
@@ -148,7 +149,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 if (Type == BuildingType.TradingPost)
                     QuestNpcID = WorkOrderNPCEntryId;
                 else
-                    QuestNpcID = GetBuildingFirstQuestNpcId(Type, Player.IsAlliance);
+                    QuestNpcID = GetBuildingFirstQuestNpcId(Type, Character.Player.IsAlliance);
             }
             else
             {

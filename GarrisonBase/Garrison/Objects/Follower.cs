@@ -1,21 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Coroutines;
+using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Styx;
+using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Garrison.Objects
 {
     public class Follower
     {
+        internal readonly GarrisonFollower _refFollower;
         public int Level { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
-        public string Status { get; set; }
+        
         public string Quality { get; set; }
         public int ItemLevel { get; set; }
         public int XP { get; set; }
         public int LevelXP { get; set; }
         public List<FollowerAbility> Abilities { get; set; }
+
+        public GarrisonFollowerStatus Status { get; set; }
 
         public Follower(int id, string name, int level, int itemlevel, int xp, int levelxp, string status,
             string quality, List<FollowerAbility> abilities)
@@ -26,9 +34,36 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             ItemLevel = itemlevel;
             XP = xp;
             LevelXP = levelxp;
-            Status = status;
+           
             Quality = quality;
             Abilities = abilities;
+        }
+
+        public Follower(GarrisonFollower follower)
+        {
+            _refFollower = follower;
+            ID = (int)follower.Id;
+            Name = follower.Name;
+            Level = follower.Level;
+            ItemLevel = follower.ItemLevel;
+            XP = follower.LevelExperience;
+            Status = follower.Status;
+
+            Abilities = new List<FollowerAbility>();
+            foreach (var ability in follower.AllAbilities)
+            {
+                FollowerAbility fability = FollowerAbilites.First(a => a.ID == ability.Id) ?? FollowerAbilites[0];
+                Abilities.Add(fability);
+            }
+        }
+        public bool Valid
+        {
+            get
+            {
+                return
+                    _refFollower != null &&
+                    _refFollower.BaseAddress != IntPtr.Zero;
+            }
         }
 
         public override string ToString()
@@ -37,13 +72,15 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             return
                 String.Format(
                     "{0} (ID: {1}) Level {2} (ItemLevel {3}) -- XP {4} LevelXP {5} -- Quality {6} Status {7}\r\n{8}",
-                    Name,ID, Level, ItemLevel, XP, LevelXP, Quality, Status, abilityString);
+                    Name, ID, Level, ItemLevel, XP, LevelXP, Quality, Status.ToString(), abilityString);
         }
 
 
         #region Follower Abilities List
         public static readonly List<FollowerAbility> FollowerAbilites = new List<FollowerAbility>
         {
+            new FollowerAbility(-1, "UnknownAbility", CombatAbilities.Unknown),
+            new FollowerAbility(-1, "UnknownTrait", CombatAbilities.Unknown),
             new FollowerAbility(5,"Blizzard",CombatAbilities.MinionSwarms,7),
             new FollowerAbility(6,"Shield Wall",CombatAbilities.MassiveStrike,2),
             new FollowerAbility(10,"Leap of Faith",CombatAbilities.DangerZones,6),
@@ -187,5 +224,124 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         };
 
         #endregion
+
+
+        public static BehaviorArray FollowerQuestBehaviorArray(int followerid)
+        {
+
+            if (followerid == 193)
+            {//Tormmok
+                //Final quest id 36037
+
+                //Move to location
+                var movementLocation = new WoWPoint(4852.024, 1390.837, 144.9443);
+                var moveBehavior = new BehaviorMove(movementLocation);
+                //<Hotspot X="4852.024" Y="1390.837" Z="144.9443" />
+                var hotspotBehavior =
+                    new BehaviorHotspotRunning(
+                    36037,
+                    new[] { movementLocation },
+                    new uint[] { 83827, 83824, 83828, 83826, 83871 },
+                    BehaviorHotspotRunning.HotSpotType.Killing,
+                    () => BehaviorManager.ObjectNotValidOrNotFound(83820) || !BehaviorManager.CanInteractWithUnit(83820));
+
+                //Clear area of specific mobs and wait for npc to become friendly
+                //hostile ids: 83827, 83824, 83828, 83826, 83871
+
+                //if follower is friendly and without any quest giver status
+                //  -interact with him gossip select option one twice then close dialog
+                var gossipBehavior = new BehaviorGossipInteract(83820, 0);
+                //if follower is friendly and with avaialble quest giver status
+                //  -interact with him selecting quest then completing it
+                var questBehavior = new BehaviorQuestPickup(36037, movementLocation, 83820, true);
+
+                BehaviorArray newArray=new BehaviorArray(new Behavior[] { moveBehavior, hotspotBehavior, gossipBehavior, questBehavior });
+                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(193);
+                return newArray;
+            }
+
+            if (followerid == 189)
+            { //Blook
+                //Final quest id 34279
+                //<Hotspot X="4605.237" Y="1690.607" Z="234.7461" />
+                var movementLocation = new WoWPoint(4605.237, 1690.607, 234.7461);
+                var moveBehavior = new BehaviorMove(movementLocation);
+                var gossipBehavior = new BehaviorGossipInteract(78030, 0, false, () => BehaviorManager.ObjectNotValidOrNotFound(78030) || BehaviorManager.CanInteractWithUnit(78030));
+                var hotspotBehavior =
+                   new BehaviorHotspotRunning(
+                   34279,
+                   new[] { movementLocation },
+                   new uint[] { 78030 },
+                   BehaviorHotspotRunning.HotSpotType.Killing,
+                   () => BehaviorManager.ObjectNotValidOrNotFound(78030) || !BehaviorManager.UnitHasQuestGiverStatus(78030, QuestGiverStatus.Available));
+                var questBehavior = new BehaviorQuestPickup(34279, movementLocation, 78030, true);
+
+                BehaviorArray newArray = new BehaviorArray(new Behavior[] { moveBehavior, gossipBehavior, hotspotBehavior, questBehavior });
+                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(189);
+                return newArray;
+            }
+
+            if (followerid == 207)
+            {
+                uint questId = Player.IsAlliance ? Convert.ToUInt32(34777) : Convert.ToUInt32(34776);
+                var questNPC = Player.IsAlliance ? 79979 : 79978;
+                uint[] mobIds = {79970, 79977};
+                WoWPoint npcLoc = Player.IsAlliance ? new WoWPoint(2398.989, 2402.796, 126.5605)
+                                                    : new WoWPoint(2327.925, 2369.851, 126.5607);
+
+                WoWPoint killLoc = new WoWPoint(2336.869, 2409.208, 126.5612);
+
+                var flightPath = new BehaviorUseFlightPath("Exarch's Refuge", new []{"Durotan's Grasp"});
+
+                var moveBehavior = new BehaviorMove(npcLoc);
+
+                //Pickup Quest
+                var questPickup = new BehaviorQuestPickup(questId, npcLoc, questNPC);
+                
+                //Move to Kill Zone
+                var moveKillBehavior = new BehaviorMove(killLoc);
+                //Interact With First NPC
+                var gossipBehavior = new BehaviorGossipInteract(Convert.ToInt32(mobIds[0]), 0);
+
+                //Kill until Not Attackable
+                var hotspotBehavior =
+                   new BehaviorHotspotRunning(
+                   questId,
+                   new[] { killLoc },
+                   new uint[] { mobIds[0] },
+                   BehaviorHotspotRunning.HotSpotType.Killing,
+                   () => BehaviorManager.ObjectNotValidOrNotFound(mobIds[0]) ||
+                         BehaviorManager.CanAttackUnit(mobIds[0]));
+
+                //Interact With Second NPC
+                var gossipBehavior2 = new BehaviorGossipInteract(Convert.ToInt32(mobIds[1]), 0);
+
+                //Kill until Not Attackable
+                var hotspotBehavior2 =
+                   new BehaviorHotspotRunning(
+                   questId,
+                   new[] { killLoc },
+                   new uint[] { mobIds[1] },
+                   BehaviorHotspotRunning.HotSpotType.Killing,
+                   () => BehaviorManager.ObjectNotValidOrNotFound(mobIds[1]) ||
+                         BehaviorManager.CanAttackUnit(mobIds[1]));
+
+                //Turn in Quest
+                var questTurnin = new BehaviorQuestTurnin(questId, npcLoc, questNPC);
+
+                BehaviorArray newArray = new BehaviorArray(new Behavior[]
+                {
+                    flightPath,
+                    moveBehavior, questPickup, moveKillBehavior,
+                    gossipBehavior,hotspotBehavior, 
+                    gossipBehavior2, hotspotBehavior2,
+                    questTurnin
+                });
+                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                return newArray;
+            }
+
+            return null;
+        }
     }
 }

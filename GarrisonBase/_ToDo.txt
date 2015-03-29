@@ -16,3 +16,10 @@ Building Behavior
 
 Herbing and Mining
 	Add check and use for Coffee and Miners pick during mine behavior.
+
+
+<WoWUnit Name="Tarlna Infested" Entry="83827" X="4848.325" Y="1396.403" Z="146.2636" />
+<WoWUnit Name="Tarlna Infested" Entry="83824" X="4851.518" Y="1394.815" Z="145.4874" />
+<WoWUnit Name="Tarlna Thorncaster" Entry="83828" X="4846.436" Y="1389.703" Z="145.7047" />
+<WoWUnit Name="Tarlna Thorncaster" Entry="83826" X="4848.954" Y="1388.661" Z="145.1868" />
+<WoWUnit Name="High Centurion Tormmok" Entry="83820" X="4854.461" Y="1392.67" Z="145.0087" />

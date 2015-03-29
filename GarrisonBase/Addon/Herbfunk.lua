@@ -397,26 +397,7 @@ local function BestForCurrentSelectedMission()
    end 
 end 
 
-function GetBestYield(mission_id) 
-	local filtered_followers, filtered_followers_count = GetFilteredFollowers() 
-	C_Garrison.GetAvailableMissions(available_missions) 
-   local mission 
-   for idx = 1, #available_missions do 
-      if available_missions[idx].missionID == mission_id then 
-         mission = available_missions[idx] 
-         break 
-      end 
-   end 
 
-
-
-   FindBestFollowersForMission(mission, filtered_followers, "mission_list") 
-   return top[1] 
-end 
-
-function GarrisonBaseTest() 
-	return 1 
-end 
 
 local function MissionPage_PartyButtonOnClick(self) 
    if self[1] then 
@@ -573,7 +554,26 @@ MissionList_ButtonsInit()
 hooksecurefunc("GarrisonMissionPage_ShowMission", BestForCurrentSelectedMission) 
 
 
+function GetBestYield(mission_id) 
+	local filtered_followers, filtered_followers_count = GetFilteredFollowers() 
+	C_Garrison.GetAvailableMissions(available_missions) 
+   local mission 
+   for idx = 1, #available_missions do 
+      if available_missions[idx].missionID == mission_id then 
+         mission = available_missions[idx] 
+         break 
+      end 
+   end 
 
+
+
+   FindBestFollowersForMission(mission, filtered_followers, "mission_list") 
+   return top[1] 
+end 
+
+function GarrisonBaseTest() 
+	return 1 
+end 
    
 -- Globals deliberately exposed for people outside
 function GMM_Click(button_name) 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Herbfunk.GarrisonBase.Cache
 {
@@ -33,6 +29,8 @@ namespace Herbfunk.GarrisonBase.Cache
             77903, //Pug
             77376, //Lunarfall Woodcutter
             77617, //Lunarfall Worker
+            81653, //Lunarfall Laborer
+
             79603, //Emote Bunny
             81163, //Garrison - Horde - Fishing Shack - Fish Toss -  Invis Stalker
             80026, //Debug - Garrison - Bunny - Boss Emotes
@@ -46,7 +44,9 @@ namespace Herbfunk.GarrisonBase.Cache
             85736, //Lunarfall Smith
             85722, //Rat
 
-
+            237721, //Dark Iron Mole Machine
+            230365, //Lumber (Flavor)
+            228585, //Potion
             237060, //Chair
             228587, //Table
             227916, //Table
@@ -75,6 +75,10 @@ namespace Herbfunk.GarrisonBase.Cache
             227910, //Anvil
             237612, //Anvil
             237611, //Anvil
+            237617, //Anvil
+            237616, //Anvil
+            237607, //Anvil
+            239433, //Anvil
             227917, //Iron Bar
             228550, //Bench Clamp
             227693, //Book Stack
@@ -85,6 +89,7 @@ namespace Herbfunk.GarrisonBase.Cache
             237408, //Gate
             230865, //List of Ingredients
             232529, //Thermal Anvil
+            232534, //Thermal Anvil
             230121, //Bonfire
             228594, //Enchanting Supplies
             228583, //Alchemy Kit
@@ -92,6 +97,10 @@ namespace Herbfunk.GarrisonBase.Cache
             237316, //Garrison - Armory - Alliance - V2 - Small Cannon
             237317, //Garrison - Armory - Alliance - V2 - Small Cannon
             237318, //Garrison - Armory - Alliance - V2 - Small Cannon
+            230994, //Campfire
+            235978, //Cozy Fire
+            235979, //Cozy Fire
+            227881, //The Incinerator
 
             232380, //Monument Base
             233177, //Monument Base
@@ -101,11 +110,15 @@ namespace Herbfunk.GarrisonBase.Cache
             239033, //Monument
 
             //Garrison
+            230867, //Under Construction Cloud
             232283, //Medium Plot
+            230286, //Medium Plot
             232282, //Small Plot
             232270, //Small Plot
             237223, //Fishing Shack
+            230993, //Fishing Shack
             232286, //Garden House
+            235373, //Pet Menagerie
             230985, //Garrison Building Alliance Fishing V1
             230987, //Garrison Building Alliance Fishing V2
             230989, //Garrison Building Alliance Fishing V3
@@ -243,15 +256,12 @@ namespace Herbfunk.GarrisonBase.Cache
             233170, //Table
             238791, //Cage
             238790, //Cage
-
-
             231694, //Campfire
             231708, //Campfire
             232454, //Campfire
             232440, //Campfire
             232443, //Campfire
             232439, //Campfire
-
             237129, //Coal Bin
             239082, //Spices
             231706, //Menagerie
@@ -268,10 +278,9 @@ namespace Herbfunk.GarrisonBase.Cache
             237128, //Anvil
             225952, //Anvil
             241116, //Anvil
-
+            237125, //Anvil
             231696, //Bonfire
             232444, //Bonfire
-
             237415, //Doodad_Orc_Cannon_004
             237416, //Doodad_Orc_Cannon_003
             237417, //Doodad_Orc_Cannon_002
@@ -280,14 +289,12 @@ namespace Herbfunk.GarrisonBase.Cache
             233442, //Forge
             237126, //Forge
             237124, //Coal Bin
-
-            237125, //Anvil
             233441, //Thermal Anvil
             239036, //Horde Garrison Monument 01 Plaque
             239035, //Horde Garrison Monument 02 Plaque
             239037, //Horde Garrison Monument 03 Plaque
 
-
+            
 
             //Garrison
             230443, //Garrison Building Horde Alchemy V1
@@ -394,7 +401,20 @@ namespace Herbfunk.GarrisonBase.Cache
             232468, //FW - Garrison - Small Building 03
             230310, //FW - Garrison - Small building 04
             232465, //FW - Garrison - Small Building 04
-            
+
+
+            //Followers
+            85776, //Ahm
+            85081, //Admiral Taylor
+            85759, //Soulbinder Tuulani
+            88166, //Hulda Shadowblade
+            83947, //Kimzee Pinchwhistle
+            86514, //Rangari Erdanii
+            80733, //Magister Serena
+            82495, //Rulkan
+            79607, //Dagg
+            89075, //Delvar Ironfist
+            88009, //Millhouse Manastorm
 
         };
     }

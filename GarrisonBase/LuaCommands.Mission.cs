@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
-using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
 
@@ -181,75 +180,6 @@ namespace Herbfunk.GarrisonBase
         }
 
 
-        public static Mission GetMission(int missionId)
-        {
-            GarrisonBase.Debug("LuaCommand: GetMission {0}", missionId);
-            String lua =
-                "local b = {}; local am = C_Garrison.GetCompleteMissions(); local RetInfo = {}; local cpt = 0;" +
-                String.Format("for idx = 1, #am do " +
-                              "local location, xp, environment, environmentDesc, environmentTexture, locPrefix, isExhausting, enemies = C_Garrison.GetMissionInfo(\"{0}\");" +
-                              "if am[idx].missionID == {0} then " +
-                              "b[0] = am[idx].description;" +
-                              "b[1] = am[idx].cost;" +
-                              "b[2] = am[idx].duration;" +
-                              "b[3] = am[idx].durationSeconds;" +
-                              "b[4] = am[idx].level;" +
-                              "b[5] = am[idx].type;" +
-                              "b[6] = am[idx].locPrefix;" +
-                              "b[7] = am[idx].state;" +
-                              "b[8] = am[idx].iLevel;" +
-                              "b[9] = am[idx].name;" +
-                              "b[10] = am[idx].location;" +
-                              "b[11] = am[idx].isRare;" +
-                              "b[12] = am[idx].typeAtlas;" +
-                              "b[13] = am[idx].missionID;" +
-                              "b[14] = am[idx].numFollowers;" + //"print (#pairs(am[idx].followers));" +
-                              "b[15] = am[idx].numRewards;" +
-                              "b[16] = xp;" +
-                              "b[17] = am[idx].materialMultiplier;" +
-                              "b[18] = am[idx].successChance;" +
-                              "b[19] = am[idx].xpBonus;" +
-                              "b[20] = am[idx].success;" +
-                              "end;" +
-                              "end;", missionId) +
-                "for j_=0,20 do table.insert(RetInfo,tostring(b[j_]));end; " +
-                "return unpack(RetInfo)";
-            List<string> mission = Lua.GetReturnValues(lua);
-
-            string description = mission[0];
-            int cost = mission[1].ToInt32();
-            //mission[2] = this.duration;
-            int durationSeconds = mission[3].ToInt32();
-            int level = mission[4].ToInt32();
-            string type = mission[5];
-            //mission[6] = this.locPrefix; 
-            int state = mission[7].ToInt32();
-            int ilevel = mission[8].ToInt32();
-            string name = mission[9];
-            string location = mission[10];
-            bool isRare = mission[11].ToBoolean();
-            //mission[12] = this.typeAtlas; 
-            string missionID = mission[13];
-            int numFollowers = mission[14].ToInt32();
-            int numRewards = mission[15].ToInt32();
-            int xp = mission[16].ToInt32();
-            int material = mission[17].ToInt32();
-            string successChance = mission[18];
-            int xpBonus = mission[19].ToInt32();
-            bool success = mission[20].ToBoolean();
-
-            String.Format(
-                "Descript: {0} Cost: {1} Duration: {2} Level {3} Type {4} State {5} iLevel {6} Name {7} Location {8} Rare {9} ID {10} Followers {11} Rewards {12}" +
-                "XP {13} Material {14} SuccessChance {15} XpBonus {16} Success {17}",
-                description, cost, durationSeconds, level, type, state, ilevel, name, location, isRare, missionID,
-                numFollowers, numRewards, xp, material, successChance, xpBonus, success);
-
-            return new Mission(cost, description,
-                durationSeconds, level, ilevel,
-                isRare, location, missionId,
-                name, numFollowers, numRewards,
-                state, type, xp, material, successChance, xpBonus, success);
-        }
         public static List<int> GetAvailableMissionIds()
         {
             
@@ -414,22 +344,22 @@ namespace Herbfunk.GarrisonBase
             int currencyId = mission[24].ToInt32();
             int currencyAmount = mission[25].ToInt32();
 
-            List<string> enemies = GetMissionAbilities(missionId);
-            List<CombatAbilities> abilities = new List<CombatAbilities>();
-            foreach (var a in enemies)
-            {
-                int value_int = Convert.ToInt32(a);
-                if (Enum.IsDefined(typeof(CombatAbilities), value_int))
-                {
-                    abilities.Add((CombatAbilities)value_int);
-                }
-            }
+            //List<string> enemies = GetMissionAbilities(missionId);
+            //List<CombatAbilities> abilities = new List<CombatAbilities>();
+            //foreach (var a in enemies)
+            //{
+            //    int value_int = Convert.ToInt32(a);
+            //    if (Enum.IsDefined(typeof(CombatAbilities), value_int))
+            //    {
+            //        abilities.Add((CombatAbilities)value_int);
+            //    }
+            //}
 
             return new Mission(cost, description,
                 durationSeconds, level, ilevel,
                 isRare, location, missionId,
                 name, numFollowers, numRewards,
-                state, type, xp, environment, garrisonReward, followerXP, goldReward, apexReward, itemID, itemID2, currencyId, currencyAmount, abilities);
+                state, type, xp, environment, garrisonReward, followerXP, goldReward, apexReward, itemID, itemID2, currencyId, currencyAmount);
         }
 
 
@@ -466,7 +396,7 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.Debug("LuaCommand: GetMissionBestSuccessAttempt");
             followerIds = new[] { 0, 0, 0 };
             string lua = String.Format(
-                "local yieldInfo = GetBestYield({0});", missionId) +
+                "local yieldInfo = {0}({1});",LuaEvents.SuccessFunctionString, missionId) +
                         "local Ret = {};" +
                         "table.insert(Ret,tonumber(yieldInfo.totalfollowers));" +
                         "table.insert(Ret,tonumber(yieldInfo[1].garrFollowerID));" +

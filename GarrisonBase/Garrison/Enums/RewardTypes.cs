@@ -20,5 +20,6 @@ namespace Herbfunk.GarrisonBase.Garrison.Enums
         FollowerContract=2048,
         FollowerTrait=4096,
         RushOrder = 8192,
+        Items = 16384,
     }
 }

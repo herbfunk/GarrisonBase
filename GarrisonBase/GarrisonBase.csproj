@@ -55,80 +55,98 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behavior.cs">
+    <Compile Include="Cache\EntryList.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Behavior.CraftingProfession.cs">
+    <Compile Include="Coroutines\Behaviors\Behavior.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Cache.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorArray.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Disenchant.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorCache.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.ItemInteraction.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorGossipInteract.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Mail.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorMissionComplete.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Move.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorCraftingProfession.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.PrimalTrader.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorDisenchant.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Salvage.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorFinalizePlots.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.SellRepair.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorGetMail.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.TargetUnit.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorHerb.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.TradePost.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorItemInteraction.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.WorkOrders.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorMine.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Missions.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorMove.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.FinalizePlots.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorMissionStartup.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Herb.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorPrechecks.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Mine.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorPrimalTrader.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Prechecks.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorQuestAbandon.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
     </Compile>
-    <Compile Include="Behavior.Quests.cs">
+    <Compile Include="Coroutines\Behaviors\BehaviorHotspotRunning.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Behavior.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorQuestPickup.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorQuestTurnin.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorQuestWorkOrder.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorQuestWorkOrderPickup.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorSalvage.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorSelectTarget.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorSellRepair.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorSendMail.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorUseFlightPath.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorWorkOrderPickUp.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorWorkOrderRush.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Behaviors\BehaviorWorkOrderStartUp.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Cache\Blacklist.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -139,12 +157,33 @@
     <Compile Include="Cache\Objects\C_WoWItem.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="MailAddNewItem.cs">
+    <Compile Include="Config\MailAddNewItem.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="MailAddNewItem.Designer.cs">
+    <Compile Include="Config\MailAddNewItem.Designer.cs">
       <DependentUpon>MailAddNewItem.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Common.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\Common.EngageObject.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Common.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Coroutines\Common.LootObject.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Common.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Coroutines\Common.CheckLootFrame.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Common.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Coroutines\Movement.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Quest\Objects\CGossipEntry.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Quest\Objects\CGossipQuestEntry.cs">
@@ -207,27 +246,27 @@
     <Compile Include="Cache\ObjectCacheManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Player\Player.cs">
+    <Compile Include="Character\Player.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Player\PlayerProfessions.cs">
+    <Compile Include="Character\PlayerProfessions.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Player\PlayerInventory.cs">
+    <Compile Include="Character\PlayerInventory.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Cache\Enums\WoWObjectTypes.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Config.cs">
+    <Compile Include="Config\Config.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Config.Designer.cs">
+    <Compile Include="Config\Config.Designer.cs">
       <DependentUpon>Config.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Coroutines.cs">
+    <Compile Include="Coroutines\BehaviorManager.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Garrison\Objects\Follower.cs">
@@ -251,9 +290,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Garrison\Objects\Mission.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Movement.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MovementCache.Alliance.cs">
@@ -285,19 +321,19 @@
     <Compile Include="Settings.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControlDebugEntry.cs">
+    <Compile Include="Config\UserControlDebugEntry.cs">
       <SubType>UserControl</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControlDebugEntry.designer.cs">
+    <Compile Include="Config\UserControlDebugEntry.designer.cs">
       <DependentUpon>UserControlDebugEntry.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControl_MissionReward.cs">
+    <Compile Include="Config\UserControl_MissionReward.cs">
       <SubType>UserControl</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="UserControl_MissionReward.Designer.cs">
+    <Compile Include="Config\UserControl_MissionReward.Designer.cs">
       <DependentUpon>UserControl_MissionReward.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -323,10 +359,10 @@
     <Content Include="_ToDo.txt" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Config.resx">
+    <EmbeddedResource Include="Config\Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MailAddNewItem.resx">
+    <EmbeddedResource Include="Config\MailAddNewItem.resx">
       <DependentUpon>MailAddNewItem.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -335,11 +371,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlDebugEntry.resx">
+    <EmbeddedResource Include="Config\UserControlDebugEntry.resx">
       <DependentUpon>UserControlDebugEntry.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControl_MissionReward.resx">
+    <EmbeddedResource Include="Config\UserControl_MissionReward.resx">
       <DependentUpon>UserControl_MissionReward.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>

@@ -34,6 +34,7 @@ namespace Herbfunk.GarrisonBase
 
 
         internal static readonly WoWPoint AllianceSellRepairNpc = new WoWPoint(1860.432, 260.8574, 76.63974);
+        internal static readonly WoWPoint AllianceFlightPathNpc = new WoWPoint(1865.812, 220.7363, 76.69885);
 
         internal static readonly WoWPoint AllianceGarrisonEntrance = new WoWPoint(1924.372, 296.1701, 88.966);
 
@@ -168,6 +169,13 @@ namespace Herbfunk.GarrisonBase
         
         #endregion
 
+        internal static readonly WoWPoint AllianceSalvageYardPlot18 = new WoWPoint(1819.787, 227.919, 72.93478);
+        internal static readonly WoWPoint AllianceSalvageYardPlot19 = new WoWPoint(1830.51, 200.0502, 72.74524);
+        internal static readonly WoWPoint AllianceSalvageYardPlot20=new WoWPoint(1803.424, 192.5173, 70.83544);
+
+
+        #region Dwarven Bunkers
+
         internal static List<WoWPoint> Alliance_WarMill_Plot24_Level2 = new List<WoWPoint>
         {
             new WoWPoint(1824.36, 278.8286, 78.51082),
@@ -192,6 +200,10 @@ namespace Herbfunk.GarrisonBase
         {
             //TODO!!
         };
+        
+        #endregion
+
+        #region Trade Post
 
         internal static List<WoWPoint> Alliance_Plot22_TradePost_Level1 = new List<WoWPoint>
         {
@@ -221,5 +233,461 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(1885.674, 189.499, 79.72184),
             new WoWPoint(1892.04, 192.2097, 79.72184),
         };
+        
+        #endregion
+
+    
+
+        #region The Forge
+
+        #region Level 1
+
+        internal static List<WoWPoint> Alliance_Plot18_Forge_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Forge_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Forge_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+
+        #endregion
+
+        #region Level 2
+
+        internal static List<WoWPoint> Alliance_Plot18_Forge_Level2 = new List<WoWPoint>
+        {
+           //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Forge_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Forge_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+
+        #endregion
+
+        #region Level 3
+
+        internal static List<WoWPoint> Alliance_Plot18_Forge_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Forge_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Forge_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+
+        #endregion
+
+        #endregion
+
+        #region Tannery Special Movement
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_Tannery_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Tannery_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Tannery_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_Tannery_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Tannery_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Tannery_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_Tannery_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_Tannery_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_Tannery_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Alchemy Lab
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_AlchemyLab_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_AlchemyLab_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_AlchemyLab_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_AlchemyLab_Level2 = new List<WoWPoint>
+        {
+            new WoWPoint(1822.562, 227.7075, 72.97662),
+        };
+        internal static List<WoWPoint> Alliance_Plot19_AlchemyLab_Level2 = new List<WoWPoint>
+        {
+            new WoWPoint(1828.326, 200.6566, 72.75695),
+        };
+        internal static List<WoWPoint> Alliance_Plot20_AlchemyLab_Level2 = new List<WoWPoint>
+        {
+            new WoWPoint(1802.076, 192.555, 70.87757),
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_AlchemyLab_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_AlchemyLab_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_AlchemyLab_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Enchanters Study
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_EnchantersStudy_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EnchantersStudy_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EnchantersStudy_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_EnchantersStudy_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EnchantersStudy_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EnchantersStudy_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_EnchantersStudy_Level3 = new List<WoWPoint>
+        {
+            new WoWPoint(1819.439, 227.3108, 73.03439),
+            new WoWPoint(1823.86, 232.2389, 72.94739),
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EnchantersStudy_Level3 = new List<WoWPoint>
+        {
+            new WoWPoint(1830.014, 201.1206, 72.80533),
+            new WoWPoint(1827.52, 196.2728, 72.75903),
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EnchantersStudy_Level3 = new List<WoWPoint>
+        {
+            new WoWPoint(1803.312, 193.8891, 70.84586),
+            new WoWPoint(1800.87, 187.9106, 70.84789),
+        };
+        #endregion
+
+        #endregion
+
+        #region Scribes Quarters
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_ScribesQuarter_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_ScribesQuarter_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_ScribesQuarter_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_ScribesQuarter_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_ScribesQuarter_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_ScribesQuarter_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_ScribesQuarter_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_ScribesQuarter_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_ScribesQuarter_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Engineering Works
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_EngineeringWorks_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EngineeringWorks_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EngineeringWorks_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_EngineeringWorks_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EngineeringWorks_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EngineeringWorks_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_EngineeringWorks_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_EngineeringWorks_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_EngineeringWorks_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Tailoring Emporium
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_TailoringEmporium_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_TailoringEmporium_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_TailoringEmporium_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_TailoringEmporium_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_TailoringEmporium_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_TailoringEmporium_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_TailoringEmporium_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_TailoringEmporium_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_TailoringEmporium_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Store House
+
+        #region Level 1
+
+        internal static List<WoWPoint> Alliance_Plot18_StoreHouse_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_StoreHouse_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_StoreHouse_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_StoreHouse_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_StoreHouse_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_StoreHouse_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_StoreHouse_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_StoreHouse_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_StoreHouse_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
+
+        #region Gem Boutique
+
+        #region Level 1
+        internal static List<WoWPoint> Alliance_Plot18_GemBoutique_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_GemBoutique_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_GemBoutique_Level1 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 2
+        internal static List<WoWPoint> Alliance_Plot18_GemBoutique_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_GemBoutique_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_GemBoutique_Level2 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #region Level 3
+        internal static List<WoWPoint> Alliance_Plot18_GemBoutique_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot19_GemBoutique_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        internal static List<WoWPoint> Alliance_Plot20_GemBoutique_Level3 = new List<WoWPoint>
+        {
+            //TODO
+        };
+        #endregion
+
+        #endregion
     }
 }

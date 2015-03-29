@@ -72,7 +72,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     ShouldLoot = true;
                     InteractRange = 5f;
                 }
-                else if (ObjectCacheManager.LootableEntryIds.Contains(Entry))
+                else if (ObjectCacheManager.LootIds.Contains(Entry))
                 {
                     ShouldLoot = true;
                 }

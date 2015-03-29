@@ -17,5 +17,6 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
         Mailbox = 256,
         PrimalTrader = 512,
         RepairVendor = 1024,
+        Follower = 2048,
     }
 }

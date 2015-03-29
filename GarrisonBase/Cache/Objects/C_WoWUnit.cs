@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Windows.Shapes;
 using Herbfunk.GarrisonBase.Cache.Enums;
-using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Objects;
-using Styx.CommonBot;
+using Styx;
 using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Cache.Objects
@@ -21,8 +19,10 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public bool IsDead { get; set; }
         public bool Attackable { get; set; }
         public bool Lootable { get; set; }
-
-
+        public bool CanInteract { get; set; }
+        public QuestGiverStatus QuestGiverStatus { get; set; }
+        private bool updateQuestGiverStatus = false;
+        private bool updateCanInteract = false;
         public C_WoWUnit(WoWUnit obj)
             : base(obj)
         {
@@ -36,6 +36,8 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     SubType = WoWObjectTypes.GarrisonWorkOrderNpc;
                     InteractRange = 5.4f;
                     IgnoresRemoval = true;
+                    updateQuestGiverStatus = true;
+                    updateCanInteract = true;
                 }
                 else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
                 {
@@ -43,28 +45,33 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     InteractRange = 4.55f;
                     IgnoresRemoval = true;
                 }
-                else if (CacheStaticLookUp.MineQuestMobIDs.Contains(Entry) ||
-                         CacheStaticLookUp.HerbQuestMobIDs.Contains(Entry))
-                {
-                    InteractRange = 5f;
-                    ShouldLoot = true;
-                    ShouldKill = true;
-                }
-                else if (Entry == GarrisonManager.PrimalTraderID)
+                else if (CacheStaticLookUp.PrimalTraderIds.Contains(Entry))
                 {
                     SubType = WoWObjectTypes.PrimalTrader;
                     IgnoresRemoval = true;
                 }
-                else if (Entry == GarrisonManager.SellRepairNpcId)
+                else if (CacheStaticLookUp.RepairVendorIds.Contains(Entry))
                 {
                     SubType= WoWObjectTypes.RepairVendor;
                     IgnoresRemoval = true;
                 }
-                else if (ObjectCacheManager.KillableEntryIds.Contains(Entry))
+
+                if (ObjectCacheManager.QuestNpcIds.Contains(Entry))
                 {
-                    ShouldKill = true;
+                    InteractRange = 5.4f;
+                    IsQuestNpc = true;
+                }
+
+                if (ObjectCacheManager.LootIds.Contains(Entry))
+                {
                     ShouldLoot = true;
                 }
+
+                if (ObjectCacheManager.CombatIds.Contains(Entry))
+                {
+                    ShouldKill = true;
+                }
+
             }
         }
 
@@ -78,7 +85,13 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             Location = RefWoWUnit.Location;
             IsDead=RefWoWUnit.IsDead;
 
-
+            if (IsQuestNpc)
+            {
+                CanInteract = RefWoWUnit.CanInteract;
+                QuestGiverStatus = RefWoWUnit.QuestGiverStatus;
+            }
+           
+            
             if (IsDead)
             {
                 if (ShouldLoot)
@@ -100,7 +113,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForTargeting) return false;
 
-                if (IsDead && !Lootable) return false;
+                if (!IsDead || !Lootable) return false;
 
                 if (!ShouldLoot || !LineOfSight) return false;
 
@@ -118,6 +131,8 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
                 if (!ShouldKill || !LineOfSight) return false;
 
+
+
                 return true;
             }
         }
@@ -126,9 +141,13 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public override string ToString()
         {
             return String.Format("{0}\r\n" +
-                                 "IsDead {1} Lootable {2} ShouldLoot {3}",
+                                 "Lootable {2} ShouldLoot {3}\r\n" +
+                                 "ShouldKill {6} Attackable {7} IsDead {1}\r\n" +
+                                 "IsQuestNPC {8} CanInteract {4} QuestGiverStatus {5}",
                                     base.ToString(),
-                                    IsDead, Lootable, ShouldLoot);
+                                    IsDead, Lootable, ShouldLoot,
+                                    CanInteract, QuestGiverStatus,
+                                    ShouldKill, Attackable, IsQuestNpc);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Quest.Objects
@@ -20,6 +21,12 @@ namespace Herbfunk.GarrisonBase.Quest.Objects
             if (quest.Id != Id) return;
 
             IsCompleted = quest.IsCompleted;
+        }
+
+        public override string ToString()
+        {
+            return String.Format("Name {0} Id {1} Completed {2}",
+                                    Name, Id, IsCompleted);
         }
     }
 }
