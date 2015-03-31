@@ -1,4 +1,8 @@
-﻿v1.2.0.1
+﻿v1.2.0.2
+
+Follower refreshing should no longer throw exception (due to ability not found - requires new additions!)
+
+v1.2.0.1
 
 Added Crescent Saberfish Flesh to trade post workorders.
 Bot will now only harvest ore/herbs during the correct behaviors.

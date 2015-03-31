@@ -25,19 +25,19 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
         public GarrisonFollowerStatus Status { get; set; }
 
-        public Follower(int id, string name, int level, int itemlevel, int xp, int levelxp, string status,
-            string quality, List<FollowerAbility> abilities)
-        {
-            ID = id;
-            Name = name;
-            Level = level;
-            ItemLevel = itemlevel;
-            XP = xp;
-            LevelXP = levelxp;
+        //public Follower(int id, string name, int level, int itemlevel, int xp, int levelxp, string status,
+        //    string quality, List<FollowerAbility> abilities)
+        //{
+        //    ID = id;
+        //    Name = name;
+        //    Level = level;
+        //    ItemLevel = itemlevel;
+        //    XP = xp;
+        //    LevelXP = levelxp;
            
-            Quality = quality;
-            Abilities = abilities;
-        }
+        //    Quality = quality;
+        //    Abilities = abilities;
+        //}
 
         public Follower(GarrisonFollower follower)
         {
@@ -49,12 +49,12 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             XP = follower.LevelExperience;
             Status = follower.Status;
 
-            Abilities = new List<FollowerAbility>();
-            foreach (var ability in follower.AllAbilities)
-            {
-                FollowerAbility fability = FollowerAbilites.First(a => a.ID == ability.Id) ?? FollowerAbilites[0];
-                Abilities.Add(fability);
-            }
+            //Abilities = new List<FollowerAbility>();
+            //foreach (var ability in follower.AllAbilities)
+            //{
+            //    FollowerAbility fability = FollowerAbilites.First(a => a.ID == ability.Id) ?? FollowerAbilites[0];
+            //    Abilities.Add(fability);
+            //}
         }
         public bool Valid
         {

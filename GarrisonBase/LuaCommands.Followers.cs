@@ -14,42 +14,42 @@ namespace Herbfunk.GarrisonBase
             return str.ToInt32();
         }
 
-        public static Follower GetFollowerInfo(int followerId)
-        {
-            GarrisonBase.Debug("LuaCommand: GetFollowerInfo {0}", followerId);
-            String lua =
-                "local RetInfo = {}; Temp = {}; local followers = C_Garrison.GetFollowers();" +
-                String.Format(
-                    "for i,f in ipairs(followers) do " +
-                    "local followerID = (f.garrFollowerID) and tonumber(f.garrFollowerID) or f.followerID;" +
-                    "if (followerID == {0}) then " +
-                    "Temp[0] = followerID;" +
-                    "Temp[1] = f.name;" +
-                    "Temp[2] = f.status;" +
-                    "Temp[3] = f.ClassSpecName;" +
-                    "Temp[4] = f.quality;" +
-                    "Temp[5] = f.level;" +
-                    "Temp[6] = f.isCollected ;" +
-                    "Temp[7] = f.iLevel;" +
-                    "Temp[8] = f.levelXP;" +
-                    "Temp[9] = f.xp;" +
-                    "end;" +
-                    "end;" +
-                    "for j_=0,9 do table.insert(RetInfo,tostring(Temp[j_]));end; " +
-                    "return unpack(RetInfo)", followerId);
-            List<String> follower = Lua.GetReturnValues(lua);
-            String Name = follower[1];
-            String Status = follower[2];
-            String ClassSpecName = follower[3];
-            String quality = follower[4];
-            int level = follower[5].ToInt32();
-            bool isCollected = follower[6].ToBoolean();
-            int iLevel = follower[7].ToInt32();
-            int xp = follower[8].ToInt32();
-            int levelXp = follower[9].ToInt32();
-            List<FollowerAbility> abilities = GetFollowerAbilities(followerId);
-            return new Follower(followerId, Name, level, iLevel, xp, levelXp, Status, quality, abilities);
-        }
+        //public static Follower GetFollowerInfo(int followerId)
+        //{
+        //    GarrisonBase.Debug("LuaCommand: GetFollowerInfo {0}", followerId);
+        //    String lua =
+        //        "local RetInfo = {}; Temp = {}; local followers = C_Garrison.GetFollowers();" +
+        //        String.Format(
+        //            "for i,f in ipairs(followers) do " +
+        //            "local followerID = (f.garrFollowerID) and tonumber(f.garrFollowerID) or f.followerID;" +
+        //            "if (followerID == {0}) then " +
+        //            "Temp[0] = followerID;" +
+        //            "Temp[1] = f.name;" +
+        //            "Temp[2] = f.status;" +
+        //            "Temp[3] = f.ClassSpecName;" +
+        //            "Temp[4] = f.quality;" +
+        //            "Temp[5] = f.level;" +
+        //            "Temp[6] = f.isCollected ;" +
+        //            "Temp[7] = f.iLevel;" +
+        //            "Temp[8] = f.levelXP;" +
+        //            "Temp[9] = f.xp;" +
+        //            "end;" +
+        //            "end;" +
+        //            "for j_=0,9 do table.insert(RetInfo,tostring(Temp[j_]));end; " +
+        //            "return unpack(RetInfo)", followerId);
+        //    List<String> follower = Lua.GetReturnValues(lua);
+        //    String Name = follower[1];
+        //    String Status = follower[2];
+        //    String ClassSpecName = follower[3];
+        //    String quality = follower[4];
+        //    int level = follower[5].ToInt32();
+        //    bool isCollected = follower[6].ToBoolean();
+        //    int iLevel = follower[7].ToInt32();
+        //    int xp = follower[8].ToInt32();
+        //    int levelXp = follower[9].ToInt32();
+        //    List<FollowerAbility> abilities = GetFollowerAbilities(followerId);
+        //    return new Follower(followerId, Name, level, iLevel, xp, levelXp, Status, quality, abilities);
+        //}
         public static List<FollowerAbility> GetFollowerAbilities(int followerId)
         {
             GarrisonBase.Debug("LuaCommand: GetFollowerAbilities {0}", followerId);
