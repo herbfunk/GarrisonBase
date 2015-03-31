@@ -42,6 +42,8 @@ namespace Herbfunk.GarrisonBase
         SorcerousEarth = 113263,
 
         SavageBlood = 118472,
+
+        CrescentSaberfishFlesh=109137,
         
 
         //bop

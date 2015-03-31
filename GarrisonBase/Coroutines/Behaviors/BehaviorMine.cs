@@ -40,6 +40,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 ObjectCacheManager.CombatIds.Add(mobId);
                 ObjectCacheManager.LootIds.Add(mobId);
             }
+
+            foreach (var deposit in CacheStaticLookUp.MineDeposits)
+            {
+                ObjectCacheManager.LootIds.Add(deposit);
+            }
             
             ObjectCacheManager.ShouldLoot = true;
             ObjectCacheManager.ShouldKill = true;
@@ -71,10 +76,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             ObjectCacheManager.ShouldLoot = false;
             ObjectCacheManager.ShouldKill = false;
-            foreach (var mineQuestMobID in CacheStaticLookUp.MineQuestMobIDs)
+            foreach (var id in CacheStaticLookUp.MineQuestMobIDs)
             {
-                ObjectCacheManager.CombatIds.Remove(mineQuestMobID);
-                ObjectCacheManager.LootIds.Remove(mineQuestMobID);
+                ObjectCacheManager.CombatIds.Remove(id);
+                ObjectCacheManager.LootIds.Remove(id);
+            }
+            foreach (var deposit in CacheStaticLookUp.MineDeposits)
+            {
+                ObjectCacheManager.LootIds.Remove(deposit);
             }
             base.Dispose();
         }
@@ -91,7 +100,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await StartMovement.MoveTo()) return true;
 
             
-            ObjectCacheManager.UpdateLootableTarget();
+           // ObjectCacheManager.UpdateLootableTarget();
 
             if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
             {
@@ -107,7 +116,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 {
                     if (_movement != null)
                     {
-                        await _movement.MoveTo();
+                        if (await _movement.MoveTo()) return true;
                     }
 
                     return true;

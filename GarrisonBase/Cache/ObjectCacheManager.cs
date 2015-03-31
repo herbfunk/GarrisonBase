@@ -380,70 +380,68 @@ namespace Herbfunk.GarrisonBase.Cache
                 RemovalCheck = false;
             }
         }
-        internal static List<WoWGuid> BlacklistGuiDs = new List<WoWGuid>();
 
-       
 
         public static C_WoWObject GetWoWObject(uint entryId)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistGuiDs.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistedGuids.Contains(obj.Guid));
             return ret;
         }
         public static C_WoWObject GetWoWObject(int entryId)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistGuiDs.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistedGuids.Contains(obj.Guid));
             return ret;
         }
         public static C_WoWObject GetWoWObject(string name)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Name == name && !BlacklistGuiDs.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid));
             return ret;
         }
 
         public static List<C_WoWObject> GetWoWObjects(params uint[] args)
         {
             var ids = new List<uint>(args);
-            return ObjectCollection.Values.Where(obj => ids.Contains(obj.Entry) && !BlacklistGuiDs.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(WoWObjectTypes type)
         {
-            return ObjectCollection.Values.Where(obj => obj.SubType==type && !BlacklistGuiDs.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(int id)
         {
-            return ObjectCollection.Values.Where(obj => obj.Entry == id && !BlacklistGuiDs.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(string name)
         {
-            return ObjectCollection.Values.Where(obj => obj.Name == name && !BlacklistGuiDs.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(params uint[] args)
         {
             var ids = new List<uint>(args);
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(WoWObjectTypes type)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.SubType == type && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(int id)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.Entry == id && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(string name)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.Name == name && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(params uint[] args)
@@ -451,28 +449,28 @@ namespace Herbfunk.GarrisonBase.Cache
             var ids = new List<uint>(args);
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistGuiDs.Contains(obj.Guid))
+                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid))
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(int id)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.Entry == id && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(WoWObjectTypes type)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.SubType == type && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(string name)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.Name == name && !BlacklistGuiDs.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetUnitsNearPoint(WoWPoint location, float maxdistance, bool validOnly = true)

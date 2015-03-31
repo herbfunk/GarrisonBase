@@ -32,7 +32,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 else if (CacheStaticLookUp.MineDeposits.Contains(Entry))
                 {
                     SubType = WoWObjectTypes.OreVein;
-                    ShouldLoot = true;
+                    //ShouldLoot = true;
                     IgnoresRemoval = true;
                     InteractRange = 6f;
                     LineofSightWaitTimer = new WaitTimer(new TimeSpan(0, 0, 0, 2, 500));
@@ -41,7 +41,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 else if (CacheStaticLookUp.HerbDeposits.Contains(Entry))
                 {
                     SubType = WoWObjectTypes.Herb;
-                    ShouldLoot = true;
+                    //ShouldLoot = true;
                     IgnoresRemoval = true;
                     InteractRange = 5f;
                 }
@@ -72,15 +72,16 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     ShouldLoot = true;
                     InteractRange = 5f;
                 }
-                else if (ObjectCacheManager.LootIds.Contains(Entry))
-                {
-                    ShouldLoot = true;
-                }
                 else
                 {
                     //Don't update objects we don't know..
                     RequiresUpdate = false;
                 }
+
+                if (!ObjectCacheManager.LootIds.Contains(Entry)) return;
+
+                ShouldLoot = true;
+                RequiresUpdate = true;
             }
         }
 

@@ -384,7 +384,7 @@
             this.groupBox6.Controls.Add(this.flowLayoutPanel_TradePostReagents);
             this.groupBox6.Location = new System.Drawing.Point(8, 235);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(347, 262);
+            this.groupBox6.Size = new System.Drawing.Size(443, 262);
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Trade Post Reagents";
@@ -394,7 +394,7 @@
             this.flowLayoutPanel_TradePostReagents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel_TradePostReagents.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel_TradePostReagents.Name = "flowLayoutPanel_TradePostReagents";
-            this.flowLayoutPanel_TradePostReagents.Size = new System.Drawing.Size(341, 243);
+            this.flowLayoutPanel_TradePostReagents.Size = new System.Drawing.Size(437, 243);
             this.flowLayoutPanel_TradePostReagents.TabIndex = 7;
             // 
             // tabPage3

@@ -1,4 +1,10 @@
-﻿v1.2.0.0
+﻿v1.2.0.1
+
+Added Crescent Saberfish Flesh to trade post workorders.
+Bot will now only harvest ore/herbs during the correct behaviors.
+
+
+v1.2.0.0
 
 Lua Injected "Addon" now uses randomized strings for the global functions.
 Replaced most Lua Calls for Follower and Mission initalizing with honorbuddy garrison API.

@@ -76,8 +76,9 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             GorgrondFlytrap=256,
             NagrandArrowbloom=512,
             TaladorOrchid=1024,
+            CrescentSaberfishFlesh=2048,
 
-            All = BlackrockOre|TrueIronOre|DraenicDust|SumptuousFur|RawBeastHide|Starflower|Frostweed|Fireweed|GorgrondFlytrap|NagrandArrowbloom|TaladorOrchid,
+            All = BlackrockOre | TrueIronOre | DraenicDust | SumptuousFur | RawBeastHide | Starflower | Frostweed | Fireweed | GorgrondFlytrap | NagrandArrowbloom | TaladorOrchid | CrescentSaberfishFlesh,
         }
 
         public static CacheStaticLookUp.RushOrders GetRushOrderItem(WorkOrderType type)
@@ -156,6 +157,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 case 87207:
                 case 87120:
                     return TradePostReagentTypes.DraenicDust;
+                case 91071:
+                    return TradePostReagentTypes.CrescentSaberfishFlesh;
             }
 
             return TradePostReagentTypes.None;
@@ -187,6 +190,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.NagrandArrowbloom, 5) };
                 case TradePostReagentTypes.TaladorOrchid:
                     return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.TaladorOrchid, 5) };
+                case TradePostReagentTypes.CrescentSaberfishFlesh:
+                    return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.CrescentSaberfishFlesh, 20) };
             }
 
             return null;
@@ -254,6 +259,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             87119,
             87120,
             87121,
+            91070,
         };
         public static readonly List<uint> AllianceTradePostNpcIds = new List<uint>
         {
@@ -268,6 +274,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             87215,
             87216,
             87217,
+            91071,
         };
 
         /* Trade Post
@@ -285,6 +292,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         * 87119 - Fireweed
         * 87120 - Draenic Dust
         * 87121 - Blackrock Ore
+        * 91070 - Crescent Saberfish Flesh
         * 
         * Alliance
         * 87207 - Draenic Dust
@@ -298,6 +306,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         * 87215 - Nagrand Arrowbloom
         * 87216 - Gorgrond Flytrap
         * 87217 - Blackrock Ore
+        * 91071 - Crescent Saberfish Flesh
         */
 
         #endregion

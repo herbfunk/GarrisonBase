@@ -24,7 +24,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return false;
             }
 
-            if (ObjectCacheManager.LootableObject == null)
+            if (ObjectCacheManager.LootableObject == null || !ObjectCacheManager.LootableObject.IsValid)
             {
                 ObjectCacheManager.UpdateLootableTarget();
                 if (ObjectCacheManager.LootableObject == null)
@@ -34,13 +34,13 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
             }
 
-            if (!ObjectCacheManager.LootableObject.IsValid)
-            {
-                GarrisonBase.Debug("LootObject no longer valid!");
-                _lootMovement = null;
-                ObjectCacheManager.LootableObject.NeedsRemoved = true;
-                return false;
-            }
+            //if (!ObjectCacheManager.LootableObject.IsValid)
+            //{
+            //    GarrisonBase.Debug("LootObject no longer valid!");
+            //    _lootMovement = null;
+            //    ObjectCacheManager.LootableObject = null;
+            //    return false;
+            //}
 
             if (!ObjectCacheManager.LootableObject.ValidForLooting)
             {
