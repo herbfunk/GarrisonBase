@@ -437,10 +437,23 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.SumptuousFur, 5) };
                 case WorkOrderType.Leatherworking:
                     return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.RawBeastHide, 5) };
+                case WorkOrderType.Barn:
+                    return new[] { new Tuple<CraftingReagents, int>(CraftingReagents.FurryCagedBeast, 1) };
             }
 
             return null;
         }
+
+        internal static readonly List<Tuple<CraftingReagents, int>[]> BarnWorkOrderItemList = new List
+            <Tuple<CraftingReagents, int>[]>
+        {
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.FurryCagedBeast, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.LeatheryCagedBeast, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.MeatyCagedBeast, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyClefthoof, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyRiverbeast, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyWolf, 1)},
+        };
 
         public static int GetWorkOrderNpcEntryId(BuildingType type, bool ally)
         {
@@ -474,6 +487,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     return !ally ? 79833 : 78207;
                 case BuildingType.WarMillDwarvenBunker:
                     return !ally ? 89066 : 89065;
+                case BuildingType.Barn:
+                    return !ally ? 85048 : 84524;
             }
 
             return -1;

@@ -346,15 +346,6 @@
     <None Include="Addon\Herbfunk.toc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Profiles\AllianceGarrisonLevel3.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Profiles\AllianceGarrison.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Profiles\HordeGarrison.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="_ReadMe.txt" />
     <Content Include="_ToDo.txt" />
   </ItemGroup>

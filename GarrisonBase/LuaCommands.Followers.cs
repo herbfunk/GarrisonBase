@@ -67,7 +67,7 @@ namespace Herbfunk.GarrisonBase
             foreach (var s in info)
             {
                 int iS = Convert.ToInt32(s);
-                FollowerAbility ability = Follower.FollowerAbilites.FirstOrDefault(a => a.ID == iS);
+                FollowerAbility ability = Follower.FollowerAbilites.FirstOrDefault(a => a.Id == iS);
                 Abilities.Add(ability);
             }
 

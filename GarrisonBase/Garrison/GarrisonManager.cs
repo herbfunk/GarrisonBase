@@ -4,6 +4,7 @@ using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
 using Styx.CommonBot.Profiles;
+using Styx.Pathing;
 using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Garrison
@@ -64,7 +65,9 @@ namespace Herbfunk.GarrisonBase.Garrison
                 PrimalTraderID = 84967;
                 PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.HordePrimalTraderLevel2: MovementCache.HordePrimalTraderLevel3;
 
-                ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\HordeGarrison.xml", false);
+                BlackspotManager.AddBlackspots(MovementCache.HordeBlackSpots);
+
+                //ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\HordeGarrison.xml", false);
             }
             else
             {
@@ -80,11 +83,12 @@ namespace Herbfunk.GarrisonBase.Garrison
                 PrimalTraderID = 84246;
                 PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.AlliancePrimalTraderLevel2 : MovementCache.AlliancePrimalTraderLevel3;
 
+                BlackspotManager.AddBlackspots(MovementCache.AllianceBlackSpots);
 
-                if (Character.Player.MapId == 1331)
-                    ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrison.xml", false);
-                else
-                    ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrisonLevel3.xml", false);
+                //if (Character.Player.MapId == 1331)
+                //    ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrison.xml", false);
+                //else
+                //    ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrisonLevel3.xml", false);
             }
 
             GarrisonBase.Debug("Has Forge {0}", HasForge);

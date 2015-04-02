@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Styx;
+using Styx.CommonBot.Profiles;
 using Tripper.Tools.Math;
 
 namespace Herbfunk.GarrisonBase
@@ -747,6 +748,15 @@ namespace Herbfunk.GarrisonBase
 
         #endregion
 
-        //
+        internal static readonly List<Blackspot> HordeBlackSpots = new List<Blackspot>
+        {
+            new Blackspot(new WoWPoint(5665.256,4549.886,120.41), 5f, 10f),
+            new Blackspot(new WoWPoint(5643.812,4504.172,119.9041), 5f, 10f),
+            new Blackspot(new WoWPoint(5618.075,4510.39,119.8379), 6f, 10f),
+            new Blackspot(new WoWPoint(5524.729,4522.987,132.3107), 8f, 10f),
+            new Blackspot(new WoWPoint(5649.103,4447.976,130.5355), 8f, 10f),
+            new Blackspot(new WoWPoint(5576.156,4459.763,130.5877), 8f, 10f),
+            new Blackspot(new WoWPoint(5691.774,4471.398,130.9299), 8f, 10f),
+        };
     }
 }

@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Documents;
+using Bots.Quest;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
@@ -32,7 +35,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                              Building.WorkOrder != null &&
                              Building.WorkOrder.Type != WorkOrderType.None &&
                              Building.WorkOrder.Pending < Building.WorkOrder.Maximum &&
-                             ((Building.Type != BuildingType.TradingPost && Building.WorkOrder.TotalWorkorderStartups() > 0) ||
+                             ((Building.Type == BuildingType.Barn) ||
+                             (Building.Type != BuildingType.TradingPost && Building.WorkOrder.TotalWorkorderStartups() > 0) ||
                              (Building.Type == BuildingType.TradingPost && !BaseSettings.CurrentSettings.TradePostReagents.Equals(WorkOrder.TradePostReagentTypes.None)));
             }
         }
@@ -45,6 +49,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (Building.SpecialMovementPoints != null)
                 _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f);
 
+            if (Building.Type == BuildingType.Barn)
+                BarnWorkOrderCurrencies = new List<Tuple<CraftingReagents, int>[]>(WorkOrder.BarnWorkOrderItemList);
+
             base.Initalize();
         }
 
@@ -54,6 +61,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private Movement _movement, _specialMovement;
         private int _interactionAttempts = 0;
         private bool _checkedReagent = false;
+        private List<Tuple<CraftingReagents, int>[]> BarnWorkOrderCurrencies;
+        private Tuple<CraftingReagents, int>[] CurrentBarnCurrceny;
+        private string BarnWorkOrderGossipString = String.Empty;
 
         public C_WoWUnit WorkOrderObject
         {
@@ -95,6 +105,51 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     }
 
                     _checkedReagent = true;
+                }
+            }
+
+            if (Building.Type == BuildingType.Barn && CurrentBarnCurrceny==null)
+            {
+                //TODO:: Further Testing!
+                return false;
+
+                bool found = false;
+                var removalList = new List<int>();
+                for (int i = 0; i < BarnWorkOrderCurrencies.Count; i++)
+                {
+                    
+
+                    var item = BarnWorkOrderCurrencies[i];
+                    var totalCount = WorkOrder.GetTotalWorkorderStartups(item);
+                    if (totalCount <= 0)
+                    {
+                        removalList.Add(i);
+                        continue;
+                    }
+
+                    CurrentBarnCurrceny = item;
+                    found = true;
+                    break;
+                }
+
+                if (!found)
+                {
+                    Building.CheckedWorkOrderStartUp = true;
+                    return false;
+                }
+
+                GarrisonBase.Debug("Staring Work Order for Barn using {0}", CurrentBarnCurrceny[0].Item1.ToString());
+
+                if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.FurryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyWolf)
+                    BarnWorkOrderGossipString = "i would like to place a work order for fur.";
+                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.LeatheryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyClefthoof)
+                    BarnWorkOrderGossipString = "i would like to place a work order for leather.";
+                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.MeatyCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyRiverbeast)
+                    BarnWorkOrderGossipString = "i would like to place a work order for meat.";
+
+                foreach (var i in removalList)
+                {
+                    BarnWorkOrderCurrencies.RemoveAt(i);
                 }
             }
 
@@ -151,6 +206,21 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     //Workorder frame is displayed!
                     return false;
                 }
+
+                if (Building.Type== BuildingType.Barn && LuaEvents.GossipFrameOpen)
+                {
+                   var entries= QuestManager.GossipFrame.GossipOptionEntries.Where(
+                                    entry => entry.Text.ToLower().Contains(BarnWorkOrderGossipString)).ToList();
+
+                    if (entries.Count > 0)
+                    {
+                        int index = entries[0].Index;
+                        QuestManager.GossipFrame.SelectGossipOption(index);
+                        await CommonCoroutines.SleepForRandomUiInteractionTime();
+                        return true;
+                    }
+                }
+
                 _interactionAttempts++;
                 WorkOrderObject.Interact();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
@@ -221,11 +291,22 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 if (BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER || !LuaCommands.ClickStartOrderButtonEnabled())
                 {
-                    Building.CheckedWorkOrderStartUp = true;
+                    if (Building.Type != BuildingType.Barn)
+                    {
+                        Building.CheckedWorkOrderStartUp = true;
+                    }
+                    else
+                    {
+                        CurrentBarnCurrceny = null;
+                        BarnWorkOrderCurrencies.RemoveAt(0);
+                    }
+
                     if (_specialMovement!=null) _specialMovement.UseDeqeuedPoints(true);
                     GarrisonBase.Log("Order Button Disabled!");
                     Building.WorkOrder.Refresh();
-                    return false;
+                    LuaCommands.ClickGarrisonCapactiveCloseButton();
+
+                    return Building.Type == BuildingType.Barn;
                 }
 
                 await CommonCoroutines.SleepForRandomUiInteractionTime();

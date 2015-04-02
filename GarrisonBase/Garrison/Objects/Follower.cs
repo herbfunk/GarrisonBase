@@ -68,7 +68,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
         public override string ToString()
         {
-            string abilityString = Abilities.Aggregate("", (current, a) => current + String.Format("Ability {0} (ID {1}) Counters {2} CounterID {3}", a.Name, a.ID, a.Counters, a.CounterID) + "\r\n");
+            string abilityString = Abilities.Aggregate("", (current, a) => current + String.Format("Ability {0} (ID {1}) Counters {2} CounterID {3}", a.Name, a.Id, a.Counters, a.CounterId) + "\r\n");
             return
                 String.Format(
                     "{0} (ID: {1}) Level {2} (ItemLevel {3}) -- XP {4} LevelXP {5} -- Quality {6} Status {7}\r\n{8}",

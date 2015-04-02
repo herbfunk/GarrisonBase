@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Styx;
+using Styx.CommonBot.Profiles;
 
 namespace Herbfunk.GarrisonBase
 {
@@ -236,7 +237,30 @@ namespace Herbfunk.GarrisonBase
         
         #endregion
 
-    
+        #region Barn
+
+        internal static List<WoWPoint> Alliance_Plot22_Barn_Level2 = new List<WoWPoint>
+        {
+            new WoWPoint(1866.953, 297.2848, 81.66016),
+            new WoWPoint(1865.661, 309.8015, 82.27261),
+            new WoWPoint(1865.039, 318.2485, 82.27153),
+        };
+        internal static List<WoWPoint> Alliance_Plot25_Barn_Level2 = new List<WoWPoint>
+        {
+            new WoWPoint(1876.044, 197.2052, 78.05712),
+            new WoWPoint(1884.703, 191.6729, 78.66826),
+            new WoWPoint(1892.027, 186.6466, 78.66734),
+        };
+        internal static List<WoWPoint> Alliance_Plot22_Barn_Level3 = new List<WoWPoint>
+        {
+           
+        };
+        internal static List<WoWPoint> Alliance_Plot25_Barn_Level3 = new List<WoWPoint>
+        {
+            
+        };
+
+        #endregion
 
         #region The Forge
 
@@ -689,5 +713,14 @@ namespace Herbfunk.GarrisonBase
         #endregion
 
         #endregion
+
+        internal static readonly List<Blackspot> AllianceBlackSpots = new List<Blackspot>
+        {
+            new Blackspot(new WoWPoint(1830.085,197.1292,72.67456), 5f, 10f),
+            new Blackspot(new WoWPoint(1804.306,189.4055,70.70669), 5f, 10f),
+            new Blackspot(new WoWPoint(1819.719,231.1095,72.64378), 5f, 10f),
+            new Blackspot(new WoWPoint(1893.243,187.0173,78.22331), 9f, 10f),
+            new Blackspot(new WoWPoint(1822.411,280.115,77.7338), 9f, 10f),
+        };
     }
 }

@@ -592,7 +592,22 @@ namespace Herbfunk.GarrisonBase
                         }
                     }
                     break;
-              
+                case BuildingType.Barn:
+                    if (alliance)
+                    {
+                        if (plotId == 22)
+                        {
+                            if (level == 2) return Alliance_Plot22_Barn_Level2;
+                            if (level == 3) return Alliance_Plot22_Barn_Level3;
+                        }
+                        if (plotId == 25)
+                        {
+                            if (level == 2) return Alliance_Plot25_Barn_Level2;
+                            if (level == 3) return Alliance_Plot25_Barn_Level3;
+                        }
+                    }
+                    break;
+
             }
 
             return null;

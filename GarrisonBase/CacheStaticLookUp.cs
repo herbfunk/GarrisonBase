@@ -50,6 +50,13 @@ namespace Herbfunk.GarrisonBase
         DraenicStone = 115508,
         DraenicSeeds = 116053,
         Timber = 114781,
+
+        FurryCagedBeast = 119813,
+        LeatheryCagedBeast=119814,
+        MeatyCagedBeast=119810,
+        CagedMightyClefthoof=119819,
+        CagedMightyRiverbeast=119817,
+        CagedMightyWolf=119815,
     }
     public static class CacheStaticLookUp
     {

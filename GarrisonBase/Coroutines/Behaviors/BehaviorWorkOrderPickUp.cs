@@ -4,9 +4,11 @@ using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
+using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
 using Styx.CommonBot.Coroutines;
+using Styx.Pathing;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
@@ -22,6 +24,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override void Initalize()
         {
             _movement = null;
+
+            if (Building.Type == BuildingType.Barn && Building.SpecialMovementPoints != null)
+            {
+                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f);
+            }
+
             base.Initalize();
         }
 
@@ -50,7 +58,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
 
 
-        private Movement _movement;
+        private Movement _movement, _specialMovement;
 
         public override async Task<bool> Interaction()
         {
@@ -100,10 +108,48 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
 
+            if (_specialMovement != null)
+            {//Special Movement for navigating inside buildings using Click To Move
+
+                if (_specialMovement.CurrentMovementQueue.Count > 0)
+                {
+                    //find the nearest point to the npc in our special movement queue 
+                    var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location, _specialMovement.CurrentMovementQueue.ToList());
+                    //click to move.. but don't dequeue
+                    var result = await _specialMovement.ClickToMove_Result(false);
+
+                    if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
+                    {
+                        //force dequeue now since its not nearest point
+                        if (result == MoveResult.ReachedDestination)
+                            _specialMovement.ForceDequeue(true);
+
+                        return true;
+                    }
+
+
+                    //Last position was nearest and we reached our destination.. so lets finish special movement!
+                    if (result == MoveResult.ReachedDestination)
+                    {
+                        _specialMovement.DequeueAll(false);
+                    }
+                }
+
+
+                if (_movement == null)
+                    _movement = new Movement(WorkOrderObject.Location, 4f);
+
+                //since we are navigating inside building.. we must continue to use CTM
+                if (await _movement.ClickToMove(false))
+                    return true;
+            }
+
+
             //Move to the interaction object
             if (_movement == null || _movement.CurrentMovementQueue.Count==0)
                 _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange-0.25f);
-                
+
+
             await _movement.MoveTo();
 
             return true;
@@ -117,6 +163,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await StartMovement.MoveTo()) return true;
 
             if (await Interaction()) return true;
+
+            if (_specialMovement != null && await _specialMovement.ClickToMove())
+                return true;
 
             if (await EndMovement.MoveTo()) return true;
 

@@ -168,6 +168,12 @@ namespace Herbfunk.GarrisonBase
             return ret;
         }
 
+        public static void ClickGarrisonCapactiveCloseButton()
+        {
+            GarrisonBase.Debug("LuaCommand: ClickGarrisonCapactiveCloseButton");
+            Lua.DoString("GarrisonCapacitiveDisplayFrameCloseButton:Click()");
+        }
+
         public static bool IsStaticPopupVisible()
         {
             GarrisonBase.Debug("LuaCommand: IsStaticPopupVisible");
