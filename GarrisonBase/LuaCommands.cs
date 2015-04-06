@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Styx;
 using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
@@ -10,22 +11,9 @@ namespace Herbfunk.GarrisonBase
 {
     static partial class LuaCommands
     {
-        public enum ButtonNames
-        {
-            GarrisonCapacitiveDisplayFrame_CreateAllWorkOrdersButton,
-            GarrisonLandingPageMinimapButton,
-            TradeSkillFrameCloseButton,
-            GarrisonCapacitiveDisplayFrame_StartWorkOrderButton,
-            GarrisonMissionFrame_CloseButton,
-            GarrisonMissionFrame_MissionTab_MissionPage_StartMissionButton,
-            GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton,
-            GarrisonMissionFrame_MissionComplete_NextMissionButton,
-            InboxNextPageButton,
-            InboxPrevPageButton,
-            OpenMailFrameCloseButton,
-        }
+        
 
-        public static bool IsButtonEnabled(ButtonNames name)
+        public static bool IsButtonEnabled(LuaUI.ButtonNames name)
         {
    
             string buttonname = name.ToString().Replace("_", ".");
@@ -35,7 +23,7 @@ namespace Herbfunk.GarrisonBase
 
             return ret;
         }
-        public static void ClickButton(ButtonNames name)
+        public static void ClickButton(LuaUI.ButtonNames name)
         {
             GarrisonBase.Debug("LuaCommand: ClickButton {0}", name);
             string buttonname = name.ToString().Replace("_", ".");
@@ -422,6 +410,7 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.Debug("LuaCommand: IsQuestFlaggedCompleted {0}", ID);
             string lua = String.Format("return tostring(IsQuestFlaggedCompleted(\"{0}\"))", ID);
             List<string> retList = Lua.GetReturnValues(lua);
+          
             return retList[0].ToBoolean();
         }
 
@@ -472,24 +461,29 @@ namespace Herbfunk.GarrisonBase
             return false;
         }
 
-
-        public static void Test()
+        public static bool IsAddonLoaded(string AddonName)
         {
-  
-            string missionId = "253";
-            string lua = String.Format(
-                "local yieldInfo = GetGameTime();") +
-                         "local Ret = {};" +
-                         "for i = 1, #yieldInfo do " +
-                         "table.insert(RetInfo,yieldInfo[i]);" +
-                         "end;" +
-                         "return unpack(Ret)";
-            //
-            List<string> retvalues=Lua.GetReturnValues(lua);
-            foreach (var s in retvalues)
-            {
-                Logging.Write("{0}", s);
-            }
+            var luastr = String.Format("return GetAddOnEnableState(\"{0}\",\"{1}\")", StyxWoW.Me.Name, AddonName);
+            List<string> retList = Lua.GetReturnValues(luastr);
+            var retValue = retList[0].ToInt32();
+            GarrisonBase.Debug("LuaCommand: GetAddOnEnableState {0} == ({1})", AddonName, retValue);
+            return retValue > 0;
+        }
+        public static void DisableAddon(string AddonName)
+        {
+            GarrisonBase.Debug("LuaCommand: DisableAddOn {0}", AddonName);
+            Lua.DoString(String.Format("DisableAddOn(\"{0}\")", AddonName));
+        }
+        public static void EnableAddon(string AddonName)
+        {
+            GarrisonBase.Debug("LuaCommand: EnableAddOn {0}", AddonName);
+            Lua.DoString(String.Format("EnableAddOn(\"{0}\")", AddonName));
+        }
+        public static void ReloadUI()
+        {
+            
+            GarrisonBase.Debug("LuaCommand: ReloadUI");
+            Lua.DoString("ReloadUI()");
         }
     }
 }

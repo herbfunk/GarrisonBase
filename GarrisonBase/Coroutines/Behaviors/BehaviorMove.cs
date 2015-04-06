@@ -22,7 +22,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
-
+            
 
             if (await _movement.MoveTo())
                 return true;

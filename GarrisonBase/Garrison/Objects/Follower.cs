@@ -228,12 +228,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
         public static BehaviorArray FollowerQuestBehaviorArray(int followerid)
         {
+            #region Tormmok (193)
 
             if (followerid == 193)
             {//Tormmok
                 //Final quest id 36037
 
                 //Move to location
+                var flightPath = new BehaviorUseFlightPath("Bastion Rise", new[] { "Deeproot", "Fort Wrynn" });
                 var movementLocation = new WoWPoint(4852.024, 1390.837, 144.9443);
                 var moveBehavior = new BehaviorMove(movementLocation);
                 //<Hotspot X="4852.024" Y="1390.837" Z="144.9443" />
@@ -255,15 +257,28 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 //  -interact with him selecting quest then completing it
                 var questBehavior = new BehaviorQuestPickup(36037, movementLocation, 83820, true);
 
-                BehaviorArray newArray=new BehaviorArray(new Behavior[] { moveBehavior, hotspotBehavior, gossipBehavior, questBehavior });
+                var newArray = new BehaviorArray(new Behavior[]
+                {
+                    flightPath,
+                    moveBehavior, 
+                    hotspotBehavior, 
+                    gossipBehavior, 
+                    questBehavior
+                });
+
                 newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(193);
                 return newArray;
             }
+            
+            #endregion
+
+            #region Blook (189)
 
             if (followerid == 189)
             { //Blook
                 //Final quest id 34279
-                //<Hotspot X="4605.237" Y="1690.607" Z="234.7461" />
+
+                var flightPath = new BehaviorUseFlightPath("Bastion Rise", new[] { "Deeproot", "Fort Wrynn" });
                 var movementLocation = new WoWPoint(4605.237, 1690.607, 234.7461);
                 var moveBehavior = new BehaviorMove(movementLocation);
                 var gossipBehavior = new BehaviorGossipInteract(78030, 0, false, () => BehaviorManager.ObjectNotValidOrNotFound(78030) || BehaviorManager.CanInteractWithUnit(78030));
@@ -276,32 +291,47 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                    () => BehaviorManager.ObjectNotValidOrNotFound(78030) || !BehaviorManager.UnitHasQuestGiverStatus(78030, QuestGiverStatus.Available));
                 var questBehavior = new BehaviorQuestPickup(34279, movementLocation, 78030, true);
 
-                BehaviorArray newArray = new BehaviorArray(new Behavior[] { moveBehavior, gossipBehavior, hotspotBehavior, questBehavior });
+                BehaviorArray newArray = new BehaviorArray(new Behavior[]
+                {
+                    flightPath,
+                    moveBehavior, 
+                    gossipBehavior, 
+                    hotspotBehavior, 
+                    questBehavior
+                });
                 newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(189);
                 return newArray;
             }
+            
+            #endregion
+
+            #region Defender Illona / Aeda Brightdawn (207)
 
             if (followerid == 207)
             {
                 uint questId = Player.IsAlliance ? Convert.ToUInt32(34777) : Convert.ToUInt32(34776);
                 var questNPC = Player.IsAlliance ? 79979 : 79978;
-                uint[] mobIds = {79970, 79977};
+                uint[] mobIds = { 79970, 79977 };
                 WoWPoint npcLoc = Player.IsAlliance ? new WoWPoint(2398.989, 2402.796, 126.5605)
                                                     : new WoWPoint(2327.925, 2369.851, 126.5607);
 
                 WoWPoint killLoc = new WoWPoint(2336.869, 2409.208, 126.5612);
 
-                var flightPath = new BehaviorUseFlightPath("Exarch's Refuge", new []{"Durotan's Grasp"});
+                var flightPath = new BehaviorUseFlightPath("Exarch's Refuge", new[] { "Durotan's Grasp" });
 
                 var moveBehavior = new BehaviorMove(npcLoc);
 
                 //Pickup Quest
                 var questPickup = new BehaviorQuestPickup(questId, npcLoc, questNPC);
-                
+                questPickup.Criteria += () => !LuaCommands.IsQuestFlaggedCompleted(questId.ToString());
+
                 //Move to Kill Zone
                 var moveKillBehavior = new BehaviorMove(killLoc);
+                moveKillBehavior.Criteria += () => BehaviorManager.HasQuestAndNotCompleted(questId);
+
                 //Interact With First NPC
                 var gossipBehavior = new BehaviorGossipInteract(Convert.ToInt32(mobIds[0]), 0);
+                gossipBehavior.Criteria += () => BehaviorManager.HasQuestAndNotCompleted(questId);
 
                 //Kill until Not Attackable
                 var hotspotBehavior =
@@ -312,9 +342,12 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                    BehaviorHotspotRunning.HotSpotType.Killing,
                    () => BehaviorManager.ObjectNotValidOrNotFound(mobIds[0]) ||
                          BehaviorManager.CanAttackUnit(mobIds[0]));
+                hotspotBehavior.Criteria += () => BehaviorManager.HasQuestAndNotCompleted(questId);
+
 
                 //Interact With Second NPC
                 var gossipBehavior2 = new BehaviorGossipInteract(Convert.ToInt32(mobIds[1]), 0);
+                gossipBehavior2.Criteria += () => BehaviorManager.HasQuestAndNotCompleted(questId);
 
                 //Kill until Not Attackable
                 var hotspotBehavior2 =
@@ -325,9 +358,16 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                    BehaviorHotspotRunning.HotSpotType.Killing,
                    () => BehaviorManager.ObjectNotValidOrNotFound(mobIds[1]) ||
                          BehaviorManager.CanAttackUnit(mobIds[1]));
+                hotspotBehavior2.Criteria += () => BehaviorManager.HasQuestAndNotCompleted(questId);
 
                 //Turn in Quest
                 var questTurnin = new BehaviorQuestTurnin(questId, npcLoc, questNPC);
+                questTurnin.Criteria += () => BehaviorManager.HasQuest(questId);
+
+                //Final Quest
+                uint finalQuestID = Player.IsAlliance ? Convert.ToUInt32(36519) : Convert.ToUInt32(36518);
+                var finalquestTurnin = new BehaviorQuestPickup(finalQuestID, npcLoc, questNPC, true);
+                finalquestTurnin.Criteria += () => LuaCommands.IsQuestFlaggedCompleted(questId.ToString());
 
                 BehaviorArray newArray = new BehaviorArray(new Behavior[]
                 {
@@ -335,11 +375,43 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     moveBehavior, questPickup, moveKillBehavior,
                     gossipBehavior,hotspotBehavior, 
                     gossipBehavior2, hotspotBehavior2,
-                    questTurnin
+                    questTurnin,
+                    finalquestTurnin
                 });
                 newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
             }
+            
+            #endregion
+
+            #region Fen Tao (467)
+
+            if (followerid == 467)
+            {
+                var flightPath = new BehaviorUseFlightPath("Stormshield", new[] { "Warspear" });
+
+                var moveLoc = Player.IsAlliance
+                    ? new WoWPoint(3589.48, 3935.393, 21.33015)
+                    : new WoWPoint(5300.374, 3966.365, 18.41501);
+
+                var moveBehavior = new BehaviorMove(moveLoc);
+
+                var npcId = 91483;
+                var gossipBehavior = new BehaviorGossipInteract(npcId, 0);
+                var clickStaticPop = new BehaviorClickStaticPopup(1);
+
+                BehaviorArray newArray = new BehaviorArray(new Behavior[]
+                {
+                    flightPath,
+                    moveBehavior,
+                    gossipBehavior,
+                    clickStaticPop
+                });
+                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                return newArray;
+            }
+            
+            #endregion
 
             return null;
         }

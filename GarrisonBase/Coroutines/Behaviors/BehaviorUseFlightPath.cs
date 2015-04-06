@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Bots.Quest;
-using Herbfunk.GarrisonBase.Garrison;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
+using Styx.Common;
+using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
+using Styx.WoWInternals.DBC;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
@@ -15,27 +18,70 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     {
         public override BehaviorType Type { get { return BehaviorType.Taxi; } }
 
-        private readonly string _nodename;
-        private readonly List<string> _nodenameAlternatives=new List<string>();
-        public BehaviorUseFlightPath(string nodeName, string[] alternatives=null) : base(MovementCache.FlightPathNpcLocation, GarrisonManager.FlightPathNpcId)
+        private readonly List<string> _nodenames = new List<string>();
+        //private NpcHelper.TaxiNpc TaxiInfo;
+        public BehaviorUseFlightPath(string nodeName, string[] alternatives = null) :
+            base()
         {
-            _nodename = nodeName.ToLower();
-            if (alternatives != null)
+            Common.ShouldUpdateTaxiNodes = true;
+            _nodenames.Add(nodeName.ToLower());
+            if (alternatives == null) return;
+            foreach (string s in alternatives)
             {
-                foreach (string s in alternatives)
-                {
-                    _nodenameAlternatives.Add(s.ToLower());
-                }
+                _nodenames.Add(s.ToLower());
             }
         }
 
-        public override Func<bool> Criteria
+        public override void Initalize()
         {
-            get
+            //if (!NpcHelper.TaxiNpcs.ContainsKey(Convert.ToInt32(Player.MapId)))
+            //{
+            //    RunCondition += () => false;
+            //}
+            //else
+            //{
+            //    var taxiNpcs = NpcHelper.TaxiNpcs[Convert.ToInt32(Player.MapId)].ToList();
+            //    foreach (var npc in taxiNpcs)
+            //    {
+            //        if (Player.IsAlliance && npc.Faction.HasFlag(NpcHelper.NpcFaction.Alliance))
+            //        {
+            //            TaxiInfo = npc;
+            //            break;
+            //        }
+            //        if (!Player.IsAlliance && npc.Faction.HasFlag(NpcHelper.NpcFaction.Horde))
+            //        {
+            //            TaxiInfo = npc;
+            //            break;
+            //        }
+            //    }
+
+            //    if (TaxiInfo == null)
+            //    {
+            //        GarrisonBase.Debug("Failed to find Taxi Info for map id {0}", Player.MapId);
+            //        RunCondition += () => false;
+            //        IsDone = true;
+            //        return;
+            //    }
+
+            //    GarrisonBase.Debug("Using Taxi NPC {0}", TaxiInfo.EntryId);
+            //}
+
+            bool foundUsableNode = _nodenames.Any(alt => TaxiFlightHelper.TaxiNodes.Any(n => n.Name.ToLower().Contains(alt)));
+            if (!foundUsableNode)
             {
-                return () => (StyxWoW.Me.CurrentMap.IsGarrison);
+                GarrisonBase.Err("UseFlightPath could not find a valid flight node!");
+                IsDone = true;
+                return;
             }
+
+            var nearestNpc = FlightPaths.NearestFlightMerchant;
+            GarrisonBase.Debug("UseFlightPath nearest npc {0}", nearestNpc.Name);
+            MovementPoints.Add(nearestNpc.Location);
+            InteractionEntryId = (int)nearestNpc.Entry;
+
+            base.Initalize();
         }
+
 
         private Movement _npcMovement;
         public override async Task<bool> BehaviorRoutine()
@@ -68,23 +114,21 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     return false;
                 }
 
-                var possibleNodes = TaxiFrame.Instance.Nodes.Where(n => n.Name.ToLower().Contains(_nodename) && n.Reachable).ToList();
-                if (possibleNodes.Count == 0)
+                var taxiFrameNodes = new List<TaxiFrame.TaxiFrameNode>();
+                foreach (var alt in _nodenames)
                 {
-                    foreach (var alt in _nodenameAlternatives)
-                    {
-                        possibleNodes = TaxiFrame.Instance.Nodes.Where(n => n.Name.ToLower().Contains(alt) && n.Reachable).ToList();
-                        if (possibleNodes.Count > 0)
-                            break;
-                    }
-                    if (possibleNodes.Count == 0)
-                    {
-                        //Error could not find matching node!
-                        return false;
-                    }
+                    taxiFrameNodes = TaxiFrame.Instance.Nodes.Where(n => n.Name.ToLower().Contains(alt) && n.Reachable).ToList();
+                    if (taxiFrameNodes.Count > 0)
+                        break;
                 }
 
-                await CommonCoroutines.WaitForLuaEvent("TAXIMAP_CLOSED", 3500, null, possibleNodes[0].TakeNode);
+                if (taxiFrameNodes.Count == 0)
+                {
+                    //Error could not find matching node!
+                    return false;
+                }
+
+                await CommonCoroutines.WaitForLuaEvent("TAXIMAP_CLOSED", 3500, null, taxiFrameNodes[0].TakeNode);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
 
                 IsDone = true;

@@ -15,22 +15,16 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorMine()
             : base(MovementCache.MinePlot59SafePoint)
         {
-            
-        }
-
-
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () =>
+            Criteria += () =>
                     (!GarrisonManager.Buildings[BuildingType.Mines].IsBuilding &&
                      !GarrisonManager.Buildings[BuildingType.Mines].CanActivate &&
-                     GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted && 
-                     LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) && 
+                     GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted &&
+                     LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) &&
                      BaseSettings.CurrentSettings.BehaviorMineGather);
-            }
         }
+
+
+
         public override void Initalize()
         {
             base.Initalize();

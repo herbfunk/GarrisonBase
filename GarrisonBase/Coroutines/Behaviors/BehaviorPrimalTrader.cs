@@ -17,20 +17,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorPrimalTrader()
             : base(GarrisonManager.PrimalTraderPoint, GarrisonManager.PrimalTraderID)
         {
-
-        }
-
-
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => 
+            Criteria += () =>
                     BaseSettings.CurrentSettings.ExchangePrimalSpirits &&
-                    ExchangeItemInfo!=null &&
-                    ExchangeItemInfo.Cost<=TotalPrimalSpiritCount;
-            }
+                    ExchangeItemInfo != null &&
+                    ExchangeItemInfo.Cost <= TotalPrimalSpiritCount;
         }
+
+
 
         public override async Task<bool> BehaviorRoutine()
         {

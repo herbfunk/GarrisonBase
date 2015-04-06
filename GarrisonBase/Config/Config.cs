@@ -10,7 +10,9 @@ using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.Quest;
+using Styx;
 using Styx.Helpers;
 using Styx.WoWInternals.Garrison;
 
@@ -123,7 +125,7 @@ namespace Herbfunk.GarrisonBase.Config
                     BaseSettings.CurrentSettings.FollowerTokens.Priority,
                     BaseSettings.CurrentSettings.FollowerTokens.SuccessRate,
                     BaseSettings.CurrentSettings.FollowerTokens.MinimumLevel,
-                    "Follower Tokens", 
+                    "Follower Tokens",
                     Color.Blue)
                 {
                     UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerTokens.Priority = i; },
@@ -218,6 +220,28 @@ namespace Herbfunk.GarrisonBase.Config
 
                 #endregion
 
+                checkBox_MissionRewards_FollowerToken_ArmorSet615.Checked =BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615;
+                checkBox_MissionRewards_FollowerToken_ArmorSet615.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet615_CheckedChanged;
+
+                checkBox_MissionRewards_FollowerToken_ArmorSet630.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630;
+                checkBox_MissionRewards_FollowerToken_ArmorSet630.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet630_CheckedChanged;
+
+                checkBox_MissionRewards_FollowerToken_ArmorSet645.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645;
+                checkBox_MissionRewards_FollowerToken_ArmorSet645.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet645_CheckedChanged;
+
+                checkBox_MissionRewards_FollowerToken_WeaponSet615.Checked=BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615;
+                checkBox_MissionRewards_FollowerToken_WeaponSet615.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet615_CheckedChanged;
+
+                checkBox_MissionRewards_FollowerToken_WeaponSet630.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630;
+                checkBox_MissionRewards_FollowerToken_WeaponSet630.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet630_CheckedChanged;
+
+                checkBox_MissionRewards_FollowerToken_WeaponSet645.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645;
+                checkBox_MissionRewards_FollowerToken_WeaponSet645.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet645_CheckedChanged;
+
+                trackBar_ItemReward_CharacterTokenLevel.Value=BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel;
+                label_ItemReward_CharacterTokenLevel.Text=BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel.ToString(CultureInfo.InvariantCulture);
+                trackBar_ItemReward_CharacterTokenLevel.ValueChanged += trackBar_ItemReward_CharacterTokenLevel_SliderChanged;
+
                 //
                 checkBox_Behavior_Disenchant.Checked = BaseSettings.CurrentSettings.BehaviorDisenchanting;
                 checkBox_Behavior_Disenchant.CheckedChanged += checkBox_Behavior_Disenchant_CheckedChanged;
@@ -263,7 +287,7 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_MailEnchanting.CheckedChanged += checkBox_MailEnchanting_CheckedChanged;
                 textBox_MailEnchanting.Text = BaseSettings.CurrentSettings.MailSendEnchantingRecipient;
                 textBox_MailEnchanting.TextChanged += textBox_MailEnchanting_TextChanged;
-                
+
                 checkBox_MailEpic.Checked = BaseSettings.CurrentSettings.MailSendEpic;
                 checkBox_MailEpic.CheckedChanged += checkBox_MailEpic_CheckedChanged;
                 textBox_MailEpic.Text = BaseSettings.CurrentSettings.MailSendEpicRecipient;
@@ -301,7 +325,7 @@ namespace Herbfunk.GarrisonBase.Config
                     listView_MailItems.Items.Add(lvi);
                 }
 
-              
+
                 comboBox_PrimalSpiritItems.Items.Clear();
                 var primalTraderIndex = -1;
                 var index = 0;
@@ -320,7 +344,7 @@ namespace Herbfunk.GarrisonBase.Config
 
                 Func<object, string> fRetrieveWorkOrderTypesName = s => Enum.GetName(typeof(WorkOrderType), s);
                 bool noWorkOrderTypeFlag = BaseSettings.CurrentSettings.WorkOrderTypes.Equals(WorkOrderType.None);
-                foreach (var value in Enum.GetValues(typeof (WorkOrderType)))
+                foreach (var value in Enum.GetValues(typeof(WorkOrderType)))
                 {
                     WorkOrderType enumValue = (WorkOrderType)value;
                     if (enumValue.Equals(WorkOrderType.None) || enumValue.Equals(WorkOrderType.All) || enumValue.Equals(WorkOrderType.DwarvenBunker)) continue;
@@ -359,17 +383,17 @@ namespace Herbfunk.GarrisonBase.Config
                     flowLayoutPanel_TradePostReagents.Controls.Add(newCheckBox);
                 }
                 checkBox_Vendor_Junk.Checked = BaseSettings.CurrentSettings.VendorJunkItems;
-                checkBox_Vendor_Junk.CheckedChanged +=checkBox_Vendor_Junk_CheckedChanged;
+                checkBox_Vendor_Junk.CheckedChanged += checkBox_Vendor_Junk_CheckedChanged;
                 checkBox_Vendor_Common.Checked = BaseSettings.CurrentSettings.VendorCommonItems;
-                checkBox_Vendor_Common.CheckedChanged +=checkBox_Vendor_Common_CheckedChanged;
+                checkBox_Vendor_Common.CheckedChanged += checkBox_Vendor_Common_CheckedChanged;
                 checkBox_Vendor_Uncommon.Checked = BaseSettings.CurrentSettings.VendorUncommonItems;
-                checkBox_Vendor_Uncommon.CheckedChanged +=checkBox_Vendor_Uncommon_CheckedChanged;
+                checkBox_Vendor_Uncommon.CheckedChanged += checkBox_Vendor_Uncommon_CheckedChanged;
                 checkBox_Vendor_Rare.Checked = BaseSettings.CurrentSettings.VendorRareItems;
-                checkBox_Vendor_Rare.CheckedChanged +=checkBox_Vendor_Rare_CheckedChanged;
+                checkBox_Vendor_Rare.CheckedChanged += checkBox_Vendor_Rare_CheckedChanged;
 
                 checkBox_Disenchanting_UncommonItems.Checked = BaseSettings.CurrentSettings.DisenchantingUncommon;
                 checkBox_Disenchanting_UncommonItems.CheckedChanged += checkBox_Disenchanting_UncommonItems_CheckedChanged;
-                checkBox_Disenchanting_Epic.Checked =BaseSettings.CurrentSettings.DisenchantingEpic;
+                checkBox_Disenchanting_Epic.Checked = BaseSettings.CurrentSettings.DisenchantingEpic;
                 checkBox_Disenchanting_Epic.CheckedChanged += checkBox_Disenchanting_Epic_CheckedChanged;
                 checkBox_Disenchanting_RareItems.Checked = BaseSettings.CurrentSettings.DisenchantingRare;
                 checkBox_Disenchanting_RareItems.CheckedChanged += checkBox_Disenchanting_RareItems_CheckedChanged;
@@ -382,32 +406,33 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Disenchanting_EpicSoulbound.CheckedChanged += checkBox_Disenchanting_EpicSoulbound_CheckedChanged;
 
                 textBox_Disenchanting_UncommonLevel.Text = BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel.ToString();
-                textBox_Disenchanting_UncommonLevel.TextChanged+=textBox_Disenchanting_UncommonLevel_TextedChanged;
+                textBox_Disenchanting_UncommonLevel.TextChanged += textBox_Disenchanting_UncommonLevel_TextedChanged;
                 textBox_Disenchanting_RareLevel.Text = BaseSettings.CurrentSettings.DisenchantingRareItemLevel.ToString();
-                textBox_Disenchanting_RareLevel.TextChanged+=textBox_Disenchanting_RareLevel_TextedChanged;
+                textBox_Disenchanting_RareLevel.TextChanged += textBox_Disenchanting_RareLevel_TextedChanged;
                 textBox_Disenchanting_EpicLevel.Text = BaseSettings.CurrentSettings.DisenchantingEpicItemLevel.ToString();
-                textBox_Disenchanting_EpicLevel.TextChanged+=textBox_Disenchanting_EpicLevel_TextedChanged;
+                textBox_Disenchanting_EpicLevel.TextChanged += textBox_Disenchanting_EpicLevel_TextedChanged;
 
-                
+
 
                 checkBox_ExchangePrimalSpirits.Checked = BaseSettings.CurrentSettings.ExchangePrimalSpirits;
                 checkBox_ExchangePrimalSpirits.CheckedChanged += checkBox_ExchangePrimalSpirits_CheckedChanged;
 
+                #region Profession Crafting Settings
 
-                flowLayoutPanel_ProfessionSpells.Controls.Clear();
                 foreach (var value in PlayerProfessions.ProfessionDailyCooldownSpellIds)
                 {
                     FlowLayoutPanel layoutPanelWrapper = new FlowLayoutPanel
                     {
                         FlowDirection = FlowDirection.TopDown,
                         BorderStyle = BorderStyle.Fixed3D,
-                        Size = new Size(185, 70)
+                        Size = new Size(185, 125),
+                        Dock = DockStyle.Top,
                     };
 
                     Label lblType = new Label
                     {
-                        Text = value.Key.ToString(),
-                        Font = new Font(FontFamily.GenericSansSerif, 10, FontStyle.Bold),
+                        Text = "Crafting " + value.Key.ToString(),
+                        Font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Bold),
                         AutoSize = true,
                     };
                     layoutPanelWrapper.Controls.Add(lblType);
@@ -419,6 +444,7 @@ namespace Herbfunk.GarrisonBase.Config
                             Name = i.ToString(),
                             Text = PlayerProfessions.GetProfessionCraftingName(i),
                             Checked = BaseSettings.CurrentSettings.ProfessionSpellIds.Contains(i),
+                            Font = new Font(FontFamily.GenericSansSerif, 9.5f, FontStyle.Regular),
                             AutoSize = true,
 
                         };
@@ -426,9 +452,99 @@ namespace Herbfunk.GarrisonBase.Config
                         layoutPanelWrapper.Controls.Add(newCheckBox);
                     }
 
-                    flowLayoutPanel_ProfessionSpells.Controls.Add(layoutPanelWrapper);
-                   
+                    switch (value.Key)
+                    {
+                        case SkillLine.Alchemy:
+                            tabPage_Alchemy.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Blacksmithing:
+                            tabPage_Blacksmithing.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Enchanting:
+                            tabPage_Enchanting.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Engineering:
+                            tabPage_Engineering.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Inscription:
+                            tabPage_Inscription.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Jewelcrafting:
+                            tabPage_Jewelcrafting.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Leatherworking:
+                            tabPage_Leatherworking.Controls.Add(layoutPanelWrapper);
+                            break;
+                        case SkillLine.Tailoring:
+                            tabPage_Tailoring.Controls.Add(layoutPanelWrapper);
+                            break;
+                    }
                 }
+
+                #region Milling Settings
+
+                //Milling (Inscription)
+                checkBox_Milling_Enabled.Checked = BaseSettings.CurrentSettings.MillingEnabled;
+                checkBox_Milling_Enabled.CheckedChanged += checkBox_Milling_Enabled_CheckedChanged;
+
+                textBox_Milling_RequiredAmount.Text = BaseSettings.CurrentSettings.MillingMinimum.ToString();
+                textBox_Milling_RequiredAmount.TextChanged += textBox_Milling_Minimum_TextedChanged;
+
+                foreach (var id in PlayerInventory.HerbIds)
+                {
+                    var name = Enum.GetName(typeof(CraftingReagents), id);
+                    CraftingReagents type = (CraftingReagents)Enum.Parse(typeof(CraftingReagents), name);
+                    InscriptionMillingSetting millingSetting = null;
+                    switch (type)
+                    {
+                        case CraftingReagents.Frostweed:
+                            millingSetting = BaseSettings.CurrentSettings.MillingFrostWeed;
+                            break;
+                        case CraftingReagents.Fireweed:
+                            millingSetting = BaseSettings.CurrentSettings.MillingFireWeed;
+                            break;
+                        case CraftingReagents.NagrandArrowbloom:
+                            millingSetting = BaseSettings.CurrentSettings.MillingNagrandArrowbloom;
+                            break;
+                        case CraftingReagents.GorgrondFlytrap:
+                            millingSetting = BaseSettings.CurrentSettings.MillingGorgrondFlytrap;
+                            break;
+                        case CraftingReagents.Starflower:
+                            millingSetting = BaseSettings.CurrentSettings.MillingStarflower;
+                            break;
+                        case CraftingReagents.TaladorOrchid:
+                            millingSetting = BaseSettings.CurrentSettings.MillingTaladorOrchid;
+                            break;
+                    }
+
+                    CheckBox newCheckBox = new CheckBox
+                    {
+                        Name = "millingenabled_" + id.ToString(),
+                        Text = name,
+                        Checked = !millingSetting.Ignored,
+                        Font = new Font(FontFamily.GenericSansSerif, 9.5f, FontStyle.Regular),
+                        Size = new Size(190, 25),
+                        Padding = new Padding(0, 0, 25, 0),
+                    };
+                    newCheckBox.CheckedChanged += checkBox_MillingHerb_Checked;
+                    flowLayoutPanel_Milling.Controls.Add(newCheckBox);
+
+                    TextBox newTextBox = new TextBox
+                    {
+                        Name = "millingenabled_" + id.ToString(),
+                        Text = millingSetting.Reserved.ToString(),
+                        Font = new Font(FontFamily.GenericSansSerif, 9.5f, FontStyle.Regular),
+                        Size = new Size(50, 25),
+                    };
+                    newTextBox.TextChanged += textBox_MillingHerb_TextChanged;
+                    newTextBox.KeyPress += textBox_Numbers_KeyPress;
+                    flowLayoutPanel_Milling.SetFlowBreak(newTextBox, true);
+                    flowLayoutPanel_Milling.Controls.Add(newTextBox);
+                }
+                
+                #endregion
+
+                #endregion
 
                 trackBar_MinimumBagSlotsFree.Value = BaseSettings.CurrentSettings.MinimumBagSlotsFree;
                 textBox_MinimumBagSlotsFree.Text = BaseSettings.CurrentSettings.MinimumBagSlotsFree.ToString();
@@ -443,6 +559,9 @@ namespace Herbfunk.GarrisonBase.Config
 
                 checkBox_Debug_IgnoreHearthStone.Checked = BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE;
                 checkBox_Debug_IgnoreHearthStone.CheckedChanged += checkBox_Debug_IgnoreHearthStone_CheckedChanged;
+
+                checkBox_Debug_FakePickupWorkOrder.Checked = BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER;
+                checkBox_Debug_FakePickupWorkOrder.CheckedChanged += checkBox_Debug_FakePickupWorkOrder_CheckedChanged;
             }
             catch (Exception ex)
             {
@@ -458,6 +577,79 @@ namespace Herbfunk.GarrisonBase.Config
                 BaseSettings.CurrentSettings.ProfessionSpellIds.Remove(value);
             else
                 BaseSettings.CurrentSettings.ProfessionSpellIds.Add(value);
+        }
+        private void checkBox_Milling_Enabled_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MillingEnabled = !BaseSettings.CurrentSettings.MillingEnabled;
+        }
+        private void textBox_Milling_Minimum_TextedChanged(object sender, EventArgs e)
+        {
+            var txtbox = (TextBox)sender;
+            var value = txtbox.Text.Trim();
+            if (string.IsNullOrEmpty(value)) value = "0";
+            BaseSettings.CurrentSettings.MillingMinimum = value.ToInt32();
+        }
+        private void checkBox_MillingHerb_Checked(object sender, EventArgs e)
+        {
+            var cbSender = (CheckBox)sender;
+            var id = StringHelper.ExtractNumbers(cbSender.Name).ToInt32();
+            var name = Enum.GetName(typeof(CraftingReagents), id);
+            CraftingReagents type = (CraftingReagents)Enum.Parse(typeof(CraftingReagents), name);
+           
+            switch (type)
+            {
+                case CraftingReagents.Frostweed:
+                    BaseSettings.CurrentSettings.MillingFrostWeed.Ignored=!cbSender.Checked;
+                    break;
+                case CraftingReagents.Fireweed:
+                    BaseSettings.CurrentSettings.MillingFireWeed.Ignored = !cbSender.Checked;
+                    break;
+                case CraftingReagents.NagrandArrowbloom:
+                    BaseSettings.CurrentSettings.MillingNagrandArrowbloom.Ignored = !cbSender.Checked;
+                    break;
+                case CraftingReagents.GorgrondFlytrap:
+                    BaseSettings.CurrentSettings.MillingGorgrondFlytrap.Ignored = !cbSender.Checked;
+                    break;
+                case CraftingReagents.Starflower:
+                    BaseSettings.CurrentSettings.MillingStarflower.Ignored = !cbSender.Checked;
+                    break;
+                case CraftingReagents.TaladorOrchid:
+                    BaseSettings.CurrentSettings.MillingTaladorOrchid.Ignored = !cbSender.Checked;
+                    break;
+            }
+         
+        }
+        private void textBox_MillingHerb_TextChanged(object sender, EventArgs e)
+        {
+            var txtbox = (TextBox)sender;
+            var value = txtbox.Text.Trim();
+            if (string.IsNullOrEmpty(value)) value = "0";
+
+            var id = StringHelper.ExtractNumbers(txtbox.Name).ToInt32();
+            var name = Enum.GetName(typeof(CraftingReagents), id);
+            CraftingReagents type = (CraftingReagents)Enum.Parse(typeof(CraftingReagents), name);
+
+            switch (type)
+            {
+                case CraftingReagents.Frostweed:
+                    BaseSettings.CurrentSettings.MillingFrostWeed.Reserved = value.ToInt32();
+                    break;
+                case CraftingReagents.Fireweed:
+                    BaseSettings.CurrentSettings.MillingFireWeed.Reserved = value.ToInt32();
+                    break;
+                case CraftingReagents.NagrandArrowbloom:
+                    BaseSettings.CurrentSettings.MillingNagrandArrowbloom.Reserved = value.ToInt32();
+                    break;
+                case CraftingReagents.GorgrondFlytrap:
+                    BaseSettings.CurrentSettings.MillingGorgrondFlytrap.Reserved = value.ToInt32();
+                    break;
+                case CraftingReagents.Starflower:
+                    BaseSettings.CurrentSettings.MillingStarflower.Reserved = value.ToInt32();
+                    break;
+                case CraftingReagents.TaladorOrchid:
+                    BaseSettings.CurrentSettings.MillingTaladorOrchid.Reserved = value.ToInt32();
+                    break;
+            }
         }
         private void checkBox_WorkOrderType_Checked(object sender, EventArgs e)
         {
@@ -505,7 +697,7 @@ namespace Herbfunk.GarrisonBase.Config
         }
         private void textBox_Disenchanting_UncommonLevel_TextedChanged(object sender, EventArgs e)
         {
-            var txtbox = (TextBox) sender;
+            var txtbox = (TextBox)sender;
             var value = txtbox.Text.Trim();
             if (string.IsNullOrEmpty(value)) value = "0";
             BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel = value.ToInt32();
@@ -655,7 +847,37 @@ namespace Herbfunk.GarrisonBase.Config
         {
             BaseSettings.CurrentSettings.BehaviorWorkOrderStartup = !BaseSettings.CurrentSettings.BehaviorWorkOrderStartup;
         }
-
+        private void checkBox_MissionRewards_FollowerToken_ArmorSet615_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615;
+        }
+        private void checkBox_MissionRewards_FollowerToken_ArmorSet630_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630;
+        }
+        private void checkBox_MissionRewards_FollowerToken_ArmorSet645_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645;
+        }
+        private void checkBox_MissionRewards_FollowerToken_WeaponSet615_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615;
+        }
+        private void checkBox_MissionRewards_FollowerToken_WeaponSet630_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630;
+        }
+        private void checkBox_MissionRewards_FollowerToken_WeaponSet645_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645;
+        }
+        private void trackBar_ItemReward_CharacterTokenLevel_SliderChanged(object sender, EventArgs e)
+        {
+            TrackBar slider_sender = (TrackBar)sender;
+            int Value = (int)slider_sender.Value;
+            BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel = Value;
+            label_ItemReward_CharacterTokenLevel.Text = Value.ToString();
+        }
         private void trackBar_ReservedGarrisonResources_SliderChanged(object sender, EventArgs e)
         {
             TrackBar slider_sender = (TrackBar)sender;
@@ -681,6 +903,10 @@ namespace Herbfunk.GarrisonBase.Config
         private void checkBox_Debug_IgnoreHearthStone_CheckedChanged(object sender, EventArgs e)
         {
             BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE = !BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE;
+        }
+        private void checkBox_Debug_FakePickupWorkOrder_CheckedChanged(object sender, EventArgs e)
+        {
+            BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER = !BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER;
         }
         private void Config_Load(object sender, EventArgs e)
         {
@@ -724,7 +950,7 @@ namespace Herbfunk.GarrisonBase.Config
             LBDebug.Controls.Add(
                 new UserControlDebugEntry(String.Format("Total completed missions {0} [{1}]",
                     LuaCommands._getNumberCompletedMissions, GarrisonManager.CompletedMissionIds.Count)));
-            
+
             LBDebug.Controls.Add(
                 new UserControlDebugEntry(String.Format("Total mission IDs {0}",
                     GarrisonManager.AvailableMissionIds.Count)));
@@ -762,19 +988,19 @@ namespace Herbfunk.GarrisonBase.Config
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            TextBox textBox = (TextBox) sender;
+            TextBox textBox = (TextBox)sender;
             if (!TextContainsAllNumbers(textBox.Text))
             {
                 Char[] textBoxChars = textBox.Text.ToCharArray();
                 List<int> removalList = new List<int>();
-                for (int i = textBoxChars.Length - 1; i>0; i--)
+                for (int i = textBoxChars.Length - 1; i > 0; i--)
                 {
                     if (!Char.IsNumber(textBoxChars[i]))
                         removalList.Add(i);
                 }
                 foreach (var i in removalList)
                 {
-                   textBox.Text=textBox.Text.Remove(i, 1);
+                    textBox.Text = textBox.Text.Remove(i, 1);
                 }
             }
         }
@@ -799,9 +1025,9 @@ namespace Herbfunk.GarrisonBase.Config
                                 : (cWoWObject is C_WoWUnit) ? Color.MediumSeaGreen
                                 : Color.Gray;
                     string entryString = cWoWObject.ToString();
-                    UserControlDebugEntry entry = new UserControlDebugEntry(entryString, foreColor,backColor);
+                    UserControlDebugEntry entry = new UserControlDebugEntry(entryString, foreColor, backColor);
                     LBDebug.Controls.Add(entry);
-                }   
+                }
             }
             catch (Exception ex)
             {
@@ -845,7 +1071,7 @@ namespace Herbfunk.GarrisonBase.Config
 
             LBDebug.Focus();
         }
-      
+
 
 
 
@@ -863,9 +1089,9 @@ namespace Herbfunk.GarrisonBase.Config
                         BaseSettings.CurrentSettings.MailSendItems.FirstOrDefault(m => m.EntryId == entryid);
                     if (removeItem != null)
                         BaseSettings.CurrentSettings.MailSendItems.Remove(removeItem);
-                    
+
                     listView_MailItems.Items.Remove(listViewItem);
-                    
+
                 }
             }
         }
@@ -874,14 +1100,14 @@ namespace Herbfunk.GarrisonBase.Config
         {
             string entryId = textBox_MailItem_EntryId.Text;
             if (String.IsNullOrEmpty(entryId)) return;
-            if (!GarrisonBase.TextIsAllNumerical(entryId)) return;
+            if (!StringHelper.TextIsAllNumerical(entryId)) return;
 
             string recipient = textBox_MailItem_Recipient.Text;
             if (String.IsNullOrEmpty(recipient)) return;
 
             string count = textBox_MailItem_Count.Text;
             if (String.IsNullOrEmpty(count)) return;
-            if (!GarrisonBase.TextIsAllNumerical(count)) return;
+            if (!StringHelper.TextIsAllNumerical(count)) return;
 
             string name = "New Entry";
             string txtbox_name = textBox_MailItem_Name.Text;

@@ -101,7 +101,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (result == MoveResult.Failed)
             {
                 GarrisonBase.Debug("Behavior Looting Movement FAILED for {0}", ObjectCacheManager.LootableObject.Name);
-                ObjectCacheManager.LootableObject.IgnoredTimer = WaitTimer.TenSeconds;
+                ObjectCacheManager.LootableObject.NeedsRemoved = true;
+                ObjectCacheManager.LootableObject.BlacklistType= BlacklistType.Guid;
                 ObjectCacheManager.LootableObject = null;
                 _lootMovement = null;
                 return false;

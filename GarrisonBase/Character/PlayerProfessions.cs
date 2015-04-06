@@ -127,43 +127,43 @@ namespace Herbfunk.GarrisonBase.Character
             if (spellId == 171690) //TrueSteel Ingot
                 return "TrueSteel Ingot";
             if (spellId == 176090) //secrets of draenor blacksmithing
-                return "Secrets of draenor blacksmithing";
+                return "Secrets of Draenor Blacksmithing";
 
             if (spellId == 156587) //Alchemical Catalyst
                 return "Alchemical Catalyst";
             if (spellId == 175880) //secrets of draenor alchemy
-                return "secrets of draenor alchemy";
+                return "Secrets of Draenor Alchemy";
 
             if (spellId == 171391) //Burnished Leather
                 return "Burnished Leather";
             if (spellId == 176089) //secrets of draenor leatherworking
-                return "secrets of draenor leatherworking";
+                return "Secrets of Draenor Leatherworking";
 
             if (spellId == 168835) //Hexweave Cloth
                 return "Hexweave Cloth";
             if (spellId == 176058) //secrets of draenor tailoring
-                return "secrets of draenor tailoring";
+                return "Secrets of Draenor Tailoring";
 
             if (spellId == 170700) //Taladite Crystal
                 return "Taladite Crystal";
             if (spellId == 176087) //secrets of draenor jewelcrafting
-                return "secrets of draenor jewelcrafting";
+                return "Secrets of Draenor Jewelcrafting";
 
             if (spellId == 169080) //Gearspring Parts
                 return "Gearspring Parts";
             if (spellId == 177054) //secrets of draenor Engineering
-                return "secrets of draenor Engineering";
+                return "Secrets of Draenor Engineering";
 
 
             if (spellId == 169081) //War paints
                 return "War paints";
             if (spellId == 177045) //secrets of draenor Inscription
-                return "secrets of draenor Inscription";
+                return "Secrets of Draenor Inscription";
 
             if (spellId == 169092) //Temporal Crystal
                 return "Temporal Crystal";
             if (spellId == 177043) //secrets of draenor enchanting
-                return "secrets of draenor enchanting";
+                return "Secrets of Draenor Enchanting";
 
             return "Unknown";
         }

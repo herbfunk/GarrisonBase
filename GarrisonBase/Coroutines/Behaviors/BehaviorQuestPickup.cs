@@ -26,16 +26,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                                   !QuestManager.QuestContainedInQuestLog(QuestID);
             }
             ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(InteractionEntryId));
-            
+
+            Criteria += (() =>  (!QuestManager.QuestLogFull &&
+                                  !QuestManager.QuestContainedInQuestLog(QuestID)));
         }
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => (!QuestManager.QuestLogFull &&
-                                  !QuestManager.QuestContainedInQuestLog(QuestID));
-            }
-        }
+
         public override void Dispose()
         {
             base.Dispose();

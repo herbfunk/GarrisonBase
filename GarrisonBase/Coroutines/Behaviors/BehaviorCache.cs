@@ -19,17 +19,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             InteractionEntryId = GarrisonManager.GarrisonResourceCacheEntryId;
             MovementPoints.Add(MovementCache.GarrisonEntrance);
-        }
-
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => (BaseSettings.CurrentSettings.BehaviorLootCache &&
+            Criteria += () => (BaseSettings.CurrentSettings.BehaviorLootCache &&
                               GarrisonResourceCacheObject != null &&
                               GarrisonResourceCacheObject.RefWoWObject.IsValid);
-            }
         }
+
+
 
         public C_WoWGameObject GarrisonResourceCacheObject
         {

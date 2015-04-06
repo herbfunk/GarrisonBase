@@ -18,13 +18,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorSendMail()
             : base(MovementCache.GarrisonEntrance)
         {
-
+            Criteria += () => BaseSettings.CurrentSettings.MailAutoSend && GetMailingDictionary().Count > 0;
         }
 
-        public override Func<bool> Criteria
-        {
-            get { return () => BaseSettings.CurrentSettings.MailAutoSend && GetMailingDictionary().Count > 0; }
-        }
+
         public override void Initalize()
         {
             _movement = null;

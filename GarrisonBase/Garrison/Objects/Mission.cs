@@ -101,9 +101,55 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
 
                     if (RewardTypes.HasFlag(RewardTypes.CharacterToken))
-                        _priority += BaseSettings.CurrentSettings.CharacterTokens.Priority;
+                    {
+                        if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward) &&
+                            CacheStaticLookUp.DictItemRewards_CharacterTokens[ItemIdReward].Item2<BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel)
+                        {
+                            _priority = 0;
+                        }
+                        else
+                        {
+                            _priority += BaseSettings.CurrentSettings.CharacterTokens.Priority;
+                        }
+                        
+                    }
                     else if (RewardTypes.HasFlag(RewardTypes.FollowerToken))
-                        _priority += BaseSettings.CurrentSettings.FollowerTokens.Priority;
+                    {
+                        if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor615 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615)
+                        {
+                            _priority = 0;
+                        }
+                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor630 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630)
+                        {
+                            _priority = 0;
+                        }
+                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor645 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645)
+                        {
+                            _priority = 0;
+                        }
+                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon615 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615)
+                        {
+                            _priority = 0;
+                        }
+                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon630 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630)
+                        {
+                            _priority = 0;
+                        }
+                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon645 == ItemIdReward &&
+                            !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645)
+                        {
+                            _priority = 0;
+                        }
+                        else
+                        {
+                            _priority += BaseSettings.CurrentSettings.FollowerTokens.Priority;
+                        }
+                    }
                     else if (RewardTypes.HasFlag(RewardTypes.FollowerTrait))
                         _priority += BaseSettings.CurrentSettings.FollowerTraits.Priority;
                     else if (RewardTypes.HasFlag(RewardTypes.FollowerContract))
@@ -288,6 +334,11 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     RewardTypes |= RewardTypes.XP;
 
                 if (reward.ItemId <= 0) continue;
+
+                if (ItemIdReward == 0)
+                    ItemIdReward = reward.ItemId;
+                else
+                    ItemIdReward2 = reward.ItemId;
 
                 if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(reward.ItemId))
                     RewardTypes |= RewardTypes.CharacterToken;

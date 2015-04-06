@@ -1,10 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Styx.Common.Helpers;
+using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Cache
 {
     public static class Blacklist
     {
-        public static HashSet<uint> BlacklistEntryIDs = new HashSet<uint>(); 
+        public static HashSet<uint> BlacklistEntryIDs = new HashSet<uint>();
+        public static HashSet<uint> TempBlacklistEntryIDs = new HashSet<uint>();
+        public static HashSet<WoWGuid> TempBlacklistGuids = new HashSet<WoWGuid>();
+        private static WaitTimer TempBlacklistEntryIDsTimer, TempBlacklistGuidsTimer;
 
         public static void Initalize(bool IsAlliance)
         {
@@ -14,6 +20,24 @@ namespace Herbfunk.GarrisonBase.Cache
                 BlacklistEntryIDs.UnionWith(_blacklistEntryIds_Alliance);
             else
                 BlacklistEntryIDs.UnionWith(_blacklistEntryIds_Horde);
+
+            TempBlacklistEntryIDsTimer = new WaitTimer(new TimeSpan(0, 0, 1, 0));
+            TempBlacklistGuidsTimer = new WaitTimer(new TimeSpan(0, 0, 1, 0));
+        }
+
+        internal static void CheckTempBlacklists()
+        {
+            if (TempBlacklistEntryIDsTimer.IsFinished)
+            {
+                TempBlacklistEntryIDsTimer.Reset();
+                TempBlacklistEntryIDs.Clear();
+            }
+
+            if (TempBlacklistGuidsTimer.IsFinished)
+            {
+                TempBlacklistGuidsTimer.Reset();
+                TempBlacklistGuids.Clear();
+            }
         }
 
         #region Alliance Blacklist Collection

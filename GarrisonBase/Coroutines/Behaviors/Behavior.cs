@@ -40,7 +40,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         /// This check will occur only once!
         /// </summary>
         /// <returns></returns>
-        public virtual Func<bool> Criteria
+        public Func<bool> Criteria
         {
             get { return _criteria; }
             set { _criteria = value; }
@@ -106,7 +106,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return false;
             }
                
-            await Coroutine.Yield();
+            //await Coroutine.Yield();
             return await Common.CheckCommonCoroutines();
         }
 

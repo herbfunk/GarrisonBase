@@ -1,20 +1,28 @@
-﻿v1.2.0.3
+﻿v1.2.1.0
 
+Will now disable addon Master Plan if found at beginning and renabled at the end.
+Work order pickup will now use a location to find nearest work order object.
+Added behavior for milling and settings for each herb (enabled and reserve count)
+Added settings for mission rewards for follower tokens and character tokens.
+Fixed issue with invalid ore/herb causing endless run loop.
+Added Barn Work Order start up.
+Added Taxi Node update behavior (for refreshing valid nodes)
+
+
+
+v1.2.0.3
 Removed Profile Loading, blackspots will now be added using code thru blackspot manager.
 Added Level 2 Barn Movement for Alliance.
 
 v1.2.0.2
-
 Follower refreshing should no longer throw exception (due to ability not found - requires new additions!)
 
 v1.2.0.1
-
 Added Crescent Saberfish Flesh to trade post workorders.
 Bot will now only harvest ore/herbs during the correct behaviors.
 
 
 v1.2.0.0
-
 Lua Injected "Addon" now uses randomized strings for the global functions.
 Replaced most Lua Calls for Follower and Mission initalizing with honorbuddy garrison API.
 
@@ -41,7 +49,6 @@ Major refactoring of code
 
 
 v1.1.1.0
-
 Added Combat Coroutine method to handle objects that should be engaged.
 Sending BOE items via Mail will now only consider armor or weapon items.
 Store House and Lumbermill first quest is now supported!

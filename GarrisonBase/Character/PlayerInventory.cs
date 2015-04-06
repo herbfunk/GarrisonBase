@@ -50,16 +50,18 @@ namespace Herbfunk.GarrisonBase.Character
 
         internal string DebugString
         {
-            get { return String.Format("Total Bag Slots {0} / Free Slots {1}\r\n" +
-                                       "Total Bag Items {2}\r\n" +
-                                       "Total Bank Items {3}\r\n" +
-                                       "Total Reagent Bank Items {4}\r\n" +
-                                       "Lowest Durability Item {5}",
-                                       TotalBagSlots,TotalFreeSlots,
-                                       BagItems.Count,
-                                       BankItems.Count,
-                                       BankReagentItems.Count,
-                                       LowestEquippedDurability);
+            get
+            {
+                return String.Format("Total Bag Slots {0} / Free Slots {1}\r\n" +
+                                     "Total Bag Items {2}\r\n" +
+                                     "Total Bank Items {3}\r\n" +
+                                     "Total Reagent Bank Items {4}\r\n" +
+                                     "Lowest Durability Item {5}",
+                                     TotalBagSlots, TotalFreeSlots,
+                                     BagItems.Count,
+                                     BankItems.Count,
+                                     BankReagentItems.Count,
+                                     LowestEquippedDurability);
             }
         }
 
@@ -84,7 +86,7 @@ namespace Herbfunk.GarrisonBase.Character
                 }
             }
         }
-        
+
         internal void RefreshEquipmentManagerItemGuids()
         {
             EquipmentManagerItemGuids.Clear();
@@ -108,7 +110,7 @@ namespace Herbfunk.GarrisonBase.Character
         };
         internal void RefreshBackpackContainerInfo()
         {
-            BagContainerTotalSlots = new[] {16, 0, 0, 0, 0};
+            BagContainerTotalSlots = new[] { 16, 0, 0, 0, 0 };
             for (int i = 1; i < 5; i++)
             {
                 bool ignored = LuaCommands.GetBagSlotFlag(i, 1);
@@ -119,7 +121,7 @@ namespace Herbfunk.GarrisonBase.Character
         //-1 Base Backpack Bag
         //0 - 3 Extra Backpack Bags
 
-        
+
         public void UpdateBagItems()
         {
             BagItems.Clear();
@@ -135,12 +137,12 @@ namespace Herbfunk.GarrisonBase.Character
             {
                 BehaviorManager.SwitchBehavior = new BehaviorSellRepair();
             }
-            
+
             ShouldUpdateBagItems = false;
         }
         public bool ShouldUpdateBagItems = true;
 
-        
+
         public void UpdateBankItems()
         {
             BankItems.Clear();
@@ -156,7 +158,7 @@ namespace Herbfunk.GarrisonBase.Character
         }
         public bool ShouldUpdateBankItems = true;
 
-        
+
         public void UpdateBankReagentItems()
         {
             BankReagentItems.Clear();
@@ -173,14 +175,14 @@ namespace Herbfunk.GarrisonBase.Character
         public bool ShouldUpdateBankReagentItems = true;
 
 
-        public bool FindFreeBagSlot(out int bagIndex , out int bagSlot )
+        public bool FindFreeBagSlot(out int bagIndex, out int bagSlot)
         {
             bagIndex = -1;
             bagSlot = -1;
 
             for (int i = 0; i < 5; i++)
             {
-                var bagItemSlots = BagItems.Values.Where(item => item.BagIndex+1 == i).Select(item => item.BagSlot).ToList();
+                var bagItemSlots = BagItems.Values.Where(item => item.BagIndex + 1 == i).Select(item => item.BagSlot).ToList();
                 for (int j = 0; j < BagContainerTotalSlots[i]; j++)
                 {
                     if (bagItemSlots.Contains(j)) continue;
@@ -215,7 +217,7 @@ namespace Herbfunk.GarrisonBase.Character
             return BagItems.Values.Where(i => i.Quality == quality).ToList();
         }
 
-        public List<WoWGuid> ItemDisenchantingBlacklistedGuids =new List<WoWGuid>();
+        public List<WoWGuid> ItemDisenchantingBlacklistedGuids = new List<WoWGuid>();
 
         public List<C_WoWItem> GetBagItemsVendor()
         {
@@ -265,13 +267,13 @@ namespace Herbfunk.GarrisonBase.Character
                         !EquipmentManagerItemGuids.Contains(i.Guid))
                     .ToList());
             }
-            
+
 
             return retList;
         }
         public List<C_WoWItem> GetBagItemsDisenchantable()
         {
-            
+
             List<C_WoWItem> retList = new List<C_WoWItem>();
             if (BaseSettings.CurrentSettings.DisenchantingUncommon)
             {
@@ -279,7 +281,7 @@ namespace Herbfunk.GarrisonBase.Character
                     .Where(i =>
                             !i.IsOpenable && !i.IsAccountBound &&
                             i.ConsumableClass == WoWItemConsumableClass.None &&
-                            i.RequiredLevel > 89 && (i.Level > 429 && i.Level<=BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel) &&
+                            i.RequiredLevel > 89 && (i.Level > 429 && i.Level <= BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel) &&
                             (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                             !ItemDisenchantingBlacklistedGuids.Contains(i.Guid) &&
                             (!BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded || i.IsSoulbound))
@@ -314,10 +316,10 @@ namespace Herbfunk.GarrisonBase.Character
         public List<C_WoWItem> GetBagItemsBOE()
         {
             List<C_WoWItem> retList = new List<C_WoWItem>();
-            return BagItems.Values.Where(i => 
+            return BagItems.Values.Where(i =>
                  !i.IsOpenable &&
-                 i.ConsumableClass == WoWItemConsumableClass.None && 
-                 !i.IsSoulbound && 
+                 i.ConsumableClass == WoWItemConsumableClass.None &&
+                 !i.IsSoulbound &&
                  (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
                  !EquipmentManagerItemGuids.Contains(i.Guid)).ToList();
         }
@@ -348,27 +350,72 @@ namespace Herbfunk.GarrisonBase.Character
 
         public List<C_WoWItem> GetBagItemsEnchanting()
         {
-            return BagItems.Values.Where(i => 
-                (i.Entry==(int)CraftingReagents.DraenicDust||
-                i.Entry==(int)CraftingReagents.LuminousShard||
-                i.Entry == (int)CraftingReagents.TemporalCrystal||
-                i.Entry == (int)CraftingReagents.FracturedTemporalCrystal)).ToList();
+            return BagItems.Values.Where(i => EnchantingIds.Contains((int)i.Entry)).ToList();
         }
         public List<C_WoWItem> GetBagItemsHerbs()
         {
-            return BagItems.Values.Where(i =>
-                (i.Entry == (int)CraftingReagents.Frostweed ||
-                i.Entry == (int)CraftingReagents.Fireweed ||
-                i.Entry == (int)CraftingReagents.NagrandArrowbloom ||
-                i.Entry == (int)CraftingReagents.TaladorOrchid ||
-                i.Entry == (int)CraftingReagents.GorgrondFlytrap ||
-                i.Entry == (int)CraftingReagents.Starflower)).ToList();
+            return BagItems.Values.Where(i => HerbIds.Contains((int)i.Entry)).ToList();
         }
         public List<C_WoWItem> GetBagItemsOre()
         {
-            return BagItems.Values.Where(i =>
-                (i.Entry == (int)CraftingReagents.TrueIronOre ||
-                i.Entry == (int)CraftingReagents.BlackrockOre)).ToList();
+            return BagItems.Values.Where(i => OreIds.Contains((int)i.Entry)).ToList();
+        }
+
+        public List<C_WoWItem> GetBagItemsMilling()
+        {
+            var returnHerbs = new List<C_WoWItem>();
+            var herbs = GetBagItemsHerbs();
+            foreach (var item in herbs)
+            {
+                var type = (CraftingReagents) Enum.Parse(typeof (CraftingReagents), item.Entry.ToString());
+                switch (type)
+                {
+                    case CraftingReagents.Frostweed:
+                        if (!BaseSettings.CurrentSettings.MillingFrostWeed.Ignored && 
+                            BaseSettings.CurrentSettings.MillingFrostWeed.Reserved<item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                    case CraftingReagents.Fireweed:
+                        if (!BaseSettings.CurrentSettings.MillingFireWeed.Ignored &&
+                            BaseSettings.CurrentSettings.MillingFireWeed.Reserved < item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                    case CraftingReagents.GorgrondFlytrap:
+                        if (!BaseSettings.CurrentSettings.MillingGorgrondFlytrap.Ignored &&
+                            BaseSettings.CurrentSettings.MillingGorgrondFlytrap.Reserved < item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                    case CraftingReagents.NagrandArrowbloom:
+                        if (!BaseSettings.CurrentSettings.MillingNagrandArrowbloom.Ignored &&
+                            BaseSettings.CurrentSettings.MillingNagrandArrowbloom.Reserved < item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                    case CraftingReagents.Starflower:
+                        if (!BaseSettings.CurrentSettings.MillingStarflower.Ignored &&
+                            BaseSettings.CurrentSettings.MillingStarflower.Reserved < item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                    case CraftingReagents.TaladorOrchid:
+                        if (!BaseSettings.CurrentSettings.MillingTaladorOrchid.Ignored &&
+                            BaseSettings.CurrentSettings.MillingTaladorOrchid.Reserved < item.StackCount)
+                        {
+                            returnHerbs.Add(item);
+                        }
+                        break;
+                }
+            }
+
+            return returnHerbs;
         }
 
         internal Dictionary<C_WoWItem, string> GetMailItems()
@@ -380,7 +427,7 @@ namespace Herbfunk.GarrisonBase.Character
                 var items = GetBagItemsById(mailSendItem.EntryId).Where(i => i.StackCount > mailSendItem.OnCount).ToList();
                 if (items.Count > 0)
                 {
-                    foreach (var item in items )
+                    foreach (var item in items)
                     {
                         mailItems.Add(item, mailSendItem.Recipient);
                     }
@@ -399,5 +446,30 @@ namespace Herbfunk.GarrisonBase.Character
             }
         }
         private C_WoWItem _garrisonhearthstone;
+
+
+        public static readonly List<int> HerbIds = new List<int>
+        {
+            109125, //Fireweed
+            109124, //Frostweed
+            109126, //GorgrondFlytrap
+            109128, //NagrandArrowbloom
+            109127, //Starflower
+            109129, //TaladorOrchid
+        };
+
+        public static readonly List<int> OreIds = new List<int>
+        {
+            109118, //BlackrockOre
+            109119, //TrueIronOre
+        };
+
+        public static readonly List<int> EnchantingIds = new List<int>
+        {
+            109693, //DraenicDust
+            111245, //LuminousShard
+            113588, //TemporalCrystal
+            115504, //FracturedTemporalCrystal
+        };
     }
 }

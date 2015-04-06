@@ -18,12 +18,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override BehaviorType Type { get { return BehaviorType.Mail; } }
         public BehaviorGetMail() : base(MovementCache.GarrisonEntrance)
         {
-            
+            Criteria += () => BaseSettings.CurrentSettings.MailAutoGet && LuaCommands.HasNewMail();
         }
-        public override Func<bool> Criteria
-        {
-            get { return () => BaseSettings.CurrentSettings.MailAutoGet && LuaCommands.HasNewMail(); }
-        }
+
 
         public C_WoWObject Mailbox
         {
@@ -92,12 +89,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (!LuaEvents.MailOpen)
                     return true;
 
-                if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                if (LuaUI.InboxPreviousPage.IsEnabled())
                 {
                     //We need to reset back to first page!
-                    while (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                    while (LuaUI.InboxPreviousPage.IsEnabled())
                     {
-                        LuaCommands.ClickButton(LuaCommands.ButtonNames.InboxPrevPageButton);
+                        LuaUI.InboxPreviousPage.Click();
                         await CommonCoroutines.SleepForRandomUiInteractionTime();
                     }
                 }
@@ -112,11 +109,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (highestInboxPageIndex>1)
                 {
                     //We want to loot mail that is not on the first page..
-                    if (!LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.InboxPrevPageButton))
+                    if (!LuaUI.InboxPreviousPage.IsEnabled())
                     {
                         for (int i = 1; i < highestInboxPageIndex; i++)
                         {//Click next page until we are at the correct page.
-                            LuaCommands.ClickButton(LuaCommands.ButtonNames.InboxNextPageButton);
+                            LuaUI.InboxNextPage.Click();
                             await CommonCoroutines.SleepForRandomUiInteractionTime();
                         }
                     }
@@ -146,7 +143,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         //Close the open mail frame (if visible..)
                         if (LuaCommands.OpenMailFrameIsVisible())
                         {
-                            LuaCommands.ClickButton(LuaCommands.ButtonNames.OpenMailFrameCloseButton);
+                            LuaUI.InboxClose.Click();
                             await CommonCoroutines.SleepForRandomUiInteractionTime();
                         }
                     }

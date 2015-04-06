@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using Herbfunk.GarrisonBase.Cache.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx.Helpers;
 
 namespace Herbfunk.GarrisonBase.Config
@@ -170,7 +171,7 @@ namespace Herbfunk.GarrisonBase.Config
 
         private void textBox_Count_TextChanged(object sender, EventArgs e)
         {
-            if (!GarrisonBase.TextIsAllNumerical(textBox_Count.Text))
+            if (!StringHelper.TextIsAllNumerical(textBox_Count.Text))
                 textBox_Count.Text = "0";
         }
     }

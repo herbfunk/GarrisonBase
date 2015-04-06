@@ -21,6 +21,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint);
             MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].EntranceMovementPoint);
             InteractionEntryId = GarrisonManager.DisenchantingEntryId;
+
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorDisenchanting &&
+                             !GarrisonManager.Buildings[BuildingType.EnchantersStudy].IsBuilding &&
+                             !GarrisonManager.Buildings[BuildingType.EnchantersStudy].CanActivate &&
+                             Character.Player.Inventory.GetBagItemsDisenchantable().Count > 0;
         }
 
         public override void Initalize()
@@ -29,16 +34,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             base.Initalize();
         }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => BaseSettings.CurrentSettings.BehaviorDisenchanting &&
-                             !GarrisonManager.Buildings[BuildingType.EnchantersStudy].IsBuilding &&
-                             !GarrisonManager.Buildings[BuildingType.EnchantersStudy].CanActivate &&
-                             Character.Player.Inventory.GetBagItemsDisenchantable().Count > 0;
-            }
-        }
+
         public C_WoWGameObject DisenchantingObject
         {
             get { return ObjectCacheManager.GetWoWGameObjects(GarrisonManager.DisenchantingEntryId).FirstOrDefault(); }

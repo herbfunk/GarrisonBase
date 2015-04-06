@@ -14,20 +14,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public BehaviorHerb() : base(MovementCache.GardenPlot63SafePoint)
         {
-            
-        }
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () =>
-                    (!GarrisonManager.Buildings[BuildingType.HerbGarden].IsBuilding &&
+            Criteria += () => (!GarrisonManager.Buildings[BuildingType.HerbGarden].IsBuilding &&
                      !GarrisonManager.Buildings[BuildingType.HerbGarden].CanActivate &&
                      GarrisonManager.Buildings[BuildingType.HerbGarden].FirstQuestCompleted &&
-                     LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedHerb) && 
+                     LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedHerb) &&
                      BaseSettings.CurrentSettings.BehaviorHerbGather);
-            }
         }
+
         public override void Initalize()
         {
             base.Initalize();

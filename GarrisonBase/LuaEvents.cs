@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Garrison;
+using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.Properties;
 using Herbfunk.GarrisonBase.Quest;
 using Herbfunk.GarrisonBase.Quest.Objects;
@@ -471,9 +472,9 @@ namespace Herbfunk.GarrisonBase
         }
 
         internal static bool LuaAddonInjected = false;
-        internal static string TestFunctionString = GarrisonBase.RandomString;
-        internal static string SuccessFunctionString = GarrisonBase.RandomString;
-        internal static string ClickFunctionString = GarrisonBase.RandomString;
+        internal static string TestFunctionString = StringHelper.RandomString;
+        internal static string SuccessFunctionString = StringHelper.RandomString;
+        internal static string ClickFunctionString = StringHelper.RandomString;
 
         internal static async Task<bool> InjectLuaAddon()
         {

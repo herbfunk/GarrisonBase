@@ -16,9 +16,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
         public static async Task<bool> EngageObject()
         {
             if (ObjectCacheManager.ShouldUpdateObjectCollection)
-            {
                 ObjectCacheManager.UpdateCache();
-            }
+            
 
             if (!ObjectCacheManager.ShouldKill)
             {
@@ -40,6 +39,10 @@ namespace Herbfunk.GarrisonBase.Coroutines
             {
                 GarrisonBase.Debug("EngageObject no longer valid for combat!");
                 ObjectCacheManager.UpdateCombatTarget();
+
+                //Clear lootable object
+                ObjectCacheManager.LootableObject = null;
+
                 _combatMovement = null;
                 return false;
             }

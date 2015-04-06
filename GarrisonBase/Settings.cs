@@ -60,6 +60,23 @@ namespace Herbfunk.GarrisonBase
         }
     }
 
+    public class InscriptionMillingSetting
+    {
+        public bool Ignored { get; set; }
+        public int Reserved { get; set; }
+
+        public InscriptionMillingSetting()
+        {
+            Ignored = true;
+            Reserved = 0;
+        }
+        public InscriptionMillingSetting(bool ignored, int reserved)
+        {
+            Ignored = ignored;
+            Reserved = reserved;
+        }
+    }
+
     public class BaseSettings
     {
         internal static BaseSettings CurrentSettings = new BaseSettings();
@@ -80,6 +97,15 @@ namespace Herbfunk.GarrisonBase
 
 
         public int ReservedGarrisonResources { get; set; }
+
+        public bool MissionReward_FollowerToken_ArmorSet615 { get; set; }
+        public bool MissionReward_FollowerToken_ArmorSet630 { get; set; }
+        public bool MissionReward_FollowerToken_ArmorSet645 { get; set; }
+        public bool MissionReward_FollowerToken_WeaponSet615 { get; set; }
+        public bool MissionReward_FollowerToken_WeaponSet630 { get; set; }
+        public bool MissionReward_FollowerToken_WeaponSet645 { get; set; }
+
+        public int MissionReward_CharacterToken_ItemLevel { get; set; }
         
 
         public bool MailAutoSend { get; set; }
@@ -163,11 +189,22 @@ namespace Herbfunk.GarrisonBase
         public bool VendorRareItems { get; set; }
 
         public List<int> ProfessionSpellIds { get; set; }
+
+        public bool MillingEnabled { get; set; }
+        public int MillingMinimum { get; set; }
+        public InscriptionMillingSetting MillingFrostWeed { get; set; }
+        public InscriptionMillingSetting MillingFireWeed { get; set; }
+        public InscriptionMillingSetting MillingNagrandArrowbloom { get; set; }
+        public InscriptionMillingSetting MillingTaladorOrchid { get; set; }
+        public InscriptionMillingSetting MillingGorgrondFlytrap { get; set; }
+        public InscriptionMillingSetting MillingStarflower { get; set; }
+
         public int MinimumBagSlotsFree { get; set; }
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
         public bool DEBUG_IGNOREHEARTHSTONE { get; set; }
+        public bool DEBUG_FAKEPICKUPWORKORDER { get; set; }
 
         public BaseSettings()
         {
@@ -217,6 +254,15 @@ namespace Herbfunk.GarrisonBase
             BehaviorLootCache = true;
 
             ReservedGarrisonResources = 0;
+
+            MissionReward_FollowerToken_ArmorSet615 = true;
+            MissionReward_FollowerToken_ArmorSet630 = true;
+            MissionReward_FollowerToken_ArmorSet645 = true;
+            MissionReward_FollowerToken_WeaponSet615 = true;
+            MissionReward_FollowerToken_WeaponSet630 = true;
+            MissionReward_FollowerToken_WeaponSet645 = true;
+            MissionReward_CharacterToken_ItemLevel = 519;
+
             HBRelog_SkipToNextTask = true;
 
             ExchangePrimalSpirits = false;
@@ -244,9 +290,20 @@ namespace Herbfunk.GarrisonBase
             ProfessionSpellIds = new List<int>();
             MinimumBagSlotsFree = 4;
 
+            MillingEnabled = false;
+            MillingMinimum = 50;
+            MillingFireWeed = new InscriptionMillingSetting(true, 100);
+            MillingFrostWeed = new InscriptionMillingSetting(true, 100);
+            MillingGorgrondFlytrap = new InscriptionMillingSetting(true, 100);
+            MillingNagrandArrowbloom = new InscriptionMillingSetting(true, 100);
+            MillingStarflower = new InscriptionMillingSetting(true, 100);
+            MillingTaladorOrchid = new InscriptionMillingSetting(true, 100);
+
+
             DEBUG_FAKESTARTWORKORDER = false;
             DEBUG_FAKEFINISHQUEST = false;
             DEBUG_IGNOREHEARTHSTONE = false;
+            DEBUG_FAKEPICKUPWORKORDER = false;
 
             LastCheckedHerbString = "0001-01-01T00:00:00";
             LastCheckedMineString = "0001-01-01T00:00:00";

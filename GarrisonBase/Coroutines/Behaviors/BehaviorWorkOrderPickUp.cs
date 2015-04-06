@@ -20,6 +20,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             : base(building.SafeMovementPoint, building.WorkOrderObjectEntryId)
         {
             Building = building;
+
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorWorkOrderPickup &&
+                             !Building.CanActivate && !Building.IsBuilding &&
+                             BaseSettings.CurrentSettings.WorkOrderTypes.HasFlag(Building.WorkOrderType) &&
+                             !Building.CheckedWorkOrderPickUp && Building.WorkOrder.Pickup > 0;
         }
         public override void Initalize()
         {
@@ -39,23 +44,19 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             get
             {
-                C_WoWGameObject obj;
-                obj=ObjectCacheManager.GetWoWGameObjects(Building.WorkOrderObjectName).FirstOrDefault() ??
-                    ObjectCacheManager.GetWoWGameObjects("Crate").FirstOrDefault();
+                C_WoWGameObject obj = 
+                    ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint,
+                    150f, 
+                    Building.WorkOrderObjectName).FirstOrDefault() 
+                    ??
+                    ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint,
+                    150f,
+                    "Crate").FirstOrDefault();
+
                 return obj;
             }
         }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => BaseSettings.CurrentSettings.BehaviorWorkOrderPickup &&
-                             !Building.CanActivate && !Building.IsBuilding &&
-                             BaseSettings.CurrentSettings.WorkOrderTypes.HasFlag(Building.WorkOrderType) &&
-                             !Building.CheckedWorkOrderPickUp && Building.WorkOrder.Pickup > 0;
-            }
-        }
 
 
         private Movement _movement, _specialMovement;
@@ -80,6 +81,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 if (StyxWoW.Me.IsMoving) 
                     await CommonCoroutines.StopMoving();
+
+                if (BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER)
+                {
+                    Building.CheckedWorkOrderPickUp = true;
+                    return false;
+                }
 
                 if (WorkOrderObject.GetCursor == WoWCursorType.PointCursor)
                 {

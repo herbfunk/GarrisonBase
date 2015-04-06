@@ -22,15 +22,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (Character.Player.MinimapZoneText != "Town Hall" || CommandTable == null)
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
+
+            Criteria += () => 
+                BaseSettings.CurrentSettings.BehaviorMissionStart && 
+                GarrisonManager.AvailableMissionIds.Count > 0 &&
+                GarrisonManager.CurrentActiveFollowers <= GarrisonManager.MaxActiveFollowers;
         }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => BaseSettings.CurrentSettings.BehaviorMissionStart && GarrisonManager.AvailableMissionIds.Count > 0;
-            }
-        }
+
         public C_WoWObject CommandTable
         {
             get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(); }

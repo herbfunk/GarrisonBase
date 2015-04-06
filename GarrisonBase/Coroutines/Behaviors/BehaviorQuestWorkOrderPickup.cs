@@ -7,12 +7,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     {
         public BehaviorQuestWorkOrderPickup(Building building) : base(building)
         {
-            
+            Criteria = () => true;
         }
 
-        public override Func<bool> Criteria
-        {
-            get { return () => true; }
-        }
+
     }
 }

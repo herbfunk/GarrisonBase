@@ -24,41 +24,54 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             SkillId = skillid;
             SkillBookId = PlayerProfessions.DraenorProfessionSpellIds[Skill];
             Currency = PlayerProfessions.GetWorkOrderItemAndQuanityRequired(skillid);
+            Criteria += () => (BaseSettings.CurrentSettings.BehaviorProfessions &&
+                    BaseSettings.CurrentSettings.ProfessionSpellIds.Contains(SkillId) &&
+                    PlayerProfessions.HasRequiredCurrency(Currency) &&
+                    !Spell.Cooldown);
         }
+
+        public override void Initalize()
+        {
+            if (Skill == SkillLine.Blacksmithing || Skill == SkillLine.Engineering)
+            {
+                if (!GarrisonManager.HasForge)
+                {
+                    IsDone = true;
+                    return;
+                }
+
+                if (GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].CanActivate ||
+                    GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].IsBuilding)
+                {
+                    IsDone = true;
+                    return;
+                }
+
+                var building = GarrisonManager.Buildings[GarrisonManager.ForgeBuilding];
+                var loc = building.EntranceMovementPoint;
+                if (building.SpecialMovementPoints != null && building.SpecialMovementPoints.Count>0)
+                    loc = building.SpecialMovementPoints[0];
+                _movement = new Movement(loc, 2f);
+            }
+
+            base.Initalize();
+        }
+
         public override string GetStatusText
         {
             get { return base.GetStatusText + Skill.ToString() + " id[" + SkillId + "]"; }
         }
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () =>
-                    (BaseSettings.CurrentSettings.BehaviorProfessions &&
-                     BaseSettings.CurrentSettings.ProfessionSpellIds.Contains(SkillId) &&
-                     PlayerProfessions.HasRequiredCurrency(Currency) &&
-                     !Spell.Cooldown);
-            }
-        }
+
 
         public override async Task<bool> BehaviorRoutine()
         {
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
+            //Requires Anvil
             if (Skill == SkillLine.Blacksmithing || Skill == SkillLine.Engineering)
             {
-                if (!GarrisonManager.HasForge)
-                    return false;
-
-                if (GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].CanActivate ||
-                    GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].IsBuilding)
-                    return false;
-
-                if (_movement==null)
-                    _movement=new Movement(GarrisonManager.Buildings[GarrisonManager.ForgeBuilding].EntranceMovementPoint, 2f);
-
-                if (await _movement.MoveTo())
+                if (_movement != null && await _movement.MoveTo())
                     return true;
             }
 
@@ -93,7 +106,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     10000,
                     () => false,
                     Spell.Cast);
-
+                
                 return true;
             }
 

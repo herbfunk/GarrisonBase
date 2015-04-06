@@ -100,24 +100,6 @@ namespace Herbfunk.GarrisonBase
         }
 
 
-      
-
-
-
-
-
-        internal static void Reset()
-        {
-            InitalizedCache = false;
-            GarrisonManager.Initalized = false;
-
-            GarrisonManager.Buildings.Clear();
-            GarrisonManager.Followers.Clear();
-            GarrisonManager.AvailableMissions.Clear();
-            GarrisonManager.CompletedMissionIds.Clear();
-            QuestManager.QuestLog.Clear();
-        }
-
         public static WoWObject GetWoWObject(uint entryId)
         {
             ObjectManager.Update();
@@ -329,19 +311,29 @@ namespace Herbfunk.GarrisonBase
             118529, //Normal (665)
             118530, //Heroic (670)
         };
+
+        public static int ItemRewards_FollowerToken_ArmorEnhancement = 120301;
+        public static int ItemRewards_FollowerToken_WeaponEnhancement = 120302;
+        public static int ItemRewards_FollowerToken_Armor615 = 114807;
+        public static int ItemRewards_FollowerToken_Weapon615 = 114616;
+        public static int ItemRewards_FollowerToken_Armor630 = 114806;
+        public static int ItemRewards_FollowerToken_Weapon630 = 114081;
+        public static int ItemRewards_FollowerToken_Armor645 = 114746;
+        public static int ItemRewards_FollowerToken_Weapon645 = 114622;
+
         public static readonly List<int> ItemRewards_FollowerTokens = new List<int>
         {
-            120301, //Armor Enhancement Token
-            120302, //Weapon Enhancement Token
+            ItemRewards_FollowerToken_ArmorEnhancement, //Armor Enhancement Token
+            ItemRewards_FollowerToken_WeaponEnhancement, //Weapon Enhancement Token
 
-            114616, //war-ravaged-weaponry
-            114807, //war-ravaged-armor-set
+            ItemRewards_FollowerToken_Weapon615, //war-ravaged-weaponry
+            ItemRewards_FollowerToken_Armor615, //war-ravaged-armor-set
 
-            114806, //blackrock-armor-set 
-            114081, //blackrock-weaponry
+            ItemRewards_FollowerToken_Armor630, //blackrock-armor-set 
+            ItemRewards_FollowerToken_Weapon630, //blackrock-weaponry
 
-            114746, //goredrenched-armor-set
-            114622, //goredrenched-weaponry
+            ItemRewards_FollowerToken_Armor645, //goredrenched-armor-set
+            ItemRewards_FollowerToken_Weapon630, //goredrenched-weaponry
 
             114822, //heavily-reinforced-armor-enhancement (+9)
             114131, //power-overrun-weapon-enhancement (+9)

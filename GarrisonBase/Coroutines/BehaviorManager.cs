@@ -43,15 +43,12 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     return false;
                 }
             }
-
+            
             if (await Common.CheckCommonCoroutines())
                 return true;
 
-
             if (!BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE && await Common.PreChecks.BehaviorRoutine())
                 return true;
-
-
 
             if (!GarrisonManager.Initalized)
             {
@@ -152,6 +149,15 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return true;
             }
 
+            if (Common.PreChecks.DisabledMasterPlanAddon)
+            {
+                LuaCommands.EnableAddon("MasterPlan");
+                LuaCommands.ReloadUI();
+                Common.PreChecks.DisabledMasterPlanAddon = false;
+                await Coroutine.Wait(6000, () => StyxWoW.IsInGame);
+                return true;
+            }
+
 
 
             TreeRoot.StatusText = "GarrisonBase is finished!";
@@ -168,6 +174,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             CurrentBehavior = null;
             SwitchBehavior = null;
 
+            //Behaviors.Add(Follower.FollowerQuestBehaviorArray(467));
             //Behaviors.Add(Follower.FollowerQuestBehaviorArray(189));
             //Behaviors.Add(Follower.FollowerQuestBehaviorArray(193));
             //Behaviors.Add(Follower.FollowerQuestBehaviorArray(207));
@@ -332,6 +339,9 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //Profession Crafting
             foreach (var skill in Player.Professions.ProfessionSkills)
             {
+                if (skill == SkillLine.Inscription)
+                    Behaviors.Add(new BehaviorMilling());
+                
                 int[] spellIds = PlayerProfessions.ProfessionDailyCooldownSpellIds[skill];
                 Behaviors.Add(new BehaviorCraftingProfession(skill, spellIds[1]));
                 Behaviors.Add(new BehaviorCraftingProfession(skill, spellIds[0]));
@@ -352,7 +362,12 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     if (b.WorkOrder != null)
                     {
                         Behaviors.Add(new BehaviorWorkOrderPickUp(b));
-                        if (b.Type == BuildingType.EnchantersStudy) Behaviors.Add(new BehaviorDisenchant()); //Disenchanting!
+
+                        if (b.Type == BuildingType.EnchantersStudy) 
+                            Behaviors.Add(new BehaviorDisenchant()); //Disenchanting!
+                        else if(b.Type== BuildingType.ScribesQuarters)
+                            Behaviors.Add(new BehaviorMilling()); //Milling!
+
                         Behaviors.Add(new BehaviorWorkOrderStartUp(b));
                     }
                 }
@@ -383,10 +398,14 @@ namespace Herbfunk.GarrisonBase.Coroutines
             }
         }
 
+        internal static bool HasQuest(uint questId)
+        {
+            return QuestManager.QuestContainedInQuestLog(questId);
+        }
         internal static bool HasQuestAndNotCompleted(uint questId)
         {
             return
-                QuestManager.QuestContainedInQuestLog(questId) &&
+                HasQuest(questId) &&
                 !QuestManager.GetQuestFromQuestLog(questId).IsCompleted;
         }
         internal static bool ObjectNotValidOrNotFound(uint id)

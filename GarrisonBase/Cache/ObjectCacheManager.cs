@@ -14,23 +14,20 @@ namespace Herbfunk.GarrisonBase.Cache
         [Flags]
         public enum ObjectFlags
         {
-            None=0,
-            Combat=1,
-            Loot=2,
-            Quest=4,
+            None = 0,
+            Combat = 1,
+            Loot = 2,
+            Quest = 4,
         }
 
         public static void Initalize()
         {
-            LootIds = new EntryList();
             LootIds.OnItemAdded += OnLootIdAdded;
             LootIds.OnItemRemoved += OnLootIdRemoved;
 
-            CombatIds = new EntryList();
             CombatIds.OnItemAdded += OnCombatIdAdded;
             CombatIds.OnItemRemoved += OnCombatIdRemoved;
 
-            QuestNpcIds = new EntryList();
             QuestNpcIds.OnItemAdded += OnQuestNpcIdAdded;
             QuestNpcIds.OnItemRemoved += OnQuestNpcIdRemoved;
 
@@ -44,7 +41,7 @@ namespace Herbfunk.GarrisonBase.Cache
         internal static C_WoWUnit CombatObject { get; set; }
         internal static bool FoundOreObject { get; set; }
         internal static bool FoundHerbObject { get; set; }
-       
+
         internal static bool CheckFlag(WoWObjectTypes property, WoWObjectTypes flag)
         {
             return (property & flag) != 0;
@@ -103,7 +100,7 @@ namespace Herbfunk.GarrisonBase.Cache
         }
         private static double _lootDistance = 100;
 
-        public static EntryList LootIds { get; set; }
+        public static EntryList LootIds = new EntryList();
         internal static void OnLootIdAdded(uint item)
         {
             foreach (var obj in GetWoWObjects(item))
@@ -119,7 +116,7 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
 
-        public static EntryList CombatIds { get; set; }
+        public static EntryList CombatIds = new EntryList();
         internal static void OnCombatIdAdded(uint item)
         {
             foreach (var obj in GetWoWObjects(item))
@@ -135,7 +132,7 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
 
-        public static EntryList QuestNpcIds { get; set; }
+        public static EntryList QuestNpcIds = new EntryList();
         internal static void OnQuestNpcIdAdded(uint item)
         {
             foreach (var obj in GetWoWObjects(item))
@@ -158,7 +155,7 @@ namespace Herbfunk.GarrisonBase.Cache
 
             LootableObject = null;
             CombatObject = null;
-            
+
             QuestNpcIds.Clear();
             CombatIds.Clear();
             LootIds.Clear();
@@ -169,13 +166,20 @@ namespace Herbfunk.GarrisonBase.Cache
             _lootDistance = 100;
             FoundOreObject = false;
             FoundHerbObject = false;
+             
+            LootIds.OnItemAdded -= OnLootIdAdded;
+            LootIds.OnItemRemoved -= OnLootIdRemoved;
+            CombatIds.OnItemAdded -= OnCombatIdAdded;
+            CombatIds.OnItemRemoved -= OnCombatIdRemoved;
+            QuestNpcIds.OnItemAdded -= OnQuestNpcIdAdded;
+            QuestNpcIds.OnItemRemoved -= OnQuestNpcIdRemoved;
 
             ValidLootableObjects.Clear();
             ValidCombatObjects.Clear();
             ObjectCollection.Clear();
 
-            BlacklistedGuids.Clear();
-            BlacklistedEntryIds.Clear();
+            Blacklist.TempBlacklistGuids.Clear();
+            Blacklist.TempBlacklistEntryIDs.Clear();
 
         }
 
@@ -190,8 +194,6 @@ namespace Herbfunk.GarrisonBase.Cache
         }
 
         private static int _updateLoopCounter;
-        private static readonly List<WoWGuid> BlacklistedGuids=new List<WoWGuid>();
-        private static readonly List<uint> BlacklistedEntryIds = new List<uint>(); 
         internal static void UpdateCache()
         {
             Character.Player.Update();
@@ -199,54 +201,57 @@ namespace Herbfunk.GarrisonBase.Cache
             FoundOreObject = false;
             FoundHerbObject = false;
 
+            Blacklist.CheckTempBlacklists();
+
             //GarrisonBase.Debug("Updating Object Cache");
-            List<WoWGuid> GuidsSeenThisLoop = new List<WoWGuid>();
+            var guidsSeenThisLoop = new List<WoWGuid>();
+
             using (StyxWoW.Memory.AcquireFrame())
             {
                 ObjectManager.Update();
                 foreach (var obj in ObjectManager.ObjectList)
                 {
-                    uint tmp_Entry = obj.Entry;
-                    if (BlacklistedEntryIds.Contains(tmp_Entry)) continue;
-                    if (Blacklist.BlacklistEntryIDs.Contains(tmp_Entry))
+                    var tmpEntry = obj.Entry;
+                    if (Blacklist.TempBlacklistEntryIDs.Contains(tmpEntry)) continue;
+                    if (Blacklist.BlacklistEntryIDs.Contains(tmpEntry))
                     {
                         //Styx.CommonBot.Blacklist.Add(obj, BlacklistFlags.All, new TimeSpan(1, 0, 0, 0), "Perma Blacklist");
                         continue;
                     }
 
-                    WoWGuid tmp_Guid = obj.Guid;
-                    if (GuidsSeenThisLoop.Contains(tmp_Guid)) continue;
-                    GuidsSeenThisLoop.Add(tmp_Guid);
+                    var tmpGuid = obj.Guid;
+                    if (guidsSeenThisLoop.Contains(tmpGuid)) continue;
+                    guidsSeenThisLoop.Add(tmpGuid);
 
-                    if (BlacklistedGuids.Contains(tmp_Guid)) continue;
+                    if (Blacklist.TempBlacklistGuids.Contains(tmpGuid)) continue;
 
                     C_WoWObject wowObj;
-                    if (!ObjectCollection.TryGetValue(tmp_Guid, out wowObj))
+                    if (!ObjectCollection.TryGetValue(tmpGuid, out wowObj))
                     {
                         //Create new object!
-                        if (obj.Type == WoWObjectType.Unit)
+                        switch (obj.Type)
                         {
-                            C_WoWUnit objUnit = new C_WoWUnit(obj.ToUnit());
-                            ObjectCollection.Add(tmp_Guid, objUnit);
-                            wowObj = ObjectCollection[tmp_Guid];
-                        }
-                        else if (obj.Type == WoWObjectType.GameObject)
-                        {
-                            WoWGameObject gameObject = obj.ToGameObject();
-                            if (CacheStaticLookUp.BlacklistedGameObjectTypes.Contains(gameObject.SubType))
-                            {
-                                BlacklistedEntryIds.Add(tmp_Entry);
+                            case WoWObjectType.Unit:
+                                var objUnit = new C_WoWUnit(obj.ToUnit());
+                                ObjectCollection.Add(tmpGuid, objUnit);
+                                wowObj = ObjectCollection[tmpGuid];
+                                break;
+
+                            case WoWObjectType.GameObject:
+                                var gameObject = obj.ToGameObject();
+                                if (CacheStaticLookUp.BlacklistedGameObjectTypes.Contains(gameObject.SubType))
+                                {
+                                    Blacklist.TempBlacklistEntryIDs.Add(tmpEntry);
+                                    continue;
+                                }
+                                var objGame = new C_WoWGameObject(gameObject);
+                                ObjectCollection.Add(tmpGuid, objGame);
+                                wowObj = ObjectCollection[tmpGuid];
+                                break;
+
+                            default:
+                                Blacklist.TempBlacklistEntryIDs.Add(tmpEntry);
                                 continue;
-                            }
-                            C_WoWGameObject objGame = new C_WoWGameObject(gameObject);
-                            ObjectCollection.Add(tmp_Guid, objGame);
-                            wowObj = ObjectCollection[tmp_Guid];
-                        }
-                        else
-                        {
-                            //Don't care for anything else!
-                            BlacklistedEntryIds.Add(tmp_Entry);
-                            continue;
                         }
                     }
 
@@ -260,30 +265,48 @@ namespace Herbfunk.GarrisonBase.Cache
                 }
             }
 
-            //Tally up unseen objects.
-            var unseenObjects = ObjectCollection.Keys.Where(o => !GuidsSeenThisLoop.Contains(o)).ToList();
-            if (unseenObjects.Any())
+            foreach (var obj in ObjectCollection.Values)
             {
-                for (int i = 0; i < unseenObjects.Count(); i++)
+                if (!guidsSeenThisLoop.Contains(obj.Guid)) 
+                    obj.LoopsUnseen++;
+
+                switch (obj.SubType)
                 {
-                    ObjectCollection[unseenObjects[i]].LoopsUnseen++;
+                    case WoWObjectTypes.Herb:
+                        FoundHerbObject = true;
+                        break;
+                    case WoWObjectTypes.OreVein:
+                        FoundOreObject = true;
+                        break;
                 }
+
+                if (obj.LoopsUnseen >= 5 && !obj.IgnoresRemoval)
+                    obj.NeedsRemoved = true;
             }
+
+            //Tally up unseen objects.
+            //var unseenObjects = ObjectCollection.Keys.Where(o => !guidsSeenThisLoop.Contains(o)).ToList();
+            //if (unseenObjects.Any())
+            //{
+            //    for (int i = 0; i < unseenObjects.Count(); i++)
+            //    {
+            //        ObjectCollection[unseenObjects[i]].LoopsUnseen++;
+            //    }
+            //}
 
             //Trim our collection every 5th refresh.
             _updateLoopCounter++;
             if (_updateLoopCounter > 4)
             {
                 _updateLoopCounter = 0;
-                //Now flag any objects not seen for 5 loops. Gold/Globe only 1 loop.
-                foreach (var item in ObjectCollection.Values.Where(CO => CO.LoopsUnseen >= 5 && !CO.IgnoresRemoval))
-                {
-                    item.NeedsRemoved = true;
-                }
-
+                //Now flag any objects not seen for 5 loops
+                //foreach (var item in ObjectCollection.Values.Where(CO => CO.LoopsUnseen >= 5 && !CO.IgnoresRemoval))
+                //{
+                //    item.NeedsRemoved = true;
+                //}
                 CheckForCacheRemoval();
             }
-            
+
             //if (_shouldLoot) UpdateLootableTarget();
             //if (_shouldKill) UpdateCombatTarget();
 
@@ -310,7 +333,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     return;
             }
 
-            ValidLootableObjects = ObjectCollection.Values.Where(obj => obj.ValidForLooting && obj.Distance<=LootDistance).OrderBy(obj => obj.Distance).ToList();
+            ValidLootableObjects = ObjectCollection.Values.Where(obj => obj.ValidForLooting && obj.Distance <= LootDistance).OrderBy(obj => obj.Distance).ToList();
 
             foreach (var target in ValidLootableObjects)
             {
@@ -338,7 +361,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     return;
             }
 
-            ValidCombatObjects = ObjectCollection.Values.OfType<C_WoWUnit>().Where(obj => obj.ValidForCombat && obj.Distance<=KillDistance).OrderBy(obj => obj.Distance).ToList();
+            ValidCombatObjects = ObjectCollection.Values.OfType<C_WoWUnit>().Where(obj => obj.ValidForCombat && obj.Distance <= KillDistance).OrderBy(obj => obj.Distance).ToList();
 
             foreach (var target in ValidCombatObjects)
             {
@@ -357,21 +380,22 @@ namespace Herbfunk.GarrisonBase.Cache
             if (RemovalCheck)
             {
                 //Remove flagged objects
-                var RemovalObjs = (from objs in ObjectCollection.Values
-                                   where objs.NeedsRemoved 
+                var removalObjs = (from objs in ObjectCollection.Values
+                                   where objs.NeedsRemoved
                                    select objs.Guid).ToList();
 
-                foreach (var item in RemovalObjs)
+                foreach (var item in removalObjs)
                 {
-                    C_WoWObject thisObj = ObjectCollection[item];
+                    var thisObj = ObjectCollection[item];
                     //Blacklist flag check
-                    if (thisObj.BlacklistType == BlacklistType.Entry)
+                    switch (thisObj.BlacklistType)
                     {
-                        BlacklistedEntryIds.Add(thisObj.Entry);
-                    }
-                    else if (thisObj.BlacklistType == BlacklistType.Guid)
-                    {
-                        BlacklistedGuids.Add(thisObj.Guid);
+                        case BlacklistType.Entry:
+                            Blacklist.TempBlacklistEntryIDs.Add(thisObj.Entry);
+                            break;
+                        case BlacklistType.Guid:
+                            Blacklist.TempBlacklistGuids.Add(thisObj.Guid);
+                            break;
                     }
 
                     ObjectCollection.Remove(thisObj.Guid);
@@ -384,64 +408,64 @@ namespace Herbfunk.GarrisonBase.Cache
 
         public static C_WoWObject GetWoWObject(uint entryId)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistedGuids.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !Blacklist.TempBlacklistGuids.Contains(obj.Guid));
             return ret;
         }
         public static C_WoWObject GetWoWObject(int entryId)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !BlacklistedGuids.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Entry == entryId && !Blacklist.TempBlacklistGuids.Contains(obj.Guid));
             return ret;
         }
         public static C_WoWObject GetWoWObject(string name)
         {
-            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid));
+            var ret = ObjectCollection.Values.FirstOrDefault(obj => obj.Name == name && !Blacklist.TempBlacklistGuids.Contains(obj.Guid));
             return ret;
         }
 
         public static List<C_WoWObject> GetWoWObjects(params uint[] args)
         {
             var ids = new List<uint>(args);
-            return ObjectCollection.Values.Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => ids.Contains(obj.Entry) && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(WoWObjectTypes type)
         {
-            return ObjectCollection.Values.Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(int id)
         {
-            return ObjectCollection.Values.Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.Entry == id && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(string name)
         {
-            return ObjectCollection.Values.Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid)).ToList();
+            return ObjectCollection.Values.Where(obj => obj.Name == name && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(params uint[] args)
         {
             var ids = new List<uint>(args);
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => ids.Contains(obj.Entry) && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(WoWObjectTypes type)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(int id)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Entry == id && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(string name)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Name == name && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(params uint[] args)
@@ -449,28 +473,28 @@ namespace Herbfunk.GarrisonBase.Cache
             var ids = new List<uint>(args);
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => ids.Contains(obj.Entry) && !BlacklistedGuids.Contains(obj.Guid))
+                    .Where(obj => ids.Contains(obj.Entry) && !Blacklist.TempBlacklistGuids.Contains(obj.Guid))
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(int id)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.Entry == id && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Entry == id && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(WoWObjectTypes type)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.SubType == type && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(string name)
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.Name == name && !BlacklistedGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => obj.Name == name && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetUnitsNearPoint(WoWPoint location, float maxdistance, bool validOnly = true)
@@ -480,12 +504,22 @@ namespace Herbfunk.GarrisonBase.Cache
                     .Where(obj => location.Distance(obj.Location) <= maxdistance && (!validOnly || obj.IsValid))
                     .ToList();
         }
-        public static List<C_WoWObject> GetObjectsNearPoint(WoWPoint location, float maxdistance, bool validOnly=true)
+        public static List<C_WoWObject> GetObjectsNearPoint(WoWPoint location, float maxdistance, bool validOnly = true)
         {
             return
                 ObjectCollection.Values
                     .Where(obj => location.Distance(obj.Location) <= maxdistance && (!validOnly || obj.IsValid))
                     .ToList();
+        }
+        public static List<C_WoWGameObject> GetGameObjectsNearPoint(WoWPoint location, float maxdistance, string name)
+        {
+            return
+                ObjectCollection.Values.OfType<C_WoWGameObject>()
+                    .Where(obj => obj.Name == name && 
+                        location.Distance(obj.Location) <= maxdistance &&
+                        !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && 
+                        obj.IsValid)
+                    .OrderBy(o => location.Distance(o.Location)).ToList();
         }
     }
 }

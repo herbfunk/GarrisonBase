@@ -23,15 +23,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (Character.Player.MinimapZoneText != "Town Hall" || CommandTable == null)
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
+
+            Criteria += () => GarrisonManager.CompletedMissionIds.Count > 0;
         }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => GarrisonManager.CompletedMissionIds.Count > 0;
-            }
-        }
+
         public C_WoWObject CommandTable
         {
             get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(); }
@@ -118,7 +114,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //Check if the first dialog is visible..
             if (LuaCommands.IsGarrisonMissionCompleteDialogVisible())
             {
-                LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton);
+                LuaUI.MissionCompleteView.Click();
+                //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton);
                 _commandtableCompletemissionsWaittimer.Reset();
                 return true;
             }
@@ -126,7 +123,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //Check if mission complete dialogs are even visible..
             if (!LuaCommands.IsGarrisonMissionCompleteBackgroundVisible())
             {
-                LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_CloseButton);
+                LuaUI.MissionClose.Click();
+                //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_CloseButton);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 return true;
             }
@@ -134,11 +132,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //Find the current completed mission!
             if (_currentMission == null)
             {
-
+                
                 //Click next..
-                if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+                //if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+                if(LuaUI.MissionNext.IsEnabled())
                 {
-                    LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
+                    LuaUI.MissionNext.Click();
+                    //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                     _commandtableCompletemissionsWaittimer.Reset();
                     return true;
                 }
@@ -179,9 +179,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (_currentMission == null || !_currentMission.Valid)
             {
                 //Click next..
-                if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+                //if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+                if (LuaUI.MissionNext.IsEnabled())
                 {
-                    LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
+                    LuaUI.MissionNext.Click();
+                    //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                 }
                 return true;
             }
@@ -202,11 +204,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             await Coroutine.Yield();
 
-            if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+           // if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
+            if (LuaUI.MissionNext.IsEnabled())
             {
+                
+                LuaUI.MissionNext.Click();
+                //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
-                LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
-
                 _commandtableCompletemissionsWaittimer.Reset();
                 GarrisonManager.CompletedMissionIds.Remove(_currentMission.Id);
                 GarrisonManager.CompletedMissions.Remove(_currentMission);

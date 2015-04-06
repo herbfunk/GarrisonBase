@@ -14,21 +14,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorWorkOrderRush(Building building)
         {
             Building = building;
+            Criteria += () => Building.WorkOrder != null &&
+                        Building.WorkOrder.Type != WorkOrderType.None &&
+                        (Building.WorkOrder.Pending - Building.WorkOrder.Pickup) >= 5 &&
+                        Character.Player.Inventory.GetBagItemsById((int)Building.WorkOrder.RushOrderItemType).Count > 0;
         }
         public Building Building { get; set; }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return
-                    () =>
-                        Building.WorkOrder != null &&
-                        Building.WorkOrder.Type != WorkOrderType.None &&
-                        (Building.WorkOrder.Pending-Building.WorkOrder.Pickup) >= 5 &&
-                        Character.Player.Inventory.GetBagItemsById((int) Building.WorkOrder.RushOrderItemType).Count > 0;
-            }
-        }
+
 
         public override async Task<bool> BehaviorRoutine()
         {

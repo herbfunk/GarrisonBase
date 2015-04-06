@@ -20,17 +20,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             Building = building;
             MovementPoints.Add(Building.SafeMovementPoint);
+            Criteria += () => Building.CanActivate;
         }
 
         public Building Building { get; set; }
 
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => Building.CanActivate;
-            }
-        }
+
         public override async Task<bool> BehaviorRoutine()
         {
             if (await base.BehaviorRoutine()) return true;

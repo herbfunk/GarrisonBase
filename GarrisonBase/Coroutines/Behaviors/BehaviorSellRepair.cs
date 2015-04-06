@@ -14,12 +14,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorSellRepair()
             : base(MovementCache.SellRepairNpcLocation, GarrisonManager.SellRepairNpcId)
         {
-                
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorRepairSell && 
+                Character.Player.Inventory.GetBagItemsVendor().Count > 0;
         }
-        public override Func<bool> Criteria
-        {
-            get { return () => BaseSettings.CurrentSettings.BehaviorRepairSell && Character.Player.Inventory.GetBagItemsVendor().Count > 0; }
-        }
+
 
         public override void Initalize()
         {

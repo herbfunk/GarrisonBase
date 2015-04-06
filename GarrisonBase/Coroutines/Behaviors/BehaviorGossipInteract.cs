@@ -82,8 +82,18 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
                 GarrisonBase.Debug("Selecting Gossip Option {0}", gossipEntry.Index);
-                GossipFrame.Instance.SelectGossipOption(gossipEntry.Index);
+                var success=await CommonCoroutines.WaitForLuaEvent("GOSSIP_SHOW", 2500, null,
+                                    () => GossipFrame.Instance.SelectGossipOption(gossipEntry.Index));
+
+
+                GarrisonBase.Debug("Gossip Selection success = {0}", success);
+                
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
+
+                if (!success)
+                {
+                    return false;
+                }
 
                 if (_oneTime) IsDone = true;
                 return !_oneTime;

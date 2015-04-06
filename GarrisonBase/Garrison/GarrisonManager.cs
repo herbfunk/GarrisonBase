@@ -3,6 +3,7 @@ using System.Linq;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
+using Styx.Common.Helpers;
 using Styx.CommonBot.Profiles;
 using Styx.Pathing;
 using Styx.WoWInternals.Garrison;
@@ -45,7 +46,8 @@ namespace Herbfunk.GarrisonBase.Garrison
             GarrisonBase.Debug("Initalizing GarrisonManager..");
 
             RefreshBuildings();
-            UpdateMissionIds();
+
+            UpdateMissionIds(true);
 
             RefreshFollowerIds();
             RefreshFollowers();
@@ -100,6 +102,15 @@ namespace Herbfunk.GarrisonBase.Garrison
            
         }
 
+        internal static void Reset()
+        {
+            Initalized = false;
+            Buildings.Clear();
+            Followers.Clear();
+            AvailableMissions.Clear();
+            CompletedMissionIds.Clear();
+        }
+
         public static Dictionary<int, Follower> Followers = new Dictionary<int, Follower>();
         public static int MaxActiveFollowers = 20;
         public static int CurrentActiveFollowers = 0;
@@ -152,8 +163,12 @@ namespace Herbfunk.GarrisonBase.Garrison
         public static List<Mission> CompletedMissions = new List<Mission>();
         public static List<int> AvailableMissionIds = new List<int>();
         public static List<int> CompletedMissionIds = new List<int>();
-        internal static void UpdateMissionIds()
+        private static readonly WaitTimer UpdateMissionsWaitTimer = WaitTimer.OneSecond;
+        internal static void UpdateMissionIds(bool force=false)
         {
+            if (!force && !UpdateMissionsWaitTimer.IsFinished) return;
+            UpdateMissionsWaitTimer.Reset();
+
             GarrisonBase.Debug("Updating Mission Ids..");
 
             CompletedMissionIds.Clear();

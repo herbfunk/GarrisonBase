@@ -25,22 +25,16 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             MovementPoints.Add(Building.SpecialMovementPoints[0]);
             
             InteractionEntryId = Building.WorkOrderNPCEntryId;
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorSalvaging &&
+                             !Building.CanActivate && !Building.IsBuilding &&
+                             SalvagableGoods.Count > 0;
         }
         public override void Initalize()
         {
             _movement = new Movement(Building.SpecialMovementPoints[0], 2.5f);
             base.Initalize();
         }
-            
-        public override Func<bool> Criteria
-        {
-            get
-            {
-                return () => BaseSettings.CurrentSettings.BehaviorSalvaging &&
-                             !Building.CanActivate && !Building.IsBuilding &&
-                             SalvagableGoods.Count > 0;
-            }
-        }
+
 
         public Building Building { get; set; }
 

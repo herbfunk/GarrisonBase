@@ -268,15 +268,15 @@ namespace Herbfunk.GarrisonBase
 
         internal static List<WoWPoint> Alliance_Plot18_Forge_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1819.69, 227.1223, 72.96257),
         };
         internal static List<WoWPoint> Alliance_Plot19_Forge_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1830.243, 201.0425, 72.77658),
         };
         internal static List<WoWPoint> Alliance_Plot20_Forge_Level1 = new List<WoWPoint>
         {
-            //TODO
+           new WoWPoint(1803.589, 193.1322, 70.86319),
         };
 
         #endregion
@@ -521,15 +521,15 @@ namespace Herbfunk.GarrisonBase
         #region Level 1
         internal static List<WoWPoint> Alliance_Plot18_EngineeringWorks_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1818.893, 228.4791, 72.94559),
         };
         internal static List<WoWPoint> Alliance_Plot19_EngineeringWorks_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1830.636, 198.3738, 72.75722),
         };
         internal static List<WoWPoint> Alliance_Plot20_EngineeringWorks_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1804.518, 190.968, 70.84632),
         };
         #endregion
 
@@ -670,15 +670,15 @@ namespace Herbfunk.GarrisonBase
         #region Level 1
         internal static List<WoWPoint> Alliance_Plot18_GemBoutique_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1822.369, 228.9625, 72.9454),
         };
         internal static List<WoWPoint> Alliance_Plot19_GemBoutique_Level1 = new List<WoWPoint>
         {
-            //TODO
+            new WoWPoint(1827.3, 200.1062, 72.75676),
         };
         internal static List<WoWPoint> Alliance_Plot20_GemBoutique_Level1 = new List<WoWPoint>
         {
-            //TODO
+           new WoWPoint(1801.436, 192.0244, 70.84675),
         };
         #endregion
 
