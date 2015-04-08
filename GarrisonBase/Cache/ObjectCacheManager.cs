@@ -5,7 +5,6 @@ using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Styx;
 using Styx.WoWInternals;
-using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Cache
 {

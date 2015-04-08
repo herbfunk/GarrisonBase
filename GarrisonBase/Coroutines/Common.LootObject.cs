@@ -2,7 +2,6 @@
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Styx;
-using Styx.Common.Helpers;
 using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
 

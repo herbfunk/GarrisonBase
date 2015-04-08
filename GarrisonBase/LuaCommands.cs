@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
-using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
 
@@ -13,23 +12,6 @@ namespace Herbfunk.GarrisonBase
     {
         
 
-        public static bool IsButtonEnabled(LuaUI.ButtonNames name)
-        {
-   
-            string buttonname = name.ToString().Replace("_", ".");
-            String lua = String.Format("return tostring({0}:IsEnabled())", buttonname);
-            var ret = Lua.GetReturnValues(lua)[0].ToBoolean();
-            GarrisonBase.Debug("LuaCommand: IsButtonEnabled {0} {1}", name.ToString(), ret);
-
-            return ret;
-        }
-        public static void ClickButton(LuaUI.ButtonNames name)
-        {
-            GarrisonBase.Debug("LuaCommand: ClickButton {0}", name);
-            string buttonname = name.ToString().Replace("_", ".");
-            String lua = String.Format("{0}:Click()", buttonname);
-            Lua.DoString(lua);
-        }
 
         public static bool TestLuaInjectionCode()
         {
@@ -46,13 +28,7 @@ namespace Herbfunk.GarrisonBase
             List<string> retvalues = Lua.GetReturnValues(lua);
             return retvalues[0].ToInt32();
         }
-        public static int GetNumberContainerFreeSlots(int index)
-        {
-            GarrisonBase.Debug("LuaCommand: GetNumberContainerFreeSlots");
-            string lua = String.Format("return GetContainerNumFreeSlots({0})", index);
-            List<string> retvalues = Lua.GetReturnValues(lua);
-            return retvalues[0].ToInt32();
-        }
+
         public static int GetCurrencyCount(int currencyId)
         {
             GarrisonBase.Debug("LuaCommand: GetCurrencyInfo");
@@ -78,42 +54,7 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.Debug("LuaCommand: CloseTradeSkillFrame");
             Lua.DoString("TradeSkillFrameCloseButton:Click()");
         }
-        public static void AssignFollowers()
-        {
-            GarrisonBase.Debug("LuaCommand: AssignFollowers");
-            string lua = String.Format("{0}('MissionPage1')", LuaEvents.ClickFunctionString);
-            Lua.DoString(lua);
-        }
-        public static void OpenMission(int missionId)
-        {
-            GarrisonBase.Debug("LuaCommand: OpenMission");
-            //Scroll until we see mission first
-            String lua =
-                "local mission; local am = {}; C_Garrison.GetAvailableMissions(am);" +
-                String.Format(
-                    "for idx = 1, #am do " +
-                    "if am[idx].missionID == {0} then " +
-                    "mission = am[idx];" +
-                    "end;" +
-                    "end;" +
-                    "GarrisonMissionFrame.MissionTab.MissionList:Hide();" +
-                    "GarrisonMissionFrame.MissionTab.MissionPage:Show();" +
-                    "GarrisonMissionPage_ShowMission(mission);"
-                    , missionId);
 
-            Lua.DoString(lua);
-        }
-
-        public static void CloseMission()
-        {
-            GarrisonBase.Debug("LuaCommand: CloseMission");
-            string lua = "GarrisonMissionFrame.MissionTab.MissionPage:Hide();" +
-                         "GarrisonMissionFrame.MissionTab.MissionList:Show();"+
-                         "GarrisonMissionPage_ClearParty();" +
-                         "GarrisonMissionFrame.followerCounters = nil;" +
-                         "GarrisonMissionFrame.MissionTab.MissionPage.missionInfo = nil;";
-            Lua.DoString(lua);
-        }
 
         public static WorkOrder GetWorkOrder(string buildingId)
         {
@@ -156,11 +97,6 @@ namespace Herbfunk.GarrisonBase
             return ret;
         }
 
-        public static void ClickGarrisonCapactiveCloseButton()
-        {
-            GarrisonBase.Debug("LuaCommand: ClickGarrisonCapactiveCloseButton");
-            Lua.DoString("GarrisonCapacitiveDisplayFrameCloseButton:Click()");
-        }
 
         public static bool IsStaticPopupVisible()
         {
@@ -202,15 +138,6 @@ namespace Herbfunk.GarrisonBase
             Lua.DoString(String.Format("UseContainerItem(\"{0}\"" + ", \"{1}\");", bag, index));
         }
 
-        public static bool IsMiniMapMailIconVisible()
-        {
-            //
-            GarrisonBase.Debug("LuaCommand: MiniMapMailFrame");
-            const string lua = "return tostring(MiniMapMailFrame:IsVisible())";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-            return ret;
-        }
 
         public static bool OpenMailFrameIsVisible()
         {
@@ -219,11 +146,7 @@ namespace Herbfunk.GarrisonBase
             bool ret = t.ToBoolean();
             return ret;
         }
-        public static void AutoLootMailItem(int index)
-        {
-            GarrisonBase.Debug("LuaCommand: AutoLootMailItem {0}", index);
-            Lua.DoString(String.Format("AutoLootMailItem(\"{0}\")", index));
-        }
+
         public static bool HasNewMail()
         {
             GarrisonBase.Debug("LuaCommand: HasNewMail");
@@ -287,20 +210,7 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.Debug("LuaCommand: ClickStartOrderButtonEnabled {0}", ret);
             return ret;
         }
-        public static void ClickStartAllOrderButton()
-        {
-            //
-            GarrisonBase.Debug("LuaCommand: ClickStartAllOrderButton");
-            Lua.DoString("GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton:Click()");
-        }
-        public static bool ClickStartAllOrderButtonEnabled()
-        {
-            //
-            String lua = "return tostring(GarrisonCapacitiveDisplayFrame.CreateAllWorkOrdersButton:IsEnabled())";
-            var ret = Lua.GetReturnValues(lua)[0].ToBoolean();
-            GarrisonBase.Debug("LuaCommand: ClickStartAllOrderButtonEnabled {0}", ret);
-            return ret;
-        }
+
       
 
 
@@ -371,39 +281,6 @@ namespace Herbfunk.GarrisonBase
             return Lua.GetReturnValues(lua);
         }
 
-
-        public static ReagentInfo GetShipmentReagentInfo(int index)
-        {
-            GarrisonBase.Debug("LuaCommand: GetShipmentReagentInfo");
-
-            String lua =
-                String.Format(
-                    "local name, icon, count, amount, total, itemID = C_Garrison.GetShipmentReagentInfo(\"{0}\");", index) +
-                    "local RetInfo = {};" +
-                    "table.insert(RetInfo, tostring(name));" +
-                    "table.insert(RetInfo, tostring(icon));" +
-                    "table.insert(RetInfo, tostring(count));" +
-                    "table.insert(RetInfo, tostring(amount));" +
-                    "table.insert(RetInfo, tostring(total));" +
-                    "table.insert(RetInfo, tostring(itemID));" +
-                    "return unpack(RetInfo)";
-
-            List<string> retList=Lua.GetReturnValues(lua);
-            try
-            {
-                Logging.Write("{0}", retList.Count);
-
-                string name = retList[0];
-                int amount = retList[3].ToInt32();
-                int total = retList[4].ToInt32();
-                int itemID = retList[5].ToInt32();
-
-                return new ReagentInfo(name, itemID, amount, total);
-            }
-            catch {}
-
-            return null;
-        }
 
         public static bool IsQuestFlaggedCompleted(string ID)
         {

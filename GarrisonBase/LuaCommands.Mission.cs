@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx.Helpers;
 using Styx.WoWInternals;
@@ -10,230 +9,19 @@ namespace Herbfunk.GarrisonBase
     static partial class LuaCommands
     {
 
-        public static void CloseGarrisonMissionFrame()
-        {
-            //
-            GarrisonBase.Debug("LuaCommand: CloseGarrisonMissionFrame");
-            Lua.DoString("GarrisonMissionFrame.CloseButton:Click()");
-        }
-        public static bool IsMissionStageVisible()
-        {
-            string lua =
-                "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame.MissionTab.MissionPage.Stage:IsVisible());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        public static bool IsMissionStageStartButtonEnabled()
-        {
-            //
-            string lua =
-                "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame.MissionTab.MissionPage.StartMissionButton:IsEnabled());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        public static void ClickMissionStageStartButton()
-        {
-            GarrisonBase.Debug("LuaCommand: ClickMissionStageStartButton");
-            Lua.DoString("GarrisonMissionFrame.MissionTab.MissionPage.StartMissionButton:Click()");
-        }
-
-        public static void ClickMissionsListTab()
-        {
-            Lua.DoString("GarrisonMissionFrameMissionsTab1:Click()");
-        }
-        public static bool IsMissionsListTabVisible()
-        {
-            string lua =
-                "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrameMissionsTab1:IsVisible());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        public static bool IsMissionVisibleAtIndex(int index)
-        {
-            string lua =
-                String.Format("if not GarrisonMissionFrame then return false; " +
-                              "else return tostring(GarrisonMissionFrameMissionsListScrollFrameButton{0}:IsVisible());end;", index);
-            try
-            {
-                string t = Lua.GetReturnValues(lua)[0];
-                return t.ToBoolean();
-            }
-            catch
-            {
-                return false;
-            }
-
-        }
-        public static void ClickMissionAtIndex(int index)
-        {
-            GarrisonBase.Debug("LuaCommand: ClickMissionAtIndex");
-            Lua.DoString(String.Format("GarrisonMissionFrameMissionsListScrollFrameButton{0}:Click()", index));
-        }
-        public static bool IsFollowerVisibleAtIndex(int index)
-        {
-            string lua =
-                String.Format("if not GarrisonMissionFrame then return false; " +
-                              "else return tostring(GarrisonMissionFrameFollowersListScrollFrameButton{0}:IsVisible());end;", index);
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        public static void RightClickFollowerAtIndex(int index)
-        {
-            Lua.DoString(String.Format("GarrisonMissionFrameFollowersListScrollFrameButton{0}:Click('RightButton')", index));
-        }
-        public static bool IsAddFollowerDropDownListVisible()
-        {
-            string lua =
-                String.Format("return tostring(DropDownList1Button1:IsVisible());");
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        public static void ClickAddFollowerToMission()
-        {
-            Lua.DoString(String.Format("DropDownList1Button1:Click()"));
-        }
-
-        public static int GetMissionListScrollButtonCount()
-        {
-            String lua = "return #(GarrisonMissionFrame.MissionTab.MissionList.listScroll.buttons)";
-            List<string> info = Lua.GetReturnValues(lua);
-            if (info.Count == 0 || info[0] == null) return 0;
-            return Convert.ToInt32(info[0]);
-        }
-        public static int GetMissionListScrollOffSet()
-        {
-            String lua = "return HybridScrollFrame_GetOffset(GarrisonMissionFrame.MissionTab.MissionList.listScroll)";
-            List<string> info = Lua.GetReturnValues(lua);
-            if (info.Count == 0 || info[0] == null) return 0;
-            return Convert.ToInt32(info[0]);
-        }
-
-        public static bool IsGarrisonMissionFrameOpen()
-        {
-            GarrisonBase.Debug("LuaCommand: IsGarrisonMissionFrameOpen");
-            const string lua =
-                "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame:IsVisible());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            return t.ToBoolean();
-        }
-        /// <summary>
-        /// Determines if the first dialog for mission complete is visible (the very first one that says # completed)
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsGarrisonMissionCompleteDialogVisible()
-        {
-            
-            const string lua =
-                   "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrameMissions.CompleteDialog:IsVisible());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-
-            GarrisonBase.Debug("LuaCommand: IsGarrisonMissionCompleteDialogVisible {0}", ret);
-            return ret;
-
-        }
-        /// <summary>
-        /// Determines if the any of the mission complete dialogs are visible!
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsGarrisonMissionCompleteBackgroundVisible()
-        {
-            //GarrisonMissionFrame.MissionCompleteBackground:IsVisible()
-            const string lua =
-                   "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame.MissionCompleteBackground:IsVisible());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-
-            GarrisonBase.Debug("LuaCommand: IsGarrisonMissionCompleteBackgroundVisible {0}", ret);
-            return ret;
-        }
-        public static void ClickMissionCompleteDialogNextButton()
-        {
-            GarrisonBase.Debug("LuaCommand: ClickMissionCompleteDialogNextButton");
-            Lua.DoString("GarrisonMissionFrameMissions.CompleteDialog.BorderFrame.ViewButton:Click()");
-        }
-        public static void ClickMissionCompleteNextButton()
-        {
-            //
-            GarrisonBase.Debug("LuaCommand: ClickMissionCompleteNextButton");
-            Lua.DoString("GarrisonMissionFrame.MissionComplete.NextMissionButton:Click()");
-        }
-        public static bool MissionCompleteNextButtonEnabled()
-        {
-            const string lua =
-                    "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame.MissionComplete.NextMissionButton:IsEnabled());end;";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-
-            GarrisonBase.Debug("LuaCommand: MissionCompleteNextButtonEnabled {0}", ret);
-            return ret;
-        }
+       
         public static void MissionCompleteRollChest(int missionId)
         {
             GarrisonBase.Debug("LuaCommand: MissionCompleteRollChest");
             Lua.DoString(String.Format("C_Garrison.MissionBonusRoll(\"{0}\")", missionId));
         }
+
         public static void MissionCompleteMarkComplete(int missionId)
         {
             GarrisonBase.Debug("LuaCommand: MissionCompleteMarkComplete");
             Lua.DoString(String.Format("C_Garrison.MarkMissionComplete(\"{0}\")", missionId));
         }
 
-
-        public static List<int> GetAvailableMissionIds()
-        {
-            
-            String lua =
-                "local available_missions = {}; local RetInfo = {}; C_Garrison.GetAvailableMissions(available_missions);" +
-                "for idx = 1, #available_missions do " +
-                    "table.insert(RetInfo,available_missions[idx].missionID);" +
-                "end;" +
-                "return unpack(RetInfo)";
-
-            List<int> missionsId = Lua.GetReturnValues(lua).ConvertAll(s => s.ToInt32());
-
-            GarrisonBase.Debug("LuaCommand: GetAvailableMissionIds {0}", missionsId.Count);
-            return missionsId;
-
-        }
-        public static int GetTotalAvailableMissionIds()
-        {
-            String lua =
-                "local available_missions = {}; local RetInfo = {}; return #(C_Garrison.GetAvailableMissions(available_missions));";
-
-            List<string> missionsId = Lua.GetReturnValues(lua);
-            return missionsId[0].ToInt32();
-        }
-        public static List<int> GetCompletedMissionIds()
-        {
-            
-            String lua =
-                "local complete_missions = C_Garrison.GetCompleteMissions(); local RetInfo = {};" +
-                "for idx = 1, #complete_missions do " +
-                    "table.insert(RetInfo,complete_missions[idx].missionID);" +
-                "end;" +
-                "return unpack(RetInfo)";
-            List<int> missionsId = Lua.GetReturnValues(lua).ConvertAll(s => s.ToInt32());
-            GarrisonBase.Debug("LuaCommand: GetCompletedMissionIds {0}", missionsId.Count);
-            return missionsId;
-        }
-
-        internal static int _getNumberCompletedMissions = 0;
-        public static int GetNumberCompletedMissions()
-        {
-            String lua = "return #(C_Garrison.GetCompleteMissions())";
-            try
-            {
-                int retvalue = Lua.GetReturnValues(lua)[0].ToInt32();
-                _getNumberCompletedMissions = retvalue;
-                return retvalue;
-            }
-            catch
-            {
-                _getNumberCompletedMissions = 0;
-                return 0;
-            }
-        }
 
         public static Mission GetMissionInfo(int missionId)
         {
@@ -363,25 +151,6 @@ namespace Herbfunk.GarrisonBase
         }
 
 
-        public static List<string> GetMissionAbilities(int missionId)
-        {
-            GarrisonBase.Debug("LuaCommand: GetMissionAbilities {0}", missionId);
-            String lua =
-                String.Format(
-                    "local location, xp, environment, environmentDesc, environmentTexture, locPrefix, isExhausting, enemies = C_Garrison.GetMissionInfo(\"{0}\");",
-                    missionId) +
-                "local RetInfo = {};" +
-                "for i = 1, #enemies do " +
-                "local enemy = enemies[i];" +
-                "for id,mechanic in pairs(enemy.mechanics) do " +
-                "table.insert(RetInfo,tostring(id));" +
-                "end;" +
-                "end;" +
-                "return unpack(RetInfo)";
-            List<string> enemies = Lua.GetReturnValues(lua);
-            return enemies ?? new List<string>();
-        }
-
         public static int GetMissionBonusChance(int missionId)
         {
             GarrisonBase.Debug("LuaCommand: GetMissionBonusChance");
@@ -444,13 +213,6 @@ namespace Herbfunk.GarrisonBase
             
 
             return successChance;
-        }
-
-        public static bool IsMissionStillValid(int id)
-        {
-            String lua = String.Format("return C_Garrison.GetBasicMissionInfo(\"{0}\")", id);
-            List<string> ret = Lua.GetReturnValues(lua);
-            return ret.Count != 0;
         }
     }
 }

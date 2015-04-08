@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -98,7 +97,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return false;
             }
 
-            if (LuaCommands.IsGarrisonMissionCompleteDialogVisible())
+            if (LuaUI.MissionFrame.IsMissionCompleteDialogVisible)
             {
                 //Complete Dialog is visible..
                 //We need to add complete missions to coroutines
@@ -107,7 +106,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 GarrisonBase.Log("Garrison Mission Complete Is Visible!");
                 BehaviorManager.Behaviors.Insert(1, new BehaviorMissionComplete());
                 BehaviorManager.Behaviors.Insert(2, new BehaviorMissionStartup());
-                LuaCommands.CloseGarrisonMissionFrame();
+                LuaUI.MissionFrame.Close.Click();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 await Coroutine.Yield();
                 return false;
@@ -164,7 +163,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 await Coroutine.Sleep(2218);
 
                 await
-                    CommonCoroutines.WaitForLuaEvent("GARRISON_MISSION_STARTED", 7500, null, LuaCommands.ClickMissionStageStartButton);
+                    CommonCoroutines.WaitForLuaEvent("GARRISON_MISSION_STARTED", 
+                    7500, 
+                    null,
+                    LuaUI.MissionFrame.StartMissionButton.Click);
 
                 await Coroutine.Sleep(2500);
                 //LuaCommands.CloseMission();
@@ -184,8 +186,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private void Action()
         {
-            LuaCommands.OpenMission(_currentMission.Id);
-            LuaCommands.AssignFollowers();
+            LuaUI.MissionFrame.OpenMission(_currentMission.Id);
+            LuaUI.MissionFrame.AssignFollowers();
         }
 
          

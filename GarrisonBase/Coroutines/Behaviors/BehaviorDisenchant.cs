@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
@@ -18,11 +17,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorDisenchant()
             : base()
         {
-            MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint);
-            MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].EntranceMovementPoint);
-            InteractionEntryId = GarrisonManager.DisenchantingEntryId;
-
             Criteria += () => BaseSettings.CurrentSettings.BehaviorDisenchanting &&
+                             GarrisonManager.HasDisenchant &&
                              !GarrisonManager.Buildings[BuildingType.EnchantersStudy].IsBuilding &&
                              !GarrisonManager.Buildings[BuildingType.EnchantersStudy].CanActivate &&
                              Character.Player.Inventory.GetBagItemsDisenchantable().Count > 0;
@@ -30,6 +26,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
+            ObjectCacheManager.ShouldKill = false;
+            ObjectCacheManager.ShouldLoot = false;
+            MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint);
+            MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].EntranceMovementPoint);
+            InteractionEntryId = GarrisonManager.DisenchantingEntryId;
+
             _movement = null;
             base.Initalize();
         }

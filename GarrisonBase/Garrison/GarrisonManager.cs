@@ -4,7 +4,6 @@ using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
 using Styx.Common.Helpers;
-using Styx.CommonBot.Profiles;
 using Styx.Pathing;
 using Styx.WoWInternals.Garrison;
 

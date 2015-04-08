@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Styx.Helpers;
 using Styx.WoWInternals;
 
@@ -29,10 +25,6 @@ namespace Herbfunk.GarrisonBase
 
         public static UIbutton GarrisonMinimap = new UIbutton(ButtonNames.GarrisonLandingPageMinimapButton);
         public static UIbutton TradeSkillClose = new UIbutton(ButtonNames.TradeSkillFrameCloseButton);
-        public static UIbutton MissionClose = new UIbutton(ButtonNames.GarrisonMissionFrame_CloseButton);
-        public static UIbutton MissionStart = new UIbutton(ButtonNames.GarrisonMissionFrame_MissionTab_MissionPage_StartMissionButton);
-        public static UIbutton MissionCompleteView = new UIbutton(ButtonNames.GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton);
-        public static UIbutton MissionNext = new UIbutton(ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
         public static UIbutton InboxNextPage = new UIbutton(ButtonNames.InboxNextPageButton);
         public static UIbutton InboxPreviousPage = new UIbutton(ButtonNames.InboxPrevPageButton);
         public static UIbutton InboxClose = new UIbutton(ButtonNames.OpenMailFrameCloseButton);
@@ -103,5 +95,82 @@ namespace Herbfunk.GarrisonBase
         }
         public static UIworkorder WorkOrder = new UIworkorder();
 
+        public class UImissionframe : UIframe
+        {
+            public UImissionframe() : base("GarrisonMissionFrame") { }
+            private readonly UIbutton _closebutton = new UIbutton(ButtonNames.GarrisonMissionFrame_CloseButton);
+            public override UIbutton Close
+            {
+                get { return _closebutton; }
+            }
+
+            /// <summary>
+            /// Determines if the first dialog for mission complete is visible (the very first one that says # completed)
+            /// </summary>
+            /// <returns></returns>
+            public bool IsMissionCompleteDialogVisible
+            {
+                get
+                {
+                    const string lua = "if not GarrisonMissionFrame then return false; " +
+                                       "else return tostring(GarrisonMissionFrameMissions.CompleteDialog:IsVisible());end;";
+
+                    var t = Lua.GetReturnValues(lua)[0];
+                    var ret = t.ToBoolean();
+
+                    GarrisonBase.Debug("LuaCommand: IsGarrisonMissionCompleteDialogVisible {0}", ret);
+                    return ret;  
+                }
+            }
+            /// <summary>
+            /// Determines if the any of the mission complete dialogs are visible!
+            /// </summary>
+            /// <returns></returns>
+            public bool IsMissionCompleteBackgroundVisible
+            {
+                get
+                {
+                    const string lua =
+                           "if not GarrisonMissionFrame then return false; else return tostring(GarrisonMissionFrame.MissionCompleteBackground:IsVisible());end;";
+                    var t = Lua.GetReturnValues(lua)[0];
+                    var ret = t.ToBoolean();
+
+                    GarrisonBase.Debug("LuaCommand: IsGarrisonMissionCompleteBackgroundVisible {0}", ret);
+                    return ret;
+                }
+            }
+
+            public void OpenMission(int missionId)
+            {
+                GarrisonBase.Debug("LuaCommand: OpenMission {0}", missionId);
+                //Scroll until we see mission first
+                var lua =
+                    "local mission; local am = {}; C_Garrison.GetAvailableMissions(am);" +
+                    String.Format(
+                        "for idx = 1, #am do " +
+                        "if am[idx].missionID == {0} then " +
+                        "mission = am[idx];" +
+                        "end;" +
+                        "end;" +
+                        "GarrisonMissionFrame.MissionTab.MissionList:Hide();" +
+                        "GarrisonMissionFrame.MissionTab.MissionPage:Show();" +
+                        "GarrisonMissionPage_ShowMission(mission);"
+                        , missionId);
+
+                Lua.DoString(lua);
+            }
+            public void AssignFollowers()
+            {
+                GarrisonBase.Debug("LuaCommand: AssignFollowers");
+                string lua = String.Format("{0}('MissionPage1')", LuaEvents.ClickFunctionString);
+                Lua.DoString(lua);
+            }
+
+            public readonly UIbutton StartMissionButton = new UIbutton(ButtonNames.GarrisonMissionFrame_MissionTab_MissionPage_StartMissionButton);
+            public readonly UIbutton MissionCompleteViewButton = new UIbutton(ButtonNames.GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton);
+            public readonly UIbutton MissionNextButton = new UIbutton(ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
+        
+        }
+        public static UImissionframe MissionFrame = new UImissionframe();
     }
 }

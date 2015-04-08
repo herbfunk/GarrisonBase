@@ -4,6 +4,7 @@ using System.Linq;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
+using Herbfunk.GarrisonBase.Garrison;
 using Styx;
 using Styx.CommonBot.Inventory;
 using Styx.WoWInternals;
@@ -133,9 +134,13 @@ namespace Herbfunk.GarrisonBase.Character
                 }
             }
 
-            if (TotalFreeSlots < BaseSettings.CurrentSettings.MinimumBagSlotsFree)
+            if (TotalFreeSlots < BaseSettings.CurrentSettings.MinimumBagSlotsFree && GarrisonManager.Initalized)
             {
-                BehaviorManager.SwitchBehavior = new BehaviorSellRepair();
+                if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.SellRepair))
+                    BehaviorManager.SwitchBehaviors.Insert(0, new BehaviorSellRepair());
+                
+                if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.Disenchanting))
+                    BehaviorManager.SwitchBehaviors.Add(new BehaviorDisenchant());
             }
 
             ShouldUpdateBagItems = false;

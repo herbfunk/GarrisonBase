@@ -1,5 +1,13 @@
-﻿v1.2.1.0
+﻿v1.2.1.1
 
+Vendor behavior will no longer use click movement. (caused a stuck)
+Cleaned up unused lua commands (and moved mission frame related into LuaUI)
+Changed switch behavior into a list to accept multiple behaviors.
+Bags being full will also add disenchanting behavior in addition to vendor behavior to switch.
+Vendor and Disenchanting will disable loot/kill during initalization.
+
+
+v1.2.1.0
 Will now disable addon Master Plan if found at beginning and renabled at the end.
 Work order pickup will now use a location to find nearest work order object.
 Added behavior for milling and settings for each herb (enabled and reserve count)

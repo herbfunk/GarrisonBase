@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Styx;
 using Styx.CommonBot.Coroutines;
-using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {

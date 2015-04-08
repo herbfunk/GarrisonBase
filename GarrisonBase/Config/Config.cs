@@ -14,7 +14,6 @@ using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.Quest;
 using Styx;
 using Styx.Helpers;
-using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Config
 {
@@ -934,10 +933,39 @@ namespace Herbfunk.GarrisonBase.Config
         {
             LBDebug.Controls.Clear();
 
+            
+
+            if (BehaviorManager.CurrentBehavior != null)
+            {
+                LBDebug.Controls.Add(
+                    new UserControlDebugEntry(String.Format("Current behavior {0}",
+                        BehaviorManager.CurrentBehavior)));
+            }
+
+            LBDebug.Controls.Add(
+                 new UserControlDebugEntry(String.Format("Total behaviors {0}",
+                     BehaviorManager.Behaviors.Count)));
             foreach (var b in BehaviorManager.Behaviors)
             {
                 LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
             }
+
+            if (BehaviorManager.SwitchBehavior != null)
+            {
+                LBDebug.Controls.Add(
+                    new UserControlDebugEntry(String.Format("Switch behavior {0}",
+                        BehaviorManager.SwitchBehavior)));
+            }
+
+            LBDebug.Controls.Add(
+                new UserControlDebugEntry(String.Format("Total switch behaviors {0}",
+                    BehaviorManager.SwitchBehaviors.Count)));
+
+            foreach (var b in BehaviorManager.SwitchBehaviors)
+            {
+                LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
+            }
+
 
             LBDebug.Focus();
         }
@@ -948,8 +976,8 @@ namespace Herbfunk.GarrisonBase.Config
 
 
             LBDebug.Controls.Add(
-                new UserControlDebugEntry(String.Format("Total completed missions {0} [{1}]",
-                    LuaCommands._getNumberCompletedMissions, GarrisonManager.CompletedMissionIds.Count)));
+                new UserControlDebugEntry(String.Format("Total completed missions {0}",
+                    GarrisonManager.CompletedMissionIds.Count)));
 
             LBDebug.Controls.Add(
                 new UserControlDebugEntry(String.Format("Total mission IDs {0}",

@@ -1,5 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Styx;
 using Styx.CommonBot.Coroutines;
@@ -21,6 +21,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
+            ObjectCacheManager.ShouldKill = false;
+            ObjectCacheManager.ShouldLoot = false;
             _npcMovement = null;
             base.Initalize();
         }
@@ -32,7 +34,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (IsDone) return false;
                 
 
-            if (InteractionObject == null || !InteractionObject.IsValid || InteractionObject.Collision || !InteractionObject.LineOfSight)
+            if (InteractionObject == null)
             {
                 if (await StartMovement.MoveTo()) return true;
             }
@@ -48,7 +50,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (_npcMovement == null)
                     _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f);
 
-                await _npcMovement.ClickToMove(false);
+                await _npcMovement.MoveTo(false);
                 return true;
             }
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx.Helpers;
 using Styx.WoWInternals;

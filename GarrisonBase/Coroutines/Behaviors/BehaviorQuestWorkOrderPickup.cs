@@ -1,5 +1,4 @@
-﻿using System;
-using Herbfunk.GarrisonBase.Garrison.Objects;
+﻿using Herbfunk.GarrisonBase.Garrison.Objects;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {

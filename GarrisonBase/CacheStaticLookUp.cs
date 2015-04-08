@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Quest;
 using Styx;
 using Styx.WoWInternals;

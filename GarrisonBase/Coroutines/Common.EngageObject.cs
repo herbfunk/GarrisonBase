@@ -40,8 +40,10 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 GarrisonBase.Debug("EngageObject no longer valid for combat!");
                 ObjectCacheManager.UpdateCombatTarget();
 
+                
                 //Clear lootable object
                 ObjectCacheManager.LootableObject = null;
+                _lootMovement = null;
 
                 _combatMovement = null;
                 return false;

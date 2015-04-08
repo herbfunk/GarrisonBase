@@ -7,7 +7,6 @@ using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
-using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Quest;
 using Styx;
 using Styx.CommonBot;
@@ -18,15 +17,15 @@ namespace Herbfunk.GarrisonBase.Coroutines
 {
     public class BehaviorManager
     {
-        public static Behavior CurrentBehavior { get; private set; }
+        internal static Behavior CurrentBehavior { get; private set; }
         internal static List<Behavior> Behaviors = new List<Behavior>();
 
+        
         /// <summary>
         /// Used to switch the current behavior
         /// </summary>
-        public static Behavior SwitchBehavior { get; set; }
-
-
+        internal static List<Behavior> SwitchBehaviors = new List<Behavior>();
+        internal static Behavior SwitchBehavior { get; set; }
 
         public static async Task<bool> RootLogic()
         {
@@ -59,6 +58,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
 
                 GarrisonManager.Initalize();
+
 
                 if (!LuaEvents.LuaAddonInjected)
                 {
@@ -104,46 +104,51 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             if (CurrentBehavior != null)
             {
+                //Check for any switch behaviors.. (override current behavior temporarly)
+                if (SwitchBehaviors.Count > 0 && SwitchBehavior == null)
+                {
+                    while (SwitchBehaviors.Count > 0)
+                    {
+                        if (!SwitchBehaviors[0].CheckCriteria())
+                            SwitchBehaviors.RemoveAt(0);
+                        else
+                        {
+                            SwitchBehavior = SwitchBehaviors[0];
+                            break;
+                        }
+                    }
+                }
+                
                 if (SwitchBehavior != null && CurrentBehavior != SwitchBehavior)
                 {
-                    if (!SwitchBehavior.CheckCriteria())
-                    {
-                        SwitchBehavior = null;
-                    }
-                    else
-                    {
-                        GarrisonBase.Debug("Switching behaviors to {0}", SwitchBehavior.Type);
-                        CurrentBehavior = SwitchBehavior;
-                        CurrentBehavior.Initalize();
-                    }
+                    GarrisonBase.Debug("Switching behaviors to {0}", SwitchBehavior.Type);
+                    CurrentBehavior = SwitchBehavior;
+                    CurrentBehavior.Initalize();
                 }
 
                 bool x = await CurrentBehavior.BehaviorRoutine();
 
-                if (!x || CurrentBehavior.IsDone)
+                if (x && !CurrentBehavior.IsDone) return true;
+
+                GarrisonBase.Debug(
+                    !x ? "Finishing Behavior {0} because it returned false!"
+                        : "Finishing Behavior {0} because IsDone is true", CurrentBehavior.Type);
+
+                if (!CurrentBehavior.Disposed) CurrentBehavior.Dispose();
+
+                if (SwitchBehavior != null && CurrentBehavior.Equals(SwitchBehavior))
                 {
-                    if (!x)
-                        GarrisonBase.Debug("Finishing Behavior {0} because it returned false!", CurrentBehavior.Type);
-                    else
-                        GarrisonBase.Debug("Finishing Behavior {0} because IsDone is true", CurrentBehavior.Type);
+                    SwitchBehaviors.RemoveAt(0);
+                    SwitchBehavior = null;
 
-                    if (!CurrentBehavior.Disposed) CurrentBehavior.Dispose();
-
-                    if (SwitchBehavior != null && CurrentBehavior.Equals(SwitchBehavior))
-                    {
-                        SwitchBehavior = null;
-                        CurrentBehavior = Behaviors[0];
-                        CurrentBehavior.Initalize();
-                    }
-                    else
-                    {
-                        Behaviors.RemoveAt(0);
-                        CurrentBehavior = null;
-                    }
-
+                    CurrentBehavior = Behaviors[0];
+                    CurrentBehavior.Initalize();
                 }
-
-
+                else
+                {
+                    Behaviors.RemoveAt(0);
+                    CurrentBehavior = null;
+                }
 
 
                 return true;

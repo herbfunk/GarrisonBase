@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
@@ -21,6 +20,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                      GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted &&
                      LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) &&
                      BaseSettings.CurrentSettings.BehaviorMineGather);
+
+           
         }
 
 
@@ -43,6 +44,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             ObjectCacheManager.ShouldLoot = true;
             ObjectCacheManager.ShouldKill = true;
 
+            if (_movementQueue != null) return;
+
             List<WoWPoint> miningPoints;
 
             if (Character.Player.IsAlliance)
@@ -63,6 +66,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 _movementQueue.Enqueue(p);
             }
+
             _movement = null;
         }
 

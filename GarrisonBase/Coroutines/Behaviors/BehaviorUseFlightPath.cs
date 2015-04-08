@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bots.Quest;
-using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
-using Styx.Common;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
-using Styx.WoWInternals.DBC;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {

@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
@@ -101,7 +100,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //GarrisonManager.CompletedMissionIds = LuaCommands.GetCompletedMissionIds();
             if (GarrisonManager.CompletedMissionIds.Count == 0)
             {
-                LuaCommands.CloseGarrisonMissionFrame();
+                LuaUI.MissionFrame.Close.Click();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 return false;
             }
@@ -111,19 +110,21 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 await Coroutine.Sleep(_Waitmilliseconds);
             }
 
+            
             //Check if the first dialog is visible..
-            if (LuaCommands.IsGarrisonMissionCompleteDialogVisible())
+            if (LuaUI.MissionFrame.IsMissionCompleteDialogVisible)
             {
-                LuaUI.MissionCompleteView.Click();
+
+                LuaUI.MissionFrame.MissionCompleteViewButton.Click();
                 //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrameMissions_CompleteDialog_BorderFrame_ViewButton);
                 _commandtableCompletemissionsWaittimer.Reset();
                 return true;
             }
-
+            
             //Check if mission complete dialogs are even visible..
-            if (!LuaCommands.IsGarrisonMissionCompleteBackgroundVisible())
+            if (!LuaUI.MissionFrame.IsMissionCompleteBackgroundVisible)
             {
-                LuaUI.MissionClose.Click();
+                LuaUI.MissionFrame.Close.Click();
                 //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_CloseButton);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 return true;
@@ -135,9 +136,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 
                 //Click next..
                 //if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
-                if(LuaUI.MissionNext.IsEnabled())
+                if(LuaUI.MissionFrame.MissionNextButton.IsEnabled())
                 {
-                    LuaUI.MissionNext.Click();
+                    LuaUI.MissionFrame.MissionNextButton.Click();
                     //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                     _commandtableCompletemissionsWaittimer.Reset();
                     return true;
@@ -180,9 +181,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 //Click next..
                 //if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
-                if (LuaUI.MissionNext.IsEnabled())
+                if (LuaUI.MissionFrame.MissionNextButton.IsEnabled())
                 {
-                    LuaUI.MissionNext.Click();
+                    LuaUI.MissionFrame.MissionNextButton.Click();
                     //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                 }
                 return true;
@@ -205,10 +206,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             await Coroutine.Yield();
 
            // if (LuaCommands.IsButtonEnabled(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton))
-            if (LuaUI.MissionNext.IsEnabled())
+            if (LuaUI.MissionFrame.MissionNextButton.IsEnabled())
             {
                 
-                LuaUI.MissionNext.Click();
+                LuaUI.MissionFrame.MissionNextButton.Click();
                 //LuaCommands.ClickButton(LuaCommands.ButtonNames.GarrisonMissionFrame_MissionComplete_NextMissionButton);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 _commandtableCompletemissionsWaittimer.Reset();

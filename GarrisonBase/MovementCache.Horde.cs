@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Styx;
 using Styx.CommonBot.Profiles;
-using Tripper.Tools.Math;
 
 namespace Herbfunk.GarrisonBase
 {
