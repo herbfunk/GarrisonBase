@@ -21,5 +21,9 @@ namespace Herbfunk.GarrisonBase.Garrison.Enums
         FollowerTrait=4096,
         RushOrder = 8192,
         Items = 16384,
+        AbrogatorStone = 32768,
+        ElementalRune = 65536,
+        SavageBlood = 131072,
+        PrimalSpirit = 262144,
     }
 }

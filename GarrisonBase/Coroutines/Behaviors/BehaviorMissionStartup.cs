@@ -28,6 +28,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 GarrisonManager.CurrentActiveFollowers <= GarrisonManager.MaxActiveFollowers;
         }
 
+        public override void Initalize()
+        {
+            base.Initalize();
+        }
 
         public C_WoWObject CommandTable
         {
@@ -51,7 +55,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override async Task<bool> Movement()
         {
-            if (LuaEvents.MissionFrameOpen)
+            if (LuaUI.MissionFrame.IsOpen)
                 return false;
 
             if (CommandTable == null)

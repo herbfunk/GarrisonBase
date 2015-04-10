@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Garrison.Objects;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
@@ -32,7 +32,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
-            if (!QuestManager.QuestContainedInQuestLog(QuestID) || QuestManager.GetQuestFromQuestLog(QuestID).IsCompleted)
+            if (!QuestHelper.QuestContainedInQuestLog(QuestID) || QuestHelper.GetQuestFromQuestLog(QuestID).IsCompleted)
                 return false;
 
             if (Building.WorkOrder == null || Building.WorkOrder.TotalWorkorderStartups() == 0)
@@ -40,8 +40,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (await StartMovement.MoveTo())
                 return true;
-                
-            if (LuaEvents.GossipFrameOpen)
+
+            if (GossipHelper.IsOpen)
             {
                 GossipFrame.Instance.SelectGossipOption(0);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();

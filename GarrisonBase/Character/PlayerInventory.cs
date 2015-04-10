@@ -16,7 +16,15 @@ namespace Herbfunk.GarrisonBase.Character
         public Dictionary<WoWGuid, C_WoWItem> BagItems = new Dictionary<WoWGuid, C_WoWItem>();
         public Dictionary<WoWGuid, C_WoWItem> BankItems = new Dictionary<WoWGuid, C_WoWItem>();
         public Dictionary<WoWGuid, C_WoWItem> BankReagentItems = new Dictionary<WoWGuid, C_WoWItem>();
-        public List<WoWGuid> EquipmentManagerItemGuids = new List<WoWGuid>();
+        internal List<C_WoWItem> VendorItems = new List<C_WoWItem>();
+        internal List<C_WoWItem> DisenchantItems = new List<C_WoWItem>();
+        internal List<C_WoWItem> MailItems = new List<C_WoWItem>(); 
+
+        internal static List<WoWGuid> EquipmentManagerItemGuids = new List<WoWGuid>();
+        internal static List<WoWGuid> ItemDisenchantingBlacklistedGuids = new List<WoWGuid>();
+
+        internal static bool ShouldVendor = true;
+
         public int[] BagContainerTotalSlots { get; set; }
 
         public int TotalBagSlots
@@ -37,13 +45,21 @@ namespace Herbfunk.GarrisonBase.Character
 
         public PlayerInventory()
         {
+            EquipmentManagerItemGuids.Clear();
+            ItemDisenchantingBlacklistedGuids.Clear();
             RefreshEquipmentManagerItemGuids();
+            ItemDisenchantingBlacklistedGuids.AddRange(EquipmentManagerItemGuids);
+
             RefreshBackpackContainerInfo();
             UpdateBagItems();
             UpdateBankItems();
             UpdateBankReagentItems();
-            ItemDisenchantingBlacklistedGuids.AddRange(EquipmentManagerItemGuids);
+            
             RefreshLowestDurabilityPercent();
+
+            LuaEvents.OnBagUpdate += () => ShouldUpdateBagItems = true;
+            LuaEvents.OnPlayerBankSlotsChanged += () => ShouldUpdateBankItems = true;
+            LuaEvents.OnPlayerReagentsBankSlotsChanged += () => ShouldUpdateBankReagentItems = true;
 
             GarrisonBase.Log(DebugString);
 
@@ -126,21 +142,52 @@ namespace Herbfunk.GarrisonBase.Character
         public void UpdateBagItems()
         {
             BagItems.Clear();
+            VendorItems.Clear();
+            DisenchantItems.Clear();
+            MailItems.Clear();
+
             using (StyxWoW.Memory.AcquireFrame())
             {
                 foreach (var item in StyxWoW.Me.BagItems)
                 {
-                    BagItems.Add(item.Guid, new C_WoWItem(item));
+                    var newItem = new C_WoWItem(item);
+                    BagItems.Add(item.Guid, newItem);
+
+                    //if (newItem.ShouldMail) 
+                    //    MailItems.Add(newItem);
+                    if (GarrisonManager.HasDisenchant && newItem.ShouldDisenchant) 
+                        DisenchantItems.Add(newItem);
+                    else if (ShouldVendor && newItem.ShouldVendor) 
+                        VendorItems.Add(newItem);
+                    
                 }
             }
 
-            if (TotalFreeSlots < BaseSettings.CurrentSettings.MinimumBagSlotsFree && GarrisonManager.Initalized)
+            if (TotalFreeSlots < BaseSettings.CurrentSettings.MinimumBagSlotsFree)
             {
-                if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.SellRepair))
-                    BehaviorManager.SwitchBehaviors.Insert(0, new BehaviorSellRepair());
-                
-                if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.Disenchanting))
-                    BehaviorManager.SwitchBehaviors.Add(new BehaviorDisenchant());
+                if (GarrisonManager.Initalized)
+                {
+                    if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.SellRepair))
+                        BehaviorManager.SwitchBehaviors.Insert(0, new BehaviorSellRepair());
+
+                    if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.Disenchanting))
+                        BehaviorManager.SwitchBehaviors.Add(new BehaviorDisenchant());
+                }
+
+                if (!ShouldVendor)
+                {
+                    //We didn't update our vendor list last time.. (so we will require another update next loop.)
+                    ShouldVendor = true;
+                    return;
+                }
+
+                ShouldVendor = true;
+            }
+            else
+            {
+                //When current behavior is vendoring.. we should continue to update the vendor list.
+                ShouldVendor = BehaviorManager.CurrentBehavior!=null &&
+                                BehaviorManager.CurrentBehavior.Type == BehaviorType.SellRepair;
             }
 
             ShouldUpdateBagItems = false;
@@ -222,102 +269,7 @@ namespace Herbfunk.GarrisonBase.Character
             return BagItems.Values.Where(i => i.Quality == quality).ToList();
         }
 
-        public List<WoWGuid> ItemDisenchantingBlacklistedGuids = new List<WoWGuid>();
 
-        public List<C_WoWItem> GetBagItemsVendor()
-        {
-            List<C_WoWItem> retList = new List<C_WoWItem>();
-
-            if (BaseSettings.CurrentSettings.VendorJunkItems)
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Poor));
-
-            if (BaseSettings.CurrentSettings.VendorCommonItems)
-            {
-                //Low level green equipment
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Common)
-                    .Where(i =>
-                        !i.IsOpenable && !i.IsAccountBound &&
-                        i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
-                        (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                        !i.IsSoulbound &&
-                        !EquipmentManagerItemGuids.Contains(i.Guid))
-                    .ToList());
-            }
-
-            if (BaseSettings.CurrentSettings.VendorUncommonItems)
-            {
-                //Low level green equipment
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Uncommon)
-                    .Where(i =>
-                        !i.IsOpenable && !i.IsAccountBound &&
-                        i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
-                        (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                        !i.IsSoulbound &&
-                        !EquipmentManagerItemGuids.Contains(i.Guid))
-                    .ToList());
-            }
-
-            if (BaseSettings.CurrentSettings.VendorRareItems)
-            {
-                //Low level green equipment
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Rare)
-                    .Where(i =>
-                        !i.IsOpenable && !i.IsAccountBound &&
-                        i.ConsumableClass == WoWItemConsumableClass.None &&
-                        i.RequiredLevel > 0 && ((i.RequiredLevel < 90 && i.Level > 1) || (i.RequiredLevel == 90 && i.Level == 429)) &&
-                        (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                        !i.IsSoulbound &&
-                        !EquipmentManagerItemGuids.Contains(i.Guid))
-                    .ToList());
-            }
-
-
-            return retList;
-        }
-        public List<C_WoWItem> GetBagItemsDisenchantable()
-        {
-
-            List<C_WoWItem> retList = new List<C_WoWItem>();
-            if (BaseSettings.CurrentSettings.DisenchantingUncommon)
-            {
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Uncommon)
-                    .Where(i =>
-                            !i.IsOpenable && !i.IsAccountBound &&
-                            i.ConsumableClass == WoWItemConsumableClass.None &&
-                            i.RequiredLevel > 89 && (i.Level > 429 && i.Level <= BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel) &&
-                            (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                            !ItemDisenchantingBlacklistedGuids.Contains(i.Guid) &&
-                            (!BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded || i.IsSoulbound))
-                    .ToList());
-            }
-            if (BaseSettings.CurrentSettings.DisenchantingRare)
-            {
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Rare)
-                    .Where(i =>
-                            !i.IsOpenable && !i.IsAccountBound &&
-                            i.ConsumableClass == WoWItemConsumableClass.None &&
-                            i.RequiredLevel > 89 && (i.Level > 429 && i.Level <= BaseSettings.CurrentSettings.DisenchantingRareItemLevel) &&
-                            (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                            !ItemDisenchantingBlacklistedGuids.Contains(i.Guid) &&
-                            (!BaseSettings.CurrentSettings.DisenchantingRareSoulbounded || i.IsSoulbound))
-                    .ToList());
-            }
-            if (BaseSettings.CurrentSettings.DisenchantingEpic)
-            {
-                retList.AddRange(GetBagItemsByQuality(WoWItemQuality.Epic)
-                    .Where(i =>
-                            !i.IsOpenable &&
-                            i.ConsumableClass == WoWItemConsumableClass.None && !i.IsAccountBound &&
-                            i.RequiredLevel > 89 && (i.Level > 429 && i.Level <= BaseSettings.CurrentSettings.DisenchantingEpicItemLevel) &&
-                            (i.ItemClass == WoWItemClass.Armor || i.ItemClass == WoWItemClass.Weapon) &&
-                            !ItemDisenchantingBlacklistedGuids.Contains(i.Guid) &&
-                            (!BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded || i.IsSoulbound))
-                    .ToList());
-            }
-            return retList;
-        }
         public List<C_WoWItem> GetBagItemsBOE()
         {
             List<C_WoWItem> retList = new List<C_WoWItem>();
@@ -372,6 +324,8 @@ namespace Herbfunk.GarrisonBase.Character
             var herbs = GetBagItemsHerbs();
             foreach (var item in herbs)
             {
+                if (item.StackCount < 4) continue;
+
                 var type = (CraftingReagents) Enum.Parse(typeof (CraftingReagents), item.Entry.ToString());
                 switch (type)
                 {

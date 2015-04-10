@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -44,13 +45,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             get
             {
                 C_WoWGameObject obj = 
-                    ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint,
-                    150f, 
-                    Building.WorkOrderObjectName).FirstOrDefault() 
-                    ??
-                    ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint,
-                    150f,
-                    "Crate").FirstOrDefault();
+                    //ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint, 150f, Building.WorkOrderObjectName).FirstOrDefault() 
+                    //??
+                    ObjectCacheManager.GetGameObjectsNearPoint(Building.EntranceMovementPoint, 150f, WoWObjectTypes.GarrisonShipment).FirstOrDefault();
 
                 return obj;
             }

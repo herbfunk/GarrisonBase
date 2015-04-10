@@ -10,13 +10,13 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
         OreVein=2,
         Herb=4,
         GarrisonCache=8,
-        GarrisonWorkOrder=16,
+        GarrisonShipment=16,
         GarrisonFinalizePlot=32,
         GarrisonCommandTable=64,
         GarrisonWorkOrderNpc=128,
         Mailbox = 256,
         PrimalTrader = 512,
-        RepairVendor = 1024,
+        Vendor = 1024,
         Follower = 2048,
     }
 }

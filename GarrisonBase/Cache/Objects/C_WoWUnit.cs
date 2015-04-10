@@ -1,6 +1,7 @@
 ﻿using System;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.WoWInternals.WoWObjects;
 
@@ -47,12 +48,17 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 }
                 else if (CacheStaticLookUp.PrimalTraderIds.Contains(Entry))
                 {
-                    SubType = WoWObjectTypes.PrimalTrader;
+                    SubType = WoWObjectTypes.PrimalTrader | WoWObjectTypes.Vendor;
                     IgnoresRemoval = true;
                 }
-                else if (CacheStaticLookUp.RepairVendorIds.Contains(Entry))
+
+                if (MerchantHelper.GarrisonVendorEntryIds.Contains(Entry))
                 {
-                    SubType= WoWObjectTypes.RepairVendor;
+                    if (SubType== WoWObjectTypes.Unknown)
+                        SubType = WoWObjectTypes.Vendor;
+                    else
+                        SubType |= WoWObjectTypes.Vendor;
+
                     IgnoresRemoval = true;
                 }
 

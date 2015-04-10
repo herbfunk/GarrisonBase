@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
+using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
 
@@ -15,9 +16,9 @@ namespace Herbfunk.GarrisonBase
 
         public static bool TestLuaInjectionCode()
         {
-            GarrisonBase.Debug("LuaCommand: TestLuaInjectionCode");
+            GarrisonBase.Debug("LuaCommand: {0}", String.Format("return {0}()", LuaEvents.TestFunctionString));
             string lua = String.Format("return {0}()", LuaEvents.TestFunctionString);
-            List<string> retvalues = Lua.GetReturnValues(lua);
+            List<string> retvalues = Lua.GetReturnValues(lua, "clicky.lua");
             return retvalues != null;
         }
 
@@ -287,7 +288,6 @@ namespace Herbfunk.GarrisonBase
             GarrisonBase.Debug("LuaCommand: IsQuestFlaggedCompleted {0}", ID);
             string lua = String.Format("return tostring(IsQuestFlaggedCompleted(\"{0}\"))", ID);
             List<string> retList = Lua.GetReturnValues(lua);
-          
             return retList[0].ToBoolean();
         }
 

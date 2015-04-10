@@ -97,7 +97,12 @@ namespace Herbfunk.GarrisonBase
 
         public class UImissionframe : UIframe
         {
-            public UImissionframe() : base("GarrisonMissionFrame") { }
+            public bool IsOpen { get; set; }
+            public UImissionframe() : base("GarrisonMissionFrame")
+            {
+                LuaEvents.OnGarrisonMissionNpcOpened += () => IsOpen = true;
+                LuaEvents.OnGarrisonMissionNpcClosed += () => IsOpen = false;
+            }
             private readonly UIbutton _closebutton = new UIbutton(ButtonNames.GarrisonMissionFrame_CloseButton);
             public override UIbutton Close
             {

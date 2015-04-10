@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx.CommonBot.Coroutines;
 using Styx.WoWInternals;
 
@@ -21,7 +21,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (IsDone) return false;
 
-            if (QuestManager.QuestContainedInQuestLog(QuestID))
+            if (QuestHelper.QuestContainedInQuestLog(QuestID))
             {
                 QuestLog.Instance.AbandonQuestById(QuestID);
                 await CommonCoroutines.SleepForRandomUiInteractionTime();

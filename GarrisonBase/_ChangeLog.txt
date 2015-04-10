@@ -1,5 +1,36 @@
-﻿v1.2.1.1
+﻿v1.2.2.0
+Work order pickup no longer uses name to find and ID objects.
+Vendor behavior will now choose the nearest valid npc to vendor at. (from preset list of ids)
+Primal Spirit behavior is now capable of buying when using spirits found in reagent bank.
 
+Settings and Config UI
+	-Added Mission Priority Settings (Abrogator Stone, Elemental Rune, Savage Blood, and Primal Spirit)
+	-Mission priority settings got a visual update!
+	-The Misc tab now has a sub tab control for all things misc!
+
+Added MerchantHelper static class for buying and tracking merchant frame related things.
+Added GossipHelper static class for tracking gossip frame related things.
+Added TaxiFlightHelper static class for flight path related things.
+Renamed QuestManager to QuestHelper, moved to Helpers namespace.
+
+Player Inventory bag items will now add disenchant/vendor items to collections during updating for quick lookup.
+Added Map Expansion Id, Parent Id, and IsContintent properties to Player.
+
+Fixed Hotspot Running behavior movement when loot/kill is set to none.
+Taxi Flight Path Behavior
+	-Constructor also now accepts a destination WoWPoint and will find nearest Flight Path accordingly.
+	-Distances that take > 90 seconds will always attempt to use flight path.
+	-Will now use XML nodes as backup incase NearestFlightMerchant returns null.
+
+Optional Testable Behavior - Gather sum followers! 
+	*Note to enable gathering of any of the followers, enable the settings found in Misc Tab -> Followers Tab*
+	*Note most have been tested multiple times, but be wary and watchful it may mess up*
+	-Current followers supported: Tormmok, Blook, Defender Illona or Aeda Brightdawn, Fen Tao, and Goldmaneg the Skinner
+
+
+
+
+v1.2.1.1
 Vendor behavior will no longer use click movement. (caused a stuck)
 Cleaned up unused lua commands (and moved mission frame related into LuaUI)
 Changed switch behavior into a list to accept multiple behaviors.

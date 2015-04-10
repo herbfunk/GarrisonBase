@@ -49,7 +49,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (_hotspotType.HasFlag(HotSpotType.Killing)) ObjectCacheManager.CombatIds.Add(i);
             }
 
-           
+
             base.Initalize();
         }
 
@@ -80,9 +80,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (_hotSpotMovement.CurrentMovementQueue.Count == 0)
                 _hotSpotMovement.UseDeqeuedPoints(true);
 
-            if (((_hotspotType.HasFlag(HotSpotType.Looting) && ObjectCacheManager.LootableObject == null) ||
-                (_hotspotType.HasFlag(HotSpotType.Killing) && ObjectCacheManager.CombatObject == null)))
-                await _hotSpotMovement.MoveTo();
+            if (_hotspotType == HotSpotType.None ||
+                 (_hotspotType.HasFlag(HotSpotType.Looting) && ObjectCacheManager.LootableObject == null) ||
+                 (_hotspotType.HasFlag(HotSpotType.Killing) && ObjectCacheManager.CombatObject == null))
+            {
+                await _hotSpotMovement.MoveTo(); 
+                
+            }
+
 
             return true;
         }

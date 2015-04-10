@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
+using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx;
@@ -21,7 +22,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                              GarrisonManager.HasDisenchant &&
                              !GarrisonManager.Buildings[BuildingType.EnchantersStudy].IsBuilding &&
                              !GarrisonManager.Buildings[BuildingType.EnchantersStudy].CanActivate &&
-                             Character.Player.Inventory.GetBagItemsDisenchantable().Count > 0;
+                             Character.Player.Inventory.DisenchantItems.Count > 0;
+
+            RunCondition += () => BaseSettings.CurrentSettings.BehaviorDisenchanting && 
+                                Character.Player.Inventory.DisenchantItems.Count > 0;
         }
 
         public override void Initalize()
@@ -85,13 +89,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override async Task<bool> Interaction()
         {
-            var items = Character.Player.Inventory.GetBagItemsDisenchantable();
-            if (items.Count == 0)
-            {
-                IsDone = true;
-                return false;
-            }
-                
+
 
             /*
                  * Check Cursor Spell ID
@@ -104,22 +102,27 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                  * 
                  */
 
-            if (Character.Player.CurrentPendingCursorSpellId == 160201)
+            if (Player.CurrentPendingCursorSpellId == 160201)
             {
                 //Item Interaction!
                 GarrisonBase.Log("Disenchant Cursor!");
                    
-                if (items.Count > 0)
+                if (Player.Inventory.DisenchantItems.Count > 0)
                 {
-                    var item = items[0];
-                    GarrisonBase.Log("Disenchanting {0}", item.Name);
+                    var item = Player.Inventory.DisenchantItems[0];
+                    GarrisonBase.Debug("Disenchanting Item {0} ({1}) Quality {2}", item.Name, item.Entry, item.Quality);
                     bool bagChanged = await CommonCoroutines.WaitForLuaEvent(
                         "BAG_UPDATE",
                         6200,
                         null,
                         item.Use);
 
-                    Character.Player.Inventory.ItemDisenchantingBlacklistedGuids.Add(item.Guid);
+                    PlayerInventory.ItemDisenchantingBlacklistedGuids.Add(item.Guid);
+
+                    //Force update if bag didn't change.. (so we ignore this item now)
+                    if (!bagChanged)
+                        Player.Inventory.UpdateBagItems();
+
                     return true;
                 }
                 return false;

@@ -7,11 +7,14 @@ using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.WoWInternals;
+using Styx.WoWInternals.DB;
+using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Coroutines
 {
@@ -42,46 +45,39 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     return false;
                 }
             }
-            
+
             if (await Common.CheckCommonCoroutines())
                 return true;
 
-            if (!BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE && await Common.PreChecks.BehaviorRoutine())
+            //Do we need to hearth or fly to our garrison?
+            if (await Common.PreChecks.BehaviorRoutine())
                 return true;
 
-            if (!GarrisonManager.Initalized)
+            //Disable and reload UI if master plan is enabled..
+            if (await Common.PreChecks.CheckAddons()) return true;
+
+            //We need "open" the garrison up and initalize it.. (so we don't get errors trying to inject!)
+            if (await Common.PreChecks.InitalizeGarrisonManager()) return true;
+
+            //Inject our lua addon code for mission success function
+            if (!LuaEvents.LuaAddonInjected)
             {
-                await CommonCoroutines.WaitForLuaEvent("GARRISON_SHOW_LANDING_PAGE", 2500, null, LuaCommands.ClickGarrisonMinimapButton);
-                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                await Coroutine.Sleep(StyxWoW.Random.Next(1234, 2331));
-                Lua.DoString("GarrisonLandingPage.CloseButton:Click()");
-                await CommonCoroutines.SleepForRandomUiInteractionTime();
-
-                GarrisonManager.Initalize();
-
-
-                if (!LuaEvents.LuaAddonInjected)
-                {
-                    if (LuaCommands.TestLuaInjectionCode())
-                    {//Prevent multiple injections by checking simple function return!
-                        LuaEvents.LuaAddonInjected = true;
-                    }
-                    else
-                    {
-                        await LuaEvents.InjectLuaAddon();
-                        return true;
-                    }
+                if (LuaCommands.TestLuaInjectionCode())
+                {//Prevent multiple injections by checking simple function return!
+                    LuaEvents.LuaAddonInjected = true;
                 }
-
-                return true;
+                else
+                {
+                    await LuaEvents.InjectLuaAddon();
+                    return true;
+                }
             }
-
+            
+            
 
 
             if (!InitalizedBehaviorList)
                 InitalizeBehaviorsList();
-
-
 
             //Check for next behavior
             if (CurrentBehavior == null)
@@ -156,6 +152,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             if (Common.PreChecks.DisabledMasterPlanAddon)
             {
+                Common.PreChecks.ShouldCheckAddons = false;
                 LuaCommands.EnableAddon("MasterPlan");
                 LuaCommands.ReloadUI();
                 Common.PreChecks.DisabledMasterPlanAddon = false;
@@ -174,15 +171,16 @@ namespace Herbfunk.GarrisonBase.Coroutines
         internal static bool InitalizedBehaviorList = false;
         internal static void InitalizeBehaviorsList()
         {
+            GarrisonBase.Debug("Initalize Behaviors List..");
             //Insert new missions behavior at beginning!
             Behaviors.Clear();
+            SwitchBehaviors.Clear();
             CurrentBehavior = null;
             SwitchBehavior = null;
 
-            //Behaviors.Add(Follower.FollowerQuestBehaviorArray(467));
-            //Behaviors.Add(Follower.FollowerQuestBehaviorArray(189));
-            //Behaviors.Add(Follower.FollowerQuestBehaviorArray(193));
-            //Behaviors.Add(Follower.FollowerQuestBehaviorArray(207));
+
+            
+
 
             //Move to entrance!
             //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
@@ -387,15 +385,29 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //Finally, start some new missions!
             Behaviors.Add(new BehaviorMissionStartup());
 
-            
-
+            //Optional follower behaviors (to unlock)
+            Behaviors.Add(new BehaviorArray(new Behavior[]
+            {
+                Follower.FollowerQuestBehaviorArray(170),
+                Follower.FollowerQuestBehaviorArray(467),
+                Follower.FollowerQuestBehaviorArray(189),
+                Follower.FollowerQuestBehaviorArray(193),
+                Follower.FollowerQuestBehaviorArray(207),
+                Follower.FollowerQuestBehaviorArray(190),
+                new BehaviorCustomAction(() => Common.PreChecks.IgnoreHearthing=false),
+                new BehaviorUseFlightPath(MovementCache.GarrisonEntrance)
+            }));
+           
 
             InitalizedBehaviorList = true;
+            
+            
         }
 
         internal static void Reset()
         {
             InitalizedBehaviorList = false;
+
             Behaviors.ForEach(b => b.IsDone = true);
             foreach (var behavior in Behaviors)
             {
@@ -405,13 +417,13 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
         internal static bool HasQuest(uint questId)
         {
-            return QuestManager.QuestContainedInQuestLog(questId);
+            return QuestHelper.QuestContainedInQuestLog(questId);
         }
         internal static bool HasQuestAndNotCompleted(uint questId)
         {
             return
                 HasQuest(questId) &&
-                !QuestManager.GetQuestFromQuestLog(questId).IsCompleted;
+                !QuestHelper.GetQuestFromQuestLog(questId).IsCompleted;
         }
         internal static bool ObjectNotValidOrNotFound(uint id)
         {

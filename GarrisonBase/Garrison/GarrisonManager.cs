@@ -26,18 +26,20 @@ namespace Herbfunk.GarrisonBase.Garrison
         /// <summary>
         /// Buildings contain enchanting
         /// </summary>
-        public static bool HasDisenchant { get; set; }
+        public static bool HasDisenchant = false;
         internal static int DisenchantingEntryId = 0;
         /// <summary>
         /// Buildings contains a forge (blacksmithing)
         /// </summary>
-        public static bool HasForge { get; set; }
+        public static bool HasForge = false;
         public static BuildingType ForgeBuilding { get; set; }
 
         public static int PrimalTraderID { get; set; }
         public static WoWPoint PrimalTraderPoint { get; set; }
 
         public static int FlightPathNpcId { get; set; }
+
+
 
         internal static bool Initalized = false;
         internal static void Initalize()
@@ -96,6 +98,9 @@ namespace Herbfunk.GarrisonBase.Garrison
             GarrisonBase.Debug("Has Disenchanting {0} {1}", HasDisenchant,
                 DisenchantingEntryId != 0 ? DisenchantingEntryId.ToString() : "");
 
+            LuaEvents.OnGarrisonMissionListUpdated += () => UpdateMissionIds();
+            LuaEvents.OnGarrisonMissionFinished += () => UpdateMissionIds();
+
             Initalized = true;
 
            
@@ -108,6 +113,7 @@ namespace Herbfunk.GarrisonBase.Garrison
             Followers.Clear();
             AvailableMissions.Clear();
             CompletedMissionIds.Clear();
+
         }
 
         public static Dictionary<int, Follower> Followers = new Dictionary<int, Follower>();

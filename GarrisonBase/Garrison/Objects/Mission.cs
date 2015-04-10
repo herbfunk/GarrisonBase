@@ -65,6 +65,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                         return BaseSettings.CurrentSettings.FollowerRetraining.SuccessRate;
                     if (RewardTypes.HasFlag(RewardTypes.RushOrder))
                         return BaseSettings.CurrentSettings.RushOrders.SuccessRate;
+                    if (RewardTypes.HasFlag(RewardTypes.AbrogatorStone))
+                        return BaseSettings.CurrentSettings.AbrogatorStone.SuccessRate;
+                    if (RewardTypes.HasFlag(RewardTypes.ElementalRune))
+                        return BaseSettings.CurrentSettings.ElementalRune.SuccessRate;
+                    if (RewardTypes.HasFlag(RewardTypes.SavageBlood))
+                        return BaseSettings.CurrentSettings.SavageBlood.SuccessRate;
+                    if (RewardTypes.HasFlag(RewardTypes.PrimalSpirit))
+                        return BaseSettings.CurrentSettings.PrimalSpirit.SuccessRate;
 
                     return BaseSettings.CurrentSettings.Items.SuccessRate;
                 }
@@ -85,6 +93,9 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
                 if (RewardTypes.HasFlag(RewardTypes.SealOfTemperedFate))
                     return BaseSettings.CurrentSettings.SealOfTemperedFate.SuccessRate;
+
+                if (RewardTypes.HasFlag(RewardTypes.HonorPoints))
+                    return BaseSettings.CurrentSettings.HonorPoints.SuccessRate;
 
 
                 return 100;
@@ -157,6 +168,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                         _priority += BaseSettings.CurrentSettings.FollowerRetraining.Priority;
                     else if (RewardTypes.HasFlag(RewardTypes.RushOrder))
                         _priority += BaseSettings.CurrentSettings.RushOrders.Priority;
+                    else if (RewardTypes.HasFlag(RewardTypes.SavageBlood))
+                        _priority += BaseSettings.CurrentSettings.SavageBlood.Priority;
+                    else if (RewardTypes.HasFlag(RewardTypes.AbrogatorStone))
+                        _priority += BaseSettings.CurrentSettings.AbrogatorStone.Priority;
+                    else if (RewardTypes.HasFlag(RewardTypes.ElementalRune))
+                        _priority += BaseSettings.CurrentSettings.ElementalRune.Priority;
+                    else if (RewardTypes.HasFlag(RewardTypes.PrimalSpirit))
+                        _priority += BaseSettings.CurrentSettings.PrimalSpirit.Priority;
                     else if (RewardTypes.HasFlag(RewardTypes.Items))
                     {
                         _priority += BaseSettings.CurrentSettings.Items.Priority;
@@ -178,6 +197,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     if (RewardTypes.HasFlag(RewardTypes.Garrison))
                         _priority += BaseSettings.CurrentSettings.GarrisonResources.Priority;
 
+                    if (RewardTypes.HasFlag(RewardTypes.HonorPoints))
+                        _priority += BaseSettings.CurrentSettings.HonorPoints.Priority;
 
 
 
@@ -208,6 +229,15 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     if (RewardTypes.HasFlag(RewardTypes.RushOrder))
                         return BaseSettings.CurrentSettings.RushOrders.MinimumLevel;
 
+                    if (RewardTypes.HasFlag(RewardTypes.AbrogatorStone))
+                        return BaseSettings.CurrentSettings.AbrogatorStone.MinimumLevel;
+                    if (RewardTypes.HasFlag(RewardTypes.ElementalRune))
+                        return BaseSettings.CurrentSettings.ElementalRune.MinimumLevel;
+                    if (RewardTypes.HasFlag(RewardTypes.SavageBlood))
+                        return BaseSettings.CurrentSettings.SavageBlood.MinimumLevel;
+                    if (RewardTypes.HasFlag(RewardTypes.PrimalSpirit))
+                        return BaseSettings.CurrentSettings.PrimalSpirit.MinimumLevel;
+
                     return BaseSettings.CurrentSettings.Items.MinimumLevel;
                 }
 
@@ -228,6 +258,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 if (RewardTypes.HasFlag(RewardTypes.SealOfTemperedFate))
                     return BaseSettings.CurrentSettings.SealOfTemperedFate.MinimumLevel;
 
+                if (RewardTypes.HasFlag(RewardTypes.HonorPoints))
+                    return BaseSettings.CurrentSettings.HonorPoints.MinimumLevel;
 
                 return 90;
             }
@@ -351,6 +383,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     RewardTypes |= RewardTypes.FollowerTrait;
                 else if (CacheStaticLookUp.ItemRewards_RushOrders.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.RushOrder;
+                else if (CacheStaticLookUp.ItemReward_AbrogatorStone==reward.ItemId)
+                    RewardTypes |= RewardTypes.AbrogatorStone;
+                else if (CacheStaticLookUp.ItemReward_ElementalRune == reward.ItemId)
+                    RewardTypes |= RewardTypes.ElementalRune;
+                else if (CacheStaticLookUp.ItemReward_SavageBlood == reward.ItemId)
+                    RewardTypes |= RewardTypes.SavageBlood;
+                else if (CacheStaticLookUp.ItemReward_PrimalSpirit == reward.ItemId)
+                    RewardTypes |= RewardTypes.PrimalSpirit;
                 else
                     RewardTypes |= RewardTypes.Items;
             }

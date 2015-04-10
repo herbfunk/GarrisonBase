@@ -1,4 +1,5 @@
 using System;
+using Herbfunk.GarrisonBase.Character;
 using Styx;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
@@ -50,6 +51,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
             catch
             {
+                
             }
 
 
@@ -158,6 +160,17 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
         }
 
+        public bool IsValid
+        {
+            get
+            {
+                return Guid.IsValid &&
+                       ref_WoWItem != null &&
+                       ref_WoWItem.BaseAddress != IntPtr.Zero &&
+                       ref_WoWItem.IsValid;
+            }
+        }
+
         public void Use()
         {
             ref_WoWItem.Use();
@@ -166,6 +179,97 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         {
             ref_WoWItem.Interact();
         }
+
+        public bool ShouldVendor
+        {
+            get
+            {
+                if (!IsValid) return false;
+
+                if ((Quality == WoWItemQuality.Poor && !BaseSettings.CurrentSettings.VendorJunkItems) ||
+                    (Quality == WoWItemQuality.Common && !BaseSettings.CurrentSettings.VendorCommonItems)||
+                    (Quality == WoWItemQuality.Uncommon && !BaseSettings.CurrentSettings.VendorUncommonItems)||
+                    (Quality == WoWItemQuality.Rare && !BaseSettings.CurrentSettings.VendorRareItems))
+                {
+                    return false;
+                }
+
+                switch (Quality)
+                {
+                    case WoWItemQuality.Poor:
+                        return true;
+
+                    case WoWItemQuality.Common:
+                    case WoWItemQuality.Uncommon:
+                    case WoWItemQuality.Rare:
+
+                        return (!IsOpenable && !IsAccountBound &&
+                                ConsumableClass == WoWItemConsumableClass.None &&
+                                RequiredLevel > 0 &&
+                                ((RequiredLevel < 90 && Level > 1) || (RequiredLevel == 90 && Level == 429)) &&
+                                (ItemClass == WoWItemClass.Armor || ItemClass == WoWItemClass.Weapon) &&
+                                !IsSoulbound &&
+                                !PlayerInventory.EquipmentManagerItemGuids.Contains(Guid));
+                }
+
+                return false;
+            }
+        }
+        public bool ShouldDisenchant
+        {
+            get
+            {
+                if (!IsValid) return false;
+
+                if (Quality != WoWItemQuality.Uncommon && Quality != WoWItemQuality.Rare &&
+                    Quality != WoWItemQuality.Epic) return false;
+
+                if ((PlayerInventory.ItemDisenchantingBlacklistedGuids.Contains(Guid) ||
+                     IsOpenable ||
+                     IsAccountBound ||
+                     RequiredLevel < 90 ||
+                     Level < 430 ||
+                     ConsumableClass != WoWItemConsumableClass.None ||
+                     (ItemClass != WoWItemClass.Armor && ItemClass != WoWItemClass.Weapon)) ||
+
+                    (Quality == WoWItemQuality.Uncommon &&
+                     (!BaseSettings.CurrentSettings.DisenchantingUncommon ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded))) ||
+
+                    (Quality == WoWItemQuality.Rare &&
+                     (!BaseSettings.CurrentSettings.DisenchantingRare ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingRareItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingRareSoulbounded))) ||
+
+                    (Quality == WoWItemQuality.Epic &&
+                     (!BaseSettings.CurrentSettings.DisenchantingEpic ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingEpicItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded))))
+                {
+                    return false;
+                }
+
+
+                return true;
+            }
+        }
+
+        public bool ShouldMail
+        {
+            get
+            {
+                MailItem mailitem;
+                if (BaseSettings.CurrentSettings.DictMailSendItems.TryGetValue((int) Entry, out mailitem))
+                {
+                    MailItemInfo = mailitem;
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        public MailItem MailItemInfo = null;
 
         public override int GetHashCode()
         {

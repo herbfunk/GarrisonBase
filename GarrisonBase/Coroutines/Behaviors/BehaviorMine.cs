@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
@@ -29,6 +30,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override void Initalize()
         {
             base.Initalize();
+
+            //Coroutines.Movement.MovementCache.ShouldRecord = true;
 
             foreach (var mobId in CacheStaticLookUp.MineQuestMobIDs)
             {
@@ -72,6 +75,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Dispose()
         {
+            //Coroutines.Movement.MovementCache.ResetCache();
             ObjectCacheManager.ShouldLoot = false;
             ObjectCacheManager.ShouldKill = false;
             foreach (var id in CacheStaticLookUp.MineQuestMobIDs)
@@ -104,7 +108,21 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 if (_movementQueue.Count > 0)
                 {
-                    _movement = new Movement(_movementQueue.Dequeue(), 5f);
+                    //while (_movementQueue.Count > 0)
+                    //{
+                    //    if (Coroutines.Movement.MovementCache.CachedPositions.Any(
+                    //              p => p.Location.Distance(_movementQueue.Peek()) <= p.Radius))
+                    //    {
+                    //        GarrisonBase.Debug("Dequeueing point from mine movement due to cache!");
+                    //        _movementQueue.Dequeue();
+                    //        continue;
+                    //    }
+
+                    //    break;
+                    //}
+
+                    if (_movementQueue.Count>0)
+                        _movement = new Movement(_movementQueue.Dequeue(), 5f);
                 }
             }
 

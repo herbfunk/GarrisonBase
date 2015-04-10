@@ -41,10 +41,8 @@ namespace Herbfunk.GarrisonBase.Cache
         internal static bool FoundOreObject { get; set; }
         internal static bool FoundHerbObject { get; set; }
 
-        internal static bool CheckFlag(WoWObjectTypes property, WoWObjectTypes flag)
-        {
-            return (property & flag) != 0;
-        }
+        
+
         internal static CacheCollection ObjectCollection = new CacheCollection();
         private static DateTime _lastUpdatedCacheCollection = DateTime.Today;
         internal static bool ShouldUpdateObjectCollection
@@ -269,15 +267,10 @@ namespace Herbfunk.GarrisonBase.Cache
                 if (!guidsSeenThisLoop.Contains(obj.Guid)) 
                     obj.LoopsUnseen++;
 
-                switch (obj.SubType)
-                {
-                    case WoWObjectTypes.Herb:
-                        FoundHerbObject = true;
-                        break;
-                    case WoWObjectTypes.OreVein:
-                        FoundOreObject = true;
-                        break;
-                }
+                if (CheckFlag(obj.SubType, WoWObjectTypes.Herb))
+                    FoundHerbObject = true;
+                if (CheckFlag(obj.SubType, WoWObjectTypes.OreVein))
+                    FoundOreObject = true;
 
                 if (obj.LoopsUnseen >= 5 && !obj.IgnoresRemoval)
                     obj.NeedsRemoved = true;
@@ -404,6 +397,11 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
 
+        internal static bool CheckFlag(WoWObjectTypes property, WoWObjectTypes flag)
+        {
+            return (property & flag) != 0;
+        }
+
 
         public static C_WoWObject GetWoWObject(uint entryId)
         {
@@ -428,7 +426,8 @@ namespace Herbfunk.GarrisonBase.Cache
         }
         public static List<C_WoWObject> GetWoWObjects(WoWObjectTypes type)
         {
-            return ObjectCollection.Values.Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
+            //ObjectCacheManager.CheckFlag(SubType, WoWObjectTypes.Herb)
+            return ObjectCollection.Values.Where(obj => CheckFlag(obj.SubType, type) && !Blacklist.TempBlacklistGuids.Contains(obj.Guid)).ToList();
         }
         public static List<C_WoWObject> GetWoWObjects(int id)
         {
@@ -450,7 +449,9 @@ namespace Herbfunk.GarrisonBase.Cache
         {
             return
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
-                    .Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => CheckFlag(obj.SubType, type)
+                        && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) &&
+                        obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWGameObject> GetWoWGameObjects(int id)
@@ -486,7 +487,9 @@ namespace Herbfunk.GarrisonBase.Cache
         {
             return
                 ObjectCollection.Values.OfType<C_WoWUnit>()
-                    .Where(obj => obj.SubType == type && !Blacklist.TempBlacklistGuids.Contains(obj.Guid) && obj.IsValid)
+                    .Where(obj => CheckFlag(obj.SubType, type) &&
+                        !Blacklist.TempBlacklistGuids.Contains(obj.Guid) &&
+                        obj.IsValid)
                     .ToList();
         }
         public static List<C_WoWUnit> GetWoWUnits(string name)
@@ -509,6 +512,16 @@ namespace Herbfunk.GarrisonBase.Cache
                 ObjectCollection.Values
                     .Where(obj => location.Distance(obj.Location) <= maxdistance && (!validOnly || obj.IsValid))
                     .ToList();
+        }
+        public static List<C_WoWGameObject> GetGameObjectsNearPoint(WoWPoint location, float maxdistance, WoWObjectTypes type)
+        {
+            return
+                ObjectCollection.Values.OfType<C_WoWGameObject>()
+                    .Where(obj => CheckFlag(obj.SubType, type) &&
+                        location.Distance(obj.Location) <= maxdistance &&
+                        !Blacklist.TempBlacklistGuids.Contains(obj.Guid) &&
+                        obj.IsValid)
+                    .OrderBy(o => location.Distance(o.Location)).ToList();
         }
         public static List<C_WoWGameObject> GetGameObjectsNearPoint(WoWPoint location, float maxdistance, string name)
         {

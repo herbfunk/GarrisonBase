@@ -8,6 +8,7 @@ using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
@@ -210,9 +211,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     return false;
                 }
 
-                if (Building.Type== BuildingType.Barn && LuaEvents.GossipFrameOpen)
+                if (Building.Type == BuildingType.Barn && GossipHelper.IsOpen)
                 {
-                   var entries= QuestManager.GossipFrame.GossipOptionEntries.Where(
+                    var entries = GossipHelper.GossipOptions.Where(
                                     entry => entry.Text.ToLower().Contains(BarnWorkOrderGossipString)).ToList();
 
                     if (entries.Count > 0)
@@ -268,11 +269,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (_movement == null)
                 _movement = new Movement(WorkOrderObject.Location, 4f);
-
-            if (await _movement.ClickToMove(false)) 
-                return true;
-
-            return !WorkOrderObject.WithinInteractRange;
+            await _movement.ClickToMove(false);
+            return true;
         }
 
         

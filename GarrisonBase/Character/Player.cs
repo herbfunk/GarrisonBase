@@ -19,6 +19,10 @@ namespace Herbfunk.GarrisonBase.Character
         internal static WoWPoint TraceLinePosition = WoWPoint.Zero;
 
         internal static CachedValue<uint> MapId;
+        internal static CachedValue<int> ParentMapId;
+        internal static CachedValue<uint> MapExpansionId;
+        internal static CachedValue<bool> MapIsContinent;
+
         internal static CachedValue<int> GarrisonResource;
         internal static CachedValue<string> MinimapZoneText;
         internal static CachedValue<int> CurrentPendingCursorSpellId;
@@ -47,13 +51,24 @@ namespace Herbfunk.GarrisonBase.Character
             Inventory = new PlayerInventory();
             Professions = new PlayerProfessions();
 
-            MinimapZoneText = new CachedValue<string>(updateMinimapZoneText);
-            MapId = new CachedValue<uint>(_updateMapId);
-            GarrisonResource=new CachedValue<int>(_updateGarrisonResource);
+            MinimapZoneText = new CachedValue<string>(() => StyxWoW.Me.MinimapZoneText);
+            MapId = new CachedValue<uint>(() => StyxWoW.Me.CurrentMap.MapId);
+            ParentMapId = new CachedValue<int>(() => StyxWoW.Me.CurrentMap.ParentMapId);
+            MapExpansionId = new CachedValue<uint>(() => StyxWoW.Me.CurrentMap.ExpansionId);
+            MapIsContinent = new CachedValue<bool>(() => StyxWoW.Me.CurrentMap.IsContinent);
+            // 
+            GarrisonResource = new CachedValue<int>(() => LuaCommands.GetCurrencyCount(824));
             CurrentPendingCursorSpellId = new CachedValue<int>(_updateCurrentPendingCursorSpellId);
             LastErrorMessage = new CachedValue<string>(GetLastErrorMessage);
 
-            LuaEvents.OnZoneChangedNewArea += () => MapId.Reset();
+            LuaEvents.OnZoneChangedNewArea += () =>
+            {
+                MapId.Reset();
+                ParentMapId.Reset();
+                MapExpansionId.Reset();
+                MapIsContinent.Reset();
+            };
+
             LuaEvents.OnZoneChanged += () => MinimapZoneText.Reset();
             LuaEvents.OnCurrencyDisplayUpdate += () => GarrisonResource.Reset();
             LuaEvents.OnCurrentSpellCastChanged += () => CurrentPendingCursorSpellId.Reset();
@@ -76,20 +91,8 @@ namespace Herbfunk.GarrisonBase.Character
             
         }
 
-        
-        
-        private static string updateMinimapZoneText()
-        {
-            return StyxWoW.Me.MinimapZoneText;
-        }
-        private static uint _updateMapId()
-        {
-            return StyxWoW.Me.CurrentMap.MapId;
-        }
-        private static int _updateGarrisonResource()
-        {
-            return LuaCommands.GetCurrencyCount(824);
-        }
+
+
 
         internal static void RefreshAuraIds()
         {

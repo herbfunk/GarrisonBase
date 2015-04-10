@@ -10,6 +10,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
     public class BehaviorMilling : Behavior
     {
+        public override BehaviorType Type { get { return BehaviorType.Milling; } }
+
         public BehaviorMilling()
         {
 
@@ -51,6 +53,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
+            GarrisonBase.Debug("Milling Herb {0} stack {1}", millingHerbs[0].Name, millingHerbs[0].StackCount);
             await CommonCoroutines.WaitForLuaEvent(
                 "BAG_UPDATE",
                 10000,

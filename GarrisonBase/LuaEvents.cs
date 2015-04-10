@@ -1,59 +1,35 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
-using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.Properties;
-using Herbfunk.GarrisonBase.Quest;
-using Herbfunk.GarrisonBase.Quest.Objects;
-using Styx.CommonBot.Frames;
 using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase
 {
-    public enum QuestFrameTypes
-    {
-        None,
-        Detail,
-        Progress,
-        Complete
-    }
 
-    public enum QuestLogChangeType
-    {
-        None,
-        Accepted,
-        Removed,
-        Update
-    }
 
     public static class LuaEvents
     {
-        
-        public static bool MissionFrameOpen { get; set; }
+        static LuaEvents()
+        {
+            TestFunctionString = StringHelper.RandomString;
+            SuccessFunctionString = StringHelper.RandomString;
+            ClickFunctionString = StringHelper.RandomString;
+        }
+
         public static bool ShipmentOrderFrameOpen { get; set; }
         public static bool MailOpen { get; set; }
         public static bool LootOpened { get; set; }
-        public static bool QuestFrameOpen { get; set; }
-        public static QuestFrameTypes QuestFrameType { get; set; }
-        public static QuestLogChangeType QuestLogChangeType { get; set; }
-        public static bool GossipFrameOpen { get; set; }
         public static bool TradeSkillFrameOpen { get; set; }
-        public static bool MerchantFrameOpen { get; set; }
-        public static bool TaxiMapOpen { get; set; }
 
 
         public static void ResetFrameVariables()
         {
-            MissionFrameOpen = false;
             ShipmentOrderFrameOpen = false;
             MailOpen = false;
             LootOpened = false;
-            QuestFrameOpen = false;
-            GossipFrameOpen = false;
             TradeSkillFrameOpen = false;
-            MerchantFrameOpen = false;
-            TaxiMapOpen = false;
         }
 
         public delegate void LuaEventFired();
@@ -68,41 +44,37 @@ namespace Herbfunk.GarrisonBase
         public static event LuaEventFired OnGarrisonBuildingActivatable;
         public static void GARRISON_MISSION_STARTED(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission Started!") + "\r\n{0}", args.ToString());
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission Started!"));
             if (OnGarrisonMissionStarted != null) OnGarrisonMissionStarted();
         }
         public static void GARRISON_MISSION_LIST_UPDATE(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission List Updated!") + "\r\n{0}", args.ToString());
-            GarrisonManager.UpdateMissionIds();
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission List Updated!"));
             if (OnGarrisonMissionListUpdated != null) OnGarrisonMissionListUpdated();
         }
         public static void GARRISON_FOLLOWER_LIST_UPDATE(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Follower List Updated!") + "\r\n{0}", args.ToString());
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Follower List Updated!"));
             if (OnGarrisonFollowerListUpdated != null) OnGarrisonFollowerListUpdated();
         }
         public static void GARRISON_MISSION_NPC_OPENED(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission NPC Opened!") + "\r\n{0}", args.ToString());
-            MissionFrameOpen = true;
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission NPC Opened!"));
             if (OnGarrisonMissionNpcOpened != null) OnGarrisonMissionNpcOpened();
         }
         public static void GARRISON_MISSION_NPC_CLOSED(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission NPC Closed!") + "\r\n{0}", args.ToString());
-            MissionFrameOpen = false;
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Mission NPC Closed!"));
             if (OnGarrisonMissionNpcClosed != null) OnGarrisonMissionNpcClosed();
         }
         public static void GARRISON_SHOW_LANDING_PAGE(object sender, LuaEventArgs args)
         {
-            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Landing Page Shown!") + "\r\n{0}", args.ToString());
+            GarrisonBase.DebugLuaEvent(String.Format("LuaEvent: {0}", "Garrison Landing Page Shown!"));
             if (OnGarrisonLandingPageShow != null) OnGarrisonLandingPageShow();
         }
         public static void GARRISON_MISSION_FINISHED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: GARRISON_MISSION_FINISHED");
-            GarrisonManager.UpdateMissionIds();
             if (OnGarrisonMissionFinished != null) OnGarrisonMissionFinished();
         }
         public static void GARRISON_BUILDING_ACTIVATABLE(object sender, LuaEventArgs args)
@@ -153,54 +125,48 @@ namespace Herbfunk.GarrisonBase
         public static void QUEST_DETAIL(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_DETAIL");
-            QuestFrameType = QuestFrameTypes.Detail;
-            QuestFrameOpen = true;
+ 
             if (OnQuestDetail != null) OnQuestDetail();
         }
         public static void QUEST_PROGRESS(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_PROGRESS");
-            QuestFrameType = QuestFrameTypes.Progress;
-            QuestFrameOpen = true;
+            
             if (OnQuestProgress != null) OnQuestProgress();
         }
         public static void QUEST_COMPLETE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_COMPLETE");
-            QuestFrameType = QuestFrameTypes.Complete;
-            QuestFrameOpen = true;
+            
             if (OnQuestComplete != null) OnQuestComplete();
         }
         public static void QUEST_FINISHED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_FINISHED");
-            QuestFrameType= QuestFrameTypes.None;
-            QuestFrameOpen = false;
+            
             if (OnQuestFinished != null) OnQuestFinished();
         }
         public static void QUEST_LOG_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_LOG_UPDATE");
-            QuestManager.RefreshQuestLog();
             if (OnQuestLogUpdate != null) OnQuestLogUpdate();
         }
         public static void QUEST_REMOVED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_REMOVED");
-            QuestLogChangeType = QuestLogChangeType.Removed;
+            
             if (OnQuestRemoved != null) OnQuestRemoved();
         }
         public static void QUEST_ACCEPTED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_ACCEPTED");
-            QuestLogChangeType = QuestLogChangeType.Accepted;
-            QuestFrameOpen = false;
+            
             if (OnQuestAccepted != null) OnQuestAccepted();
         }
         public static void QUEST_WATCH_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: QUEST_WATCH_UPDATE");
-            QuestLogChangeType = QuestLogChangeType.Update;
+            
             if (OnQuestWatchUpdate != null) OnQuestWatchUpdate();
         }
 
@@ -210,15 +176,13 @@ namespace Herbfunk.GarrisonBase
         public static void GOSSIP_SHOW(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: GOSSIP_SHOW");
-            GossipFrameOpen = true;
-            QuestManager.GossipFrameInfo = new GossipFrameInfo(GossipFrame.Instance);
+            
             if (OnGossipShow != null) OnGossipShow();
         }
         public static void GOSSIP_CLOSED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: GOSSIP_CLOSED");
-            GossipFrameOpen = false;
-            QuestManager.GossipFrameInfo = new GossipFrameInfo();
+            
             if (OnGossipClosed != null) OnGossipClosed();
         }
 
@@ -242,13 +206,11 @@ namespace Herbfunk.GarrisonBase
         public static void MERCHANT_SHOW(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: MERCHANT_SHOW");
-            MerchantFrameOpen = true;
             if (OnMerchantShow != null) OnMerchantShow();
         }
         public static void MERCHANT_CLOSED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: MERCHANT_CLOSED");
-            MerchantFrameOpen = false;
             if (OnMerchantClosed != null) OnMerchantClosed();
         }
 
@@ -258,19 +220,16 @@ namespace Herbfunk.GarrisonBase
         public static void BAG_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: BAG_UPDATE");
-            Character.Player.Inventory.ShouldUpdateBagItems = true;
             if (OnBagUpdate != null) OnBagUpdate();
         }
         public static void PLAYERBANKSLOTS_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: PLAYERBANKSLOTS_CHANGED");
-            Character.Player.Inventory.ShouldUpdateBankItems = true;
             if (OnPlayerBankSlotsChanged != null) OnPlayerBankSlotsChanged();
         }
         public static void PLAYERREAGENTBANKSLOTS_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: PLAYERREAGENTBANKSLOTS_CHANGED");
-            Character.Player.Inventory.ShouldUpdateBankReagentItems = true;
             if (OnPlayerReagentsBankSlotsChanged != null) OnPlayerReagentsBankSlotsChanged();
         }
 
@@ -278,14 +237,14 @@ namespace Herbfunk.GarrisonBase
         public static void ZONE_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: ZONE_CHANGED");
-            
+
             if (OnZoneChanged != null) OnZoneChanged();
         }
         public static event LuaEventFired OnZoneChangedNewArea;
         public static void ZONE_CHANGED_NEW_AREA(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: ZONE_CHANGED_NEW_AREA");
-            
+
             if (OnZoneChangedNewArea != null) OnZoneChangedNewArea();
         }
         //
@@ -293,7 +252,7 @@ namespace Herbfunk.GarrisonBase
         public static void CURRENT_SPELL_CAST_CHANGED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: CURRENT_SPELL_CAST_CHANGED");
-           
+
             if (OnCurrentSpellCastChanged != null) OnCurrentSpellCastChanged();
         }
 
@@ -309,7 +268,7 @@ namespace Herbfunk.GarrisonBase
         public static void CURRENCY_DISPLAY_UPDATE(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: CURRENCY_DISPLAY_UPDATE");
-           
+
             if (OnCurrencyDisplayUpdate != null) OnCurrencyDisplayUpdate();
         }
 
@@ -332,14 +291,12 @@ namespace Herbfunk.GarrisonBase
         public static void TAXIMAP_OPENED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: TAXIMAP_OPENED");
-            TaxiMapOpen = true;
             if (OnTaxiMapOpened != null) OnTaxiMapOpened();
         }
         public static event LuaEventFired OnTaxiMapClosed;
         public static void TAXIMAP_CLOSED(object sender, LuaEventArgs args)
         {
             GarrisonBase.DebugLuaEvent("LuaEvent: TAXIMAP_CLOSED");
-            TaxiMapOpen = false;
             if (OnTaxiMapClosed != null) OnTaxiMapClosed();
         }
         //
@@ -478,22 +435,27 @@ namespace Herbfunk.GarrisonBase
 
         internal static async Task<bool> InjectLuaAddon()
         {
-            GarrisonBase.Log("Injecting Lua Code");
+            
+
+            GarrisonBase.Debug("Injecting Lua Code..");
 
             String luaCode = String.Format("{0} " +
                                            "function {4}() {1} " +
                                            "function {5}(button_name) {2} " +
-                                           "function {6}(mission_id) {3}", 
+                                           "function {6}(mission_id) {3}",
                 Resources.LuaStringAddon,
                 Resources.LuaStringAddonTest,
-                Resources.LuaStringAddonClickButton, 
+                Resources.LuaStringAddonClickButton,
                 Resources.LuaStringAddonSuccess,
                 TestFunctionString,
                 ClickFunctionString,
                 SuccessFunctionString);
 
+            GarrisonBase.Debug("TestFunctionString {0}\r\nClickFunctionString {1}\r\nSuccessFunctionString {2}",
+                TestFunctionString,ClickFunctionString,SuccessFunctionString);
+
             await Coroutine.Yield();
-            Lua.DoString(luaCode);
+            Lua.DoString(luaCode, "clicky.lua");
             await Coroutine.Sleep(1000);
             return false;
         }

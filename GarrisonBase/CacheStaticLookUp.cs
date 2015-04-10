@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
@@ -93,7 +93,7 @@ namespace Herbfunk.GarrisonBase
         {
             Character.Player.Initalize();
             MovementCache.Initalize(Character.Player.IsAlliance);
-            QuestManager.RefreshQuestLog();
+            QuestHelper.RefreshQuestLog();
             Cache.Blacklist.Initalize(Character.Player.IsAlliance);
             InitalizedCache = true;
         }
@@ -124,13 +124,7 @@ namespace Herbfunk.GarrisonBase
             return ObjectManager.GetObjectsOfType<WoWUnit>().Where(obj => ids.Contains(obj.Entry) && !Blacklist_GUIDs.Contains(obj.Guid) && obj.IsValid && !obj.IsDead).ToList();
         }
 
-        internal static readonly List<uint> RepairVendorIds = new List<uint>
-        {
-            //Horde
-            76872,
-            //Alliance
-            81346,
-        };
+        
         internal static readonly List<uint> PrimalTraderIds = new List<uint>
         {
             84967,//Horde
@@ -384,12 +378,15 @@ namespace Herbfunk.GarrisonBase
 
         public static readonly int ItemReward_ElementalRune = 115510;
         public static readonly int ItemReward_AbrogatorStone = 115280;
+        public static readonly int ItemReward_PrimalSpirit = 120945;
+        public static readonly int ItemReward_SavageBlood = 118472;
 
         //115510 = Elemental Rune
         //115280 = Abrogator Stone
         //120945 = Primal Spirit
         //118472 = Salvage Blood
 
+        
 
         //118474 = Supreme Manual of Dance
         //118475 = Hearthstone Strategy Guide

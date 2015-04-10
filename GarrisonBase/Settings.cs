@@ -94,6 +94,11 @@ namespace Herbfunk.GarrisonBase
         public MissionSettings RushOrders { get; set; }
         public MissionSettings SealOfTemperedFate { get; set; }
         public MissionSettings HonorPoints { get; set; }
+        
+        public MissionSettings AbrogatorStone { get; set; }
+        public MissionSettings ElementalRune { get; set; }
+        public MissionSettings SavageBlood { get; set; }
+        public MissionSettings PrimalSpirit { get; set; }
 
 
         public int ReservedGarrisonResources { get; set; }
@@ -130,6 +135,27 @@ namespace Herbfunk.GarrisonBase
         public string MailSendEnchantingRecipient { get; set; }
 
         public List<MailItem> MailSendItems { get; set; }
+
+        [XmlIgnore]
+        internal Dictionary<int, MailItem> DictMailSendItems
+        {
+            get
+            {
+                if (Dictmailsenditems.Count != MailSendItems.Count)
+                {
+                    Dictmailsenditems.Clear();
+                    foreach (var item in MailSendItems)
+                    {
+                        if (!Dictmailsenditems.ContainsKey(item.EntryId))
+                            Dictmailsenditems.Add(item.EntryId, item);
+                    }
+                }
+
+                return Dictmailsenditems;
+            }
+        }
+        [XmlIgnore]
+        internal readonly Dictionary<int, MailItem> Dictmailsenditems = new Dictionary<int, MailItem>();
 
         [XmlIgnore]
         public DateTime LastCheckedMine
@@ -201,6 +227,8 @@ namespace Herbfunk.GarrisonBase
 
         public int MinimumBagSlotsFree { get; set; }
 
+        public List<int> FollowerOptionalList = new List<int>(); 
+
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
         public bool DEBUG_IGNOREHEARTHSTONE { get; set; }
@@ -221,6 +249,10 @@ namespace Herbfunk.GarrisonBase
             RushOrders = new MissionSettings(RewardTypes.RushOrder, 100, 5, 90);
             SealOfTemperedFate = new MissionSettings(RewardTypes.SealOfTemperedFate, 100, 6, 90);
             HonorPoints = new MissionSettings(RewardTypes.HonorPoints, 100, 4, 90);
+            AbrogatorStone = new MissionSettings(RewardTypes.AbrogatorStone, 100, 2, 90);
+            ElementalRune = new MissionSettings(RewardTypes.ElementalRune, 100, 2, 90);
+            SavageBlood = new MissionSettings(RewardTypes.SavageBlood, 100, 2, 90);
+            PrimalSpirit= new MissionSettings(RewardTypes.PrimalSpirit, 100, 2, 90);
 
             MailAutoSend = false;
             MailAutoGet = false;

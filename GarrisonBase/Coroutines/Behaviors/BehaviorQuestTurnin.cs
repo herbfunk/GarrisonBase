@@ -4,7 +4,7 @@ using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
@@ -23,8 +23,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             QuestID = questId;
             buildingType = type;
 
-            RunCondition += () => QuestManager.QuestContainedInQuestLog(QuestID) &&
-                                  QuestManager.GetQuestFromQuestLog(QuestID).IsCompleted;
+            RunCondition += () => QuestHelper.QuestContainedInQuestLog(QuestID) &&
+                                  QuestHelper.GetQuestFromQuestLog(QuestID).IsCompleted;
 
             ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(InteractionEntryId));
         }
@@ -53,9 +53,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await StartMovement.MoveTo()) return true;
             //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion", Type.ToString());
 
-            if (LuaEvents.GossipFrameOpen)
+            if (GossipHelper.IsOpen)
             {
-                int index = QuestManager.GetActiveQuestIndexFromGossipFrame(QuestID);
+                int index = QuestHelper.GetActiveQuestIndexFromGossipFrame(QuestID);
                 if (index == -1)
                 {
                     GarrisonBase.Err("Failed to find quest {0} in gossip frame!", QuestID);
@@ -66,7 +66,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
-            if (!LuaEvents.QuestFrameOpen)
+            if (!QuestHelper.QuestFrameOpen)
             {
                 if (InteractionObject == null || !InteractionObject.IsValid)
                 {
@@ -94,14 +94,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (!QuestFrame.Instance.IsVisible) return true;
             //TreeRoot.StatusText = String.Format("Behavior {0} Quest Completion NPC Complete Quest", Type.ToString());
 
-            switch (LuaEvents.QuestFrameType)
+            switch (QuestHelper.QuestFrameType)
             {
-                case QuestFrameTypes.Progress:
+                case QuestHelper.QuestFrameTypes.Progress:
                     QuestFrame.Instance.ClickContinue();
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                     await Coroutine.Sleep(5000);
                     break;
-                case QuestFrameTypes.Complete:
+                case QuestHelper.QuestFrameTypes.Complete:
                     GarrisonBase.Log("Completing Quest!");
                     if (!BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST)
                     {

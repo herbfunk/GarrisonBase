@@ -5,6 +5,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
     public class BehaviorClickStaticPopup : Behavior
     {
+    
         public BehaviorClickStaticPopup(int buttonIndex)
         {
             _buttonIndex = buttonIndex;

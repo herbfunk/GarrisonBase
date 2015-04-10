@@ -55,9 +55,9 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     SubType = WoWObjectTypes.GarrisonCache;
                     IgnoresRemoval = true;
                 }
-                else if (WorkOrder.WorkOrderPickupNames.ContainsValue(Name))
+                else if (WorkOrder.WorkOrderPickupNames.ContainsValue(Name) || GameObjectType== WoWGameObjectType.GarrisonShipment)
                 {
-                    SubType = WoWObjectTypes.GarrisonWorkOrder;
+                    SubType = WoWObjectTypes.GarrisonShipment;
                     InteractRange = 5.8f;
                     IgnoresRemoval = true;
                 }
@@ -90,9 +90,6 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public override bool Update()
         {
             if (!base.Update()) return false;
-
-            if (SubType == WoWObjectTypes.Herb) ObjectCacheManager.FoundHerbObject = true;
-            else if (SubType == WoWObjectTypes.OreVein) ObjectCacheManager.FoundOreObject = true;
 
             return true;
         }

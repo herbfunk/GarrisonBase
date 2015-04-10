@@ -31,14 +31,27 @@
             this.components = new System.ComponentModel.Container();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabControl2 = new System.Windows.Forms.TabControl();
+            this.tabPage_Mission_Priorities = new System.Windows.Forms.TabPage();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel_MissionRewards = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage_Mission_Items = new System.Windows.Forms.TabPage();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label_ItemReward_CharacterTokenLevel = new System.Windows.Forms.Label();
+            this.trackBar_ItemReward_CharacterTokenLevel = new System.Windows.Forms.TrackBar();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new System.Windows.Forms.CheckBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.textBox_ReservedGarrisonResources = new System.Windows.Forms.TextBox();
+            this.checkBox_Behavior_StartMissions = new System.Windows.Forms.CheckBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.label_ReservedGarrisonResources = new System.Windows.Forms.Label();
             this.trackBar_ReservedGarrisonResources = new System.Windows.Forms.TrackBar();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
@@ -64,15 +77,6 @@
             this.tabPage_Tailoring = new System.Windows.Forms.TabPage();
             this.checkBox_Behavior_Professions = new System.Windows.Forms.CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.groupBox12 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_MinimumBagSlotsFree = new System.Windows.Forms.TextBox();
-            this.trackBar_MinimumBagSlotsFree = new System.Windows.Forms.TrackBar();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Vendor_Junk = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Common = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Uncommon = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Rare = new System.Windows.Forms.CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox_Disenchanting_EpicSoulbound = new System.Windows.Forms.CheckBox();
@@ -96,7 +100,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.checkBox_ExchangePrimalSpirits = new System.Windows.Forms.CheckBox();
             this.comboBox_PrimalSpiritItems = new System.Windows.Forms.ComboBox();
-            this.checkBox_HBRelogSkipTask = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView_MailItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -152,27 +155,43 @@
             this.checkBox_Debug_IgnoreHearthStone = new System.Windows.Forms.CheckBox();
             this.checkBox_Debug_FakePickupWorkOrder = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.tabPage_Mission_Priorities = new System.Windows.Forms.TabPage();
-            this.tabPage_Mission_Items = new System.Windows.Forms.TabPage();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox_Behavior_StartMissions = new System.Windows.Forms.CheckBox();
-            this.groupBox13 = new System.Windows.Forms.GroupBox();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new System.Windows.Forms.CheckBox();
-            this.groupBox14 = new System.Windows.Forms.GroupBox();
-            this.trackBar_ItemReward_CharacterTokenLevel = new System.Windows.Forms.TrackBar();
-            this.label_ItemReward_CharacterTokenLevel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.tabControl3 = new System.Windows.Forms.TabControl();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox_MinimumBagSlotsFree = new System.Windows.Forms.TextBox();
+            this.trackBar_MinimumBagSlotsFree = new System.Windows.Forms.TrackBar();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_Vendor_Junk = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Common = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Uncommon = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Rare = new System.Windows.Forms.CheckBox();
+            this.checkBox_HBRelogSkipTask = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_Follower_193 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_189 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_207 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_467 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_190 = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkBox_Follower_170 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabControl2.SuspendLayout();
+            this.tabPage_Mission_Priorities.SuspendLayout();
             this.groupBox10.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
+            this.tabPage_Mission_Items.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).BeginInit();
+            this.groupBox13.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
+            this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).BeginInit();
             this.tabPage6.SuspendLayout();
             this.groupBox7.SuspendLayout();
@@ -183,9 +202,6 @@
             this.tabPage_Inscription.SuspendLayout();
             this.flowLayoutPanel_Milling.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).BeginInit();
-            this.flowLayoutPanel4.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.flowLayoutPanel_MiscBehaviors.SuspendLayout();
@@ -200,14 +216,16 @@
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabPage_Mission_Priorities.SuspendLayout();
-            this.tabPage_Mission_Items.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.groupBox13.SuspendLayout();
-            this.flowLayoutPanel6.SuspendLayout();
-            this.groupBox14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).BeginInit();
+            this.tabControl3.SuspendLayout();
+            this.tabPage7.SuspendLayout();
+            this.tabPage8.SuspendLayout();
+            this.tabPage9.SuspendLayout();
+            this.tabPage10.SuspendLayout();
+            this.tabPage11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).BeginInit();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -237,10 +255,31 @@
             this.tabPage1.Text = "Missions";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tabControl2
+            // 
+            this.tabControl2.Controls.Add(this.tabPage_Mission_Priorities);
+            this.tabControl2.Controls.Add(this.tabPage_Mission_Items);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(3, 66);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(731, 514);
+            this.tabControl2.TabIndex = 15;
+            // 
+            // tabPage_Mission_Priorities
+            // 
+            this.tabPage_Mission_Priorities.Controls.Add(this.groupBox10);
+            this.tabPage_Mission_Priorities.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Mission_Priorities.Name = "tabPage_Mission_Priorities";
+            this.tabPage_Mission_Priorities.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Mission_Priorities.Size = new System.Drawing.Size(723, 488);
+            this.tabPage_Mission_Priorities.TabIndex = 0;
+            this.tabPage_Mission_Priorities.Text = "Priorities";
+            this.tabPage_Mission_Priorities.UseVisualStyleBackColor = true;
+            // 
             // groupBox10
             // 
             this.groupBox10.Controls.Add(this.flowLayoutPanel_MissionRewards);
-            this.groupBox10.Controls.Add(this.flowLayoutPanel5);
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(3, 3);
             this.groupBox10.Name = "groupBox10";
@@ -249,70 +288,203 @@
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Mission Priorities";
             // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.flowLayoutPanel5.Controls.Add(this.label3);
-            this.flowLayoutPanel5.Controls.Add(this.label4);
-            this.flowLayoutPanel5.Controls.Add(this.label5);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(711, 43);
-            this.flowLayoutPanel5.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.Lime;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(5, 5);
-            this.label3.Margin = new System.Windows.Forms.Padding(5);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(5);
-            this.label3.Size = new System.Drawing.Size(83, 29);
-            this.label3.TabIndex = 13;
-            this.label3.Text = "Priority";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(98, 5);
-            this.label4.Margin = new System.Windows.Forms.Padding(5);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(5);
-            this.label4.Size = new System.Drawing.Size(87, 29);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Success";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(195, 5);
-            this.label5.Margin = new System.Windows.Forms.Padding(5);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(5);
-            this.label5.Size = new System.Drawing.Size(80, 29);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Min Level";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // flowLayoutPanel_MissionRewards
             // 
+            this.flowLayoutPanel_MissionRewards.AutoScroll = true;
             this.flowLayoutPanel_MissionRewards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel_MissionRewards.Location = new System.Drawing.Point(3, 59);
+            this.flowLayoutPanel_MissionRewards.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel_MissionRewards.Name = "flowLayoutPanel_MissionRewards";
-            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(711, 420);
+            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(711, 463);
             this.flowLayoutPanel_MissionRewards.TabIndex = 12;
+            this.flowLayoutPanel_MissionRewards.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // tabPage_Mission_Items
+            // 
+            this.tabPage_Mission_Items.Controls.Add(this.groupBox14);
+            this.tabPage_Mission_Items.Controls.Add(this.groupBox13);
+            this.tabPage_Mission_Items.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Mission_Items.Name = "tabPage_Mission_Items";
+            this.tabPage_Mission_Items.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Mission_Items.Size = new System.Drawing.Size(723, 488);
+            this.tabPage_Mission_Items.TabIndex = 1;
+            this.tabPage_Mission_Items.Text = "Items";
+            this.tabPage_Mission_Items.UseVisualStyleBackColor = true;
+            // 
+            // groupBox14
+            // 
+            this.groupBox14.Controls.Add(this.label7);
+            this.groupBox14.Controls.Add(this.label_ItemReward_CharacterTokenLevel);
+            this.groupBox14.Controls.Add(this.trackBar_ItemReward_CharacterTokenLevel);
+            this.groupBox14.Location = new System.Drawing.Point(6, 6);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Size = new System.Drawing.Size(307, 81);
+            this.groupBox14.TabIndex = 1;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "Character Tokens";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(149, 17);
+            this.label7.TabIndex = 12;
+            this.label7.Text = "Minimum Item Level";
+            // 
+            // label_ItemReward_CharacterTokenLevel
+            // 
+            this.label_ItemReward_CharacterTokenLevel.AutoSize = true;
+            this.label_ItemReward_CharacterTokenLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(239, 36);
+            this.label_ItemReward_CharacterTokenLevel.Name = "label_ItemReward_CharacterTokenLevel";
+            this.label_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(43, 24);
+            this.label_ItemReward_CharacterTokenLevel.TabIndex = 11;
+            this.label_ItemReward_CharacterTokenLevel.Text = "519";
+            // 
+            // trackBar_ItemReward_CharacterTokenLevel
+            // 
+            this.trackBar_ItemReward_CharacterTokenLevel.LargeChange = 25;
+            this.trackBar_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(2, 36);
+            this.trackBar_ItemReward_CharacterTokenLevel.Maximum = 670;
+            this.trackBar_ItemReward_CharacterTokenLevel.Minimum = 519;
+            this.trackBar_ItemReward_CharacterTokenLevel.Name = "trackBar_ItemReward_CharacterTokenLevel";
+            this.trackBar_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(231, 42);
+            this.trackBar_ItemReward_CharacterTokenLevel.TabIndex = 10;
+            this.trackBar_ItemReward_CharacterTokenLevel.TickFrequency = 10;
+            this.trackBar_ItemReward_CharacterTokenLevel.Value = 519;
+            this.trackBar_ItemReward_CharacterTokenLevel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.flowLayoutPanel6);
+            this.groupBox13.Location = new System.Drawing.Point(8, 93);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(171, 161);
+            this.groupBox13.TabIndex = 0;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "Follower Tokens";
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet615);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet615);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet630);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet630);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet645);
+            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet645);
+            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(165, 142);
+            this.flowLayoutPanel6.TabIndex = 0;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet615
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet615";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.TabIndex = 0;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Text = "Armor Set Level 615";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet615
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Location = new System.Drawing.Point(3, 26);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet615";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.TabIndex = 1;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Text = "Weapon Set Level 615";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet630
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Location = new System.Drawing.Point(3, 49);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet630";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.TabIndex = 3;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Text = "Armor Set Level 630";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet630
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Location = new System.Drawing.Point(3, 72);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet630";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.TabIndex = 2;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Text = "Weapon Set Level 630";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet645
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.ForeColor = System.Drawing.Color.DarkViolet;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Location = new System.Drawing.Point(3, 95);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet645";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.TabIndex = 4;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Text = "Armor Set Level 645";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet645
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.ForeColor = System.Drawing.Color.DarkViolet;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Location = new System.Drawing.Point(3, 118);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet645";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.TabIndex = 5;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Text = "Weapon Set Level 645";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.textBox_ReservedGarrisonResources);
+            this.panel1.Controls.Add(this.checkBox_Behavior_StartMissions);
+            this.panel1.Controls.Add(this.label12);
+            this.panel1.Controls.Add(this.trackBar_ReservedGarrisonResources);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(3, 3);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(731, 63);
+            this.panel1.TabIndex = 16;
+            // 
+            // textBox_ReservedGarrisonResources
+            // 
+            this.textBox_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_ReservedGarrisonResources.Location = new System.Drawing.Point(653, 20);
+            this.textBox_ReservedGarrisonResources.Name = "textBox_ReservedGarrisonResources";
+            this.textBox_ReservedGarrisonResources.Size = new System.Drawing.Size(61, 29);
+            this.textBox_ReservedGarrisonResources.TabIndex = 15;
+            this.textBox_ReservedGarrisonResources.Text = "10000";
+            this.textBox_ReservedGarrisonResources.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_GarrisonReservered_KeyPress);
+            // 
+            // checkBox_Behavior_StartMissions
+            // 
+            this.checkBox_Behavior_StartMissions.AutoSize = true;
+            this.checkBox_Behavior_StartMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_StartMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(5, 3);
+            this.checkBox_Behavior_StartMissions.Name = "checkBox_Behavior_StartMissions";
+            this.checkBox_Behavior_StartMissions.Size = new System.Drawing.Size(139, 24);
+            this.checkBox_Behavior_StartMissions.TabIndex = 14;
+            this.checkBox_Behavior_StartMissions.Text = "Start Missions";
+            this.checkBox_Behavior_StartMissions.UseVisualStyleBackColor = true;
             // 
             // label12
             // 
@@ -323,16 +495,6 @@
             this.label12.Size = new System.Drawing.Size(227, 17);
             this.label12.TabIndex = 11;
             this.label12.Text = "Reserved Garrison Resources";
-            // 
-            // label_ReservedGarrisonResources
-            // 
-            this.label_ReservedGarrisonResources.AutoSize = true;
-            this.label_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ReservedGarrisonResources.Location = new System.Drawing.Point(653, 20);
-            this.label_ReservedGarrisonResources.Name = "label_ReservedGarrisonResources";
-            this.label_ReservedGarrisonResources.Size = new System.Drawing.Size(21, 24);
-            this.label_ReservedGarrisonResources.TabIndex = 10;
-            this.label_ReservedGarrisonResources.Text = "0";
             // 
             // trackBar_ReservedGarrisonResources
             // 
@@ -345,6 +507,7 @@
             this.trackBar_ReservedGarrisonResources.TabIndex = 9;
             this.trackBar_ReservedGarrisonResources.TickFrequency = 500;
             this.trackBar_ReservedGarrisonResources.Value = 1;
+            this.trackBar_ReservedGarrisonResources.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tabPage6
             // 
@@ -601,11 +764,7 @@
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.groupBox12);
-            this.tabPage5.Controls.Add(this.groupBox11);
-            this.tabPage5.Controls.Add(this.groupBox9);
-            this.tabPage5.Controls.Add(this.groupBox2);
-            this.tabPage5.Controls.Add(this.checkBox_HBRelogSkipTask);
+            this.tabPage5.Controls.Add(this.tabControl3);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
@@ -613,110 +772,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Misc";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.label2);
-            this.groupBox12.Controls.Add(this.textBox_MinimumBagSlotsFree);
-            this.groupBox12.Controls.Add(this.trackBar_MinimumBagSlotsFree);
-            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
-            this.groupBox12.Location = new System.Drawing.Point(375, 322);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(193, 223);
-            this.groupBox12.TabIndex = 25;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Vendoring";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 159);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Minimum Bag Slots Free";
-            // 
-            // textBox_MinimumBagSlotsFree
-            // 
-            this.textBox_MinimumBagSlotsFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(150, 175);
-            this.textBox_MinimumBagSlotsFree.Name = "textBox_MinimumBagSlotsFree";
-            this.textBox_MinimumBagSlotsFree.ReadOnly = true;
-            this.textBox_MinimumBagSlotsFree.Size = new System.Drawing.Size(37, 26);
-            this.textBox_MinimumBagSlotsFree.TabIndex = 2;
-            this.textBox_MinimumBagSlotsFree.Text = "16";
-            // 
-            // trackBar_MinimumBagSlotsFree
-            // 
-            this.trackBar_MinimumBagSlotsFree.LargeChange = 2;
-            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(3, 175);
-            this.trackBar_MinimumBagSlotsFree.Maximum = 30;
-            this.trackBar_MinimumBagSlotsFree.Minimum = 1;
-            this.trackBar_MinimumBagSlotsFree.Name = "trackBar_MinimumBagSlotsFree";
-            this.trackBar_MinimumBagSlotsFree.Size = new System.Drawing.Size(141, 42);
-            this.trackBar_MinimumBagSlotsFree.TabIndex = 1;
-            this.trackBar_MinimumBagSlotsFree.TickFrequency = 2;
-            this.trackBar_MinimumBagSlotsFree.Value = 1;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
-            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
-            this.flowLayoutPanel4.TabIndex = 0;
-            // 
-            // checkBox_Vendor_Junk
-            // 
-            this.checkBox_Vendor_Junk.AutoSize = true;
-            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
-            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
-            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
-            this.checkBox_Vendor_Junk.TabIndex = 2;
-            this.checkBox_Vendor_Junk.Text = "Junk";
-            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Common
-            // 
-            this.checkBox_Vendor_Common.AutoSize = true;
-            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
-            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
-            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
-            this.checkBox_Vendor_Common.TabIndex = 3;
-            this.checkBox_Vendor_Common.Text = "Common";
-            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Uncommon
-            // 
-            this.checkBox_Vendor_Uncommon.AutoSize = true;
-            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
-            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
-            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
-            this.checkBox_Vendor_Uncommon.TabIndex = 4;
-            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
-            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Rare
-            // 
-            this.checkBox_Vendor_Rare.AutoSize = true;
-            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
-            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
-            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
-            this.checkBox_Vendor_Rare.TabIndex = 5;
-            this.checkBox_Vendor_Rare.Text = "Rare";
-            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
             // 
             // groupBox11
             // 
@@ -730,7 +785,7 @@
             this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonItems);
             this.groupBox11.Controls.Add(this.textBox_Disenchanting_UncommonLevel);
             this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
-            this.groupBox11.Location = new System.Drawing.Point(8, 322);
+            this.groupBox11.Location = new System.Drawing.Point(6, 6);
             this.groupBox11.Name = "groupBox11";
             this.groupBox11.Size = new System.Drawing.Size(361, 130);
             this.groupBox11.TabIndex = 24;
@@ -852,7 +907,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.flowLayoutPanel_MiscBehaviors);
-            this.groupBox9.Location = new System.Drawing.Point(8, 124);
+            this.groupBox9.Location = new System.Drawing.Point(6, 6);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(361, 192);
             this.groupBox9.TabIndex = 23;
@@ -964,7 +1019,7 @@
             // 
             this.groupBox2.Controls.Add(this.checkBox_ExchangePrimalSpirits);
             this.groupBox2.Controls.Add(this.comboBox_PrimalSpiritItems);
-            this.groupBox2.Location = new System.Drawing.Point(8, 36);
+            this.groupBox2.Location = new System.Drawing.Point(6, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(245, 82);
             this.groupBox2.TabIndex = 15;
@@ -988,17 +1043,6 @@
             this.comboBox_PrimalSpiritItems.Name = "comboBox_PrimalSpiritItems";
             this.comboBox_PrimalSpiritItems.Size = new System.Drawing.Size(233, 21);
             this.comboBox_PrimalSpiritItems.TabIndex = 0;
-            // 
-            // checkBox_HBRelogSkipTask
-            // 
-            this.checkBox_HBRelogSkipTask.AutoSize = true;
-            this.checkBox_HBRelogSkipTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_HBRelogSkipTask.Location = new System.Drawing.Point(8, 6);
-            this.checkBox_HBRelogSkipTask.Name = "checkBox_HBRelogSkipTask";
-            this.checkBox_HBRelogSkipTask.Size = new System.Drawing.Size(245, 24);
-            this.checkBox_HBRelogSkipTask.TabIndex = 14;
-            this.checkBox_HBRelogSkipTask.Text = "HBRelog Skip to Next Task";
-            this.checkBox_HBRelogSkipTask.UseVisualStyleBackColor = true;
             // 
             // tabPage4
             // 
@@ -1537,204 +1581,306 @@
             this.checkBox_Debug_FakePickupWorkOrder.Text = "Fake Pickup Order";
             this.checkBox_Debug_FakePickupWorkOrder.UseVisualStyleBackColor = true;
             // 
-            // tabControl2
+            // tabControl3
             // 
-            this.tabControl2.Controls.Add(this.tabPage_Mission_Priorities);
-            this.tabControl2.Controls.Add(this.tabPage_Mission_Items);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.Location = new System.Drawing.Point(3, 66);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(731, 514);
-            this.tabControl2.TabIndex = 15;
+            this.tabControl3.Controls.Add(this.tabPage7);
+            this.tabControl3.Controls.Add(this.tabPage8);
+            this.tabControl3.Controls.Add(this.tabPage9);
+            this.tabControl3.Controls.Add(this.tabPage10);
+            this.tabControl3.Controls.Add(this.tabPage11);
+            this.tabControl3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl3.Location = new System.Drawing.Point(3, 3);
+            this.tabControl3.Name = "tabControl3";
+            this.tabControl3.SelectedIndex = 0;
+            this.tabControl3.Size = new System.Drawing.Size(731, 577);
+            this.tabControl3.TabIndex = 26;
             // 
-            // tabPage_Mission_Priorities
+            // tabPage7
             // 
-            this.tabPage_Mission_Priorities.Controls.Add(this.groupBox10);
-            this.tabPage_Mission_Priorities.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Mission_Priorities.Name = "tabPage_Mission_Priorities";
-            this.tabPage_Mission_Priorities.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Mission_Priorities.Size = new System.Drawing.Size(723, 488);
-            this.tabPage_Mission_Priorities.TabIndex = 0;
-            this.tabPage_Mission_Priorities.Text = "Priorities";
-            this.tabPage_Mission_Priorities.UseVisualStyleBackColor = true;
+            this.tabPage7.Controls.Add(this.groupBox9);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage7.Size = new System.Drawing.Size(723, 551);
+            this.tabPage7.TabIndex = 0;
+            this.tabPage7.Text = "Misc Behaviors";
+            this.tabPage7.UseVisualStyleBackColor = true;
             // 
-            // tabPage_Mission_Items
+            // tabPage8
             // 
-            this.tabPage_Mission_Items.Controls.Add(this.groupBox14);
-            this.tabPage_Mission_Items.Controls.Add(this.groupBox13);
-            this.tabPage_Mission_Items.Location = new System.Drawing.Point(4, 22);
-            this.tabPage_Mission_Items.Name = "tabPage_Mission_Items";
-            this.tabPage_Mission_Items.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Mission_Items.Size = new System.Drawing.Size(723, 488);
-            this.tabPage_Mission_Items.TabIndex = 1;
-            this.tabPage_Mission_Items.Text = "Items";
-            this.tabPage_Mission_Items.UseVisualStyleBackColor = true;
+            this.tabPage8.Controls.Add(this.groupBox12);
+            this.tabPage8.Controls.Add(this.groupBox11);
+            this.tabPage8.Location = new System.Drawing.Point(4, 22);
+            this.tabPage8.Name = "tabPage8";
+            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage8.Size = new System.Drawing.Size(723, 551);
+            this.tabPage8.TabIndex = 1;
+            this.tabPage8.Text = "Vendor & Disenchant";
+            this.tabPage8.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // tabPage9
             // 
-            this.panel1.Controls.Add(this.checkBox_Behavior_StartMissions);
-            this.panel1.Controls.Add(this.label12);
-            this.panel1.Controls.Add(this.trackBar_ReservedGarrisonResources);
-            this.panel1.Controls.Add(this.label_ReservedGarrisonResources);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(731, 63);
-            this.panel1.TabIndex = 16;
+            this.tabPage9.Controls.Add(this.groupBox2);
+            this.tabPage9.Location = new System.Drawing.Point(4, 22);
+            this.tabPage9.Name = "tabPage9";
+            this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage9.Size = new System.Drawing.Size(723, 551);
+            this.tabPage9.TabIndex = 2;
+            this.tabPage9.Text = "Primal Trader";
+            this.tabPage9.UseVisualStyleBackColor = true;
             // 
-            // checkBox_Behavior_StartMissions
+            // tabPage10
             // 
-            this.checkBox_Behavior_StartMissions.AutoSize = true;
-            this.checkBox_Behavior_StartMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_StartMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(5, 3);
-            this.checkBox_Behavior_StartMissions.Name = "checkBox_Behavior_StartMissions";
-            this.checkBox_Behavior_StartMissions.Size = new System.Drawing.Size(139, 24);
-            this.checkBox_Behavior_StartMissions.TabIndex = 14;
-            this.checkBox_Behavior_StartMissions.Text = "Start Missions";
-            this.checkBox_Behavior_StartMissions.UseVisualStyleBackColor = true;
+            this.tabPage10.Controls.Add(this.checkBox_HBRelogSkipTask);
+            this.tabPage10.Location = new System.Drawing.Point(4, 22);
+            this.tabPage10.Name = "tabPage10";
+            this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage10.Size = new System.Drawing.Size(723, 551);
+            this.tabPage10.TabIndex = 3;
+            this.tabPage10.Text = "Relog";
+            this.tabPage10.UseVisualStyleBackColor = true;
             // 
-            // groupBox13
+            // tabPage11
             // 
-            this.groupBox13.Controls.Add(this.flowLayoutPanel6);
-            this.groupBox13.Location = new System.Drawing.Point(8, 93);
-            this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(171, 161);
-            this.groupBox13.TabIndex = 0;
-            this.groupBox13.TabStop = false;
-            this.groupBox13.Text = "Follower Tokens";
+            this.tabPage11.Controls.Add(this.label5);
+            this.tabPage11.Controls.Add(this.label3);
+            this.tabPage11.Controls.Add(this.flowLayoutPanel5);
+            this.tabPage11.Controls.Add(this.label4);
+            this.tabPage11.Location = new System.Drawing.Point(4, 22);
+            this.tabPage11.Name = "tabPage11";
+            this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage11.Size = new System.Drawing.Size(723, 551);
+            this.tabPage11.TabIndex = 4;
+            this.tabPage11.Text = "Followers";
+            this.tabPage11.UseVisualStyleBackColor = true;
             // 
-            // flowLayoutPanel6
+            // groupBox12
             // 
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet615);
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet615);
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet630);
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet630);
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_ArmorSet645);
-            this.flowLayoutPanel6.Controls.Add(this.checkBox_MissionRewards_FollowerToken_WeaponSet645);
-            this.flowLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(165, 142);
-            this.flowLayoutPanel6.TabIndex = 0;
+            this.groupBox12.Controls.Add(this.label2);
+            this.groupBox12.Controls.Add(this.textBox_MinimumBagSlotsFree);
+            this.groupBox12.Controls.Add(this.trackBar_MinimumBagSlotsFree);
+            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
+            this.groupBox12.Location = new System.Drawing.Point(373, 6);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(193, 223);
+            this.groupBox12.TabIndex = 26;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Vendoring";
             // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet615
+            // label2
             // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet615";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.TabIndex = 0;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Text = "Armor Set Level 615";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 159);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 13);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Minimum Bag Slots Free";
             // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet615
+            // textBox_MinimumBagSlotsFree
             // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Location = new System.Drawing.Point(3, 26);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet615";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.TabIndex = 1;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Text = "Weapon Set Level 615";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.UseVisualStyleBackColor = true;
+            this.textBox_MinimumBagSlotsFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(150, 175);
+            this.textBox_MinimumBagSlotsFree.Name = "textBox_MinimumBagSlotsFree";
+            this.textBox_MinimumBagSlotsFree.ReadOnly = true;
+            this.textBox_MinimumBagSlotsFree.Size = new System.Drawing.Size(37, 26);
+            this.textBox_MinimumBagSlotsFree.TabIndex = 2;
+            this.textBox_MinimumBagSlotsFree.Text = "16";
             // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet630
+            // trackBar_MinimumBagSlotsFree
             // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Location = new System.Drawing.Point(3, 72);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet630";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.TabIndex = 2;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Text = "Weapon Set Level 630";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.UseVisualStyleBackColor = true;
+            this.trackBar_MinimumBagSlotsFree.LargeChange = 2;
+            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(3, 175);
+            this.trackBar_MinimumBagSlotsFree.Maximum = 60;
+            this.trackBar_MinimumBagSlotsFree.Minimum = 1;
+            this.trackBar_MinimumBagSlotsFree.Name = "trackBar_MinimumBagSlotsFree";
+            this.trackBar_MinimumBagSlotsFree.Size = new System.Drawing.Size(141, 42);
+            this.trackBar_MinimumBagSlotsFree.TabIndex = 1;
+            this.trackBar_MinimumBagSlotsFree.TickFrequency = 5;
+            this.trackBar_MinimumBagSlotsFree.Value = 1;
             // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet630
+            // flowLayoutPanel4
             // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Location = new System.Drawing.Point(3, 49);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet630";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.TabIndex = 3;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Text = "Armor Set Level 630";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.UseVisualStyleBackColor = true;
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
+            this.flowLayoutPanel4.TabIndex = 0;
             // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet645
+            // checkBox_Vendor_Junk
             // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.ForeColor = System.Drawing.Color.DarkViolet;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Location = new System.Drawing.Point(3, 95);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet645";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.TabIndex = 4;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Text = "Armor Set Level 645";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.UseVisualStyleBackColor = true;
+            this.checkBox_Vendor_Junk.AutoSize = true;
+            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
+            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
+            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
+            this.checkBox_Vendor_Junk.TabIndex = 2;
+            this.checkBox_Vendor_Junk.Text = "Junk";
+            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
             // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet645
+            // checkBox_Vendor_Common
             // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.ForeColor = System.Drawing.Color.DarkViolet;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Location = new System.Drawing.Point(3, 118);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet645";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.TabIndex = 5;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Text = "Weapon Set Level 645";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.UseVisualStyleBackColor = true;
+            this.checkBox_Vendor_Common.AutoSize = true;
+            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
+            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
+            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
+            this.checkBox_Vendor_Common.TabIndex = 3;
+            this.checkBox_Vendor_Common.Text = "Common";
+            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
             // 
-            // groupBox14
+            // checkBox_Vendor_Uncommon
             // 
-            this.groupBox14.Controls.Add(this.label7);
-            this.groupBox14.Controls.Add(this.label_ItemReward_CharacterTokenLevel);
-            this.groupBox14.Controls.Add(this.trackBar_ItemReward_CharacterTokenLevel);
-            this.groupBox14.Location = new System.Drawing.Point(6, 6);
-            this.groupBox14.Name = "groupBox14";
-            this.groupBox14.Size = new System.Drawing.Size(307, 81);
-            this.groupBox14.TabIndex = 1;
-            this.groupBox14.TabStop = false;
-            this.groupBox14.Text = "Character Tokens";
+            this.checkBox_Vendor_Uncommon.AutoSize = true;
+            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
+            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
+            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
+            this.checkBox_Vendor_Uncommon.TabIndex = 4;
+            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
+            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
             // 
-            // trackBar_ItemReward_CharacterTokenLevel
+            // checkBox_Vendor_Rare
             // 
-            this.trackBar_ItemReward_CharacterTokenLevel.LargeChange = 25;
-            this.trackBar_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(2, 36);
-            this.trackBar_ItemReward_CharacterTokenLevel.Maximum = 670;
-            this.trackBar_ItemReward_CharacterTokenLevel.Minimum = 519;
-            this.trackBar_ItemReward_CharacterTokenLevel.Name = "trackBar_ItemReward_CharacterTokenLevel";
-            this.trackBar_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(231, 42);
-            this.trackBar_ItemReward_CharacterTokenLevel.TabIndex = 10;
-            this.trackBar_ItemReward_CharacterTokenLevel.TickFrequency = 10;
-            this.trackBar_ItemReward_CharacterTokenLevel.Value = 519;
+            this.checkBox_Vendor_Rare.AutoSize = true;
+            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
+            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
+            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_Vendor_Rare.TabIndex = 5;
+            this.checkBox_Vendor_Rare.Text = "Rare";
+            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
             // 
-            // label_ItemReward_CharacterTokenLevel
+            // checkBox_HBRelogSkipTask
             // 
-            this.label_ItemReward_CharacterTokenLevel.AutoSize = true;
-            this.label_ItemReward_CharacterTokenLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(239, 36);
-            this.label_ItemReward_CharacterTokenLevel.Name = "label_ItemReward_CharacterTokenLevel";
-            this.label_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(43, 24);
-            this.label_ItemReward_CharacterTokenLevel.TabIndex = 11;
-            this.label_ItemReward_CharacterTokenLevel.Text = "519";
+            this.checkBox_HBRelogSkipTask.AutoSize = true;
+            this.checkBox_HBRelogSkipTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_HBRelogSkipTask.Location = new System.Drawing.Point(6, 6);
+            this.checkBox_HBRelogSkipTask.Name = "checkBox_HBRelogSkipTask";
+            this.checkBox_HBRelogSkipTask.Size = new System.Drawing.Size(245, 24);
+            this.checkBox_HBRelogSkipTask.TabIndex = 15;
+            this.checkBox_HBRelogSkipTask.Text = "HBRelog Skip to Next Task";
+            this.checkBox_HBRelogSkipTask.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // flowLayoutPanel5
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 16);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(149, 17);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "Minimum Item Level";
+            this.flowLayoutPanel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_193);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_189);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_207);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_467);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_190);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_170);
+            this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(6, 21);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(333, 262);
+            this.flowLayoutPanel5.TabIndex = 0;
+            // 
+            // checkBox_Follower_193
+            // 
+            this.checkBox_Follower_193.AutoSize = true;
+            this.checkBox_Follower_193.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_193.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Follower_193.Name = "checkBox_Follower_193";
+            this.checkBox_Follower_193.Size = new System.Drawing.Size(137, 21);
+            this.checkBox_Follower_193.TabIndex = 0;
+            this.checkBox_Follower_193.Text = "Tormmok (193)";
+            this.checkBox_Follower_193.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_189
+            // 
+            this.checkBox_Follower_189.AutoSize = true;
+            this.checkBox_Follower_189.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_189.Location = new System.Drawing.Point(3, 30);
+            this.checkBox_Follower_189.Name = "checkBox_Follower_189";
+            this.checkBox_Follower_189.Size = new System.Drawing.Size(111, 21);
+            this.checkBox_Follower_189.TabIndex = 1;
+            this.checkBox_Follower_189.Text = "Blook (189)";
+            this.checkBox_Follower_189.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_207
+            // 
+            this.checkBox_Follower_207.AutoSize = true;
+            this.checkBox_Follower_207.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_207.Location = new System.Drawing.Point(3, 57);
+            this.checkBox_Follower_207.Name = "checkBox_Follower_207";
+            this.checkBox_Follower_207.Size = new System.Drawing.Size(319, 21);
+            this.checkBox_Follower_207.TabIndex = 2;
+            this.checkBox_Follower_207.Text = "Defender Illona / Aeda Brightdawn (207)";
+            this.checkBox_Follower_207.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_467
+            // 
+            this.checkBox_Follower_467.AutoSize = true;
+            this.checkBox_Follower_467.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_467.Location = new System.Drawing.Point(3, 84);
+            this.checkBox_Follower_467.Name = "checkBox_Follower_467";
+            this.checkBox_Follower_467.Size = new System.Drawing.Size(131, 21);
+            this.checkBox_Follower_467.TabIndex = 3;
+            this.checkBox_Follower_467.Text = "Fen Tao (467)";
+            this.checkBox_Follower_467.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_190
+            // 
+            this.checkBox_Follower_190.AutoSize = true;
+            this.checkBox_Follower_190.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_190.Location = new System.Drawing.Point(3, 111);
+            this.checkBox_Follower_190.Name = "checkBox_Follower_190";
+            this.checkBox_Follower_190.Size = new System.Drawing.Size(272, 21);
+            this.checkBox_Follower_190.TabIndex = 4;
+            this.checkBox_Follower_190.Text = "Image of Archmage Vargoth (190)";
+            this.checkBox_Follower_190.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(3, 3);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(191, 15);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "Optional Followers to Unlock";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 286);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(577, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Note: If you enabled a follower You will have to restart the bot to recompile the" +
+    " behaviors!";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 310);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(594, 15);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Note: The behaviors to gain the follower will occur at the end of the normal garr" +
+    "ison routine.";
+            // 
+            // checkBox_Follower_170
+            // 
+            this.checkBox_Follower_170.AutoSize = true;
+            this.checkBox_Follower_170.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_170.Location = new System.Drawing.Point(3, 138);
+            this.checkBox_Follower_170.Name = "checkBox_Follower_170";
+            this.checkBox_Follower_170.Size = new System.Drawing.Size(241, 21);
+            this.checkBox_Follower_170.TabIndex = 5;
+            this.checkBox_Follower_170.Text = "Goldmaneg the Skinner (170)";
+            this.checkBox_Follower_170.UseVisualStyleBackColor = true;
             // 
             // Config
             // 
@@ -1749,8 +1895,18 @@
             this.Load += new System.EventHandler(this.Config_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabControl2.ResumeLayout(false);
+            this.tabPage_Mission_Priorities.ResumeLayout(false);
             this.groupBox10.ResumeLayout(false);
-            this.flowLayoutPanel5.ResumeLayout(false);
+            this.tabPage_Mission_Items.ResumeLayout(false);
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).EndInit();
+            this.groupBox13.ResumeLayout(false);
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel6.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -1764,12 +1920,6 @@
             this.flowLayoutPanel_Milling.ResumeLayout(false);
             this.flowLayoutPanel_Milling.PerformLayout();
             this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).EndInit();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
             this.groupBox11.ResumeLayout(false);
             this.groupBox11.PerformLayout();
             this.groupBox9.ResumeLayout(false);
@@ -1793,17 +1943,21 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.tabPage_Mission_Priorities.ResumeLayout(false);
-            this.tabPage_Mission_Items.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.groupBox13.ResumeLayout(false);
-            this.flowLayoutPanel6.ResumeLayout(false);
-            this.flowLayoutPanel6.PerformLayout();
-            this.groupBox14.ResumeLayout(false);
-            this.groupBox14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).EndInit();
+            this.tabControl3.ResumeLayout(false);
+            this.tabPage7.ResumeLayout(false);
+            this.tabPage8.ResumeLayout(false);
+            this.tabPage9.ResumeLayout(false);
+            this.tabPage10.ResumeLayout(false);
+            this.tabPage10.PerformLayout();
+            this.tabPage11.ResumeLayout(false);
+            this.tabPage11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).EndInit();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1822,7 +1976,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label_ReservedGarrisonResources;
         private System.Windows.Forms.TrackBar trackBar_ReservedGarrisonResources;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ListView listView_MailItems;
@@ -1867,7 +2020,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.CheckBox checkBox_ExchangePrimalSpirits;
         private System.Windows.Forms.ComboBox comboBox_PrimalSpiritItems;
-        private System.Windows.Forms.CheckBox checkBox_HBRelogSkipTask;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.CheckBox checkBox_Behavior_WorkOrderPickup;
         private System.Windows.Forms.CheckBox checkBox_Behavior_WorkOrderStart;
@@ -1899,23 +2051,10 @@
         private System.Windows.Forms.CheckBox checkBox_Disenchanting_RareSoulbound;
         private System.Windows.Forms.CheckBox checkBox_Disenchanting_UncommonSoulbound;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Junk;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Common;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Uncommon;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Rare;
         private System.Windows.Forms.CheckBox checkBox_Debug_FakeFinishQuest;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.CheckBox checkBox_Behavior_Professions;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_MinimumBagSlotsFree;
-        private System.Windows.Forms.TrackBar trackBar_MinimumBagSlotsFree;
         private System.Windows.Forms.CheckBox checkBox_Debug_IgnoreHearthStone;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox checkBox_Debug_FakePickupWorkOrder;
@@ -1950,6 +2089,33 @@
         private System.Windows.Forms.TrackBar trackBar_ItemReward_CharacterTokenLevel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_ItemReward_CharacterTokenLevel;
+        private System.Windows.Forms.TextBox textBox_ReservedGarrisonResources;
+        private System.Windows.Forms.TabControl tabControl3;
+        private System.Windows.Forms.TabPage tabPage7;
+        private System.Windows.Forms.TabPage tabPage8;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox_MinimumBagSlotsFree;
+        private System.Windows.Forms.TrackBar trackBar_MinimumBagSlotsFree;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.CheckBox checkBox_Vendor_Junk;
+        private System.Windows.Forms.CheckBox checkBox_Vendor_Common;
+        private System.Windows.Forms.CheckBox checkBox_Vendor_Uncommon;
+        private System.Windows.Forms.CheckBox checkBox_Vendor_Rare;
+        private System.Windows.Forms.TabPage tabPage9;
+        private System.Windows.Forms.TabPage tabPage10;
+        private System.Windows.Forms.CheckBox checkBox_HBRelogSkipTask;
+        private System.Windows.Forms.TabPage tabPage11;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.CheckBox checkBox_Follower_193;
+        private System.Windows.Forms.CheckBox checkBox_Follower_189;
+        private System.Windows.Forms.CheckBox checkBox_Follower_207;
+        private System.Windows.Forms.CheckBox checkBox_Follower_467;
+        private System.Windows.Forms.CheckBox checkBox_Follower_190;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBox_Follower_170;
 
     }
 }

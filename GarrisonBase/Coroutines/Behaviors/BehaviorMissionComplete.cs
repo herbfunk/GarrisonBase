@@ -26,6 +26,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             Criteria += () => GarrisonManager.CompletedMissionIds.Count > 0;
         }
 
+        public override void Initalize()
+        {
+            base.Initalize();
+        }
+
 
         public C_WoWObject CommandTable
         {
@@ -60,7 +65,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (CommandTable.Distance < 4.56 && CommandTable.LineOfSight)
             {
-                if (LuaEvents.MissionFrameOpen)
+                if (LuaUI.MissionFrame.IsOpen)
                 {
                     _interactattempts = 0;
                     return false;

@@ -12,7 +12,7 @@ namespace Herbfunk.GarrisonBase.Config
         public Action<int> UpdateMinimumLevel { get; set; }
 
         public UserControl_MissionReward(int priority, int sucessrate, int minlevel, string labelName)
-            : this(priority, sucessrate, minlevel, labelName, Color.Black)
+            : this(priority, sucessrate, minlevel, labelName, Color.White)
         {
         }
 

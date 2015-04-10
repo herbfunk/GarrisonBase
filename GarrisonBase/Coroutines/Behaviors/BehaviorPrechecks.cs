@@ -1,7 +1,10 @@
 using System.Threading.Tasks;
 using Buddy.Coroutines;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Garrison;
 using Styx;
 using Styx.CommonBot.Coroutines;
+using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
@@ -9,37 +12,44 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     {
         public override BehaviorType Type { get { return BehaviorType.None; } }
         internal bool DisabledMasterPlanAddon { get; set; }
+        internal bool ShouldCheckAddons { get; set; }
+        internal bool IgnoreHearthing { get; set; }
         public BehaviorPrechecks()
         {
-                
+            IgnoreHearthing = true;
         }
-          
+
 
 
         public override async Task<bool> BehaviorRoutine()
         {
             if (IsDone) return false;
 
-            if (await CheckHearthStone())
-                return true;
+            if (!VerifyContinentIsDraenor())
+                IgnoreHearthing = false;
+            else if (StyxWoW.Me.CurrentMap.IsGarrison)
+                IgnoreHearthing = true;
 
-            if (await CheckAddons())
+            if (!IgnoreHearthing && !BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE && await CheckHearthStone())
                 return true;
-
-            IsDone = true;
 
             return false;
         }
 
         private bool attemptedFlightPath = false;
         private BehaviorUseFlightPath FlightPathBehavior;
+        private Movement MovementBehavior;
         private async Task<bool> CheckHearthStone()
         {
-            //<WoWItem Name="Garrison Hearthstone" Entry="110560" />
-            if (StyxWoW.Me.CurrentMap.IsGarrison) return false;
+            if (await Common.CheckCommonCoroutines()) return true;
 
             if (FlightPathBehavior != null && !FlightPathBehavior.IsDone && await FlightPathBehavior.BehaviorRoutine())
                 return true;
+
+            if (MovementBehavior != null && MovementBehavior.CurrentMovementQueue.Count > 0 && await MovementBehavior.MoveTo())
+            {
+                return true;
+            }
 
             if (!StyxWoW.Me.IsCasting)
             {
@@ -78,7 +88,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     }
                     else
                     {
-                        if (StyxWoW.Me.CurrentMap.ExpansionId != 5)
+                        if (Player.MapExpansionId != 5)
                         {
                             //Not in draenor!
                             GarrisonBase.Err("Garrison Hearthstone is on cooldown and not currently in draenor!");
@@ -90,7 +100,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                             FlightPathBehavior = new BehaviorUseFlightPath("Frostwall Garrison", new[] { "Lunarfall" });
                             attemptedFlightPath = true;
                         }
-                                
+                        else
+                        {
+                            if (MovementBehavior == null)
+                                MovementBehavior = new Movement(MovementCache.GarrisonEntrance, 50f);
+
+                        }
+
                         return true;
                     }
                 }
@@ -100,16 +116,48 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             return true;
         }
 
-        private async Task<bool> CheckAddons()
+        internal bool VerifyContinentIsDraenor()
         {
+            var playerMapId = !Player.MapIsContinent
+                   ? Player.ParentMapId
+                   : (int)Player.MapId.Value;
+
+            return playerMapId == 1116;
+        }
+
+        private bool _checkedMasterPlanAddon = false;
+        internal async Task<bool> CheckAddons()
+        {
+            if (_checkedMasterPlanAddon) return false;
+            if (DisabledMasterPlanAddon) return false;
+
             await Coroutine.Yield();
             await Coroutine.Sleep(StyxWoW.Random.Next(1200, 2522));
-            if (!LuaCommands.IsAddonLoaded("MasterPlan")) return false;
-            
+            if (!LuaCommands.IsAddonLoaded("MasterPlan"))
+            {
+                _checkedMasterPlanAddon = true;
+                return false;
+            }
+
             LuaCommands.DisableAddon("MasterPlan");
             LuaCommands.ReloadUI();
             DisabledMasterPlanAddon = true;
-            await Coroutine.Wait(6000, () => StyxWoW.IsInGame);
+            _checkedMasterPlanAddon = true;
+            await Coroutine.Wait(6000, () => !StyxWoW.IsInGame);
+            return true;
+        }
+
+        internal async Task<bool> InitalizeGarrisonManager()
+        {
+            if (GarrisonManager.Initalized) return false;
+
+            await CommonCoroutines.WaitForLuaEvent("GARRISON_SHOW_LANDING_PAGE", 2500, null, LuaCommands.ClickGarrisonMinimapButton);
+            await CommonCoroutines.SleepForRandomUiInteractionTime();
+            await Coroutine.Sleep(StyxWoW.Random.Next(1234, 2331));
+            Lua.DoString("GarrisonLandingPage.CloseButton:Click()");
+            await CommonCoroutines.SleepForRandomUiInteractionTime();
+
+            GarrisonManager.Initalize();
             return true;
         }
 

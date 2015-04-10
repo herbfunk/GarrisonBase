@@ -11,7 +11,6 @@ using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
-using Herbfunk.GarrisonBase.Quest;
 using Styx;
 using Styx.Helpers;
 
@@ -28,194 +27,296 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_HBRelogSkipTask.CheckedChanged += checkBox_HBRelogSkipToNextTask_CheckedChanged;
 
                 trackBar_ReservedGarrisonResources.Value = BaseSettings.CurrentSettings.ReservedGarrisonResources;
-                label_ReservedGarrisonResources.Text = BaseSettings.CurrentSettings.ReservedGarrisonResources.ToString(CultureInfo.InvariantCulture);
+                //label_ReservedGarrisonResources.Text = BaseSettings.CurrentSettings.ReservedGarrisonResources.ToString(CultureInfo.InvariantCulture);
+                textBox_ReservedGarrisonResources.Text = BaseSettings.CurrentSettings.ReservedGarrisonResources.ToString(CultureInfo.InvariantCulture);
+                textBox_ReservedGarrisonResources.TextChanged += textBox_GarrisonReservered_TextedChanged;
                 trackBar_ReservedGarrisonResources.ValueChanged += trackBar_ReservedGarrisonResources_SliderChanged;
 
                 #region Mission Reward Controls
                 //
                 flowLayoutPanel_MissionRewards.Controls.Clear();
 
-                UserControl_MissionReward missionReward_Items =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.Items.Priority,
-                    BaseSettings.CurrentSettings.Items.SuccessRate,
-                    BaseSettings.CurrentSettings.Items.MinimumLevel,
-                    "Items",
-                    Color.OrangeRed)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.Items.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.Items.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.Items.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Items);
+                
 
+                #region Character Tokens
                 UserControl_MissionReward missionReward_CharacterTokens =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.CharacterTokens.Priority,
-                    BaseSettings.CurrentSettings.CharacterTokens.SuccessRate,
-                    BaseSettings.CurrentSettings.CharacterTokens.MinimumLevel,
-                    "Character Tokens",
-                    Color.OrangeRed)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.CharacterTokens.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.CharacterTokens.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.CharacterTokens.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_CharacterTokens);
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.CharacterTokens.Priority,
+                            BaseSettings.CurrentSettings.CharacterTokens.SuccessRate,
+                            BaseSettings.CurrentSettings.CharacterTokens.MinimumLevel,
+                            "Character Tokens",
+                            Color.Purple)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.CharacterTokens.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.CharacterTokens.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.CharacterTokens.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_CharacterTokens); 
+                #endregion
 
-                UserControl_MissionReward missionReward_Apexis =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.ApexisCrystal.Priority,
-                    BaseSettings.CurrentSettings.ApexisCrystal.SuccessRate,
-                    BaseSettings.CurrentSettings.ApexisCrystal.MinimumLevel,
-                    "Apexis Crystals",
-                    Color.Brown)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.ApexisCrystal.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.ApexisCrystal.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.ApexisCrystal.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Apexis);
-
-                UserControl_MissionReward missionReward_XP =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.FollowerExperience.Priority,
-                    BaseSettings.CurrentSettings.FollowerExperience.SuccessRate,
-                    BaseSettings.CurrentSettings.FollowerExperience.MinimumLevel,
-                    "Follower XP",
-                    Color.Brown)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerExperience.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerExperience.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerExperience.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_XP);
-
+                #region Gold
                 UserControl_MissionReward missionReward_Gold =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.Gold.Priority,
-                    BaseSettings.CurrentSettings.Gold.SuccessRate,
-                    BaseSettings.CurrentSettings.Gold.MinimumLevel,
-                    "Gold Currency",
-                    Color.Brown)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.Gold.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.Gold.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.Gold.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Gold);
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.Gold.Priority,
+                            BaseSettings.CurrentSettings.Gold.SuccessRate,
+                            BaseSettings.CurrentSettings.Gold.MinimumLevel,
+                            "Gold Currency",
+                            Color.Gold)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.Gold.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.Gold.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.Gold.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Gold); 
+                #endregion
 
+                #region Garrison Currency
                 UserControl_MissionReward missionReward_Garrison =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.GarrisonResources.Priority,
-                    BaseSettings.CurrentSettings.GarrisonResources.SuccessRate,
-                    BaseSettings.CurrentSettings.GarrisonResources.MinimumLevel,
-                    "Garrison Currency",
-                    Color.Brown)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.GarrisonResources.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.GarrisonResources.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.GarrisonResources.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Garrison);
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.GarrisonResources.Priority,
+                            BaseSettings.CurrentSettings.GarrisonResources.SuccessRate,
+                            BaseSettings.CurrentSettings.GarrisonResources.MinimumLevel,
+                            "Garrison Currency",
+                            Color.SandyBrown)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.GarrisonResources.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.GarrisonResources.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.GarrisonResources.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Garrison); 
+                #endregion
 
-                UserControl_MissionReward missionReward_FollowerToken =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.FollowerTokens.Priority,
-                    BaseSettings.CurrentSettings.FollowerTokens.SuccessRate,
-                    BaseSettings.CurrentSettings.FollowerTokens.MinimumLevel,
-                    "Follower Tokens",
-                    Color.Blue)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerTokens.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerTokens.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerTokens.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerToken);
-
-                UserControl_MissionReward missionReward_FollowerTrait =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.FollowerTraits.Priority,
-                    BaseSettings.CurrentSettings.FollowerTraits.SuccessRate,
-                    BaseSettings.CurrentSettings.FollowerTraits.MinimumLevel,
-                    "Follower Traits",
-                    Color.Blue)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerTraits.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerTraits.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerTraits.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerTrait);
-
-                UserControl_MissionReward missionReward_FollowerRetraining =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.FollowerRetraining.Priority,
-                    BaseSettings.CurrentSettings.FollowerRetraining.SuccessRate,
-                    BaseSettings.CurrentSettings.FollowerRetraining.MinimumLevel,
-                    "Follower Retraining",
-                    Color.Blue)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerRetraining.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerRetraining.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerRetraining.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerRetraining);
-
-                UserControl_MissionReward missionReward_FollowerContract =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.FollowerContracts.Priority,
-                    BaseSettings.CurrentSettings.FollowerContracts.SuccessRate,
-                    BaseSettings.CurrentSettings.FollowerContracts.MinimumLevel,
-                    "Follower Contracts",
-                    Color.Blue)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerContracts.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerContracts.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerContracts.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerContract);
-
-                UserControl_MissionReward missionReward_RushOrders =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.RushOrders.Priority,
-                    BaseSettings.CurrentSettings.RushOrders.SuccessRate,
-                    BaseSettings.CurrentSettings.RushOrders.MinimumLevel,
-                    "Rush Orders",
-                    Color.Green)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.RushOrders.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.RushOrders.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.RushOrders.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_RushOrders);
-
-                UserControl_MissionReward missionReward_SealOfTemperedFate =
-                new UserControl_MissionReward(
-                    BaseSettings.CurrentSettings.SealOfTemperedFate.Priority,
-                    BaseSettings.CurrentSettings.SealOfTemperedFate.SuccessRate,
-                    BaseSettings.CurrentSettings.SealOfTemperedFate.MinimumLevel,
-                    "Seal Of Tempered Fate",
-                    Color.OrangeRed)
-                {
-                    UpdatePriority = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.Priority = i; },
-                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.SuccessRate = i; },
-                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.MinimumLevel = i; }
-                };
-                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_SealOfTemperedFate);
-
+                #region Honor Points
                 UserControl_MissionReward missionReward_HonorPoints =
                 new UserControl_MissionReward(
                     BaseSettings.CurrentSettings.HonorPoints.Priority,
                     BaseSettings.CurrentSettings.HonorPoints.SuccessRate,
                     BaseSettings.CurrentSettings.HonorPoints.MinimumLevel,
                     "Honor Points",
-                    Color.Brown)
+                    Color.PaleVioletRed)
                 {
                     UpdatePriority = i => { BaseSettings.CurrentSettings.HonorPoints.Priority = i; },
                     UpdateSuccessRate = i => { BaseSettings.CurrentSettings.HonorPoints.SuccessRate = i; },
                     UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.HonorPoints.MinimumLevel = i; }
                 };
                 flowLayoutPanel_MissionRewards.Controls.Add(missionReward_HonorPoints);
+
+                #endregion
+
+
+                #region Follower XP
+                UserControl_MissionReward missionReward_XP =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.FollowerExperience.Priority,
+                            BaseSettings.CurrentSettings.FollowerExperience.SuccessRate,
+                            BaseSettings.CurrentSettings.FollowerExperience.MinimumLevel,
+                            "Follower XP",
+                            Color.Blue)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerExperience.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerExperience.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerExperience.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_XP);
+                #endregion
+
+                #region FollowerToken
+                UserControl_MissionReward missionReward_FollowerToken =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.FollowerTokens.Priority,
+                            BaseSettings.CurrentSettings.FollowerTokens.SuccessRate,
+                            BaseSettings.CurrentSettings.FollowerTokens.MinimumLevel,
+                            "Follower Tokens",
+                            Color.Blue)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerTokens.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerTokens.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerTokens.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerToken); 
+                #endregion
+
+                #region FollowerTrait
+                UserControl_MissionReward missionReward_FollowerTrait =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.FollowerTraits.Priority,
+                            BaseSettings.CurrentSettings.FollowerTraits.SuccessRate,
+                            BaseSettings.CurrentSettings.FollowerTraits.MinimumLevel,
+                            "Follower Traits",
+                            Color.Blue)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerTraits.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerTraits.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerTraits.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerTrait); 
+                #endregion
+
+                #region FollowerRetraining
+                UserControl_MissionReward missionReward_FollowerRetraining =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.FollowerRetraining.Priority,
+                            BaseSettings.CurrentSettings.FollowerRetraining.SuccessRate,
+                            BaseSettings.CurrentSettings.FollowerRetraining.MinimumLevel,
+                            "Follower Retraining",
+                            Color.Blue)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerRetraining.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerRetraining.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerRetraining.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerRetraining); 
+                #endregion
+
+                #region FollowerContract
+                UserControl_MissionReward missionReward_FollowerContract =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.FollowerContracts.Priority,
+                            BaseSettings.CurrentSettings.FollowerContracts.SuccessRate,
+                            BaseSettings.CurrentSettings.FollowerContracts.MinimumLevel,
+                            "Follower Contracts",
+                            Color.Blue)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.FollowerContracts.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.FollowerContracts.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.FollowerContracts.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_FollowerContract); 
+                #endregion
+
+
+                #region RushOrders
+                UserControl_MissionReward missionReward_RushOrders =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.RushOrders.Priority,
+                            BaseSettings.CurrentSettings.RushOrders.SuccessRate,
+                            BaseSettings.CurrentSettings.RushOrders.MinimumLevel,
+                            "Rush Orders",
+                            Color.LawnGreen)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.RushOrders.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.RushOrders.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.RushOrders.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_RushOrders); 
+                #endregion
+
+                #region Apexis Crystal
+                UserControl_MissionReward missionReward_Apexis =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.ApexisCrystal.Priority,
+                            BaseSettings.CurrentSettings.ApexisCrystal.SuccessRate,
+                            BaseSettings.CurrentSettings.ApexisCrystal.MinimumLevel,
+                            "Apexis Crystals",
+                            Color.LawnGreen)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.ApexisCrystal.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.ApexisCrystal.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.ApexisCrystal.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Apexis);
+                #endregion
+
+                #region PrimalSpirit
+
+                UserControl_MissionReward missionReward_PrimalSpirit =
+                new UserControl_MissionReward(
+                    BaseSettings.CurrentSettings.PrimalSpirit.Priority,
+                    BaseSettings.CurrentSettings.PrimalSpirit.SuccessRate,
+                    BaseSettings.CurrentSettings.PrimalSpirit.MinimumLevel,
+                    "Primal Spirit",
+                    Color.LawnGreen)
+                {
+                    UpdatePriority = i => { BaseSettings.CurrentSettings.PrimalSpirit.Priority = i; },
+                    UpdateSuccessRate = i => { BaseSettings.CurrentSettings.PrimalSpirit.SuccessRate = i; },
+                    UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.PrimalSpirit.MinimumLevel = i; }
+                };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_PrimalSpirit);
+
+                #endregion
+
+                #region SavageBlood
+                UserControl_MissionReward missionReward_SavageBlood =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.SavageBlood.Priority,
+                            BaseSettings.CurrentSettings.SavageBlood.SuccessRate,
+                            BaseSettings.CurrentSettings.SavageBlood.MinimumLevel,
+                            "Savage Blood",
+                            Color.OrangeRed)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.SavageBlood.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.SavageBlood.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.SavageBlood.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_SavageBlood);
+
+                #endregion
+
+                #region SealOfTemperedFate
+                UserControl_MissionReward missionReward_SealOfTemperedFate =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.SealOfTemperedFate.Priority,
+                            BaseSettings.CurrentSettings.SealOfTemperedFate.SuccessRate,
+                            BaseSettings.CurrentSettings.SealOfTemperedFate.MinimumLevel,
+                            "Seal Of Tempered Fate",
+                            Color.OrangeRed)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.SealOfTemperedFate.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_SealOfTemperedFate); 
+                #endregion
+
+                #region AbrogatorStone
+                UserControl_MissionReward missionReward_AbrogatorStone =
+                       new UserControl_MissionReward(
+                           BaseSettings.CurrentSettings.AbrogatorStone.Priority,
+                           BaseSettings.CurrentSettings.AbrogatorStone.SuccessRate,
+                           BaseSettings.CurrentSettings.AbrogatorStone.MinimumLevel,
+                           "Abrogator Stone",
+                           Color.OrangeRed)
+                       {
+                           UpdatePriority = i => { BaseSettings.CurrentSettings.AbrogatorStone.Priority = i; },
+                           UpdateSuccessRate = i => { BaseSettings.CurrentSettings.AbrogatorStone.SuccessRate = i; },
+                           UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.AbrogatorStone.MinimumLevel = i; }
+                       };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_AbrogatorStone); 
+                #endregion
+
+                #region ElementalRune
+                UserControl_MissionReward missionReward_ElementalRune =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.ElementalRune.Priority,
+                            BaseSettings.CurrentSettings.ElementalRune.SuccessRate,
+                            BaseSettings.CurrentSettings.ElementalRune.MinimumLevel,
+                            "Elemental Rune",
+                            Color.OrangeRed)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.ElementalRune.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.ElementalRune.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.ElementalRune.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_ElementalRune); 
+                #endregion
+
+                #region Items
+                UserControl_MissionReward missionReward_Items =
+                        new UserControl_MissionReward(
+                            BaseSettings.CurrentSettings.Items.Priority,
+                            BaseSettings.CurrentSettings.Items.SuccessRate,
+                            BaseSettings.CurrentSettings.Items.MinimumLevel,
+                            "Misc Items",
+                            Color.OrangeRed)
+                        {
+                            UpdatePriority = i => { BaseSettings.CurrentSettings.Items.Priority = i; },
+                            UpdateSuccessRate = i => { BaseSettings.CurrentSettings.Items.SuccessRate = i; },
+                            UpdateMinimumLevel = i => { BaseSettings.CurrentSettings.Items.MinimumLevel = i; }
+                        };
+                flowLayoutPanel_MissionRewards.Controls.Add(missionReward_Items);
+                #endregion
+
+                
 
                 #endregion
 
@@ -548,6 +649,35 @@ namespace Herbfunk.GarrisonBase.Config
                 trackBar_MinimumBagSlotsFree.Value = BaseSettings.CurrentSettings.MinimumBagSlotsFree;
                 textBox_MinimumBagSlotsFree.Text = BaseSettings.CurrentSettings.MinimumBagSlotsFree.ToString();
                 trackBar_MinimumBagSlotsFree.ValueChanged += trackBar_MinimumBagSlotsFree_SliderChanged;
+
+                //checkBox_Follower_170
+                //checkBox_Follower_189
+                //checkBox_Follower_190
+                //checkBox_Follower_193
+                //checkBox_Follower_207
+                //checkBox_Follower_467
+
+
+                //Optional follower aquire behavior
+                checkBox_Follower_170.Name = "170";
+                checkBox_Follower_189.Name = "189";
+                checkBox_Follower_190.Name = "190";
+                checkBox_Follower_193.Name = "193";
+                checkBox_Follower_207.Name = "207";
+                checkBox_Follower_467.Name = "467";
+                checkBox_Follower_170.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(170);
+                checkBox_Follower_189.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(189);
+                checkBox_Follower_190.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(190);
+                checkBox_Follower_193.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(193);
+                checkBox_Follower_207.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(207);
+                checkBox_Follower_467.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(467);
+                checkBox_Follower_170.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_189.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_190.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_193.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_207.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_467.CheckedChanged += checkBox_Follower_CheckedChanged;
+
                 //debug
                 checkBox_Debug_FakeStartWorkOrder.Checked = BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
                 checkBox_Debug_FakeStartWorkOrder.CheckedChanged += checkBox_Debug_FakeStartWorkOrder_CheckedChanged;
@@ -565,6 +695,75 @@ namespace Herbfunk.GarrisonBase.Config
             catch (Exception ex)
             {
                 GarrisonBase.Err("Failed to initalize config window!\r\n{0}\r\n{1}", ex.Message, ex.StackTrace);
+            }
+        }
+        private void trackBar_ReservedGarrisonResources_SliderChanged(object sender, EventArgs e)
+        {
+            TrackBar slider_sender = (TrackBar)sender;
+            int Value = (int)slider_sender.Value;
+            textBox_ReservedGarrisonResources.Text = Value.ToString();
+        }
+        private void textBox_GarrisonReservered_TextedChanged(object sender, EventArgs e)
+        {
+            var txtbox = (TextBox)sender;
+            var value = txtbox.Text.Trim();
+            if (string.IsNullOrEmpty(value)) value = "0";
+            var intValue = Convert.ToInt32(value);
+            trackBar_ReservedGarrisonResources.Value = intValue;
+            BaseSettings.CurrentSettings.ReservedGarrisonResources = intValue;
+        }
+        private void textBox_GarrisonReservered_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Non Numerical and Control keys ignored!
+            if (!char.IsControl(e.KeyChar) && !char.IsNumber(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+
+            if (char.IsNumber(e.KeyChar))
+            {
+                TextBox senderTextBox = (sender as TextBox);
+
+                var curText = senderTextBox.Text;
+                var selectionLength = senderTextBox.SelectionLength;
+                var selectionStart = senderTextBox.SelectionStart;
+
+
+                if (selectionLength > 0)
+                {//Selection (highlighted text) needs removed!
+                    curText = curText.Remove(selectionStart, selectionLength);
+                }
+
+                //Add the new number to the text at current selected position.
+                curText = curText.Insert(selectionStart, e.KeyChar.ToString());
+
+                int currentValue = Convert.ToInt32(curText);
+                if (currentValue > 10000)
+                {//Exceedes are maximum value.. set to max!
+                    senderTextBox.Text = "10000";
+                    senderTextBox.Select(senderTextBox.Text.Length, 0);
+                    e.Handled = true;
+                }
+                else if (curText.StartsWith("0"))
+                {//Starts with a zero.. replace with correct text!
+                    senderTextBox.Text = currentValue.ToString();
+                    senderTextBox.Select(senderTextBox.Text.Length, 0);
+                    e.Handled = true;
+                }
+            }
+            else if (e.KeyChar == '\b')
+            {
+                TextBox senderTextBox = (sender as TextBox);
+                if (senderTextBox.SelectionStart > 0 || senderTextBox.SelectionLength == senderTextBox.TextLength)
+                {
+                    if (senderTextBox.Text.Length == 1 || senderTextBox.SelectionLength == senderTextBox.TextLength)
+                    {
+                        senderTextBox.Text = "0";
+                        senderTextBox.Select(senderTextBox.Text.Length, 0);
+                        e.Handled = true;
+                    }
+                }
+
             }
         }
         private void checkBox_ProfessionSpellId_Checked(object sender, EventArgs e)
@@ -877,19 +1076,22 @@ namespace Herbfunk.GarrisonBase.Config
             BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel = Value;
             label_ItemReward_CharacterTokenLevel.Text = Value.ToString();
         }
-        private void trackBar_ReservedGarrisonResources_SliderChanged(object sender, EventArgs e)
-        {
-            TrackBar slider_sender = (TrackBar)sender;
-            int Value = (int)slider_sender.Value;
-            BaseSettings.CurrentSettings.ReservedGarrisonResources = Value;
-            label_ReservedGarrisonResources.Text = Value.ToString();
-        }
+        
         private void trackBar_MinimumBagSlotsFree_SliderChanged(object sender, EventArgs e)
         {
             TrackBar slider_sender = (TrackBar)sender;
             int Value = (int)slider_sender.Value;
             BaseSettings.CurrentSettings.MinimumBagSlotsFree = Value;
             textBox_MinimumBagSlotsFree.Text = Value.ToString();
+        }
+        private void checkBox_Follower_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkboxSender = (CheckBox) sender;
+            int followerid = checkboxSender.Name.ToInt32();
+            if (BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid))
+                BaseSettings.CurrentSettings.FollowerOptionalList.Remove(followerid);
+            else
+                BaseSettings.CurrentSettings.FollowerOptionalList.Add(followerid);
         }
         private void checkBox_Debug_FakeStartWorkOrder_CheckedChanged(object sender, EventArgs e)
         {
@@ -1121,6 +1323,7 @@ namespace Herbfunk.GarrisonBase.Config
                     listView_MailItems.Items.Remove(listViewItem);
 
                 }
+                BaseSettings.CurrentSettings.Dictmailsenditems.Clear();
             }
         }
 
@@ -1147,8 +1350,12 @@ namespace Herbfunk.GarrisonBase.Config
                     };
             ListViewItem lvi = new ListViewItem(entry);
             listView_MailItems.Items.Add(lvi);
-            BaseSettings.CurrentSettings.MailSendItems.Add(new MailItem(entryId.ToInt32(), "New Entry", recipient,
-                count.ToInt32()));
+            BaseSettings.CurrentSettings.MailSendItems.Add(new MailItem(
+                                                                entryId.ToInt32(), 
+                                                                "New Entry", 
+                                                                recipient,
+                                                                count.ToInt32()));
+            BaseSettings.CurrentSettings.Dictmailsenditems.Clear();
         }
 
         private void AddNewMailItemFromBags()
@@ -1165,6 +1372,7 @@ namespace Herbfunk.GarrisonBase.Config
                 ListViewItem lvi = new ListViewItem(entry);
                 listView_MailItems.Items.Add(lvi);
                 BaseSettings.CurrentSettings.MailSendItems.Add(newitemform.MailItem);
+                BaseSettings.CurrentSettings.Dictmailsenditems.Clear();
             }
         }
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1192,13 +1400,14 @@ namespace Herbfunk.GarrisonBase.Config
             }
         }
 
+
         private void button7_Click(object sender, EventArgs e)
         {
             LBDebug.Controls.Clear();
 
             try
             {
-                foreach (var item in QuestManager.QuestLog)
+                foreach (var item in QuestHelper.QuestLog)
                 {
                     string entryString = item.ToString();
                     UserControlDebugEntry entry = new UserControlDebugEntry(entryString);
@@ -1219,32 +1428,10 @@ namespace Herbfunk.GarrisonBase.Config
             LBDebug.Controls.Clear();
             try
             {
-                //foreach (var item in GarrisonInfo.Missions)
-                //{
-                //    string rewards = item.RewardRecords.Aggregate(String.Empty,
-                //        (current, reward) =>
-                //            current +
-                //            String.Format("Currency: {0} Xp: {1} ItemId: {2}\r\n", reward.CurrencyType + " " + reward.CurrencyQuantity,
-                //                reward.FollowerXP, reward.ItemId));
-
-                //    string entryString = String.Format("{0}\r\n" +
-                //                                       "{1} {2} {3} IntPtr {4}\r\n" +
-                //                                       "{5}", 
-                //        item.ToString(),
-                //        item.Name, item.Id, item.State, item.BaseAddress.ToString(), rewards);
-                //    UserControlDebugEntry entry = new UserControlDebugEntry(entryString);
-                //    LBDebug.Controls.Add(entry);
-                //}
-
-                //foreach (var follower in GarrisonInfo.Followers)
-                //{
-                //    string entryString = follower.ToString();
-                //    UserControlDebugEntry entry = new UserControlDebugEntry(entryString);
-                //    LBDebug.Controls.Add(entry);
-                //}
-
-                GarrisonManager.SimulateMission(302);
-
+                foreach (var n in TaxiFlightHelper.FlightPaths)
+                {
+                    LBDebug.Controls.Add(new UserControlDebugEntry(n.ToString()));
+                }
             }
             catch (Exception ex)
             {
@@ -1252,6 +1439,12 @@ namespace Herbfunk.GarrisonBase.Config
             }
 
             LBDebug.Focus();
+        }
+
+
+        private void Control_MouseEnter(object sender, EventArgs e)
+        {
+            ((Control) sender).Focus();
         }
 
     }

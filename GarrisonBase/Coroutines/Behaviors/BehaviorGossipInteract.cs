@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
-using Herbfunk.GarrisonBase.Quest;
-using Herbfunk.GarrisonBase.Quest.Objects;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
@@ -48,29 +48,38 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             get { return ObjectCacheManager.GetWoWUnits(_npcId).FirstOrDefault(); }
         }
+
+        private int _failedToFindGossipEntries = 0;
         public override async Task<bool> BehaviorRoutine()
         {
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
-            if (LuaEvents.GossipFrameOpen)
+            if (GossipHelper.IsOpen)
             {
-                if (QuestManager.GossipFrameInfo.GossipOptionEntries.Count == 0)
+                if (GossipHelper.GossipOptions.Count==0)
                 {
-                    GarrisonBase.Err("Could not find any valid gossip entries!");
-                    GossipFrame.Instance.Close();
-                    IsDone = true;
-                    return false;
+                    _failedToFindGossipEntries++;
+                    if (_failedToFindGossipEntries > 3)
+                    {
+                        GarrisonBase.Err("Could not find any valid gossip entries!");
+                        GossipFrame.Instance.Close();
+                        IsDone = true;
+                        return false;
+                    }
+
+                    await Coroutine.Yield();
+                    return true;
                 }
 
-                CGossipEntry gossipEntry=null;
+                GossipHelper.GossipOptionEntry gossipEntry=null;
                 if (_gossipIndex > -1)
                 {
-                    gossipEntry = QuestManager.GossipFrameInfo.GossipOptionEntries.FirstOrDefault(g => g.Index == _gossipIndex);
+                    gossipEntry = GossipHelper.GossipOptions[_gossipIndex];
                 }
                 else if (!string.IsNullOrEmpty(_gossipText))
                 {
-                    gossipEntry = QuestManager.GossipFrameInfo.GossipOptionEntries.FirstOrDefault(g => g.Text.ToLower().Contains(_gossipText));
+                    gossipEntry = GossipHelper.GossipOptions.FirstOrDefault(g => g.Text.ToLower().Contains(_gossipText));
                 }
                 
                 if (gossipEntry == null)
@@ -115,7 +124,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 if (StyxWoW.Me.IsMoving) await CommonCoroutines.StopMoving();
                 await CommonCoroutines.SleepForLagDuration();
-                if (LuaEvents.GossipFrameOpen)
+                if (GossipHelper.IsOpen)
                 {
                     //frame is displayed!
                     return true;

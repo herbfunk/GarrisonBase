@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
-using Herbfunk.GarrisonBase.Quest;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
@@ -22,13 +22,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             CompleteQuest = _completeQuest;
             if (!_completeQuest)
             {
-                RunCondition += () => !QuestManager.QuestLogFull &&
-                                  !QuestManager.QuestContainedInQuestLog(QuestID);
+                RunCondition += () => !QuestHelper.QuestLogFull &&
+                                  !QuestHelper.QuestContainedInQuestLog(QuestID);
             }
             ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(InteractionEntryId));
 
-            Criteria += (() =>  (!QuestManager.QuestLogFull &&
-                                  !QuestManager.QuestContainedInQuestLog(QuestID)));
+            Criteria += (() =>  (CompleteQuest ||
+                                (!QuestHelper.QuestLogFull && !QuestHelper.QuestContainedInQuestLog(QuestID))));
         }
 
         public override void Dispose()
@@ -50,9 +50,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await StartMovement.MoveTo())
                 return true;
 
-            if (LuaEvents.GossipFrameOpen)
+            if (GossipHelper.IsOpen)
             {
-                int index = QuestManager.GetAvailableQuestIndexFromGossipFrame(QuestID);
+                int index = QuestHelper.GetAvailableQuestIndexFromGossipFrame(QuestID);
                 if (index == -1)
                 {
                     GarrisonBase.Err("Failed to find quest {0} in gossip frame!", QuestID);
@@ -63,7 +63,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
-            if (!LuaEvents.QuestFrameOpen)
+            if (!QuestHelper.QuestFrameOpen)
             {
                 if (InteractionObject != null && InteractionObject.IsValid)
                 {

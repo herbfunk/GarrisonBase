@@ -15,7 +15,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             MovementPoints.Add(movepoint);
         }
-        protected Behavior(WoWPoint movepoint, int interactionEntryId, Func<bool> criteria=null )
+        protected Behavior(WoWPoint movepoint, int interactionEntryId, Func<bool> criteria = null)
         {
             MovementPoints.Add(movepoint);
             InteractionEntryId = interactionEntryId;
@@ -67,7 +67,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             Initalized = true;
         }
 
-        
+
         public bool Disposed { get; set; }
         /// <summary>
         /// This occurs only once after the behavior is considered done.
@@ -82,7 +82,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         /// A convient way to end the behavior!
         /// </summary>
         public virtual bool IsDone { get; set; }
-        public virtual BehaviorType Type { get{return BehaviorType.None;} }
+        public virtual BehaviorType Type { get { return BehaviorType.None; } }
         public int InteractionEntryId { get; set; }
 
         public virtual string GetStatusText
@@ -96,15 +96,23 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             TreeRoot.StatusText = GetStatusText;
 
-            if (!Initalized) Initalize();
+            if (!Initalized)
+            {
+                GarrisonBase.Debug("Initalizing Behavior {0}", Type);
+                Initalize();
+            }
             if (!IsDone) IsDone = !CheckRunCondition();
 
             if (IsDone)
             {
-                if (!Disposed) Dispose();
+                if (!Disposed)
+                {
+                    GarrisonBase.Debug("Disposing Behavior {0}", Type);
+                    Dispose();
+                }
                 return false;
             }
-               
+
             //await Coroutine.Yield();
             return await Common.CheckCommonCoroutines();
         }
@@ -140,8 +148,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
         public Movement StartMovement;
         public Movement EndMovement;
-        public List<WoWPoint> MovementPoints=new List<WoWPoint>();
-     
+        public List<WoWPoint> MovementPoints = new List<WoWPoint>();
+
         public virtual C_WoWObject InteractionObject
         {
             get
@@ -161,6 +169,33 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override string ToString()
         {
             return String.Format("{0} Criteria Check {1} IsDone {2} Disposed {3}", Type, CheckCriteria(), IsDone, Disposed);
+        }
+    }
+
+    public class BehaviorCustomAction : Behavior
+    {
+        public Action CustomAction;
+        public readonly bool RepeatAction;
+        public BehaviorCustomAction(Action action, bool repeat=false)
+        {
+            CustomAction = action;
+            RepeatAction = repeat;
+        }
+
+        public override async Task<bool> BehaviorRoutine()
+        {
+            if (await base.BehaviorRoutine()) return true;
+
+            if (IsDone) return false;
+
+            CustomAction.Invoke();
+
+            if (!RepeatAction)
+            {
+                IsDone = true;
+            }
+
+            return true;
         }
     }
 
@@ -190,6 +225,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         Mail,
         PrimalTrader,
         Taxi,
+        Milling,
+        Sleep,
     }
 
 }

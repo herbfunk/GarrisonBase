@@ -1,17 +1,13 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Bots.Grind;
-using Bots.Quest;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
-using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.CommonBot.Routines;
 using Styx.TreeSharp;
-using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Coroutines
 {
@@ -49,8 +45,11 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (await EngageObject())
                 return true;
 
-            if ((inCombat && StyxWoW.Me.IsActuallyInCombat && !StyxWoW.Me.Mounted) && await RoutineManager.Current.CombatBehavior.ExecuteCoroutine())
+            if ((inCombat && StyxWoW.Me.IsActuallyInCombat && !StyxWoW.Me.Mounted))
+            {
+                await RoutineManager.Current.CombatBehavior.ExecuteCoroutine();
                 return true;
+            }
 
             //GarrisonBase.Debug("Vendor Behavior..");
             bool vendorBehavior = await VendorBehavior.ExecuteCoroutine();
@@ -74,69 +73,20 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (await LootObject())
                 return true;
 
-            if (await TaxiNodeUpdateCoroutine())
-                return true;
-
-            //await Coroutine.Yield();
 
             return false;
         }
 
-        internal static bool ShouldUpdateTaxiNodes = false;
-        private static Movement _taxiMovement;
-        private static WoWUnit _taxiNpc;
-        public static async Task<bool> TaxiNodeUpdateCoroutine()
+      
+
+        internal static void CloseOpenFrames()
         {
-            if (!ShouldUpdateTaxiNodes || TaxiFlightHelper.TaxiNodes.Count > 0 || StyxWoW.Me.CurrentMap.ExpansionId != 5) return false;
-
-            TreeRoot.StatusText = "Updating Taxi Node Info";
-
-            if (LuaEvents.GossipFrameOpen)
-            {
-                if (QuestManager.GossipFrame.GossipOptionEntries.All(o => o.Type != GossipEntry.GossipEntryType.Taxi))
-                {
-                    //Could not find Taxi Option!
-                    return false;
-                }
-                var gossipOptionTaxi = QuestManager.GossipFrame.GossipOptionEntries.FirstOrDefault(o => o.Type == GossipEntry.GossipEntryType.Taxi);
-
-                QuestManager.GossipFrame.SelectGossipOption(gossipOptionTaxi.Index);
-                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                return true;
-            }
-
-            if (LuaEvents.TaxiMapOpen)
-            {
-                if (!TaxiFrame.Instance.IsVisible)
-                {
-                    //Error.. LuaEvents says open but frame instance does not!
-                    return false;
-                }
-
-                TaxiFlightHelper.PopulateTaxiNodes();
+            if (GossipHelper.IsOpen)
+                GossipFrame.Instance.Close();
+            else if (MerchantHelper.IsOpen)
+                MerchantFrame.Instance.Close();
+            else if (TaxiFlightHelper.IsOpen)
                 TaxiFrame.Instance.Close();
-                ShouldUpdateTaxiNodes = false;
-                return true;
-            }
-
-            if (_taxiNpc == null)
-                _taxiNpc = FlightPaths.NearestFlightMerchant;
-
-            if (_taxiNpc.WithinInteractRange)
-            {
-                if (StyxWoW.Me.IsMoving) await CommonCoroutines.StopMoving();
-                await CommonCoroutines.SleepForLagDuration();
-                _taxiNpc.Interact();
-                await CommonCoroutines.SleepForRandomUiInteractionTime();
-                return true;
-            }
-
-            if (_taxiMovement == null || _taxiMovement.CurrentMovementQueue.Count==0)
-                _taxiMovement = new Movement(_taxiNpc.Location, 5f - 0.25f);
-
-            await _taxiMovement.MoveTo();
-
-            return true;
         }
 
     }

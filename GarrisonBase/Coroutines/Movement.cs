@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Styx;
 using Styx.Common;
+using Styx.Common.Helpers;
 using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
 using Styx.WoWInternals;
@@ -18,10 +19,6 @@ namespace Herbfunk.GarrisonBase.Coroutines
         internal List<WoWPoint> DequeuedFinalPlayerPositionPoints = new List<WoWPoint>(); 
 
         public float Distance { get; set; }
-
-        public Movement(WoWPoint location) : this(location, 5f)
-        {
-        }
 
         public Movement(WoWPoint location, float distance)
         {
@@ -127,6 +124,9 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     return false;
             }
 
+            if (MovementCache.ShouldRecord)
+                MovementCache.AddPosition(playerPos, Distance);
+
             return true;
         }
 
@@ -194,6 +194,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
             }
 
+            if (MovementCache.ShouldRecord)
+                MovementCache.AddPosition(playerPos, Distance);
 
             //GarrisonBase.Log("[MoveTo] MoveResult: {0}", moveresult.ToString());
             return moveresult;
@@ -270,6 +272,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
                // await Coroutine.Sleep(StyxWoW.Random.Next(525, 800));
             }
 
+            if (MovementCache.ShouldRecord)
+                MovementCache.AddPosition(playerPos, Distance);
 
             return true;
         }
@@ -335,7 +339,6 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             return currentPoint;
         }
-
         public static Vector3 GetVector3(WoWPoint point)
         {
             return new Vector3(point.X, point.Y, point.Z);
@@ -343,6 +346,44 @@ namespace Herbfunk.GarrisonBase.Coroutines
         public static WoWPoint GetWoWPoint(Vector3 point)
         {
             return new WoWPoint(point.X, point.Y, point.Z);
+        }
+
+        /// <summary>
+        /// Records players position periodically!
+        /// </summary>
+        public static class MovementCache
+        {
+            public static bool ShouldRecord { get; set; }
+            public static List<LocationEntry> CachedPositions=new List<LocationEntry>();
+
+            private static readonly WaitTimer _cachedWaitTimer = new WaitTimer(new TimeSpan(0, 0, 0, 0, 500));
+            public static void AddPosition(WoWPoint pos, float radius = 10f)
+            {
+                if (!_cachedWaitTimer.IsFinished) return;
+                _cachedWaitTimer.Reset();
+
+                if (!CachedPositions.Any(p => p.Location.Distance(pos) <= p.Radius))
+                    CachedPositions.Add(new LocationEntry(pos, radius));
+            }
+
+            public static void ResetCache()
+            {
+                CachedPositions.Clear();
+                ShouldRecord = false;
+            }
+
+            public class LocationEntry
+            {
+                public WoWPoint Location { get; set; }
+                public float Radius { get; set; }
+
+                public LocationEntry(WoWPoint loc, float radius)
+                {
+                    Location = loc;
+                    Radius = radius;
+                }
+            }
+
         }
     }
 

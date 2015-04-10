@@ -17,6 +17,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorArray(Behavior[] behaviors)
         {
             Behaviors.AddRange(behaviors);
+            foreach (var behavior in Behaviors)
+            {
+                behavior.Criteria += Criteria;
+            }
         }
 
         public override string GetStatusText
