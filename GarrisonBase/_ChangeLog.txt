@@ -1,4 +1,7 @@
-﻿v1.2.2.0
+﻿v1.2.2.1
+Primal trader now uses item id to match correct item to buy.
+
+v1.2.2.0
 Work order pickup no longer uses name to find and ID objects.
 Vendor behavior will now choose the nearest valid npc to vendor at. (from preset list of ids)
 Primal Spirit behavior is now capable of buying when using spirits found in reagent bank.

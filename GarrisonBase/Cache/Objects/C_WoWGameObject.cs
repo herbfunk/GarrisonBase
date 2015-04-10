@@ -100,7 +100,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForTargeting) return false;
 
-                if (!ShouldLoot || !LineOfSight) return false;
+                if (!ShouldLoot || (!ObjectCacheManager.IgnoreLineOfSightFailure && !LineOfSight)) return false;
 
                 return true;
             }

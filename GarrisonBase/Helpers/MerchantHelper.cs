@@ -10,13 +10,31 @@ namespace Herbfunk.GarrisonBase.Helpers
 {
     public static class MerchantHelper
     {
-        public static List<MItem> MerchantItems { get; set; }
-        public static int MerchantItemCount { get; set; }
+        public static CachedValue<int> NumMerchantItems = new CachedValue<int>(GetMerchantItemCount);
+
+        public static List<MItem> MerchantItems
+        {
+            get
+            {
+                if (NumMerchantItems == _merchantItems.Count) return _merchantItems;
+
+                _merchantItems.Clear();
+                foreach (var i in MerchantFrame.Instance.GetAllMerchantItems())
+                {
+                    _merchantItems.Add(new MItem(i));
+                }
+
+                return _merchantItems;
+            }
+            set { _merchantItems = value; }
+        }
+        private static List<MItem> _merchantItems = new List<MItem>();
+        
+
+        
         public static bool IsOpen { get; set; }
         static MerchantHelper()
         {
-            MerchantItemCount = 0;
-            MerchantItems = new List<MItem>();
             LuaEvents.OnMerchantShow += MerchantFrameOpened;
             LuaEvents.OnMerchantClosed += MerchantFrameClosed;
             IsOpen = MerchantFrame.Instance.IsVisible;
@@ -49,6 +67,12 @@ namespace Herbfunk.GarrisonBase.Helpers
             if (items.Count == 0) return false;
             return buyitem(items[0], amount, forced);
         }
+        public static bool BuyItem(uint itemId, int amount, bool forced = false)
+        {
+            var items = MerchantItems.Where(i => i.ItemId == itemId).ToList();
+            if (items.Count == 0) return false;
+            return buyitem(items[0], amount, forced);
+        }
 
         private static bool buyitem(MItem item, int amount, bool forced=false)
         {
@@ -73,43 +97,21 @@ namespace Herbfunk.GarrisonBase.Helpers
         private static void MerchantFrameOpened()
         {
             GarrisonBase.Debug("Updating Merchant Frame Info..");
-            MerchantItemCount = GetMerchantItemCount();
-            MerchantItems.Clear();
-            for (int i = 1; i < MerchantItemCount+1; i++)
-            {
-                string name = GetMerchantItemName(i);
-                MerchantItems.Add(new MItem(i, name));
-            }
-            //foreach (var item in MerchantFrame.Instance.GetAllMerchantItems())
-            //{
-            //    MerchantItems.Add(new MItem(item));
-            //}
             IsOpen = true;
+            MerchantItems.Clear();
+            NumMerchantItems.Reset();
         }
         private static void MerchantFrameClosed()
         {
-            MerchantItems.Clear();
             IsOpen = false;
         }
 
-        private static string GetMerchantItemName(int index)
-        {
-            //GetMerchantItemInfo(5)
-            //[1] = Name
-            //[2] = Icon
-            GarrisonBase.Debug("LuaCommand: GetMerchantItemInfo {0}", index);
-            string lua = String.Format("return GetMerchantItemInfo(\"{0}\")", index);
-            List<string> retvalues = Lua.GetReturnValues(lua);
-            var name = retvalues[0];
-            return name;
-        }
 
         private static int GetMerchantItemCount()
         {
             GarrisonBase.Debug("LuaCommand: GetMerchantNumItems");
             string lua = String.Format("return GetMerchantNumItems()");
             List<string> retvalues = Lua.GetReturnValues(lua);
-            Logging.Write("{0}", retvalues[0].ToInt32());
             return retvalues[0].ToInt32();
         }
 
@@ -138,7 +140,7 @@ namespace Herbfunk.GarrisonBase.Helpers
 
             public MItem(MerchantItem item)
             {
-                Index = item.Index;
+                Index = item.Index+1;
                 Name = item.Name.ToLower();
                 ItemId = item.ItemId;
             }

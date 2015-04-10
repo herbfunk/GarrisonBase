@@ -37,19 +37,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (StyxWoW.Me.IsDead && StyxWoW.Me.IsGhost && await DeathBehavior.ExecuteCoroutine())
                 return true;
 
-            bool inCombat = StyxWoW.Me.Combat;
-
-            if (!inCombat && await RoutineManager.Current.PreCombatBuffBehavior.ExecuteCoroutine())
-                return true;
-
-            if (await EngageObject())
-                return true;
-
-            if ((inCombat && StyxWoW.Me.IsActuallyInCombat && !StyxWoW.Me.Mounted))
-            {
-                await RoutineManager.Current.CombatBehavior.ExecuteCoroutine();
-                return true;
-            }
+            if (await Combat()) return true;
 
             //GarrisonBase.Debug("Vendor Behavior..");
             bool vendorBehavior = await VendorBehavior.ExecuteCoroutine();

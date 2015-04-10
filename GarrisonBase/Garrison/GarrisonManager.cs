@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -460,12 +461,23 @@ namespace Herbfunk.GarrisonBase.Garrison
             public PrimalTraderItemTypes Type { get; set; }
             public string Name { get; set; }
             public int Cost { get; set; }
-
+            public CraftingReagents ReagentType { get; set; }
             public PrimalTraderItem(PrimalTraderItemTypes type, string name, int cost)
             {
                 Type = type;
                 Name = name;
                 Cost = cost;
+
+                try
+                {
+                    ReagentType = (CraftingReagents)Enum.Parse(typeof(CraftingReagents), Type.ToString(), true);
+                }
+                catch (Exception)
+                {
+                    GarrisonBase.Err("Attempted to get reagent type using {0} failed! May need to update the crafting reagents.", Type.ToString());
+                    ReagentType= CraftingReagents.None;
+                }
+                
             }
         }
 

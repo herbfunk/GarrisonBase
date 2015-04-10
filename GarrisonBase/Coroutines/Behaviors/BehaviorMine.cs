@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx;
@@ -12,8 +13,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     {
         public override BehaviorType Type { get { return BehaviorType.Mining; } }
 
-        public BehaviorMine()
-            : base(MovementCache.MinePlot59SafePoint)
+        public BehaviorMine():base(MovementCache.MinePlot59SafePoint)
         {
             Criteria += () =>
                     (!GarrisonManager.Buildings[BuildingType.Mines].IsBuilding &&
@@ -46,6 +46,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             
             ObjectCacheManager.ShouldLoot = true;
             ObjectCacheManager.ShouldKill = true;
+            ObjectCacheManager.LootDistance = 25f;
+            ObjectCacheManager.IgnoreLineOfSightFailure = true;
 
             if (_movementQueue != null) return;
 
@@ -78,6 +80,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //Coroutines.Movement.MovementCache.ResetCache();
             ObjectCacheManager.ShouldLoot = false;
             ObjectCacheManager.ShouldKill = false;
+            ObjectCacheManager.IgnoreLineOfSightFailure = false;
+
             foreach (var id in CacheStaticLookUp.MineQuestMobIDs)
             {
                 ObjectCacheManager.CombatIds.Remove(id);
@@ -99,9 +103,6 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
-            if (await StartMovement.MoveTo()) return true;
-
-            
            // ObjectCacheManager.UpdateLootableTarget();
 
             if (_movement == null || _movement.CurrentMovementQueue.Count == 0)
@@ -110,10 +111,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 {
                     //while (_movementQueue.Count > 0)
                     //{
-                    //    if (Coroutines.Movement.MovementCache.CachedPositions.Any(
-                    //              p => p.Location.Distance(_movementQueue.Peek()) <= p.Radius))
+                    //    if (ObjectCacheManager.GetGameObjectsNearPoint(_movementQueue.Peek(), 50f, WoWObjectTypes.OreVein).Count==0)
                     //    {
-                    //        GarrisonBase.Debug("Dequeueing point from mine movement due to cache!");
+                    //        GarrisonBase.Debug("Dequeueing point from mine movement!");
                     //        _movementQueue.Dequeue();
                     //        continue;
                     //    }
@@ -121,8 +121,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     //    break;
                     //}
 
-                    if (_movementQueue.Count>0)
-                        _movement = new Movement(_movementQueue.Dequeue(), 5f);
+                    if (_movementQueue.Count > 0)
+                    {
+                        _movement = new Movement(_movementQueue.Dequeue(), 5f, true);
+                        ObjectCacheManager.LootDistance += 10f;
+                    }
                 }
             }
 

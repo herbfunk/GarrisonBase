@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarrisonBase", "GarrisonBase\GarrisonBase.csproj", "{6CCE1BBA-7C16-4F20-8A9B-C0DAB861C26C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WoWHeadParser", "WoWHeadParser\WoWHeadParser.csproj", "{4C5FDCD6-BD63-4562-82F2-AE0C1FE6DCA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6CCE1BBA-7C16-4F20-8A9B-C0DAB861C26C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CCE1BBA-7C16-4F20-8A9B-C0DAB861C26C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CCE1BBA-7C16-4F20-8A9B-C0DAB861C26C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C5FDCD6-BD63-4562-82F2-AE0C1FE6DCA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C5FDCD6-BD63-4562-82F2-AE0C1FE6DCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C5FDCD6-BD63-4562-82F2-AE0C1FE6DCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C5FDCD6-BD63-4562-82F2-AE0C1FE6DCA4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

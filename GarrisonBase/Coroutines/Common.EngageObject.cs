@@ -12,6 +12,33 @@ namespace Herbfunk.GarrisonBase.Coroutines
 {
     public partial class Common
     {
+        internal static bool IsTrapping = false;
+        public static async Task<bool> Combat()
+        {
+            bool inCombat = StyxWoW.Me.Combat;
+
+            if (!inCombat && await RoutineManager.Current.PreCombatBuffBehavior.ExecuteCoroutine())
+            {
+                return true;
+            }
+
+
+            if (await EngageObject())
+            {
+                return true;
+            }
+                
+
+            if ((inCombat && StyxWoW.Me.IsActuallyInCombat && !StyxWoW.Me.Mounted))
+            {
+                await RoutineManager.Current.CombatBehavior.ExecuteCoroutine();
+                return true;
+            }
+
+
+            return false;
+        }
+
         private static Movement _combatMovement;
         public static async Task<bool> EngageObject()
         {

@@ -28,7 +28,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             : base(obj)
         {
             RefWoWUnit = obj;
-
+            
             if (SubType == WoWObjectTypes.Unknown)
             {
                 SubType = WoWObjectTypes.Unit;

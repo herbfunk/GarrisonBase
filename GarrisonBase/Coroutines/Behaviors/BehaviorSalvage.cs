@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache.Objects;
+using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -31,8 +32,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
         public override void Initalize()
         {
-            _movement = new Movement(Building.SpecialMovementPoints[0], 2.5f);
-            base.Initalize();
+            var specialLoc = Building.SpecialMovementPoints[0];
+            if (Player.Location.Distance(specialLoc) > 2.5f)
+            {
+                _movement = new Movement(Building.SpecialMovementPoints[0], 2.5f);
+                base.Initalize();
+            }
         }
 
 

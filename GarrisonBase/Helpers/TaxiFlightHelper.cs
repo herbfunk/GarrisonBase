@@ -84,13 +84,13 @@ namespace Herbfunk.GarrisonBase.Helpers
 
         public static bool ShouldTakeFlightPath(WoWPoint destination)
         {
-            GarrisonBase.Debug("Checking ShouldTakeFlightpath for {0}", destination);
-            var runTravelTime = Styx.CommonBot.FlightPaths.GetRunPathTime(new[] {Player.Location, destination}, 2f);
+            
+            var runTravelTime = Styx.CommonBot.FlightPaths.GetRunPathTime(new[] {Player.Location, destination}, 14.7f);
+            GarrisonBase.Debug("Checking ShouldTakeFlightpath for {0} with mounted time {1} seconds", destination, runTravelTime.TotalSeconds);
             if (runTravelTime.TotalSeconds < 90)
             {
-                return Styx.CommonBot.FlightPaths.ShouldTakeFlightpath(Player.Location, destination, 2f);
+                return Styx.CommonBot.FlightPaths.ShouldTakeFlightpath(Player.Location, destination, 14.7f);
             }
-
             return true;
         }
 

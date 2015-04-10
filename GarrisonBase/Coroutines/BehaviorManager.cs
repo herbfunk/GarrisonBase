@@ -325,7 +325,18 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             if (GarrisonManager.Buildings.Values.Any(b => b.Type == BuildingType.Mines))
             {
-                Behaviors.Add(new BehaviorMine());
+                var miningArray = new BehaviorArray(new Behavior[]
+                {
+                    new BehaviorMove(MovementCache.MinePlot59SafePoint),
+                    new BehaviorMine()
+                });
+                miningArray.Criteria += () => (!GarrisonManager.Buildings[BuildingType.Mines].IsBuilding &&
+                                               !GarrisonManager.Buildings[BuildingType.Mines].CanActivate &&
+                                               GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted &&
+                                               LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) &&
+                                               BaseSettings.CurrentSettings.BehaviorMineGather);
+
+                Behaviors.Add(miningArray);
                 Behaviors.Add(new BehaviorWorkOrderPickUp(GarrisonManager.Buildings[BuildingType.Mines]));
                 Behaviors.Add(new BehaviorWorkOrderStartUp(GarrisonManager.Buildings[BuildingType.Mines]));
             }

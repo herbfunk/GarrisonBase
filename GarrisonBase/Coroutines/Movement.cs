@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
+using Herbfunk.GarrisonBase.Coroutines.Behaviors;
+using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.Common;
 using Styx.Common.Helpers;
@@ -16,22 +18,26 @@ namespace Herbfunk.GarrisonBase.Coroutines
     {
         internal Queue<WoWPoint> CurrentMovementQueue = new Queue<WoWPoint>();
         internal Queue<WoWPoint> DequeuedPoints = new Queue<WoWPoint>(); 
-        internal List<WoWPoint> DequeuedFinalPlayerPositionPoints = new List<WoWPoint>(); 
+        internal List<WoWPoint> DequeuedFinalPlayerPositionPoints = new List<WoWPoint>();
+
+        private bool _checkedShoulUseFlightPath;
 
         public float Distance { get; set; }
 
-        public Movement(WoWPoint location, float distance)
-        {
-            Distance = distance;
-            CurrentMovementQueue.Enqueue(location);
-        }
-
-        public Movement(WoWPoint[] locations) : this(locations, 5f)
+        public Movement(WoWPoint location, float distance, bool ignoreTaxiCheck = false)
+            : this(new[] { location }, distance, ignoreTaxiCheck)
         {
         }
 
-        public Movement(WoWPoint[] locations, float distance)
+        public Movement(WoWPoint[] locations, bool ignoreTaxiCheck = false)
+            : this(locations, 5f, ignoreTaxiCheck)
         {
+        }
+
+        public Movement(WoWPoint[] locations, float distance, bool ignoreTaxiCheck=false)
+        {
+            _checkedShoulUseFlightPath = ignoreTaxiCheck;
+
             Distance = distance;
             foreach (var p in locations)
             {
@@ -65,6 +71,17 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 
                 return true;
             }
+
+            if (!_checkedShoulUseFlightPath)
+            {
+                _checkedShoulUseFlightPath = true;
+                if (TaxiFlightHelper.ShouldTakeFlightPath(location))
+                {
+                    BehaviorManager.SwitchBehaviors.Add(new BehaviorUseFlightPath(location));
+                    return true;
+                }
+            }
+
             bool canNavigate = true;
             try
             {

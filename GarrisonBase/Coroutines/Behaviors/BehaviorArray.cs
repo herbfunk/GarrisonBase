@@ -17,10 +17,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorArray(Behavior[] behaviors)
         {
             Behaviors.AddRange(behaviors);
-            foreach (var behavior in Behaviors)
-            {
-                behavior.Criteria += Criteria;
-            }
+            
         }
 
         public override string GetStatusText
@@ -29,6 +26,17 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 return _currentBehavior != null ? _currentBehavior.GetStatusText : base.GetStatusText;
             }
+        }
+
+        public override void Initalize()
+        {
+            //Each behavior should inherit the parent criteria!
+            foreach (var behavior in Behaviors)
+            {
+                behavior.Criteria += Criteria;
+            }
+
+            base.Initalize();
         }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Bots.Quest;
@@ -65,7 +66,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     await CommonCoroutines.WaitForLuaEvent("BAG_UPDATE",
                         StyxWoW.Random.Next(1255, 1777),
                         null,
-                        () => success = MerchantHelper.BuyItem(ExchangeItemInfo.Name, 1, true));
+                        () => success = MerchantHelper.BuyItem(Convert.ToUInt32((int)ExchangeItemInfo.ReagentType), 1, true));
 
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                     await Coroutine.Yield();

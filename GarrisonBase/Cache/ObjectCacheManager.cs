@@ -97,6 +97,8 @@ namespace Herbfunk.GarrisonBase.Cache
         }
         private static double _lootDistance = 100;
 
+        public static bool IgnoreLineOfSightFailure { get; set; }
+
         public static EntryList LootIds = new EntryList();
         internal static void OnLootIdAdded(uint item)
         {
@@ -163,7 +165,8 @@ namespace Herbfunk.GarrisonBase.Cache
             _lootDistance = 100;
             FoundOreObject = false;
             FoundHerbObject = false;
-             
+            IgnoreLineOfSightFailure = false;
+
             LootIds.OnItemAdded -= OnLootIdAdded;
             LootIds.OnItemRemoved -= OnLootIdRemoved;
             CombatIds.OnItemAdded -= OnCombatIdAdded;
@@ -353,7 +356,7 @@ namespace Herbfunk.GarrisonBase.Cache
                     return;
             }
 
-            ValidCombatObjects = ObjectCollection.Values.OfType<C_WoWUnit>().Where(obj => obj.ValidForCombat && obj.Distance <= KillDistance).OrderBy(obj => obj.Distance).ToList();
+            ValidCombatObjects = ObjectCollection.Values.OfType<C_WoWUnit>().Where(obj => obj.ValidForCombat && obj.Distance <= KillDistance).OrderBy(obj =>obj.LineOfSight).ThenBy(obj=>obj.Distance).ToList();
 
             foreach (var target in ValidCombatObjects)
             {
@@ -519,8 +522,7 @@ namespace Herbfunk.GarrisonBase.Cache
                 ObjectCollection.Values.OfType<C_WoWGameObject>()
                     .Where(obj => CheckFlag(obj.SubType, type) &&
                         location.Distance(obj.Location) <= maxdistance &&
-                        !Blacklist.TempBlacklistGuids.Contains(obj.Guid) &&
-                        obj.IsValid)
+                        !Blacklist.TempBlacklistGuids.Contains(obj.Guid))
                     .OrderBy(o => location.Distance(o.Location)).ToList();
         }
         public static List<C_WoWGameObject> GetGameObjectsNearPoint(WoWPoint location, float maxdistance, string name)
