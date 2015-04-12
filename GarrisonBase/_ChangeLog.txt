@@ -1,4 +1,8 @@
-﻿v1.2.2.1
+﻿v1.2.2.2
++ Changed all Lua.GetReturnValues using single indexes to Lua.GetReturnVal
++ Small fix for a global lua variable
+
+v1.2.2.1
 Primal trader now uses item id to match correct item to buy.
 
 v1.2.2.0

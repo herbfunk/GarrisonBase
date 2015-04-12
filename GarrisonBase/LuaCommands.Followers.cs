@@ -28,7 +28,7 @@ namespace Herbfunk.GarrisonBase
         {
             GarrisonBase.Debug("LuaCommand: IsFollowerCollected {0}", id);
             String lua = String.Format("return C_Garrison.IsFollowerCollected(\"{0}\");", id);
-            var info = Lua.GetReturnValues(lua).FirstOrDefault().ToInt32();
+            var info = Lua.GetReturnVal<int>(lua, 0);
             return info == 1;
         }
     }

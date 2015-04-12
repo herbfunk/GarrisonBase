@@ -111,7 +111,7 @@ namespace Herbfunk.GarrisonBase
             string location = mission[10];
             bool isRare = mission[11].ToBoolean();
             //mission[12] = this.typeAtlas; 
-            string missionID = mission[13];
+           // string missionID = mission[13];
             int numFollowers = mission[14].ToInt32();
             string xp = mission[15];
             int numRewards = mission[16].ToInt32();
