@@ -13,6 +13,9 @@ Behavior
 	-Added Virtual Func for updating the interaction object to allow for custom returns. (Default is by entry id given)
 	-Removed Virtual Movement and Interaction methods as they were never really used.
 
+User Contributed changes by Mirabis:
+	-Changed all Lua.GetReturnValues using single indexes to Lua.GetReturnVal
+	-Small fix for a global lua variable
 
 
 v1.2.2.1
