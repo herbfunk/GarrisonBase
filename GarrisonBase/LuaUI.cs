@@ -50,8 +50,8 @@ namespace Herbfunk.GarrisonBase
             }
             public bool IsEnabled()
             {
-                String lua = String.Format("return tostring({0}:IsEnabled())", Name);
-                var ret = Lua.GetReturnValues(lua)[0].ToBoolean();
+                String lua = String.Format("return {0}:IsEnabled()", Name);
+                var ret = Lua.GetReturnVal<bool>(lua, 0);
                 GarrisonBase.Debug("LuaCommand: IsButtonEnabled {0} {1}", Name, ret);
                 return ret;
             }
@@ -72,9 +72,8 @@ namespace Herbfunk.GarrisonBase
 
             public bool IsVisible()
             {
-                String lua = String.Format("return tostring({0}:IsVisible())", Name);
-                string t = Lua.GetReturnValues(lua)[0];
-                bool ret = t.ToBoolean();
+                String lua = String.Format("return {0}:IsVisible()", Name);
+                bool ret = Lua.GetReturnVal<bool>(lua, 0);
                 GarrisonBase.Debug("LuaCommand: IsFrameVisible {0} {1}", Name, ret);
                 return ret;
             }

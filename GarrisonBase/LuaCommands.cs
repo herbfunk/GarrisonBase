@@ -27,23 +27,20 @@ namespace Herbfunk.GarrisonBase
         {
             GarrisonBase.Debug("LuaCommand: GetNumberContainerSlots");
             string lua = String.Format("return GetContainerNumSlots({0})", index);
-            List<string> retvalues = Lua.GetReturnValues(lua);
-            return retvalues[0].ToInt32();
+            return Lua.GetReturnVal<int>(lua,0);
         }
 
         public static int GetCurrencyCount(int currencyId)
         {
             GarrisonBase.Debug("LuaCommand: GetCurrencyInfo");
             string lua = String.Format("return GetCurrencyInfo({0})", currencyId);
-            List<string> retvalues = Lua.GetReturnValues(lua);
-            return retvalues[1].ToInt32();
+            return Lua.GetReturnVal<int>(lua, 1);
         }
         public static bool GetBagSlotFlag(int bagIndex, int flag)
         {
             GarrisonBase.Debug("LuaCommand: GetBagSlotFlag");
             string lua = String.Format("return tostring(GetBagSlotFlag(\"{0}\", \"{1}\"))", bagIndex, flag);
-            List<string> retList = Lua.GetReturnValues(lua);
-            return retList[0].ToBoolean();
+            return Lua.GetReturnVal<bool>(lua, 0);
         }
         public static void ClickGarrisonMinimapButton()
         {
@@ -104,9 +101,7 @@ namespace Herbfunk.GarrisonBase
         {
             GarrisonBase.Debug("LuaCommand: IsStaticPopupVisible");
             const string lua = "return tostring(StaticPopup1:IsVisible())";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-            return ret;
+            return Lua.GetReturnVal<bool>(lua, 0);
         }
 
         public static void PickupContainerItem(int bagIndex, int bagSlot)
@@ -117,7 +112,7 @@ namespace Herbfunk.GarrisonBase
         public static bool CursorHasItem()
         {
             GarrisonBase.Debug("LuaCommand: CursorHasItem");
-            return Lua.GetReturnValues(String.Format("return CursorHasItem()"))[0].ToInt32()==1;
+            return Lua.GetReturnVal<bool>(String.Format("return CursorHasItem()"), 0);
         }
 
         public static void ClearCursor()
@@ -134,8 +129,7 @@ namespace Herbfunk.GarrisonBase
 
         public static void UseContainerItem(int bag, int index)
         {
-            //
-            
+            //  
             GarrisonBase.Debug("LuaCommand: UseContainerItem {0} / {1}", bag, index);
             Lua.DoString(String.Format("UseContainerItem(\"{0}\"" + ", \"{1}\");", bag, index));
         }
@@ -144,15 +138,13 @@ namespace Herbfunk.GarrisonBase
         public static bool OpenMailFrameIsVisible()
         {
             GarrisonBase.Debug("LuaCommand: OpenMailFrameIsVisible");
-            string t = Lua.GetReturnValues("return tostring(OpenMailFrame:IsVisible())")[0];
-            bool ret = t.ToBoolean();
-            return ret;
+            return Lua.GetReturnVal<bool>(String.Format("return OpenMailFrame:IsVisible()"), 0);
         }
 
         public static bool HasNewMail()
         {
             GarrisonBase.Debug("LuaCommand: HasNewMail");
-            return Lua.GetReturnValues(String.Format("return HasNewMail()"))[0].ToInt32() == 1;
+            return Lua.GetReturnVal<bool>(String.Format("return return HasNewMail()"), 0);
         }
         public static void ClickMailItemButton(int index)
         {
@@ -181,10 +173,7 @@ namespace Herbfunk.GarrisonBase
         {
             //SendMailFrame
             GarrisonBase.Debug("LuaCommand: IsSendMailFrameVisible");
-            const string lua = "return tostring(SendMailFrame:IsVisible())";
-            string t = Lua.GetReturnValues(lua)[0];
-            bool ret = t.ToBoolean();
-            return ret;
+            return Lua.GetReturnVal<bool>(String.Format("return SendMailFrame:IsVisible()"), 0);
         }
         public static void ClickSendMailTab()
         {
@@ -207,8 +196,9 @@ namespace Herbfunk.GarrisonBase
         public static bool ClickStartOrderButtonEnabled()
         {
             //CreateAllWorkOrdersButton
-            String lua = "return tostring(GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:IsEnabled())";
-            var ret = Lua.GetReturnValues(lua)[0].ToBoolean();
+            const string lua = "return GarrisonCapacitiveDisplayFrame.StartWorkOrderButton:IsEnabled()";
+
+            var ret = Lua.GetReturnVal<bool>(lua, 0);
             GarrisonBase.Debug("LuaCommand: ClickStartOrderButtonEnabled {0}", ret);
             return ret;
         }
@@ -218,10 +208,10 @@ namespace Herbfunk.GarrisonBase
 
         public static void GetBuildingInfo(int buildingId, out string plotId, out bool canActivate, out int shipCap, out int shipReady, out int shipTotal, out bool isBuilding)
         {
-            
+            //BUG: Changed ur Temp to a local var, but it might fuck shit up if u wanted to use Temp in other methods
             String lua =
                 "C_Garrison.RequestLandingPageShipmentInfo();" +
-                "local RetInfo = {}; Temp = {}; local buildings = C_Garrison.GetBuildings();" +
+                "local RetInfo = {}; local Temp = {}; local buildings = C_Garrison.GetBuildings();" +
                 String.Format(
                     "for i = 1, #buildings do " +
                     "local buildingID = buildings[i].buildingID;" +
@@ -254,7 +244,7 @@ namespace Herbfunk.GarrisonBase
                     "for j_=0,20 do table.insert(RetInfo,tostring(Temp[j_]));end; " +
                     "return unpack(RetInfo)", buildingId);
             List<String> building = Lua.GetReturnValues(lua);
-            int id = building[0].ToInt32();
+            //int id = building[0].ToInt32();
 
             plotId = building[1];
             canActivate = building[8].ToBoolean();
@@ -289,8 +279,7 @@ namespace Herbfunk.GarrisonBase
         {
             GarrisonBase.Debug("LuaCommand: IsQuestFlaggedCompleted {0}", ID);
             string lua = String.Format("return tostring(IsQuestFlaggedCompleted(\"{0}\"))", ID);
-            List<string> retList = Lua.GetReturnValues(lua);
-            return retList[0].ToBoolean();
+            return Lua.GetReturnVal<bool>(String.Format("return IsQuestFlaggedCompleted(\"{0}\")", ID), 0);
         }
 
         public static DateTime GetGameTime()
@@ -343,8 +332,7 @@ namespace Herbfunk.GarrisonBase
         public static bool IsAddonLoaded(string AddonName)
         {
             var luastr = String.Format("return GetAddOnEnableState(\"{0}\",\"{1}\")", StyxWoW.Me.Name, AddonName);
-            List<string> retList = Lua.GetReturnValues(luastr);
-            var retValue = retList[0].ToInt32();
+            var retValue = Lua.GetReturnVal<int>(luastr, 0);
             GarrisonBase.Debug("LuaCommand: GetAddOnEnableState {0} == ({1})", AddonName, retValue);
             return retValue > 0;
         }
@@ -360,7 +348,6 @@ namespace Herbfunk.GarrisonBase
         }
         public static void ReloadUI()
         {
-            
             GarrisonBase.Debug("LuaCommand: ReloadUI");
             Lua.DoString("ReloadUI()");
         }
