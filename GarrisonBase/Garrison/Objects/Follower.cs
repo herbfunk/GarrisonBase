@@ -647,9 +647,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 int vitality_itemId = 114242;
                 uint vitality_questId = 35711;
 
+                //The object is located on a cliff only accessible by jumping from a higher cliff..
+                //To achieve this I setup the top cliff position as normal movement
+                //Once at the top, it uses click to move to "jump" onto the below cliff.
+                //To prevent stucks, I added a custom action that tests navigation -- false means it worked.
+                //I also modified the click to move to end if it gets stuck for +3 seconds
                 var moveto_vitality_move1 = new BehaviorMove(new WoWPoint(2596.605, 5597.822, 126.3142), 1f);
                 WoWPoint vitality_loc2 = new WoWPoint(2609.613, 5579.829, 90.33648);
-                var moveto_vitality_move2 = new BehaviorMove(vitality_loc2, 1f, Movement.MovementTypes.ClickToMove);
+                var moveto_vitality_move2 = new BehaviorMove(vitality_loc2, 1f, Movement.MovementTypes.ClickToMove, true);
 
                 var custom_vitality_check = new BehaviorCustomAction(null, null, false);
                 custom_vitality_check.CustomAction = () => Behavior.ResetBehavior(custom_vitality_check);
@@ -658,6 +663,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 var gossip_vitality = new BehaviorGossipInteract(vitality_objectId, 0, true,
                                         () => Player.Inventory.GetBagItemsById(vitality_itemId).Count == 0);
 
+                
                 var barray_item_vitality = new BehaviorArray(
                     new Behavior[]
                     {
@@ -668,6 +674,10 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     });
                 barray_item_vitality.Criteria += () => Player.Inventory.GetBagItemsById(114242).Count == 0 &&
                                                        !LuaCommands.IsQuestFlaggedCompleted(vitality_questId.ToString());
+
+                //Finally if we are still on the lower cliff we need to click to move into the water!
+                var moveto_vitality_finished = new BehaviorMove(new WoWPoint(2614.899, 5585.659, 77.63692), 10f, Movement.MovementTypes.ClickToMove);
+                moveto_vitality_finished.Criteria += () => Player.Location.Distance(vitality_loc2) <= 20f;
 
 
                 //Second Item - Lure
@@ -693,10 +703,48 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                                        !LuaCommands.IsQuestFlaggedCompleted(lure_questId.ToString());
 
 
+                //Third Item - Reel
+                //<GameObject Name="Abu'gar's Missing Reel" Entry="233506" X="3457.177" Y="4460.172" Z="160.5695" />
+                int reel_objectId = 233506;
+                int reel_itemId = 114243;
+                uint reel_questId = 36089;
+
+                WoWPoint reel_moveLoc = new WoWPoint(3459.47, 4459.924, 160.8241);
+                var moveto_reel_move = new BehaviorMove(reel_moveLoc);
+                var gossip_reel = new BehaviorGossipInteract(reel_objectId, 0, true,
+                                       () => Player.Inventory.GetBagItemsById(reel_itemId).Count == 0);
+                var barray_item_reel = new BehaviorArray(
+                   new Behavior[]
+                    {
+                        moveto_reel_move,
+                        gossip_reel,
+                    });
+                barray_item_reel.Criteria += () => Player.Inventory.GetBagItemsById(reel_itemId).Count == 0 &&
+                                                       !LuaCommands.IsQuestFlaggedCompleted(reel_questId.ToString());
+
+                //Finally, once we have all 3 items, we goto Abu'Gur and turn the quest in!
+                uint final_questId = 36711;
+                int final_npcId = 82746;
+
+                WoWPoint final_loc = new WoWPoint(2802.82, 5497.004, 11.9688);
+                var final_movement = new BehaviorMove(final_loc, 10f);
+                var final_questPickup = new BehaviorQuestPickup(final_questId, final_loc, final_npcId, true);
+                var barray_final = new BehaviorArray(
+                   new Behavior[]
+                    {
+                        final_movement,
+                        final_questPickup,
+                    });
+                barray_final.Criteria +=
+                    () => Player.Inventory.GetBagItemsById(new[] {reel_itemId, lure_itemId, vitality_itemId}).Count == 3;
+                
                 var returnArray = new BehaviorArray(new Behavior[]
                 {
                     barray_item_vitality,
+                    moveto_vitality_finished,
                     barray_item_lure,
+                    barray_item_reel,
+                    barray_final
                 });
                 returnArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
                                             !GarrisonManager.FollowerIdsCollected.Contains(followerid);

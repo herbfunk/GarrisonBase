@@ -286,6 +286,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         Taxi,
         Milling,
         Sleep,
+        GossipInteract,
     }
 
 }

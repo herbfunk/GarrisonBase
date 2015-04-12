@@ -13,6 +13,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
     public class BehaviorGossipInteract : Behavior
     {
+        public override BehaviorType Type { get { return BehaviorType.GossipInteract; }}
+
         private readonly int _npcId;
         private readonly int _gossipIndex=-1;
         private readonly string _gossipText = string.Empty;
@@ -116,20 +118,24 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (_oneTime) IsDone = true;
                 return !_oneTime;
             }
+            C_WoWObject validobj = NpcObject != null ? NpcObject:
+                InteractionObject!=null?InteractionObject:null;
 
-            if (NpcObject == null || !NpcObject.CanInteract)
+            if (validobj==null || !validobj.IsValid)
             {
-                GarrisonBase.Err("Could not find npc {0} to interact with!", _npcId);
+                GarrisonBase.Err("Could not find object {0} to interact with!", _npcId);
                 IsDone = true;
                 return false;
             }
-            if (_npcMovement==null)
-                _npcMovement = new Movement(NpcObject.Location, NpcObject.InteractRange - 0.25f, false, "GossipInteract");
+            if (_npcMovement == null)
+            {
+                _npcMovement = new Movement(validobj.Location, validobj.InteractRange - 0.25f, false, "GossipInteract");
+            }
 
             if (await _npcMovement.MoveTo(false)) 
                 return true;
 
-            if (NpcObject.WithinInteractRange)
+            if (validobj.WithinInteractRange)
             {
                 if (StyxWoW.Me.IsMoving) await CommonCoroutines.StopMoving();
                 await CommonCoroutines.SleepForLagDuration();
@@ -139,7 +145,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     return true;
                 }
 
-                NpcObject.Interact();
+                validobj.Interact();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
                 return true;
             }

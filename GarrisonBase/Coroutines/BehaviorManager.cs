@@ -179,6 +179,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             CurrentBehavior = null;
             SwitchBehavior = null;
 
+            Behaviors.Add(Follower.FollowerQuestBehaviorArray(209));
             //Move to entrance!
             //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
             Behaviors.Add(new BehaviorGetMail());

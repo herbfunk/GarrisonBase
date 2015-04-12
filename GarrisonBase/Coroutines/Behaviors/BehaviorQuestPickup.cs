@@ -201,6 +201,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     return true;
                 }
 
+                if (QuestHelper.QuestFrameType == QuestHelper.QuestFrameTypes.Progress)
+                {
+                    QuestFrame.Instance.ClickContinue();
+                    await CommonCoroutines.SleepForRandomUiInteractionTime();
+                    await Coroutine.Yield();
+                    return true;
+                }
+
                 GarrisonBase.Err("QuestPickup attempted to complete quest but was not on correct frame!");
                 _questActionFinished = true;
                 return false;

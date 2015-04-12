@@ -34,7 +34,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public C_WoWObject CommandTable
         {
-            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(); }
+            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(obj => obj.IsValid); }
         }
 
         public override async Task<bool> BehaviorRoutine()

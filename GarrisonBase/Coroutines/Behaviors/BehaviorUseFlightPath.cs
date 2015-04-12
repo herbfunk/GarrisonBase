@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Bots.Quest;
 using Buddy.Coroutines;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
@@ -70,6 +71,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 GarrisonBase.Debug("UseFlightPath is finished due to matching map ids");
                 IsDone = true;
+                if (_currentMapId == 1153 || _currentMapId == 1159 || _currentMapId == 1331 || _currentMapId == 1330)
+                {
+                    //Reset Cache (Garrison was last location)
+                    ObjectCacheManager.ResetCache();
+                }
                 return false;
             }
 

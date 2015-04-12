@@ -48,7 +48,7 @@ namespace Herbfunk.GarrisonBase
             HbRelogApi = new HBRelogApi();
             CacheStaticLookUp.InitalizedCache = false;
             BehaviorManager.Reset();
-            ObjectCacheManager.ResetCache();
+            ObjectCacheManager.ResetCache(true);
             GarrisonManager.Reset();
             QuestHelper.QuestLog.Clear();
             LuaEvents.ResetFrameVariables();

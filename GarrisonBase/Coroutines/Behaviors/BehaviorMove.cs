@@ -8,13 +8,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override BehaviorType Type { get { return BehaviorType.MoveTo; } }
         public Movement.MovementTypes MovementType;
 
-        public BehaviorMove(WoWPoint loc, float distance = 10f, Movement.MovementTypes type = Movement.MovementTypes.Normal)
-            : this(new[] { loc }, distance, type)
+        public BehaviorMove(WoWPoint loc, float distance = 10f, Movement.MovementTypes type = Movement.MovementTypes.Normal, bool stuckCheck=false)
+            : this(new[] { loc }, distance, type, stuckCheck)
         {
 
         }
-        public BehaviorMove(WoWPoint[] locs, float distance = 10f, Movement.MovementTypes type=Movement.MovementTypes.Normal)
+        public BehaviorMove(WoWPoint[] locs, float distance = 10f, Movement.MovementTypes type=Movement.MovementTypes.Normal, bool stuckCheck=false)
         {
+            _stuckCheck = stuckCheck;
             _movementPoints = locs;
             _distance = distance;
             MovementType = type;
@@ -22,10 +23,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
-            _movement = new Movement(_movementPoints, _distance);
+            _movement = new Movement(_movementPoints, _distance, false, "BehaviorMove", _stuckCheck);
             base.Initalize();
         }
 
+        private bool _stuckCheck;
         private readonly WoWPoint[] _movementPoints;
         private readonly float _distance;
         private Movement _movement;

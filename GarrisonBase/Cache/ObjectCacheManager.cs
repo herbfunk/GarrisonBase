@@ -149,7 +149,7 @@ namespace Herbfunk.GarrisonBase.Cache
         }
 
 
-        public static void ResetCache()
+        public static void ResetCache(bool detatchHandlers=false)
         {
             _updateLoopCounter = 0;
 
@@ -169,13 +169,6 @@ namespace Herbfunk.GarrisonBase.Cache
             IgnoreLineOfSightFailure = false;
             IsQuesting = false;
 
-            LootIds.OnItemAdded -= OnLootIdAdded;
-            LootIds.OnItemRemoved -= OnLootIdRemoved;
-            CombatIds.OnItemAdded -= OnCombatIdAdded;
-            CombatIds.OnItemRemoved -= OnCombatIdRemoved;
-            QuestNpcIds.OnItemAdded -= OnQuestNpcIdAdded;
-            QuestNpcIds.OnItemRemoved -= OnQuestNpcIdRemoved;
-
             ValidLootableObjects.Clear();
             ValidCombatObjects.Clear();
             ObjectCollection.Clear();
@@ -183,6 +176,15 @@ namespace Herbfunk.GarrisonBase.Cache
             Blacklist.TempBlacklistGuids.Clear();
             Blacklist.TempBlacklistEntryIDs.Clear();
 
+            if (detatchHandlers)
+            {
+                LootIds.OnItemAdded -= OnLootIdAdded;
+                LootIds.OnItemRemoved -= OnLootIdRemoved;
+                CombatIds.OnItemAdded -= OnCombatIdAdded;
+                CombatIds.OnItemRemoved -= OnCombatIdRemoved;
+                QuestNpcIds.OnItemAdded -= OnQuestNpcIdAdded;
+                QuestNpcIds.OnItemRemoved -= OnQuestNpcIdRemoved;
+            }
         }
 
         public static void AddObjectToEntryList(uint id, ObjectFlags flags)
