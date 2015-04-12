@@ -70,6 +70,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 await Coroutine.Sleep(StyxWoW.Random.Next(755, 1449));
                 await Coroutine.Yield();
                 Building.WorkOrder.Refresh();
+                if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                 return false;
             }
 
@@ -81,6 +82,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER)
                 {
                     Building.CheckedWorkOrderPickUp = true;
+                    if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                     return false;
                 }
 
@@ -94,6 +96,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     //Building.WorkOrder.Refresh();
                     Building.WorkOrder.Pending -= Building.WorkOrder.Pickup;
                     Building.WorkOrder.Pickup = 0;
+                    if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                     return false;
                 }
 
