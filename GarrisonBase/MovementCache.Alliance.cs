@@ -298,11 +298,15 @@ namespace Herbfunk.GarrisonBase
         };
         internal static List<WoWPoint> Alliance_Plot22_Barn_Level3 = new List<WoWPoint>
         {
-           
+            new WoWPoint(1866.662, 298.6634, 81.66038),
+            new WoWPoint(1865.716, 309.0012, 81.89859),
+            new WoWPoint(1863.15, 323.2336, 81.89859),
         };
         internal static List<WoWPoint> Alliance_Plot25_Barn_Level3 = new List<WoWPoint>
         {
-            
+            new WoWPoint(1874.823, 197.8349, 78.05936),
+            new WoWPoint(1884.341, 191.9854, 78.29198),
+            new WoWPoint(1896.735, 184.7108, 78.29198),
         };
 
         #endregion

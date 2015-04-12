@@ -1,6 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Cache.Enums;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Coroutines.Behaviors;
+using Herbfunk.GarrisonBase.Garrison;
+using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.Garrison.Objects;
+using Styx;
 using Styx.Common;
 using Styx.CommonBot.Frames;
 using Styx.WoWInternals;
@@ -135,12 +143,18 @@ namespace Herbfunk.GarrisonBase.Helpers
             public uint Id { get; set; }
             public string Name { get; set; }
             public bool IsCompleted { get; set; }
-
+            public List<uint> RewardIds { get; set; } 
             public CPlayerQuest(PlayerQuest quest)
             {
+                
                 Id = quest.Id;
                 Name = quest.Name;
                 IsCompleted = quest.IsCompleted;
+                RewardIds = new List<uint>();
+                foreach (var choice in quest.GetRewardChoices())
+                {
+                    RewardIds.Add(choice.ItemId);
+                }
             }
 
             public void Update(PlayerQuest quest)
@@ -152,15 +166,82 @@ namespace Herbfunk.GarrisonBase.Helpers
 
             public override string ToString()
             {
-                return String.Format("Name {0} Id {1} Completed {2}",
-                                        Name, Id, IsCompleted);
+                string rewards = RewardIds.Aggregate("", (current, id) => current + id.ToString() + "\t");
+                return String.Format("Name {0} Id {1} Completed {2} Rewards {3}",
+                                        Name, Id, IsCompleted, rewards);
             }
         }
 
         
         #endregion
 
+        internal static BehaviorArray GetDailyQuestArray(uint questid, bool alliance)
+        {
+            switch (questid)
+            {
+                case 38175:
+                case 38188:
+                {
+                    var questNpcId = alliance ? 77377 : 79815;
+                    var warmillBunker = GarrisonManager.Buildings[BuildingType.WarMillDwarvenBunker];
+                    var questPickup =  new BehaviorQuestPickup(questid, warmillBunker.EntranceMovementPoint, warmillBunker.SpecialMovementPoints.ToArray(), questNpcId);
+                    var questTurnin = new BehaviorQuestTurnin(questid, warmillBunker.EntranceMovementPoint, warmillBunker.SpecialMovementPoints.ToArray(), questNpcId, BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex);
+                    var barray = new BehaviorArray(new Behavior[]
+                    {
+                        questPickup,
+                        questTurnin,
+                    });
+                    barray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests && 
+                        BaseSettings.CurrentSettings.DailyWarMillQuestSettings.Enabled &&
+                        BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex > -1 &&
+                        !LuaCommands.IsQuestFlaggedCompleted(questid.ToString());
 
+                    barray.Criteria += () =>
+                    {
+                        var items=Player.Inventory.GetBagItemsById(113681).Where(i => i.StackCount>24).ToList();
+                        return items.Count > 0;
+                    };
+
+                    return barray;
+                }
+                case 37270:
+                {
+                    var alchemyLab = GarrisonManager.Buildings[BuildingType.AlchemyLab];
+
+                    var questPickup = new BehaviorQuestPickup(
+                        questid,
+                        alchemyLab.EntranceMovementPoint,
+                        alchemyLab.SpecialMovementPoints.ToArray(),
+                        0,
+                        true,
+                        BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex);
+
+                    //Use special method of getting the interaction object since it varies on which follower is assigned!
+                    questPickup.GetInteractionObject = i =>
+                    {
+                        var validObjects =
+                            ObjectCacheManager.GetUnitsNearPoint(alchemyLab.EntranceMovementPoint, 30f, false)
+                                .Where(u => u.QuestGiverStatus == QuestGiverStatus.AvailableRepeatable && !ObjectCacheManager.QuestNpcIds.Contains(u.Entry))
+                                .ToList();
+
+                        return validObjects.Count > 0 ? validObjects[0] : null;
+                    };
+
+                    var barray = new BehaviorArray(new Behavior[]
+                    {
+                        questPickup,
+                    });
+                    barray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests && 
+                        BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.Enabled && 
+                        BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex > -1 &&
+                        !LuaCommands.IsQuestFlaggedCompleted(questid.ToString());
+
+                    return barray;
+                }
+            }
+
+            return null;
+        }
 
         /* Daily Town Hall Trader Info
          * 
@@ -216,8 +297,10 @@ namespace Herbfunk.GarrisonBase.Helpers
          *   Requires Level 3
          *   QuestId: Alliance: 38175 Horde: 38188
          *   NpcId: Alliance: 77377 Horde: 79815
-         *   Cost 25 Iron horde scraps (113681)
-         *   Rewards follower token Weapon (120302) , follower token Armor (120301) 
+         *   Cost 25 Iron horde scraps (113681) <WoWItem Name="Iron Horde Scraps" Entry="113681" />
+         *   Rewards 
+         *      follower token Armor (120301) (choice 1)
+         *      follower token Weapon (120302) (choice 2)
          * 
          * Alchemy (Alchemy Experiment)
          *  Requires Assigned Follower Working

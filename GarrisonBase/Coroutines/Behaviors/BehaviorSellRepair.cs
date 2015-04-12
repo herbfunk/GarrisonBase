@@ -110,9 +110,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
                 if (_npcMovement == null)
-                    _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f);
+                    _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f, name: "Vendor");
 
-                await _npcMovement.MoveTo();
+                await _npcMovement.MoveTo(false);
                 return true;
             }
 

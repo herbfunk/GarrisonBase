@@ -123,7 +123,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
                     if (_movementQueue.Count > 0)
                     {
-                        _movement = new Movement(_movementQueue.Dequeue(), 5f, true);
+                        _movement = new Movement(_movementQueue.Dequeue(), 5f, true, "Mining");
                         ObjectCacheManager.LootDistance += 10f;
                     }
                 }

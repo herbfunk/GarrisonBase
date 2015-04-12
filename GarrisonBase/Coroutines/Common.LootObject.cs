@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Styx;
@@ -49,17 +50,19 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return false;
             }
 
-            
+
 
             if (_lootMovement == null)
             {
                 _lootMovement = new Movement(ObjectCacheManager.LootableObject.Location,
-                    ObjectCacheManager.LootableObject.InteractRange);
+                    ObjectCacheManager.LootableObject.InteractRange,
+                    name: String.Format("Loot {0}", ObjectCacheManager.LootableObject.Name));
             }
             else if (_lootMovement.CurrentMovementQueue.Count == 0)
             {
                 _lootMovement = new Movement(ObjectCacheManager.LootableObject.Location,
-                    ObjectCacheManager.LootableObject.InteractRange -= 0.25f);
+                    ObjectCacheManager.LootableObject.InteractRange -= 0.25f,
+                    name: String.Format("Loot {0}", ObjectCacheManager.LootableObject.Name));
             }
 
             //TreeRoot.StatusText = String.Format("Behavior Looting Movement {0}", ObjectCacheManager.LootableObject.Name);

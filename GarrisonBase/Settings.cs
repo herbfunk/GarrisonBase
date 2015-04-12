@@ -77,6 +77,24 @@ namespace Herbfunk.GarrisonBase
         }
     }
 
+    public class DailyQuestSettings
+    {
+        public bool Enabled { get; set; }
+        public int RewardIndex { get; set; }
+
+        public DailyQuestSettings()
+        {
+            Enabled = false;
+            RewardIndex = -1;
+        }
+
+        public DailyQuestSettings(bool enabled, int rewardindex)
+        {
+            Enabled = enabled;
+            RewardIndex = rewardindex;
+        }
+    }
+
     public class BaseSettings
     {
         internal static BaseSettings CurrentSettings = new BaseSettings();
@@ -193,7 +211,8 @@ namespace Herbfunk.GarrisonBase
         public bool HBRelog_SkipToNextTask { get; set; }
 
         public bool ExchangePrimalSpirits { get; set; }
-        public string PrimalSpiritItem { get; set; }
+
+        public uint PrimalSpiritItemId { get; set; }
 
         public WorkOrder.TradePostReagentTypes TradePostReagents { get; set; }
         public WorkOrderType WorkOrderTypes { get; set; }
@@ -227,7 +246,10 @@ namespace Herbfunk.GarrisonBase
 
         public int MinimumBagSlotsFree { get; set; }
 
-        public List<int> FollowerOptionalList = new List<int>(); 
+        public List<int> FollowerOptionalList = new List<int>();
+
+        public DailyQuestSettings DailyWarMillQuestSettings { get; set; }
+        public DailyQuestSettings DailyAlchemyLabQuestSettings { get; set; }
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
@@ -298,7 +320,7 @@ namespace Herbfunk.GarrisonBase
             HBRelog_SkipToNextTask = true;
 
             ExchangePrimalSpirits = false;
-            PrimalSpiritItem = string.Empty;
+            PrimalSpiritItemId = 0;
             TradePostReagents= WorkOrder.TradePostReagentTypes.All;
             WorkOrderTypes = WorkOrderType.All;
 
@@ -331,6 +353,8 @@ namespace Herbfunk.GarrisonBase
             MillingStarflower = new InscriptionMillingSetting(true, 100);
             MillingTaladorOrchid = new InscriptionMillingSetting(true, 100);
 
+            DailyWarMillQuestSettings=new DailyQuestSettings();
+            DailyAlchemyLabQuestSettings=new DailyQuestSettings();
 
             DEBUG_FAKESTARTWORKORDER = false;
             DEBUG_FAKEFINISHQUEST = false;

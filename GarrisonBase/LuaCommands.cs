@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
@@ -57,13 +58,13 @@ namespace Herbfunk.GarrisonBase
         }
 
 
-        public static WorkOrder GetWorkOrder(string buildingId)
+        public static WorkOrder GetWorkOrder(int buildingId)
         {
             GarrisonBase.Debug("LuaCommand: GetWorkOrder {0}", buildingId);
             List<string> workorderinfo = Lua.GetReturnValues(String.Format("return C_Garrison.GetLandingPageShipmentInfo(\"{0}\")", buildingId));
             if (workorderinfo.Count < 2) return null;
 
-            BuildingType buildingType = Building.GetBuildingTypeUsingId(Convert.ToInt32(buildingId));
+            BuildingType buildingType = Building.GetBuildingTypeUsingId(buildingId);
             WorkOrderType workorderType = WorkOrder.GetWorkorderType(buildingType);
             int MaxOrders = workorderinfo[2].ToInt32();
             Tuple<CraftingReagents, int>[] price = WorkOrder.GetWorkOrderItemAndQuanityRequired(workorderType);
@@ -215,7 +216,7 @@ namespace Herbfunk.GarrisonBase
       
 
 
-        public static void GetBuildingInfo(string buildingId, out string plotId, out bool canActivate, out int shipCap, out int shipReady, out int shipTotal, out bool isBuilding)
+        public static void GetBuildingInfo(int buildingId, out string plotId, out bool canActivate, out int shipCap, out int shipReady, out int shipTotal, out bool isBuilding)
         {
             
             String lua =
@@ -270,7 +271,7 @@ namespace Herbfunk.GarrisonBase
                                "shipmentsCap {5}",
                                buildingId, canActivate, isBuilding, shipmentsReady, shipmentsTotal, shipmentsCap);
         }
-        public static List<string> GetBuildingIds()
+        public static List<int> GetBuildingIds()
         {
             GarrisonBase.Debug("LuaCommand: GetBuildingIds");
             String lua =
@@ -279,7 +280,8 @@ namespace Herbfunk.GarrisonBase
                 "table.insert(RetInfo,tostring(buildings[i].buildingID));" +
                 "end;" +
                 "return unpack(RetInfo)";
-            return Lua.GetReturnValues(lua);
+            List<string> retValues=Lua.GetReturnValues(lua);
+            return retValues.Select(value => value.ToInt32()).ToList();
         }
 
 

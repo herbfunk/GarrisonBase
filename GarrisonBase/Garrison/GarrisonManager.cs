@@ -47,12 +47,14 @@ namespace Herbfunk.GarrisonBase.Garrison
         {
             GarrisonBase.Debug("Initalizing GarrisonManager..");
 
+            RefreshFollowerIds();
+            RefreshFollowers();
+
             RefreshBuildings();
 
             UpdateMissionIds(true);
 
-            RefreshFollowerIds();
-            RefreshFollowers();
+            
 
             if (!Character.Player.IsAlliance)
             {
@@ -123,13 +125,14 @@ namespace Herbfunk.GarrisonBase.Garrison
         internal static List<int> FollowerIdsAll = new List<int>();
         internal static List<int> FollowerIdsCollected = new List<int>();
         internal static List<int> FollowerIdsNotCollected = new List<int>();
-
+        internal static List<int> BuildingIdsWithFollowerWorking = new List<int>(); 
         internal static void RefreshFollowerIds()
         {
             GarrisonBase.Debug("Refreshing Follower Ids..");
 
             FollowerIdsCollected.Clear();
             FollowerIdsNotCollected.Clear();
+            BuildingIdsWithFollowerWorking.Clear();
             CurrentActiveFollowers = 0;
             FollowerIdsAll = LuaCommands.GetAllFollowerIDs();
             foreach (var id in FollowerIdsAll)
@@ -153,10 +156,13 @@ namespace Herbfunk.GarrisonBase.Garrison
                     var gfollower = GarrisonInfo.Followers.First(follower => follower.GarrFollowerId == f);
                     if (gfollower != null)
                     {
-                        Followers.Add(f, new Follower(gfollower));
+                        var _follower = new Follower(gfollower);
+                        Followers.Add(f, _follower);
 
-                        if (gfollower.Status != GarrisonFollowerStatus.Inactive)
+                        if (_follower.Status != GarrisonFollowerStatus.Inactive)
                             CurrentActiveFollowers++;
+                        if (_follower.AssignedBuildingId > -1)
+                            BuildingIdsWithFollowerWorking.Add(_follower.AssignedBuildingId);
                     }
                 }
             }
@@ -368,7 +374,7 @@ namespace Herbfunk.GarrisonBase.Garrison
         /// </summary>
         public static Dictionary<BuildingType, Building> Buildings = new Dictionary<BuildingType, Building>();
 
-        public static List<string> BuildingIDs = new List<string>();
+        public static List<int> BuildingIDs = new List<int>();
 
         internal static void RefreshBuildingIDs()
         {
@@ -389,6 +395,7 @@ namespace Herbfunk.GarrisonBase.Garrison
 
             RefreshBuildingIDs();
 
+            
 
             foreach (var id in BuildingIDs)
             {
@@ -436,48 +443,40 @@ namespace Herbfunk.GarrisonBase.Garrison
 
             //if not completed the quest to unlock than we manually insert the buildings (since they do not show up in the building ids)
             if (!Buildings.ContainsKey(BuildingType.Mines))
-                Buildings.Add(BuildingType.Mines, new Building("61"));
+                Buildings.Add(BuildingType.Mines, new Building(61));
             if (!Buildings.ContainsKey(BuildingType.HerbGarden))
-                Buildings.Add(BuildingType.HerbGarden, new Building("29"));
+                Buildings.Add(BuildingType.HerbGarden, new Building(29));
         }
 
         public enum PrimalTraderItemTypes
         {
-            SorcerousAir,
-            SorcerousFire,
-            SorcerousEarth,
-            SorcerousWater,
-            SavageBlood, 
-            AlchemicalCatalyst,
-            TruesteelIngot,
-            GearspringParts,
-            WarPaints,
-            TaladiteCrystal,
-            BurnishedLeather,
-            HexweaveCloth,
+            SorcerousAir = 113264,
+            SorcerousFire = 113261,
+            SorcerousWater = 113262,
+            SorcerousEarth = 113263,
+            SavageBlood = 118472,
+            AlchemicalCatalyst = 108996,
+            TruesteelIngot = 108257,
+            GearspringParts = 111366,
+            WarPaints = 112377,
+            TaladiteCrystal = 115524,
+            BurnishedLeather = 110611,
+            HexweaveCloth = 111556,
         }
         public class PrimalTraderItem
         {
             public PrimalTraderItemTypes Type { get; set; }
             public string Name { get; set; }
             public int Cost { get; set; }
-            public CraftingReagents ReagentType { get; set; }
+
+            public readonly uint ItemId;
+
             public PrimalTraderItem(PrimalTraderItemTypes type, string name, int cost)
             {
                 Type = type;
                 Name = name;
                 Cost = cost;
-
-                try
-                {
-                    ReagentType = (CraftingReagents)Enum.Parse(typeof(CraftingReagents), Type.ToString(), true);
-                }
-                catch (Exception)
-                {
-                    GarrisonBase.Err("Attempted to get reagent type using {0} failed! May need to update the crafting reagents.", Type.ToString());
-                    ReagentType= CraftingReagents.None;
-                }
-                
+                ItemId = Convert.ToUInt32((int) Type);
             }
         }
 

@@ -63,7 +63,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             return false;
         }
 
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
 
             if (DisenchantingObject == null)
@@ -81,13 +81,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             //Move to the interaction object (within 6.7f)
             if (_movement == null)
-                _movement = new Movement(DisenchantingObject.Location, 6.7f);
+                _movement = new Movement(DisenchantingObject.Location, 6.7f, name: "DisenchantingObject");
                 
-            return await _movement.ClickToMove();
+            return await _movement.ClickToMove(false);
         }
         private Movement _movement;
 
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
 
 

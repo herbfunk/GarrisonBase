@@ -606,6 +606,17 @@ namespace Herbfunk.GarrisonBase
                             if (level == 3) return Alliance_Plot25_Barn_Level3;
                         }
                     }
+                    else
+                    {
+                        if (plotId == 22)
+                        {
+                            if (level == 3) return Horde_Plot22_Barn_Level3;
+                        }
+                        if (plotId == 25)
+                        {
+                            if (level == 3) return Horde_Plot25_Barn_Level3;
+                        }
+                    }
                     break;
 
             }

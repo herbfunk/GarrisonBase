@@ -11,13 +11,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 {
     public class Building
     {
-        public string ID { get; set; }
+        public int Id { get; set; }
         public BuildingType Type { get; set; }
         public PlotSize Plot { get; set; }
         public int PlotId { get; set; }
         public int Level { get; set; }
         public bool CanActivate { get; set; }
         public bool IsBuilding { get; set; }
+        public bool HasFollowerWorking { get; set; }
         public WorkOrderType WorkOrderType { get; set; }
         public int WorkOrderObjectEntryId { get; set; }
         public string WorkOrderObjectName { get; set; }
@@ -40,13 +41,13 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public bool CheckedWorkOrderPickUp { get; set; }
         public bool CheckedWorkOrderStartUp { get; set; }
 
-        public int WorkOrderNPCEntryId
+        public int WorkOrderNpcEntryId
         {
             get
             {
                 if (Type == BuildingType.TradingPost && _workorderNpcEntryid==-1)
                 {
-                    uint[] entryIds = Character.Player.IsAlliance
+                    uint[] entryIds = Player.IsAlliance
                         ? WorkOrder.AllianceTradePostNpcIds.ToArray()
                         : WorkOrder.HordeTradePostNpcIds.ToArray();
 
@@ -64,9 +65,12 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public WoWPoint EntranceMovementPoint { get; set; }
         public WoWPoint WorkOrderShipmentPoint { get; set; }
         public List<WoWPoint> SpecialMovementPoints { get; set; }
-        public uint FirstQuestID { get; set; }
+
+
+
+        public uint FirstQuestId { get; set; }
         public bool FirstQuestCompleted { get; set; }
-        public int QuestNpcID { get; set; }
+        public int FirstQuestNpcId { get; set; }
 
 
 
@@ -79,25 +83,26 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     return null;
 
                 if (_workorder == null)
-                    _workorder = LuaCommands.GetWorkOrder(ID);   
+                    _workorder = LuaCommands.GetWorkOrder(Id);   
 
                 return _workorder;
             }
         }
-        public Building(string id)
+        public Building(int id)
         {
-            ID = id;
-            Type = GetBuildingTypeUsingId(Convert.ToInt32(id));
-            Level = GetBuildingUpgradeLevel(Convert.ToInt32(id));
+            Id = id;
+            Type = GetBuildingTypeUsingId(Id);
+            Level = GetBuildingUpgradeLevel(Id);
             Plot = GetBuildingPlotSize(Type);
-                
+            HasFollowerWorking = GarrisonManager.BuildingIdsWithFollowerWorking.Contains(Id);
+
             WorkOrderType = WorkOrder.GetWorkorderType(Type);
 
             if (WorkOrderType != WorkOrderType.None)
             {
                 WorkOrderObjectEntryId = WorkOrder.WorkOrderPickupEntryIds[WorkOrderType];
                 WorkOrderObjectName = WorkOrder.WorkOrderPickupNames[WorkOrderType];
-                if (WorkOrderType == WorkOrderType.WarMillDwarvenBunker && Character.Player.IsAlliance )
+                if (WorkOrderType == WorkOrderType.WarMillDwarvenBunker && Player.IsAlliance )
                     WorkOrderObjectName = WorkOrder.WorkOrderPickupNames[WorkOrderType.DwarvenBunker];
             }
             else
@@ -106,10 +111,10 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 WorkOrderObjectName = String.Empty;
             }
 
-            WorkOrderNPCEntryId = WorkOrder.GetWorkOrderNpcEntryId(Type, Character.Player.IsAlliance);
+            WorkOrderNpcEntryId = WorkOrder.GetWorkOrderNpcEntryId(Type, Player.IsAlliance);
 
 
-            if (GarrisonManager.BuildingIDs.Contains(ID))
+            if (GarrisonManager.BuildingIDs.Contains(Id))
             {
                 string plotid;
                 bool canActivate, isBuilding;
@@ -117,44 +122,42 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
                 LuaCommands.GetBuildingInfo(id, out plotid, out canActivate, out shipCap, out shipReady, out shipTotal, out isBuilding);
                 if (WorkOrderType != WorkOrderType.None)
-                    _workorder = new WorkOrder(ID, Type, WorkOrderType, shipCap,
+                    _workorder = new WorkOrder(Id, Type, WorkOrderType, shipCap,
                         WorkOrder.GetWorkOrderItemAndQuanityRequired(WorkOrderType), shipReady, shipTotal);
 
                 PlotId = plotid.ToInt32();
                 CanActivate = canActivate;
                 IsBuilding = isBuilding;
 
-                int _plotId = Convert.ToInt32(PlotId);
-                SafeMovementPoint = MovementCache.GetBuildingSafeMovementPoint(_plotId);
-                EntranceMovementPoint = MovementCache.GetBuildingEntranceMovementPoint(_plotId);
+                SafeMovementPoint = MovementCache.GetBuildingSafeMovementPoint(PlotId);
+                EntranceMovementPoint = MovementCache.GetBuildingEntranceMovementPoint(PlotId);
             }
             else if (Type == BuildingType.HerbGarden || Type == BuildingType.Mines)
             {//if not completed first quest than we must insert temp info.
                 PlotId = Type == BuildingType.HerbGarden ? 63 : 59;
-                int _plotId = Convert.ToInt32(PlotId);
-                SafeMovementPoint = MovementCache.GetBuildingSafeMovementPoint(_plotId);
-                EntranceMovementPoint = MovementCache.GetBuildingEntranceMovementPoint(_plotId);
-                _workorder = new WorkOrder(ID, Type, WorkOrderType, 0,
+                SafeMovementPoint = MovementCache.GetBuildingSafeMovementPoint(PlotId);
+                EntranceMovementPoint = MovementCache.GetBuildingEntranceMovementPoint(PlotId);
+                _workorder = new WorkOrder(Id, Type, WorkOrderType, 0,
                        WorkOrder.GetWorkOrderItemAndQuanityRequired(WorkOrderType));
             }
 
             SpecialMovementPoints = MovementCache.GetSpecialMovementPoints(Type,PlotId,Level, Player.IsAlliance);
 
-            int firstquestID = GetBuildingFirstQuestId(Type, Character.Player.IsAlliance);
+            int firstquestID = GetBuildingFirstQuestId(Type, Player.IsAlliance);
             if (firstquestID > 0)
             {
-                FirstQuestID = Convert.ToUInt32(firstquestID);
-                FirstQuestCompleted = LuaCommands.IsQuestFlaggedCompleted(FirstQuestID.ToString());
+                FirstQuestId = Convert.ToUInt32(firstquestID);
+                FirstQuestCompleted = LuaCommands.IsQuestFlaggedCompleted(FirstQuestId.ToString());
 
                 if (Type == BuildingType.TradingPost)
-                    QuestNpcID = WorkOrderNPCEntryId;
+                    FirstQuestNpcId = WorkOrderNpcEntryId;
                 else
-                    QuestNpcID = GetBuildingFirstQuestNpcId(Type, Character.Player.IsAlliance);
+                    FirstQuestNpcId = GetBuildingFirstQuestNpcId(Type, Player.IsAlliance);
             }
             else
             {
-                FirstQuestID = 0;
-                QuestNpcID = 0;
+                FirstQuestId = 0;
+                FirstQuestNpcId = 0;
                 FirstQuestCompleted = true;
             }
         }
@@ -166,8 +169,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                  "WorkOrderNPCEntryId {14} WorkOrderEntryId {3} CheckedWorkOrderPickUp {4} CheckedWorkOrderStartUp {5}\r\n" +
                                  "FirstQuestID {11} QuestNpcID {12} FirstQuestCompleted {13}" +
                                  "{7}",
-                ID, Type, WorkOrderType, WorkOrderObjectEntryId, CheckedWorkOrderPickUp, CheckedWorkOrderStartUp, PlotId, WorkOrder!=null?"\r\n" + WorkOrder.ToString():"",
-                CanActivate, IsBuilding, Level, FirstQuestID, QuestNpcID, FirstQuestCompleted, WorkOrderNPCEntryId);
+                Id, Type, WorkOrderType, WorkOrderObjectEntryId, CheckedWorkOrderPickUp, CheckedWorkOrderStartUp, PlotId, WorkOrder!=null?"\r\n" + WorkOrder.ToString():"",
+                CanActivate, IsBuilding, Level, FirstQuestId, FirstQuestNpcId, FirstQuestCompleted, WorkOrderNpcEntryId);
         }
 
 
@@ -520,6 +523,17 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     return isAlly ? 85344 : 81981;
                 case BuildingType.Mines:
                     return isAlly ? 77730 : 81688;
+            }
+
+            return -1;
+        }
+
+        public static int GetBuildingDailyQuestId(BuildingType type, bool ally)
+        {
+            switch (type)
+            {
+                case BuildingType.AlchemyLab:
+                    return 37270;
             }
 
             return -1;

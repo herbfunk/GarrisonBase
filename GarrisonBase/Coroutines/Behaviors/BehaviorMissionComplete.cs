@@ -53,7 +53,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             return false;
         }
 
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
             if (CommandTable == null)
             {
@@ -88,9 +88,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
 
             if (_movement == null)
-                _movement = new Movement(CommandTable.Location, 4.55f);
+                _movement = new Movement(CommandTable.Location, 4.55f, name: "CommandTable");
 
-            await _movement.MoveTo();
+            await _movement.MoveTo(false);
             return true;
         }
         private Movement _movement;
@@ -99,7 +99,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private WaitTimer _commandtableCompletemissionsWaittimer = WaitTimer.FiveSeconds;
         private int _Waitmilliseconds = 5000;
         private Mission _currentMission = null;
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             GarrisonManager.RefreshMissions();
             //GarrisonManager.CompletedMissionIds = LuaCommands.GetCompletedMissionIds();

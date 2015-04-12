@@ -22,7 +22,7 @@ namespace Herbfunk.GarrisonBase.Helpers
             LuaEvents.OnTaxiMapClosed += TaxiFrameClosed;
             IsOpen = TaxiFrame.Instance.IsVisible;
             PopulateFlightPaths();
-            
+
         }
 
         private static void TaxiFrameOpened()
@@ -72,14 +72,20 @@ namespace Herbfunk.GarrisonBase.Helpers
                     ? Player.ParentMapId
                     : (int)Player.MapId.Value;
 
-                var localFPs = FlightPaths.Where(fp => fp.Continent == playerMapId).ToList();
-                if (localFPs.Count > 0)
-                {
-                    return localFPs.OrderBy(fp => fp.Location.Distance(Player.Location)).First();
-                }
-
-                return null;
+                return NearestFlightPathFromLocation(Player.Location, playerMapId);
             }
+        }
+
+        public static FlightPathInfo NearestFlightPathFromLocation(WoWPoint location, int continentId=-1)
+        {
+            //Get flight paths (optionally filtering with continent id)
+            List<FlightPathInfo> flightpaths = continentId > -1 
+                ? FlightPaths.Where(fp => fp.Continent == continentId)
+                    .OrderBy(fp => fp.Location.Distance(location))
+                    .ToList()
+                : FlightPaths.OrderBy(fp => fp.Location.Distance(location)).ToList();
+
+            return flightpaths.Count > 0 ? flightpaths[0] : null;
         }
 
         public static bool ShouldTakeFlightPath(WoWPoint destination)
@@ -92,6 +98,11 @@ namespace Herbfunk.GarrisonBase.Helpers
                 return Styx.CommonBot.FlightPaths.ShouldTakeFlightpath(Player.Location, destination, 14.7f);
             }
             return true;
+        }
+
+        public static int GetMapId(WoWPoint location)
+        {
+            return StyxWoW.WorldScene.WorldMap.GetMapIdAt(location);
         }
 
         public class TaxiNodeInfo
@@ -113,22 +124,27 @@ namespace Herbfunk.GarrisonBase.Helpers
         public class FlightPathInfo
         {
             public static readonly FlightPathInfo InvalidInfo = new FlightPathInfo("Invalid", WoWPoint.Empty, 9999);
+            public const uint LunarfallMasterEntry = 81103;
+            public const uint FrostwallMasterEntry = 79407;
 
             public WoWPoint Location { get; set; }
             public string Name { get; set; }
             public uint Continent { get; set; }
+            public uint MasterId { get; set; }
 
             public FlightPathInfo(string name, WoWPoint loc, uint continent)
             {
                 Name = name.ToLower();
                 Location = loc;
                 Continent = continent;
+                MasterId = 9999;
             }
             public FlightPathInfo(XmlFlightNode node)
             {
                 Name = node.Name.ToLower();
                 Location = node.Location;
                 Continent = node.Continent;
+                MasterId = node.MasterEntry;
             }
 
             public override string ToString()

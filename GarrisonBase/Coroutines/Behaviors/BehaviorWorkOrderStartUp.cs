@@ -19,7 +19,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     public class BehaviorWorkOrderStartUp : Behavior
     {
         public BehaviorWorkOrderStartUp(Building building)
-            : base(new[] { building.SafeMovementPoint, building.EntranceMovementPoint }, building.WorkOrderNPCEntryId)
+            : base(new[] { building.SafeMovementPoint, building.EntranceMovementPoint }, building.WorkOrderNpcEntryId)
         {
             Building = building;
             Criteria += () => BaseSettings.CurrentSettings.BehaviorWorkOrderStartup &&
@@ -41,7 +41,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             _interactionAttempts = 0;
             _movement = null;
             if (Building.SpecialMovementPoints != null)
-                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f);
+                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f, name: "WorkOrderPickupSpecialMovement");
 
             if (Building.Type == BuildingType.Barn)
                 BarnWorkOrderCurrencies = new List<Tuple<CraftingReagents, int>[]>(WorkOrder.BarnWorkOrderItemList);
@@ -63,7 +63,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             get
             {
-                return ObjectCacheManager.GetWoWUnits(Building.WorkOrderNPCEntryId).FirstOrDefault();
+                return ObjectCacheManager.GetWoWUnits(Building.WorkOrderNpcEntryId).FirstOrDefault();
             }
         }
 
@@ -78,12 +78,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (IsDone) return false;
 
 
-            if (Building.Type == BuildingType.TradingPost && Building.WorkOrderNPCEntryId != -1)
+            if (Building.Type == BuildingType.TradingPost && Building.WorkOrderNpcEntryId != -1)
             {
                 if (!_checkedReagent)
                 {
                     WorkOrder.TradePostReagentTypes workOrderReagent;
-                    workOrderReagent = WorkOrder.GetTradePostNPCReagent(Building.WorkOrderNPCEntryId);
+                    workOrderReagent = WorkOrder.GetTradePostNPCReagent(Building.WorkOrderNpcEntryId);
                     if (!BaseSettings.CurrentSettings.TradePostReagents.HasFlag(workOrderReagent))
                     {
                         //Does not have the current reagent set!
@@ -179,7 +179,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
 
         
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
             if (Building.CheckedWorkOrderStartUp || WorkOrderObject == null)
             {
@@ -199,7 +199,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 {
                     GarrisonBase.Log("Interaction Attempts for {0} has exceeded 3! Preforming movement..",
                         WorkOrderObject.Name);
-                    _movement = new Movement(Building.EntranceMovementPoint, 6.7f);
+                    StartMovement.Reset();
                     _interactionAttempts = 0;
                     return true;
                 }
@@ -231,13 +231,17 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
+            #region SpecialMovement
+
             if (_specialMovement != null)
-            {//Special Movement for navigating inside buildings using Click To Move
+            {
+                //Special Movement for navigating inside buildings using Click To Move
 
                 if (_specialMovement.CurrentMovementQueue.Count > 0)
                 {
                     //find the nearest point to the npc in our special movement queue 
-                    var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location, _specialMovement.CurrentMovementQueue.ToList());
+                    var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location,
+                        _specialMovement.CurrentMovementQueue.ToList());
                     //click to move.. but don't dequeue
                     var result = await _specialMovement.ClickToMove_Result(false);
 
@@ -254,28 +258,25 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     //Last position was nearest and we reached our destination.. so lets finish special movement!
                     if (result == MoveResult.ReachedDestination)
                     {
+                        _specialMovement.ForceDequeue(true);
                         _specialMovement.DequeueAll(false);
                     }
                 }
-                    
-
-                if (_movement == null)
-                    _movement = new Movement(WorkOrderObject.Location, 4f);
-
-                //since we are navigating inside building.. we must continue to use CTM
-                if (await _movement.ClickToMove(false))
-                    return true;
             }
+            
+            #endregion
 
-            if (_movement == null)
-                _movement = new Movement(WorkOrderObject.Location, 4f);
-            await _movement.ClickToMove(false);
+            //Setup the NPC movement!
+            if (_movement == null || _movement.CurrentMovementQueue.Count==0)
+                _movement = new Movement(WorkOrderObject.Location, 4f, name: WorkOrderObject.Name);
+
+            await _movement.ClickToMove();
             return true;
         }
 
-        
 
-        public override async Task<bool> Interaction()
+
+        private async Task<bool> Interaction()
         {
             if (Building.CheckedWorkOrderStartUp)
                 return false;

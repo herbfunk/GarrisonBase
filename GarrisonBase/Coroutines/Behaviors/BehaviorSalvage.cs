@@ -25,7 +25,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             MovementPoints.Add(Building.EntranceMovementPoint);
             MovementPoints.Add(Building.SpecialMovementPoints[0]);
             
-            InteractionEntryId = Building.WorkOrderNPCEntryId;
+            InteractionEntryId = Building.WorkOrderNpcEntryId;
             Criteria += () => BaseSettings.CurrentSettings.BehaviorSalvaging &&
                              !Building.CanActivate && !Building.IsBuilding &&
                              SalvagableGoods.Count > 0;
@@ -35,7 +35,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             var specialLoc = Building.SpecialMovementPoints[0];
             if (Player.Location.Distance(specialLoc) > 2.5f)
             {
-                _movement = new Movement(Building.SpecialMovementPoints[0], 2.5f);
+                _movement = new Movement(Building.SpecialMovementPoints[0], 2.5f, name: "Salvage");
                 base.Initalize();
             }
         }
@@ -68,16 +68,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private Movement _movement;
 
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
-            if (await _movement.ClickToMove())
-                return true;
-                
-
             if (SalvagableGoods.Count == 0)
                 return false;
 
-              
+            if (await _movement.ClickToMove(false))
+                return true;
+
             foreach (C_WoWItem salvageCrate in SalvagableGoods)
             {
                 salvageCrate.Interact();

@@ -48,7 +48,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
 
         private Movement _movement;
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
             if (LuaEvents.MailOpen)
                 return false;
@@ -69,12 +69,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
             if (_movement == null)
-                _movement = new Movement(Mailbox.Location, 5f);
+                _movement = new Movement(Mailbox.Location, 5f, name: "Mailbox");
 
-            await _movement.MoveTo();
+            await _movement.MoveTo(false);
             return true;
         }
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             if (!LuaCommands.IsSendMailFrameVisible())
             {

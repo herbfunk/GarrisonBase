@@ -255,6 +255,25 @@ namespace Herbfunk.GarrisonBase
 
         #endregion
 
+        #region Barn
+        internal static List<WoWPoint> Horde_Plot22_Barn_Level3 = new List<WoWPoint>
+        {
+            new WoWPoint(5544.169, 4517.91, 131.7193),
+            new WoWPoint(5543.099, 4528.681, 131.6605),
+            new WoWPoint(5534.421, 4523.765, 132.0995),
+            new WoWPoint(5527.923, 4523.991, 132.099),
+            new WoWPoint(5524.152, 4517.588, 131.9659),
+        };
+
+        internal static List<WoWPoint> Horde_Plot25_Barn_Level3 = new List<WoWPoint>
+        {
+            new WoWPoint(5684.987, 4486.495, 130.4632),
+            new WoWPoint(5676.221, 4478.086, 130.524),
+            new WoWPoint(5688.138, 4476.761, 130.8972),
+            new WoWPoint(5693.088, 4471.484, 130.9397),
+            new WoWPoint(5700.295, 4473.271, 130.7012),
+        };
+        #endregion
 
         #region The Forge
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
@@ -178,10 +179,6 @@ namespace Herbfunk.GarrisonBase.Coroutines
             CurrentBehavior = null;
             SwitchBehavior = null;
 
-
-            
-
-
             //Move to entrance!
             //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
             Behaviors.Add(new BehaviorGetMail());
@@ -196,21 +193,21 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             //Buildings that are active but have not completed the quest yet (that are setup already)
             #region Building First Quest Behaviors
-            foreach (var b in GarrisonManager.Buildings.Values.Where(b => !b.FirstQuestCompleted && !b.IsBuilding && b.QuestNpcID > -1 && b.FirstQuestID > -1))
+            foreach (var b in GarrisonManager.Buildings.Values.Where(b => !b.FirstQuestCompleted && !b.IsBuilding && b.FirstQuestNpcId > -1 && b.FirstQuestId > -1))
             {
                 if (b.Type == BuildingType.SalvageYard)
                 {
                     //var abandon = new Behaviors.BehaviorQuestAbandon(b.FirstQuestID);
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.SafeMovementPoint, b.WorkOrderNPCEntryId);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
                     var itemInteraction = new BehaviorItemInteraction(118473);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.SafeMovementPoint, b.WorkOrderNPCEntryId);
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, itemInteraction, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
                     Behaviors.Add(behaviorArray);
                 }
                 else if (b.Type == BuildingType.TradingPost)
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.SafeMovementPoint, b.WorkOrderNPCEntryId);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
                     var moveLoc = Player.IsAlliance
                         ? new WoWPoint(1764.08, 150.39, 76.02)
                         : new WoWPoint(5745.101, 4570.491, 138.8332);
@@ -219,7 +216,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     var npcId = Player.IsAlliance ? 87288 : 87260;
                     var target = new BehaviorSelectTarget(moveLoc);
                     var interact = new BehaviorItemInteraction(118418, true);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.SafeMovementPoint, b.WorkOrderNPCEntryId);
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
 
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, moveto, target, interact, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
@@ -227,7 +224,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
                 else if (b.Type == BuildingType.Storehouse)
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     List<WoWPoint> _hotSpots = new List<WoWPoint>
                     {
@@ -246,8 +243,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
                         MovementCache.SmallPlot20SafePoint,
                     };
 
-                    var looting = new BehaviorHotspotRunning(b.FirstQuestID, _hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestID));
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var looting = new BehaviorHotspotRunning(b.FirstQuestId, _hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
@@ -255,7 +252,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
                 else if (b.Type == BuildingType.Lumbermill)
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     WoWPoint movementPoint;
                     if (Player.IsAlliance)
@@ -263,26 +260,26 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     else
                         movementPoint = new WoWPoint(6082.979, 4795.821, 149.1655);
 
-                    var looting = new BehaviorHotspotRunning(b.FirstQuestID, new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestID));
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var looting = new BehaviorHotspotRunning(b.FirstQuestId, new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
                     Behaviors.Add(behaviorArray);
                 }
                 else if (b.Type == BuildingType.Mines)
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var looting = new BehaviorHotspotRunning(
-                        b.FirstQuestID,
+                        b.FirstQuestId,
                         Player.IsAlliance ?
                         MovementCache.Alliance_Mine_LevelOne.ToArray() :
                         MovementCache.Horde_Mine_LevelOne.ToArray(),
                         CacheStaticLookUp.MineQuestMobIDs.ToArray(),
                         BehaviorHotspotRunning.HotSpotType.Killing,
-                        () => HasQuestAndNotCompleted(b.FirstQuestID));
+                        () => HasQuestAndNotCompleted(b.FirstQuestId));
 
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
@@ -290,18 +287,18 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
                 else if (b.Type == BuildingType.HerbGarden)
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var looting = new BehaviorHotspotRunning(
-                        b.FirstQuestID,
+                        b.FirstQuestId,
                         Player.IsAlliance ?
                         MovementCache.Alliance_Herb_LevelOne.ToArray() :
                         MovementCache.Horde_Herb_LevelOne.ToArray(),
                         CacheStaticLookUp.HerbQuestMobIDs.ToArray(),
                         BehaviorHotspotRunning.HotSpotType.Killing,
-                        () => HasQuestAndNotCompleted(b.FirstQuestID));
+                        () => HasQuestAndNotCompleted(b.FirstQuestId));
 
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.EntranceMovementPoint, b.QuestNpcID);
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
@@ -309,10 +306,10 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
                 else
                 {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestID, b.SafeMovementPoint, b.QuestNpcID);
+                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.FirstQuestNpcId);
                     var workorder = new BehaviorQuestWorkOrder(b);
                     var workorderPickup = new BehaviorQuestWorkOrderPickup(b);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestID, b.SafeMovementPoint, b.WorkOrderNPCEntryId);
+                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, workorder, workorderPickup, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
                     Behaviors.Add(behaviorArray);
@@ -369,7 +366,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             }
 
             //Work Order Pickup and Startup (and Mine/Herb)
-            foreach (var b in GarrisonManager.Buildings.Values.Where(b => b.FirstQuestID <= 0 || b.FirstQuestCompleted).OrderBy(b => b.Plot))
+            foreach (var b in GarrisonManager.Buildings.Values.Where(b => b.FirstQuestId <= 0 || b.FirstQuestCompleted).OrderBy(b => b.Plot))
             {
                 if (b.Type != BuildingType.Mines || b.Type != BuildingType.HerbGarden)
                 {
@@ -383,6 +380,16 @@ namespace Herbfunk.GarrisonBase.Coroutines
                             Behaviors.Add(new BehaviorMilling()); //Milling!
 
                         Behaviors.Add(new BehaviorWorkOrderStartUp(b));
+
+                        if (b.Type == BuildingType.WarMillDwarvenBunker && b.Level == 3)
+                        {
+                            var questid = Player.IsAlliance ? 38175 : 38188;
+                            Behaviors.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(questid), Player.IsAlliance));
+                        }
+                        else if (b.Type == BuildingType.AlchemyLab && b.HasFollowerWorking)
+                        {
+                            Behaviors.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(37270), Player.IsAlliance));
+                        }
                     }
                 }
             }
@@ -399,6 +406,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //Optional follower behaviors (to unlock)
             Behaviors.Add(new BehaviorArray(new Behavior[]
             {
+                //Follower.FollowerQuestBehaviorArray(209),
                 Follower.FollowerQuestBehaviorArray(170),
                 Follower.FollowerQuestBehaviorArray(467),
                 Follower.FollowerQuestBehaviorArray(189),

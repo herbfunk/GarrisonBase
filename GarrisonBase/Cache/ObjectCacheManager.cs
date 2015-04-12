@@ -98,6 +98,7 @@ namespace Herbfunk.GarrisonBase.Cache
         private static double _lootDistance = 100;
 
         public static bool IgnoreLineOfSightFailure { get; set; }
+        public static bool IsQuesting { get; set; }
 
         public static EntryList LootIds = new EntryList();
         internal static void OnLootIdAdded(uint item)
@@ -166,6 +167,7 @@ namespace Herbfunk.GarrisonBase.Cache
             FoundOreObject = false;
             FoundHerbObject = false;
             IgnoreLineOfSightFailure = false;
+            IsQuesting = false;
 
             LootIds.OnItemAdded -= OnLootIdAdded;
             LootIds.OnItemRemoved -= OnLootIdRemoved;

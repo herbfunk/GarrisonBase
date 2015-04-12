@@ -47,13 +47,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
 
             if (MovementBehavior != null && MovementBehavior.CurrentMovementQueue.Count > 0 && await MovementBehavior.MoveTo())
-            {
                 return true;
-            }
+            
 
             if (!StyxWoW.Me.IsCasting)
             {
-                var hearthstone = Character.Player.Inventory.GarrisonHearthstone;
+                var hearthstone = Player.Inventory.GarrisonHearthstone;
                 if (hearthstone != null)
                 {
 
@@ -97,13 +96,15 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
                         if (!attemptedFlightPath)
                         {
-                            FlightPathBehavior = new BehaviorUseFlightPath("Frostwall Garrison", new[] { "Lunarfall" });
+                            GarrisonBase.Debug("Attempting flight path to garrison");
+                            FlightPathBehavior = new BehaviorUseFlightPath(MovementCache.GarrisonEntrance);
                             attemptedFlightPath = true;
                         }
                         else
                         {
+                            GarrisonBase.Debug("Attempting movement to garrison");
                             if (MovementBehavior == null)
-                                MovementBehavior = new Movement(MovementCache.GarrisonEntrance, 50f);
+                                MovementBehavior = new Movement(MovementCache.GarrisonEntrance, 50f, name: "GarrisonMovement");
 
                         }
 

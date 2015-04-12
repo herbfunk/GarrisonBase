@@ -7,6 +7,7 @@ using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
+using Styx.Pathing;
 using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Garrison.Objects
@@ -22,6 +23,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public int ItemLevel { get; set; }
         public int XP { get; set; }
         public int LevelXP { get; set; }
+        public int AssignedBuildingId { get; set; }
         public List<FollowerAbility> Abilities { get; set; }
 
         public GarrisonFollowerStatus Status { get; set; }
@@ -49,6 +51,12 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             ItemLevel = follower.ItemLevel;
             XP = follower.LevelExperience;
             Status = follower.Status;
+
+            if (Status == GarrisonFollowerStatus.Working)
+                AssignedBuildingId = follower.InsideBuildingId;
+            else
+                AssignedBuildingId = -1;
+
             Abilities = new List<FollowerAbility>();
 
             //foreach (var ability in follower.AllAbilities)
@@ -405,11 +413,11 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
             if (followerid == 467)
             {
-                var flightPath = new BehaviorUseFlightPath("Stormshield", new[] { "Warspear" });
-
                 var moveLoc = Player.IsAlliance
-                    ? new WoWPoint(3589.48, 3935.393, 21.33015)
-                    : new WoWPoint(5300.374, 3966.365, 18.41501);
+                   ? new WoWPoint(3589.48, 3935.393, 21.33015)
+                   : new WoWPoint(5300.374, 3966.365, 18.41501);
+
+                var flightPath = new BehaviorUseFlightPath(moveLoc);
 
                 var moveBehavior = new BehaviorMove(moveLoc);
 
@@ -623,6 +631,77 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 return newArray;
             }
 
+            #endregion
+
+            #region Abu'gar (209)
+            if (followerid == 209)
+            {
+                //Collect 3 items
+                //Talk to NPC
+
+                //First Item - Vitality
+                //object id: 233157
+                //<GameObject Name="Abu'gar's Vitality" Entry="233157" X="2609.344" Y="5572.999" Z="91.78837" />
+                //item id: 114242
+                int vitality_objectId = 233157;
+                int vitality_itemId = 114242;
+                uint vitality_questId = 35711;
+
+                var moveto_vitality_move1 = new BehaviorMove(new WoWPoint(2596.605, 5597.822, 126.3142), 1f);
+                WoWPoint vitality_loc2 = new WoWPoint(2609.613, 5579.829, 90.33648);
+                var moveto_vitality_move2 = new BehaviorMove(vitality_loc2, 1f, Movement.MovementTypes.ClickToMove);
+
+                var custom_vitality_check = new BehaviorCustomAction(null, null, false);
+                custom_vitality_check.CustomAction = () => Behavior.ResetBehavior(custom_vitality_check);
+                custom_vitality_check.CustomCondition = () => !Navigator.CanNavigateFully(Player.Location, vitality_loc2);
+
+                var gossip_vitality = new BehaviorGossipInteract(vitality_objectId, 0, true,
+                                        () => Player.Inventory.GetBagItemsById(vitality_itemId).Count == 0);
+
+                var barray_item_vitality = new BehaviorArray(
+                    new Behavior[]
+                    {
+                        moveto_vitality_move1, 
+                        moveto_vitality_move2, 
+                        custom_vitality_check,
+                        gossip_vitality,
+                    });
+                barray_item_vitality.Criteria += () => Player.Inventory.GetBagItemsById(114242).Count == 0 &&
+                                                       !LuaCommands.IsQuestFlaggedCompleted(vitality_questId.ToString());
+
+
+                //Second Item - Lure
+                //<GameObject Name="Abu'Gar's Favorite Lure" Entry="233642" X="3056.673" Y="7132.38" Z="1.907172" />
+               
+                int lure_objectId = 233642;
+                int lure_itemId = 114245;
+                uint lure_questId = 36072;
+                WoWPoint lure_moveLoc = new WoWPoint(3052.387, 7130.97, 4.490187);
+                var moveto_lure_move1 = new BehaviorMove(lure_moveLoc);
+                var moveto_lure_move2 = new BehaviorMove(lure_moveLoc, 2f, Movement.MovementTypes.ClickToMove);
+                var gossip_lure = new BehaviorGossipInteract(lure_objectId, 0, true,
+                                       () => Player.Inventory.GetBagItemsById(lure_itemId).Count == 0);
+               
+                var barray_item_lure = new BehaviorArray(
+                    new Behavior[]
+                    {
+                        moveto_lure_move1, 
+                        moveto_lure_move2, 
+                        gossip_lure,
+                    });
+                barray_item_lure.Criteria += () => Player.Inventory.GetBagItemsById(lure_itemId).Count == 0 &&
+                                                       !LuaCommands.IsQuestFlaggedCompleted(lure_questId.ToString());
+
+
+                var returnArray = new BehaviorArray(new Behavior[]
+                {
+                    barray_item_vitality,
+                    barray_item_lure,
+                });
+                returnArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
+                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                return returnArray;
+            }
             #endregion
 
             return null;

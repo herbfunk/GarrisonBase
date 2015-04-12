@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Bots.Quest;
@@ -19,10 +18,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorPrimalTrader()
             : base(GarrisonManager.PrimalTraderPoint, GarrisonManager.PrimalTraderID)
         {
-            Criteria += () =>
+            RunCondition += () =>
                     BaseSettings.CurrentSettings.ExchangePrimalSpirits &&
                     ExchangeItemInfo != null &&
                     ExchangeItemInfo.Cost <= TotalPrimalSpiritCount;
+
+            Criteria += RunCondition;
         }
 
 
@@ -66,7 +67,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     await CommonCoroutines.WaitForLuaEvent("BAG_UPDATE",
                         StyxWoW.Random.Next(1255, 1777),
                         null,
-                        () => success = MerchantHelper.BuyItem(Convert.ToUInt32((int)ExchangeItemInfo.ReagentType), 1, true));
+                        () => success = MerchantHelper.BuyItem(ExchangeItemInfo.ItemId, 1, true));
 
                     await CommonCoroutines.SleepForRandomUiInteractionTime();
                     await Coroutine.Yield();
@@ -92,7 +93,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (_npcMovement == null)
                     _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f);
 
-                await _npcMovement.MoveTo();
+                await _npcMovement.MoveTo(false);
                 return true;
             }
 
@@ -106,7 +107,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 return
                     GarrisonManager.PrimalTraderItems.FirstOrDefault(
-                        i => i.Name == BaseSettings.CurrentSettings.PrimalSpiritItem);
+                        i => i.ItemId == BaseSettings.CurrentSettings.PrimalSpiritItemId);
             }
         }
 

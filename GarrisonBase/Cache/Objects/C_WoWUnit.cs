@@ -21,9 +21,8 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public bool Attackable { get; set; }
         public bool Lootable { get; set; }
         public bool CanInteract { get; set; }
-        public QuestGiverStatus QuestGiverStatus { get; set; }
-        private bool updateQuestGiverStatus = false;
-        private bool updateCanInteract = false;
+        public QuestGiverStatus QuestGiverStatus= QuestGiverStatus.None;
+
         public C_WoWUnit(WoWUnit obj)
             : base(obj)
         {
@@ -37,8 +36,6 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                     SubType = WoWObjectTypes.GarrisonWorkOrderNpc;
                     InteractRange = 5.4f;
                     IgnoresRemoval = true;
-                    updateQuestGiverStatus = true;
-                    updateCanInteract = true;
                 }
                 else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
                 {
@@ -91,7 +88,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             Location = RefWoWUnit.Location;
             IsDead=RefWoWUnit.IsDead;
 
-            if (IsQuestNpc)
+            if (ObjectCacheManager.IsQuesting || IsQuestNpc)
             {
                 CanInteract = RefWoWUnit.CanInteract;
                 QuestGiverStatus = RefWoWUnit.QuestGiverStatus;

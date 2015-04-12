@@ -1,5 +1,28 @@
-﻿v1.2.2.1
+﻿v1.2.2.2
+Primal Trader setting has changed to used ID and will require setting it to a value again.
+Added Daily Quests for Warmill/Dwarven Bunker daily scraps and for Alchemy Lab with assigned follower.
+
+
+Movement
+	-Most behaviors movement has been changed so if movement occurs after finishing it will move back.
+	-Work order movement has been fixed so it no longer loops between CTM and regular move.
+	-Added name optional property to movement class for logging purposes.
+	-Added Level 3 Barn movement for both Horde and Alliance.
+
+Behavior
+	-Added Virtual Func for updating the interaction object to allow for custom returns. (Default is by entry id given)
+	-Removed Virtual Movement and Interaction methods as they were never really used.
+
+
+
+v1.2.2.1
 Primal trader now uses item id to match correct item to buy.
+Mining behavior will no longer require LOS and will gradually increase range of loot as it moves.
+
+BehaviorArray now adds its critieria to the individual behaviors during initalization method.
+Added property into ObjectManager to ignore line of sight failure for game objects.
+Movement MoveTo method will now by default check if flight path should be used when first used.
+
 
 v1.2.2.0
 Work order pickup no longer uses name to find and ID objects.

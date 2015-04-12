@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
 using Styx;
 using Styx.Common.Helpers;
@@ -102,12 +103,14 @@ namespace Herbfunk.GarrisonBase.Coroutines
             {
                 _combatMovement = new Movement(ObjectCacheManager.CombatObject.Location,
                     RoutineManager.Current.PullDistance.HasValue ? (float)RoutineManager.Current.PullDistance.Value :
-                    ObjectCacheManager.CombatObject.InteractRange);
+                    ObjectCacheManager.CombatObject.InteractRange,
+                    name: String.Format("Combat {0}", ObjectCacheManager.CombatObject.Name));
             }
             else if (_combatMovement.CurrentMovementQueue.Count == 0)
             {
                 _combatMovement = new Movement(ObjectCacheManager.CombatObject.Location,
-                    ObjectCacheManager.CombatObject.InteractRange -= 0.25f);
+                    ObjectCacheManager.CombatObject.InteractRange -= 0.25f,
+                    name: String.Format("Combat {0}", ObjectCacheManager.CombatObject.Name));
             }
 
             var result = await _combatMovement.MoveTo_Result();

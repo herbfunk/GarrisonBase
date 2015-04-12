@@ -19,7 +19,7 @@ namespace Herbfunk.GarrisonBase
     public class GarrisonBase : BotBase
     {
         public static HBRelogApi HbRelogApi;
-        internal static readonly Version Version = new Version(1,2,2,1);
+        internal static readonly Version Version = new Version(1,2,2,2);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {

@@ -32,7 +32,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (Building.Type == BuildingType.Barn && Building.SpecialMovementPoints != null)
             {
-                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f);
+                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f, name: "BarnSpecialMovement");
             }
 
             base.Initalize();
@@ -57,7 +57,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private Movement _movement, _specialMovement;
 
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             if (Building.CheckedWorkOrderPickUp)
                 return false;
@@ -134,27 +134,19 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     //Last position was nearest and we reached our destination.. so lets finish special movement!
                     if (result == MoveResult.ReachedDestination)
                     {
+                        _specialMovement.ForceDequeue(true);
                         _specialMovement.DequeueAll(false);
                     }
                 }
-
-
-                if (_movement == null)
-                    _movement = new Movement(WorkOrderObject.Location, 4f);
-
-                //since we are navigating inside building.. we must continue to use CTM
-                if (await _movement.ClickToMove(false))
-                    return true;
             }
 
 
             //Move to the interaction object
-            if (_movement == null || _movement.CurrentMovementQueue.Count==0)
-                _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange-0.25f);
+            if (_movement == null)
+                _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange-0.25f, name: "WorkOrderPickup " + WorkOrderObject.Name);
 
 
-            await _movement.MoveTo();
-
+            await _movement.ClickToMove(false);
             return true;
         }
 

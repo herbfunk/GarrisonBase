@@ -9,7 +9,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
     public class WorkOrder
     {
         public BuildingType BuildingType { get; set; }
-        public string BuildingId { get; set; }
+        public int BuildingId { get; set; }
         public WorkOrderType Type { get; set; }
         public int Maximum { get; set; }
         public int Pending { get; set; }
@@ -17,7 +17,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public CacheStaticLookUp.RushOrders RushOrderItemType { get; set; }
         public Tuple<CraftingReagents, int>[] Currency { get; set; }
 
-        public WorkOrder(string buildingId, BuildingType buildingType, WorkOrderType workorderType,
+        public WorkOrder(int buildingId, BuildingType buildingType, WorkOrderType workorderType,
             int max, Tuple<CraftingReagents, int>[] currency, int pending = 0, int pickup = 0)
         {
             BuildingId = buildingId;

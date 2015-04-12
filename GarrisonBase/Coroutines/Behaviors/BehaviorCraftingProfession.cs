@@ -32,6 +32,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
+            _prechecks = false;
+
             if (Skill == SkillLine.Blacksmithing || Skill == SkillLine.Engineering)
             {
                 if (!GarrisonManager.HasForge)
@@ -71,7 +73,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             //Requires Anvil
             if (Skill == SkillLine.Blacksmithing || Skill == SkillLine.Engineering)
             {
-                if (_movement != null && await _movement.MoveTo())
+                if (_movement != null && await _movement.MoveTo(false))
                     return true;
             }
 

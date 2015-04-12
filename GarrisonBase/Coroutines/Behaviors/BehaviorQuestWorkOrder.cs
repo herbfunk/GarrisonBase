@@ -14,10 +14,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public readonly uint QuestID;
         public readonly Building Building;
         public BehaviorQuestWorkOrder(Building building)
-            : base(building.SafeMovementPoint, building.WorkOrderNPCEntryId)
+            : base(building.SafeMovementPoint, building.WorkOrderNpcEntryId)
         {
             Building = building;
-            QuestID = building.FirstQuestID;
+            QuestID = building.FirstQuestId;
         }
 
         public override void Initalize()

@@ -24,7 +24,7 @@ namespace Herbfunk.GarrisonBase.Config
             try
             {
                 checkBox_HBRelogSkipTask.Checked = BaseSettings.CurrentSettings.HBRelog_SkipToNextTask;
-                checkBox_HBRelogSkipTask.CheckedChanged += checkBox_HBRelogSkipToNextTask_CheckedChanged;
+                checkBox_HBRelogSkipTask.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.HBRelog_SkipToNextTask=!BaseSettings.CurrentSettings.HBRelog_SkipToNextTask;
 
                 trackBar_ReservedGarrisonResources.Value = BaseSettings.CurrentSettings.ReservedGarrisonResources;
                 //label_ReservedGarrisonResources.Text = BaseSettings.CurrentSettings.ReservedGarrisonResources.ToString(CultureInfo.InvariantCulture);
@@ -321,22 +321,22 @@ namespace Herbfunk.GarrisonBase.Config
                 #endregion
 
                 checkBox_MissionRewards_FollowerToken_ArmorSet615.Checked =BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615;
-                checkBox_MissionRewards_FollowerToken_ArmorSet615.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet615_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_ArmorSet615.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615;
 
                 checkBox_MissionRewards_FollowerToken_ArmorSet630.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630;
-                checkBox_MissionRewards_FollowerToken_ArmorSet630.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet630_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_ArmorSet630.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630;
 
                 checkBox_MissionRewards_FollowerToken_ArmorSet645.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645;
-                checkBox_MissionRewards_FollowerToken_ArmorSet645.CheckedChanged += checkBox_MissionRewards_FollowerToken_ArmorSet645_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_ArmorSet645.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645;
 
                 checkBox_MissionRewards_FollowerToken_WeaponSet615.Checked=BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615;
-                checkBox_MissionRewards_FollowerToken_WeaponSet615.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet615_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_WeaponSet615.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615=!BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615;
 
                 checkBox_MissionRewards_FollowerToken_WeaponSet630.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630;
-                checkBox_MissionRewards_FollowerToken_WeaponSet630.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet630_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_WeaponSet630.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630=!BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630;
 
                 checkBox_MissionRewards_FollowerToken_WeaponSet645.Checked = BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645;
-                checkBox_MissionRewards_FollowerToken_WeaponSet645.CheckedChanged += checkBox_MissionRewards_FollowerToken_WeaponSet645_CheckedChanged;
+                checkBox_MissionRewards_FollowerToken_WeaponSet645.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645=!BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645;
 
                 trackBar_ItemReward_CharacterTokenLevel.Value=BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel;
                 label_ItemReward_CharacterTokenLevel.Text=BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel.ToString(CultureInfo.InvariantCulture);
@@ -344,72 +344,72 @@ namespace Herbfunk.GarrisonBase.Config
 
                 //
                 checkBox_Behavior_Disenchant.Checked = BaseSettings.CurrentSettings.BehaviorDisenchanting;
-                checkBox_Behavior_Disenchant.CheckedChanged += checkBox_Behavior_Disenchant_CheckedChanged;
+                checkBox_Behavior_Disenchant.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorDisenchanting=!BaseSettings.CurrentSettings.BehaviorDisenchanting;
 
                 checkBox_Behavior_HerbGather.Checked = BaseSettings.CurrentSettings.BehaviorHerbGather;
-                checkBox_Behavior_HerbGather.CheckedChanged += checkBox_Behavior_HerbGather_CheckedChanged;
+                checkBox_Behavior_HerbGather.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorHerbGather=!BaseSettings.CurrentSettings.BehaviorHerbGather;
 
                 checkBox_Behavior_MineGather.Checked = BaseSettings.CurrentSettings.BehaviorMineGather;
-                checkBox_Behavior_MineGather.CheckedChanged += checkBox_Behavior_MineGather_CheckedChanged;
+                checkBox_Behavior_MineGather.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorMineGather=!BaseSettings.CurrentSettings.BehaviorMineGather;
 
                 checkBox_Behavior_Quests.Checked = BaseSettings.CurrentSettings.BehaviorQuests;
-                checkBox_Behavior_Quests.CheckedChanged += checkBox_Behavior_Quests_CheckedChanged;
+                checkBox_Behavior_Quests.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorQuests=!BaseSettings.CurrentSettings.BehaviorQuests;
 
                 checkBox_Behavior_Professions.Checked = BaseSettings.CurrentSettings.BehaviorProfessions;
-                checkBox_Behavior_Professions.CheckedChanged += checkBox_Behavior_Professions_CheckedChanged;
+                checkBox_Behavior_Professions.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorProfessions=!BaseSettings.CurrentSettings.BehaviorProfessions;
 
                 checkBox_Behavior_RepairSell.Checked = BaseSettings.CurrentSettings.BehaviorRepairSell;
-                checkBox_Behavior_RepairSell.CheckedChanged += checkBox_Behavior_RepairSell_CheckedChanged;
+                checkBox_Behavior_RepairSell.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorRepairSell=!BaseSettings.CurrentSettings.BehaviorRepairSell;
 
                 checkBox_Behavior_StartMissions.Checked = BaseSettings.CurrentSettings.BehaviorMissionStart;
-                checkBox_Behavior_StartMissions.CheckedChanged += checkBox_Behavior_StartMissions_CheckedChanged;
+                checkBox_Behavior_StartMissions.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorMissionStart=!BaseSettings.CurrentSettings.BehaviorMissionStart;
 
                 checkBox_Behavior_WorkOrderPickup.Checked = BaseSettings.CurrentSettings.BehaviorWorkOrderPickup;
-                checkBox_Behavior_WorkOrderPickup.CheckedChanged += checkBox_Behavior_WorkOrderPickup_CheckedChanged;
+                checkBox_Behavior_WorkOrderPickup.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorWorkOrderPickup=!BaseSettings.CurrentSettings.BehaviorWorkOrderPickup;
 
                 checkBox_Behavior_WorkOrderStart.Checked = BaseSettings.CurrentSettings.BehaviorWorkOrderStartup;
-                checkBox_Behavior_WorkOrderStart.CheckedChanged += checkBox_Behavior_WorkOrderStart_CheckedChanged;
+                checkBox_Behavior_WorkOrderStart.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorWorkOrderStartup=!BaseSettings.CurrentSettings.BehaviorWorkOrderStartup;
 
                 checkBox_Behavior_Salvaging.Checked = BaseSettings.CurrentSettings.BehaviorSalvaging;
-                checkBox_Behavior_Salvaging.CheckedChanged += checkBox_Behavior_Salvaging_CheckedChanged;
+                checkBox_Behavior_Salvaging.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorSalvaging=!BaseSettings.CurrentSettings.BehaviorSalvaging;
 
                 checkBox_Behavior_LootCache.Checked = BaseSettings.CurrentSettings.BehaviorLootCache;
-                checkBox_Behavior_LootCache.CheckedChanged += checkBox_Behavior_LootCache_CheckedChanged;
+                checkBox_Behavior_LootCache.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorLootCache=!BaseSettings.CurrentSettings.BehaviorLootCache;
 
                 checkBox_MailAutoGet.Checked = BaseSettings.CurrentSettings.MailAutoGet;
-                checkBox_MailAutoGet.CheckedChanged += checkBox_MailAutoGet_CheckedChanged;
+                checkBox_MailAutoGet.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailAutoGet=!BaseSettings.CurrentSettings.MailAutoGet;
 
                 checkBox_MailAutoSend.Checked = BaseSettings.CurrentSettings.MailAutoSend;
-                checkBox_MailAutoSend.CheckedChanged += checkBox_MailAutoSend_CheckedChanged;
+                checkBox_MailAutoSend.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailAutoSend=!BaseSettings.CurrentSettings.MailAutoSend;
 
                 //
                 checkBox_MailEnchanting.Checked = BaseSettings.CurrentSettings.MailSendEnchanting;
-                checkBox_MailEnchanting.CheckedChanged += checkBox_MailEnchanting_CheckedChanged;
+                checkBox_MailEnchanting.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MailSendEnchanting = !BaseSettings.CurrentSettings.MailSendEnchanting;;
                 textBox_MailEnchanting.Text = BaseSettings.CurrentSettings.MailSendEnchantingRecipient;
                 textBox_MailEnchanting.TextChanged += textBox_MailEnchanting_TextChanged;
 
                 checkBox_MailEpic.Checked = BaseSettings.CurrentSettings.MailSendEpic;
-                checkBox_MailEpic.CheckedChanged += checkBox_MailEpic_CheckedChanged;
+                checkBox_MailEpic.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailSendEpic=!BaseSettings.CurrentSettings.MailSendEpic;
                 textBox_MailEpic.Text = BaseSettings.CurrentSettings.MailSendEpicRecipient;
                 textBox_MailEpic.TextChanged += textBox_MailEpic_TextChanged;
 
                 checkBox_MailHerbs.Checked = BaseSettings.CurrentSettings.MailSendHerbs;
-                checkBox_MailHerbs.CheckedChanged += checkBox_MailHerbs_CheckedChanged;
+                checkBox_MailHerbs.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailSendHerbs=!BaseSettings.CurrentSettings.MailSendHerbs;
                 textBox_MailHerbs.Text = BaseSettings.CurrentSettings.MailSendHerbsRecipient;
                 textBox_MailHerbs.TextChanged += textBox_MailHerbs_TextChanged;
 
                 checkBox_MailOre.Checked = BaseSettings.CurrentSettings.MailSendOre;
-                checkBox_MailOre.CheckedChanged += checkBox_MailOre_CheckedChanged;
+                checkBox_MailOre.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailSendOre=!BaseSettings.CurrentSettings.MailSendOre;
                 textBox_MailOre.Text = BaseSettings.CurrentSettings.MailSendOreRecipient;
                 textBox_MailOre.TextChanged += textBox_MailOre_TextChanged;
 
                 checkBox_MailRare.Checked = BaseSettings.CurrentSettings.MailSendRare;
-                checkBox_MailRare.CheckedChanged += checkBox_MailRare_CheckedChanged;
+                checkBox_MailRare.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailSendRare=!BaseSettings.CurrentSettings.MailSendRare;
                 textBox_MailRare.Text = BaseSettings.CurrentSettings.MailSendRareRecipient;
                 textBox_MailRare.TextChanged += textBox_MailRare_TextChanged;
 
                 checkBox_MailUncommon.Checked = BaseSettings.CurrentSettings.MailSendUncommon;
-                checkBox_MailUncommon.CheckedChanged += checkBox_MailUncommon_CheckedChanged;
+                checkBox_MailUncommon.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailSendUncommon=!BaseSettings.CurrentSettings.MailSendUncommon;
                 textBox_MailUncommon.Text = BaseSettings.CurrentSettings.MailSendUncommonRecipient;
                 textBox_MailUncommon.TextChanged += textBox_MailUncommon_TextChanged;
 
@@ -431,8 +431,8 @@ namespace Herbfunk.GarrisonBase.Config
                 var index = 0;
                 foreach (var item in GarrisonManager.PrimalTraderItems)
                 {
-                    comboBox_PrimalSpiritItems.Items.Add(item.Name);
-                    if (BaseSettings.CurrentSettings.PrimalSpiritItem == item.Name)
+                    comboBox_PrimalSpiritItems.Items.Add(item.Type.ToString());
+                    if (BaseSettings.CurrentSettings.PrimalSpiritItemId == item.ItemId)
                         primalTraderIndex = index;
                     index++;
                 }
@@ -483,27 +483,27 @@ namespace Herbfunk.GarrisonBase.Config
                     flowLayoutPanel_TradePostReagents.Controls.Add(newCheckBox);
                 }
                 checkBox_Vendor_Junk.Checked = BaseSettings.CurrentSettings.VendorJunkItems;
-                checkBox_Vendor_Junk.CheckedChanged += checkBox_Vendor_Junk_CheckedChanged;
+                checkBox_Vendor_Junk.CheckedChanged += (sender, args) =>  BaseSettings.CurrentSettings.VendorJunkItems=! BaseSettings.CurrentSettings.VendorJunkItems;
                 checkBox_Vendor_Common.Checked = BaseSettings.CurrentSettings.VendorCommonItems;
-                checkBox_Vendor_Common.CheckedChanged += checkBox_Vendor_Common_CheckedChanged;
+                checkBox_Vendor_Common.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.VendorCommonItems=!BaseSettings.CurrentSettings.VendorCommonItems;
                 checkBox_Vendor_Uncommon.Checked = BaseSettings.CurrentSettings.VendorUncommonItems;
-                checkBox_Vendor_Uncommon.CheckedChanged += checkBox_Vendor_Uncommon_CheckedChanged;
+                checkBox_Vendor_Uncommon.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.VendorUncommonItems=!BaseSettings.CurrentSettings.VendorUncommonItems;
                 checkBox_Vendor_Rare.Checked = BaseSettings.CurrentSettings.VendorRareItems;
-                checkBox_Vendor_Rare.CheckedChanged += checkBox_Vendor_Rare_CheckedChanged;
+                checkBox_Vendor_Rare.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.VendorRareItems=!BaseSettings.CurrentSettings.VendorRareItems;
 
                 checkBox_Disenchanting_UncommonItems.Checked = BaseSettings.CurrentSettings.DisenchantingUncommon;
-                checkBox_Disenchanting_UncommonItems.CheckedChanged += checkBox_Disenchanting_UncommonItems_CheckedChanged;
+                checkBox_Disenchanting_UncommonItems.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingUncommon=!BaseSettings.CurrentSettings.DisenchantingUncommon;
                 checkBox_Disenchanting_Epic.Checked = BaseSettings.CurrentSettings.DisenchantingEpic;
-                checkBox_Disenchanting_Epic.CheckedChanged += checkBox_Disenchanting_Epic_CheckedChanged;
+                checkBox_Disenchanting_Epic.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingEpic=!BaseSettings.CurrentSettings.DisenchantingEpic;
                 checkBox_Disenchanting_RareItems.Checked = BaseSettings.CurrentSettings.DisenchantingRare;
-                checkBox_Disenchanting_RareItems.CheckedChanged += checkBox_Disenchanting_RareItems_CheckedChanged;
+                checkBox_Disenchanting_RareItems.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingRare=!BaseSettings.CurrentSettings.DisenchantingRare;
 
                 checkBox_Disenchanting_UncommonSoulbound.Checked = BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded;
-                checkBox_Disenchanting_UncommonSoulbound.CheckedChanged += checkBox_Disenchanting_UncommonSoulbound_CheckedChanged;
+                checkBox_Disenchanting_UncommonSoulbound.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded=!BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded;
                 checkBox_Disenchanting_RareSoulbound.Checked = BaseSettings.CurrentSettings.DisenchantingRareSoulbounded;
-                checkBox_Disenchanting_RareSoulbound.CheckedChanged += checkBox_Disenchanting_RareSoulbound_CheckedChanged;
+                checkBox_Disenchanting_RareSoulbound.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingRareSoulbounded=!BaseSettings.CurrentSettings.DisenchantingRareSoulbounded;
                 checkBox_Disenchanting_EpicSoulbound.Checked = BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded;
-                checkBox_Disenchanting_EpicSoulbound.CheckedChanged += checkBox_Disenchanting_EpicSoulbound_CheckedChanged;
+                checkBox_Disenchanting_EpicSoulbound.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded=!BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded;
 
                 textBox_Disenchanting_UncommonLevel.Text = BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel.ToString();
                 textBox_Disenchanting_UncommonLevel.TextChanged += textBox_Disenchanting_UncommonLevel_TextedChanged;
@@ -515,7 +515,7 @@ namespace Herbfunk.GarrisonBase.Config
 
 
                 checkBox_ExchangePrimalSpirits.Checked = BaseSettings.CurrentSettings.ExchangePrimalSpirits;
-                checkBox_ExchangePrimalSpirits.CheckedChanged += checkBox_ExchangePrimalSpirits_CheckedChanged;
+                checkBox_ExchangePrimalSpirits.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.ExchangePrimalSpirits=!BaseSettings.CurrentSettings.ExchangePrimalSpirits;
 
                 #region Profession Crafting Settings
 
@@ -585,7 +585,7 @@ namespace Herbfunk.GarrisonBase.Config
 
                 //Milling (Inscription)
                 checkBox_Milling_Enabled.Checked = BaseSettings.CurrentSettings.MillingEnabled;
-                checkBox_Milling_Enabled.CheckedChanged += checkBox_Milling_Enabled_CheckedChanged;
+                checkBox_Milling_Enabled.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MillingEnabled=!BaseSettings.CurrentSettings.MillingEnabled;
 
                 textBox_Milling_RequiredAmount.Text = BaseSettings.CurrentSettings.MillingMinimum.ToString();
                 textBox_Milling_RequiredAmount.TextChanged += textBox_Milling_Minimum_TextedChanged;
@@ -665,32 +665,68 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Follower_193.Name = "193";
                 checkBox_Follower_207.Name = "207";
                 checkBox_Follower_467.Name = "467";
+                checkBox_Follower_209.Name = "209";
                 checkBox_Follower_170.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(170);
                 checkBox_Follower_189.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(189);
                 checkBox_Follower_190.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(190);
                 checkBox_Follower_193.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(193);
                 checkBox_Follower_207.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(207);
                 checkBox_Follower_467.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(467);
+                checkBox_Follower_209.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(209);
                 checkBox_Follower_170.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_189.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_190.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_193.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_207.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_467.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_209.CheckedChanged += checkBox_Follower_CheckedChanged;
+
+                //Daily Quests
+                checkBox_DailyQuest_Warmill.Checked = BaseSettings.CurrentSettings.DailyWarMillQuestSettings.Enabled;
+                checkBox_DailyQuest_Warmill.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DailyWarMillQuestSettings.Enabled = !BaseSettings.CurrentSettings.DailyWarMillQuestSettings.Enabled;
+                if (BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex > -1)
+                {
+                    comboBox_DailyQuest_WarMill_Rewards.SelectedIndex =
+                        BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex;
+                }
+                comboBox_DailyQuest_WarMill_Rewards.SelectedIndexChanged += (sender, args) =>
+                {
+                    ComboBox senderCB = (ComboBox) sender;
+                    if (senderCB.SelectedIndex > -1)
+                    {
+                        BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex = senderCB.SelectedIndex;
+                    }
+                };
+
+                checkBox_DailyQuest_AlchemyLab.Checked = BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.Enabled;
+                checkBox_DailyQuest_AlchemyLab.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.Enabled=!BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.Enabled;
+                if (BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex > -1)
+                {
+                    comboBox_DailyQuest_Alchemy_Rewards.SelectedIndex =
+                        BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex;
+                }
+                comboBox_DailyQuest_Alchemy_Rewards.SelectedIndexChanged += (sender, args) =>
+                {
+                    ComboBox senderCB = (ComboBox)sender;
+                    if (senderCB.SelectedIndex > -1)
+                    {
+                        BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex = senderCB.SelectedIndex;
+                    }
+                };
 
                 //debug
                 checkBox_Debug_FakeStartWorkOrder.Checked = BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
-                checkBox_Debug_FakeStartWorkOrder.CheckedChanged += checkBox_Debug_FakeStartWorkOrder_CheckedChanged;
+                checkBox_Debug_FakeStartWorkOrder.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER=!BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
 
                 checkBox_Debug_FakeFinishQuest.Checked = BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST;
-                checkBox_Debug_FakeFinishQuest.CheckedChanged += checkBox_Debug_FakeFinishQuest_CheckedChanged;
+                checkBox_Debug_FakeFinishQuest.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST=!BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST;
 
 
                 checkBox_Debug_IgnoreHearthStone.Checked = BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE;
-                checkBox_Debug_IgnoreHearthStone.CheckedChanged += checkBox_Debug_IgnoreHearthStone_CheckedChanged;
+                checkBox_Debug_IgnoreHearthStone.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE=!BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE;
 
                 checkBox_Debug_FakePickupWorkOrder.Checked = BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER;
-                checkBox_Debug_FakePickupWorkOrder.CheckedChanged += checkBox_Debug_FakePickupWorkOrder_CheckedChanged;
+                checkBox_Debug_FakePickupWorkOrder.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER=!BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER;
             }
             catch (Exception ex)
             {
@@ -776,10 +812,7 @@ namespace Herbfunk.GarrisonBase.Config
             else
                 BaseSettings.CurrentSettings.ProfessionSpellIds.Add(value);
         }
-        private void checkBox_Milling_Enabled_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MillingEnabled = !BaseSettings.CurrentSettings.MillingEnabled;
-        }
+
         private void textBox_Milling_Minimum_TextedChanged(object sender, EventArgs e)
         {
             var txtbox = (TextBox)sender;
@@ -869,30 +902,7 @@ namespace Herbfunk.GarrisonBase.Config
             else
                 BaseSettings.CurrentSettings.TradePostReagents |= value;
         }
-        private void checkBox_Disenchanting_UncommonItems_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingUncommon = !BaseSettings.CurrentSettings.DisenchantingUncommon;
-        }
-        private void checkBox_Disenchanting_Epic_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingEpic = !BaseSettings.CurrentSettings.DisenchantingEpic;
-        }
-        private void checkBox_Disenchanting_RareItems_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingRare = !BaseSettings.CurrentSettings.DisenchantingRare;
-        }
-        private void checkBox_Disenchanting_UncommonSoulbound_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded = !BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded;
-        }
-        private void checkBox_Disenchanting_RareSoulbound_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingRareSoulbounded = !BaseSettings.CurrentSettings.DisenchantingRareSoulbounded;
-        }
-        private void checkBox_Disenchanting_EpicSoulbound_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded = !BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded;
-        }
+
         private void textBox_Disenchanting_UncommonLevel_TextedChanged(object sender, EventArgs e)
         {
             var txtbox = (TextBox)sender;
@@ -914,37 +924,19 @@ namespace Herbfunk.GarrisonBase.Config
             if (string.IsNullOrEmpty(value)) value = "0";
             BaseSettings.CurrentSettings.DisenchantingEpicItemLevel = value.ToInt32();
         }
-        private void checkBox_Vendor_Junk_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.VendorJunkItems = !BaseSettings.CurrentSettings.VendorJunkItems;
-        }
-        private void checkBox_Vendor_Common_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.VendorCommonItems = !BaseSettings.CurrentSettings.VendorCommonItems;
-        }
-        private void checkBox_Vendor_Uncommon_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.VendorUncommonItems = !BaseSettings.CurrentSettings.VendorUncommonItems;
-        }
-        private void checkBox_Vendor_Rare_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.VendorRareItems = !BaseSettings.CurrentSettings.VendorRareItems;
-        }
+
         private void comboBox_PrimalSpiritItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBox_PrimalSpiritItems.SelectedIndex > -1)
             {
-                BaseSettings.CurrentSettings.PrimalSpiritItem = comboBox_PrimalSpiritItems.SelectedItem.ToString();
+                string name = comboBox_PrimalSpiritItems.SelectedItem.ToString();
+                var enumvalue = (GarrisonManager.PrimalTraderItemTypes)Enum.Parse(typeof(GarrisonManager.PrimalTraderItemTypes), name);
+                //BaseSettings.CurrentSettings.PrimalSpiritItem = comboBox_PrimalSpiritItems.SelectedItem.ToString();
+                BaseSettings.CurrentSettings.PrimalSpiritItemId = Convert.ToUInt32((int) enumvalue);
             }
         }
-        private void checkBox_ExchangePrimalSpirits_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.ExchangePrimalSpirits = !BaseSettings.CurrentSettings.ExchangePrimalSpirits;
-        }
-        private void checkBox_HBRelogSkipToNextTask_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.HBRelog_SkipToNextTask = !BaseSettings.CurrentSettings.HBRelog_SkipToNextTask;
-        }
+      
+
         private void textBox_MailRare_TextChanged(object sender, EventArgs e)
         {
             BaseSettings.CurrentSettings.MailSendRareRecipient = textBox_MailRare.Text;
@@ -969,106 +961,7 @@ namespace Herbfunk.GarrisonBase.Config
         {
             BaseSettings.CurrentSettings.MailSendUncommonRecipient = textBox_MailUncommon.Text;
         }
-        private void checkBox_MailUncommon_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendUncommon = !BaseSettings.CurrentSettings.MailSendUncommon;
-        }
-        private void checkBox_MailRare_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendRare = !BaseSettings.CurrentSettings.MailSendRare;
-        }
-        private void checkBox_MailOre_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendOre = !BaseSettings.CurrentSettings.MailSendOre;
-        }
-        private void checkBox_MailHerbs_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendHerbs = !BaseSettings.CurrentSettings.MailSendHerbs;
-        }
-        private void checkBox_MailEpic_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendEpic = !BaseSettings.CurrentSettings.MailSendEpic;
-        }
-        private void checkBox_MailEnchanting_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailSendEnchanting = !BaseSettings.CurrentSettings.MailSendEnchanting;
-        }
-        private void checkBox_MailAutoGet_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailAutoGet = !BaseSettings.CurrentSettings.MailAutoGet;
-        }
-        private void checkBox_MailAutoSend_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MailAutoSend = !BaseSettings.CurrentSettings.MailAutoSend;
-        }
-        private void checkBox_Behavior_LootCache_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorLootCache = !BaseSettings.CurrentSettings.BehaviorLootCache;
-        }
-        private void checkBox_Behavior_Salvaging_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorSalvaging = !BaseSettings.CurrentSettings.BehaviorSalvaging;
-        }
-        private void checkBox_Behavior_Disenchant_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorDisenchanting = !BaseSettings.CurrentSettings.BehaviorDisenchanting;
-        }
-        private void checkBox_Behavior_HerbGather_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorHerbGather = !BaseSettings.CurrentSettings.BehaviorHerbGather;
-        }
-        private void checkBox_Behavior_MineGather_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorMineGather = !BaseSettings.CurrentSettings.BehaviorMineGather;
-        }
-        private void checkBox_Behavior_Quests_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorQuests = !BaseSettings.CurrentSettings.BehaviorQuests;
-        }
-        private void checkBox_Behavior_Professions_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorProfessions = !BaseSettings.CurrentSettings.BehaviorProfessions;
-        }
-        private void checkBox_Behavior_RepairSell_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorRepairSell = !BaseSettings.CurrentSettings.BehaviorRepairSell;
-        }
-        private void checkBox_Behavior_StartMissions_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorMissionStart = !BaseSettings.CurrentSettings.BehaviorMissionStart;
-        }
-        private void checkBox_Behavior_WorkOrderPickup_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorWorkOrderPickup = !BaseSettings.CurrentSettings.BehaviorWorkOrderPickup;
-        }
-        private void checkBox_Behavior_WorkOrderStart_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.BehaviorWorkOrderStartup = !BaseSettings.CurrentSettings.BehaviorWorkOrderStartup;
-        }
-        private void checkBox_MissionRewards_FollowerToken_ArmorSet615_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615;
-        }
-        private void checkBox_MissionRewards_FollowerToken_ArmorSet630_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630;
-        }
-        private void checkBox_MissionRewards_FollowerToken_ArmorSet645_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645;
-        }
-        private void checkBox_MissionRewards_FollowerToken_WeaponSet615_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615;
-        }
-        private void checkBox_MissionRewards_FollowerToken_WeaponSet630_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630;
-        }
-        private void checkBox_MissionRewards_FollowerToken_WeaponSet645_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645 = !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645;
-        }
+      
         private void trackBar_ItemReward_CharacterTokenLevel_SliderChanged(object sender, EventArgs e)
         {
             TrackBar slider_sender = (TrackBar)sender;
@@ -1093,22 +986,7 @@ namespace Herbfunk.GarrisonBase.Config
             else
                 BaseSettings.CurrentSettings.FollowerOptionalList.Add(followerid);
         }
-        private void checkBox_Debug_FakeStartWorkOrder_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER = !BaseSettings.CurrentSettings.DEBUG_FAKESTARTWORKORDER;
-        }
-        private void checkBox_Debug_FakeFinishQuest_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST = !BaseSettings.CurrentSettings.DEBUG_FAKEFINISHQUEST;
-        }
-        private void checkBox_Debug_IgnoreHearthStone_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE = !BaseSettings.CurrentSettings.DEBUG_IGNOREHEARTHSTONE;
-        }
-        private void checkBox_Debug_FakePickupWorkOrder_CheckedChanged(object sender, EventArgs e)
-        {
-            BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER = !BaseSettings.CurrentSettings.DEBUG_FAKEPICKUPWORKORDER;
-        }
+
         private void Config_Load(object sender, EventArgs e)
         {
 

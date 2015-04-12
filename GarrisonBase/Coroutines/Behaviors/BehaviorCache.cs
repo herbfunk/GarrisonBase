@@ -14,10 +14,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override BehaviorType Type { get { return BehaviorType.Cache; } }
 
         public BehaviorCache()
-            : base()
+            : base(MovementCache.GarrisonEntrance)
         {
             InteractionEntryId = GarrisonManager.GarrisonResourceCacheEntryId;
-            MovementPoints.Add(MovementCache.GarrisonEntrance);
+
             Criteria += () => (BaseSettings.CurrentSettings.BehaviorLootCache &&
                               GarrisonResourceCacheObject != null &&
                               GarrisonResourceCacheObject.RefWoWObject.IsValid);
@@ -30,18 +30,18 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             get { return ObjectCacheManager.GetWoWGameObjects(CacheStaticLookUp.ResourceCacheIds.ToArray()).FirstOrDefault(); }
         }
 
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
             if (_movement == null)
-                _movement = new Movement(GarrisonResourceCacheObject.Location, 5.75f);
+                _movement = new Movement(GarrisonResourceCacheObject.Location, 5.75f, name: "CacheObject");
                 
-            if (await _movement.MoveTo())  return true;
+            if (await _movement.MoveTo(false))  return true;
 
             return false;
         }
         private Movement _movement;
 
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             if (GarrisonResourceCacheObject != null && GarrisonResourceCacheObject.RefWoWObject.IsValid && GarrisonResourceCacheObject.GetCursor == WoWCursorType.InteractCursor)
             {

@@ -18,23 +18,32 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private readonly string _gossipText = string.Empty;
         private readonly bool _oneTime;
 
-        public BehaviorGossipInteract(int npcId, int gossipIndex, bool oneTime = false, Func<bool> runCondition = null)
+        public BehaviorGossipInteract(int npcId, bool oneTime = false, Func<bool> runCondition = null)
             : base(WoWPoint.Zero, npcId)
         {
             _npcId = npcId;
-            _gossipIndex = gossipIndex;
             _oneTime = oneTime;
             if (runCondition != null) RunCondition += runCondition;
             ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(_npcId));
         }
-
-        public BehaviorGossipInteract(int npcId, string gossipText, bool oneTime = false, Func<bool> runCondition = null) : base(WoWPoint.Zero, npcId)
+        public BehaviorGossipInteract(int npcId, int gossipIndex, bool oneTime = false, Func<bool> runCondition = null)
+            : this(npcId, oneTime, runCondition)
         {
-            _npcId = npcId;
+            _gossipIndex = gossipIndex;
+        }
+
+        public BehaviorGossipInteract(int npcId, string gossipText, bool oneTime = false, Func<bool> runCondition = null)
+            : this(npcId, oneTime, runCondition)
+        {
             _gossipText = gossipText.ToLower();
-            _oneTime = oneTime;
-            if (runCondition != null) RunCondition += runCondition;
-            ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(_npcId));
+            
+        }
+
+        public override void Initalize()
+        {
+            _npcMovement = null;
+            _failedToFindGossipEntries = 0;
+            base.Initalize();
         }
 
         public override void Dispose()
@@ -115,9 +124,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return false;
             }
             if (_npcMovement==null)
-                _npcMovement = new Movement(NpcObject.Location, NpcObject.InteractRange - 0.25f);
+                _npcMovement = new Movement(NpcObject.Location, NpcObject.InteractRange - 0.25f, false, "GossipInteract");
 
-            if (await _npcMovement.MoveTo()) 
+            if (await _npcMovement.MoveTo(false)) 
                 return true;
 
             if (NpcObject.WithinInteractRange)

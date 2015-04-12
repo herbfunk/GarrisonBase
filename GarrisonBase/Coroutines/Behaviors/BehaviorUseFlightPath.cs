@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bots.Quest;
@@ -17,23 +18,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
     {
         public override BehaviorType Type { get { return BehaviorType.Taxi; } }
 
-        private readonly List<string> _nodenames = new List<string>();
-        /// <summary>
-        /// Attempts to take flight path using names to match valid nodes.
-        /// </summary>
-        /// <param name="nodeName">First Choice, does not need to be exact string</param>
-        /// <param name="alternatives">Alternative choices</param>
-        public BehaviorUseFlightPath(string nodeName, string[] alternatives = null)
-        {
-            _nodenames.Add(nodeName.ToLower());
-            if (alternatives == null) return;
-            foreach (string s in alternatives)
-            {
-                _nodenames.Add(s.ToLower());
-            }
-        }
-
         private readonly WoWPoint _destination = WoWPoint.Empty;
+
         /// <summary>
         /// Attempts to take flight path nearest to the location given.
         /// </summary>
@@ -41,11 +27,34 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public BehaviorUseFlightPath(WoWPoint destination)
         {
             _destination = destination;
-            Criteria += () =>  TaxiFlightHelper.ShouldTakeFlightPath(destination);
+            Criteria += () => TaxiFlightHelper.ShouldTakeFlightPath(destination);
         }
 
+        private int _currentMapId, _destinationMapId;
+        private bool _shouldCheckMapId = false;
         public override void Initalize()
         {
+            _selectedTaxiNode = null;
+            _taxiMovement = null;
+            _taxiNpc = null;
+            _nonVisiblityCount = 0;
+
+            _destinationFlightPathInfo = TaxiFlightHelper.NearestFlightPathFromLocation(_destination);
+            if (_destinationFlightPathInfo != null)
+            {
+                if (_destinationFlightPathInfo.MasterId == TaxiFlightHelper.FlightPathInfo.FrostwallMasterEntry ||
+                    _destinationFlightPathInfo.MasterId == TaxiFlightHelper.FlightPathInfo.LunarfallMasterEntry)
+                {
+                    GarrisonBase.Debug("Flight path destination is garrison, ignore hearth set to false!");
+                    Common.PreChecks.IgnoreHearthing = false;
+                }
+            }
+
+            _currentMapId = TaxiFlightHelper.GetMapId(Player.Location);
+            _destinationMapId = TaxiFlightHelper.GetMapId(_destination);
+            if (_currentMapId != _destinationMapId) 
+                _shouldCheckMapId = true;
+
             Common.CloseOpenFrames();
             Initalized = true;
         }
@@ -57,11 +66,18 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
+            if (_shouldCheckMapId && Player.MapId == _destinationMapId)
+            {
+                GarrisonBase.Debug("UseFlightPath is finished due to matching map ids");
+                IsDone = true;
+                return false;
+            }
+
             if (TaxiFlightHelper.TaxiNodes.Count > 0 && _selectedTaxiNode == null && await CheckFlightNodes()) return true;
 
             if (await VerifyFlightNpc()) return true;
 
-            
+
             if (await UseFlightPath()) return true;
 
             return false;
@@ -71,43 +87,19 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private async Task<bool> CheckFlightNodes()
         {
             //Validate that we have a node we can use..
-
-            if (_destination != WoWPoint.Empty)
+            var validInfoNodes = TaxiFlightHelper.TaxiNodes.Where(n => n.Known && n.Info != null).ToList();
+            if (validInfoNodes.Count > 0)
             {
-                var validInfoNodes = TaxiFlightHelper.TaxiNodes.Where(n => n.Known && n.Info != null).ToList();
-                if (validInfoNodes.Count > 0)
-                {
-                    var orderedNodes = validInfoNodes.OrderBy(n => n.Info.Location.Distance(_destination)).ToList();
-                    _selectedTaxiNode = orderedNodes[0];
+                var orderedNodes = validInfoNodes.OrderBy(n => n.Info.Location.Distance(_destination)).ToList();
+                _selectedTaxiNode = orderedNodes[0];
 
-                    GarrisonBase.Debug("UseFlightPath using closest node {0}!", _selectedTaxiNode.Name);
-                    _nodenames.Add(_selectedTaxiNode.Name);
-                }
-                else
-                {
-                    GarrisonBase.Debug("UseFlightPath could not find a valid flight point using location!");
-                    IsDone = true;
-                    return true;
-                }
+                GarrisonBase.Debug("UseFlightPath using closest node {0}!", _selectedTaxiNode.Name);
             }
             else
             {
-                var taxiHelperNodes = new List<TaxiFlightHelper.TaxiNodeInfo>();
-                foreach (var alt in _nodenames)
-                {
-                    taxiHelperNodes = TaxiFlightHelper.TaxiNodes.Where(n => n.Known && n.Name.Contains(alt)).ToList();
-                    if (taxiHelperNodes.Count > 0)
-                        break;
-                }
-
-                if (taxiHelperNodes.Count == 0)
-                {
-                    GarrisonBase.Err("UseFlightPath could not find a valid flight node!");
-                    IsDone = true;
-                    return true;
-                }
-
-                _selectedTaxiNode = taxiHelperNodes[0];
+                GarrisonBase.Debug("UseFlightPath could not find a valid flight point using location!");
+                IsDone = true;
+                return true;
             }
 
             //Garrison FP!
@@ -123,7 +115,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private Movement _taxiMovement;
         private WoWUnit _taxiNpc;
-        private TaxiFlightHelper.FlightPathInfo _flightPathInfo;
+        private TaxiFlightHelper.FlightPathInfo _nearestflightPathInfo, _destinationFlightPathInfo;
+
         private async Task<bool> VerifyFlightNpc()
         {
             if (TaxiFlightHelper.IsOpen)
@@ -149,7 +142,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
-        
+
             if (_taxiNpc != null)
             {//We got a valid object.. so lets move into interact range!
                 if (_taxiNpc.WithinInteractRange)
@@ -179,10 +172,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (FlightPaths.NearestFlightMerchant == null)
             {
                 //Attempt to get location of nearest FP..
-                if (_flightPathInfo == null)
+                if (_nearestflightPathInfo == null)
                 {
-                    _flightPathInfo = TaxiFlightHelper.NearestFlightPath;
-                    if (_flightPathInfo == null)
+                    _nearestflightPathInfo = TaxiFlightHelper.NearestFlightPath;
+                    if (_nearestflightPathInfo == null)
                     {//Failed!
                         GarrisonBase.Err("UseFlightPath could not find valid flight path to move to!");
                         IsDone = true;
@@ -191,8 +184,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
 
-                GarrisonBase.Debug("Could not find Nearest Flight Merchant, but using nearest flight path location! {0} at {1}",_flightPathInfo.Name, _flightPathInfo.Location);
-                _taxiMovement = new Movement(_flightPathInfo.Location, 20f);
+                GarrisonBase.Debug("Could not find Nearest Flight Merchant, but using nearest flight path location! {0} at {1}", _nearestflightPathInfo.Name, _nearestflightPathInfo.Location);
+                _taxiMovement = new Movement(_nearestflightPathInfo.Location, 20f);
                 return true;
             }
 
@@ -240,11 +233,19 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
                 GarrisonBase.Debug("UseFlightPath taking node {0}", taxiFrameNodes[0].Name);
-                await CommonCoroutines.WaitForLuaEvent("TAXIMAP_CLOSED", 3500, null, taxiFrameNodes[0].TakeNode);
+                await CommonCoroutines.WaitForLuaEvent("TAXIMAP_CLOSED",
+                    3500,
+                    null, () =>
+                    {
+                        taxiFrameNodes[0].TakeNode();
+                        IsDone = true;
+                    });
+
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
 
                 if (Player.LastErrorMessage == "You are busy and can't use the taxi service now.")
                 {
+                    IsDone = false;
                     await Coroutine.Yield();
                     return true;
                 }

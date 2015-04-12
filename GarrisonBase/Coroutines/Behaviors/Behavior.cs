@@ -11,6 +11,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
     public abstract class Behavior
     {
+        #region Constructors
+
         protected Behavior(WoWPoint movepoint)
         {
             MovementPoints.Add(movepoint);
@@ -34,64 +36,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (criteria != null) _criteria = criteria; else _criteria += () => true;
         }
 
+        #endregion
+
+
         /// <summary>
-        /// Checks if this behavior meets the defined requirements to run
-        /// This check will occur only once!
+        /// The universal method used by all behaviors for execution.
         /// </summary>
         /// <returns></returns>
-        public Func<bool> Criteria
-        {
-            get { return _criteria; }
-            set { _criteria = value; }
-        }
-        private Func<bool> _criteria;
-
-        /// <summary>
-        /// Conditional function that is checked every call. Returning false will end the behavior (IsDone=True)
-        /// </summary>
-        public Func<bool> RunCondition
-        {
-            get { return _runcondition; }
-            set { _runcondition = value; }
-        }
-        private Func<bool> _runcondition = () => true;
-
-        public bool Initalized { get; set; }
-        /// <summary>
-        /// This occurs only once to initalize any variable only after the Criteria check occurs and passes.
-        /// </summary>
-        public virtual void Initalize()
-        {
-            StartMovement = new Movement(MovementPoints.ToArray(), 2f);
-            EndMovement = new Movement(MovementPoints.ToArray().Reverse().ToArray(), 2f);
-            Initalized = true;
-        }
-
-
-        public bool Disposed { get; set; }
-        /// <summary>
-        /// This occurs only once after the behavior is considered done.
-        /// </summary>
-        public virtual void Dispose()
-        {
-            IsDone = true;
-            Disposed = true;
-        }
-
-        /// <summary>
-        /// A convient way to end the behavior!
-        /// </summary>
-        public virtual bool IsDone { get; set; }
-        public virtual BehaviorType Type { get { return BehaviorType.None; } }
-        public int InteractionEntryId { get; set; }
-
-        public virtual string GetStatusText
-        {
-            get
-            {
-                return String.Format("Behavior {0} ", Type.ToString());
-            }
-        }
         public virtual async Task<bool> BehaviorRoutine()
         {
             TreeRoot.StatusText = GetStatusText;
@@ -118,44 +69,82 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
 
 
+        /// <summary>
+        /// Checks if this behavior meets the defined requirements to run
+        /// This check will occur only once!
+        /// </summary>
+        /// <returns></returns>
+        public Func<bool> Criteria
+        {
+            get { return _criteria; }
+            set { _criteria = value; }
+        }
+        private Func<bool> _criteria;
+
+        /// <summary>
+        /// Conditional function that is checked every call. Returning false will end the behavior (IsDone=True)
+        /// </summary>
+        public Func<bool> RunCondition
+        {
+            get { return _runcondition; }
+            set { _runcondition = value; }
+        }
+        private Func<bool> _runcondition = () => true;
 
         public bool CheckCriteria()
         {
             return Criteria.GetInvocationList().Cast<Func<bool>>().All(f => f());
         }
-
         public bool CheckRunCondition()
         {
             return RunCondition.GetInvocationList().Cast<Func<bool>>().All(f => f());
         }
 
+
+        public bool Initalized { get; set; }
         /// <summary>
-        /// Attempts to interact with the object matching the InteractionEntryId
+        /// This occurs only once to initalize any variable only after the Criteria check occurs and passes.
         /// </summary>
-        /// <returns></returns>
-        public virtual async Task<bool> Interaction()
+        public virtual void Initalize()
         {
-            return false;
+            StartMovement = new Movement(MovementPoints.ToArray(), 2f, false, String.Format("StartMovement({0})", Type.ToString()));
+            EndMovement = new Movement(MovementPoints.ToArray().Reverse().ToArray(), 2f, false, String.Format("EndMovement({0})", Type.ToString()));
+            _interactionObject = null;
+            IsDone = false;
+            Initalized = true;
+            GarrisonBase.Debug("Behavior {0} has been initalized", Type);
+        }
+
+        public bool Disposed { get; set; }
+        /// <summary>
+        /// This occurs only once after the behavior is considered done.
+        /// </summary>
+        public virtual void Dispose()
+        {
+            IsDone = true;
+            Disposed = true;
+            GarrisonBase.Debug("Behavior {0} has been disposed", Type);
         }
 
         /// <summary>
-        /// Attempts to move to the MovementPoint than to the object matching the InteractionEntryId
+        /// A convient way to end the behavior!
         /// </summary>
-        /// <returns></returns>
-        public virtual async Task<bool> Movement()
-        {
-            return await StartMovement.MoveTo();
-        }
-        public Movement StartMovement;
-        public Movement EndMovement;
-        public List<WoWPoint> MovementPoints = new List<WoWPoint>();
+        public virtual bool IsDone { get; set; }
 
+        public virtual BehaviorType Type { get { return BehaviorType.None; } }
+        /// <summary>
+        /// The Entry Id of the WoW object!
+        /// </summary>
+        public int InteractionEntryId { get; set; }
+        /// <summary>
+        /// The interaction object
+        /// </summary>
         public virtual C_WoWObject InteractionObject
         {
             get
             {
                 if (_interactionObject == null || !_interactionObject.IsValid)
-                    _interactionObject = ObjectCacheManager.GetWoWObject(InteractionEntryId);
+                    _interactionObject = GetInteractionObject(InteractionEntryId);
                 else if (!_interactionObject.IsValid)
                     _interactionObject = null;
 
@@ -165,37 +154,107 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
         private C_WoWObject _interactionObject;
 
+        /// <summary>
+        /// The default function we use to find and set the value of InteractionObject
+        /// </summary>
+        public Func<int, C_WoWObject> GetInteractionObject
+        {
+            get { return _getinteractionobject; }
+            set { _getinteractionobject = value; }
+        }
+        private Func<int, C_WoWObject> _getinteractionobject = (i) => ObjectCacheManager.GetWoWObject(i);
+
+        public bool InteractionObjectValid
+        {
+            get
+            {
+                return InteractionObject != null && InteractionObject.IsValid;
+            }
+        }
+
+        //Movement behaviors that use the WoWPoints given in construction of behavior class
+        public Movement StartMovement;
+        public Movement EndMovement;
+        public List<WoWPoint> MovementPoints = new List<WoWPoint>();
+
+        public BehaviorArray Parent { get; set; }
+        public BehaviorArray TopParent { get; set; }
+
+        public virtual string GetStatusText
+        {
+            get
+            {
+                return String.Format("Behavior {0} ", Type.ToString());
+            }
+        }
 
         public override string ToString()
         {
-            return String.Format("{0} Criteria Check {1} IsDone {2} Disposed {3}", Type, CheckCriteria(), IsDone, Disposed);
+            return String.Format("{0} IsDone {1} Initalized {2} Disposed {3}",
+                Type,  IsDone, Initalized, Disposed);
+        }
+
+        public static void ResetBehavior(Behavior behavior, bool allParents=false)
+        {
+            if (behavior.Parent != null)
+            {
+                if (behavior.Parent.Parent != null)
+                {
+                    BehaviorArray _currentParent = behavior.Parent.Parent;
+                    _currentParent.Dispose();
+                    _currentParent.Initalize();
+                }
+                
+                behavior.Parent.Dispose();
+                behavior.Parent.Initalize();
+            }
+            else
+            {
+                behavior.Dispose();
+                behavior.Initalize();
+            }
         }
     }
 
     public class BehaviorCustomAction : Behavior
     {
         public Action CustomAction;
+        public Func<bool> CustomCondition = () => true;
         public readonly bool RepeatAction;
-        public BehaviorCustomAction(Action action, bool repeat=false)
+        public BehaviorCustomAction(Action action, bool repeat = false)
         {
             CustomAction = action;
             RepeatAction = repeat;
         }
 
+        public BehaviorCustomAction(Action action, Func<bool> condition, bool repeat = false) : this(action, repeat)
+        {
+            CustomCondition = condition;
+        }
+        private bool CheckCondition()
+        {
+            return CustomCondition.GetInvocationList().Cast<Func<bool>>().All(f => f());
+        }
         public override async Task<bool> BehaviorRoutine()
         {
             if (await base.BehaviorRoutine()) return true;
 
             if (IsDone) return false;
 
-            CustomAction.Invoke();
+            if (!CheckCondition())
+            {
+                IsDone = !RepeatAction;
+                return false;
+            }
 
+            CustomAction.Invoke();
+            
             if (!RepeatAction)
             {
                 IsDone = true;
             }
 
-            return true;
+            return RepeatAction;
         }
     }
 

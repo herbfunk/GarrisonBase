@@ -53,7 +53,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         }
 
 
-        public override async Task<bool> Movement()
+        private async Task<bool> Movement()
         {
             if (LuaUI.MissionFrame.IsOpen)
                 return false;
@@ -79,9 +79,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
             if (_movement == null)
-                _movement = new Movement(CommandTable.Location, 4.55f);
+                _movement = new Movement(CommandTable.Location, 4.55f, name: "CommandTable");
 
-            await _movement.MoveTo();
+            await _movement.MoveTo(false);
             return true;
         }
         private Movement _movement;
@@ -90,7 +90,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private Mission _currentMission = null;
         private int _interactattempts = 0;
 
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             if (!_commandtableCompletemissionsWaittimer.IsFinished) return true;
             _commandtableCompletemissionsWaittimer.Reset();

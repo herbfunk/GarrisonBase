@@ -1,18 +1,11 @@
 ﻿Code
-
-Addon
-
+	-BehaviorArray parent and top parent todo
+	
 Cache
-
-Work Orders
-
-Starting Missions
-
 
 Building Behavior
 	-Setting up new buildings
 	-Upgrading existing buildings
-	-
 
 Herbing and Mining
 	Add check and use for Coffee and Miners pick during mine behavior.
@@ -20,4 +13,3 @@ Herbing and Mining
 
 Add support for daily quests
 	-Reagent Trader
-	-Building Dailies

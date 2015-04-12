@@ -30,7 +30,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
-            if (await StartMovement.MoveTo()) return true;
+            if (await StartMovement.MoveTo(false)) return true;
 
             if (await Interaction())
                 return true;
@@ -41,7 +41,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private Movement _movement;
         private uint entryId=0;
-        public override async Task<bool> Interaction()
+        private async Task<bool> Interaction()
         {
             if (InteractionObject != null && InteractionObject.IsValid)
             {
