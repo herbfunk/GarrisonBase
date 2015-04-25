@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Coroutines;
@@ -11,6 +12,7 @@ using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.Helpers;
 
@@ -382,6 +384,9 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_MailAutoSend.Checked = BaseSettings.CurrentSettings.MailAutoSend;
                 checkBox_MailAutoSend.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.MailAutoSend=!BaseSettings.CurrentSettings.MailAutoSend;
 
+                checkBox_LootAnything.Checked = BaseSettings.CurrentSettings.LootAnyMobs;
+                checkBox_LootAnything.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.LootAnyMobs = !BaseSettings.CurrentSettings.LootAnyMobs;
+
                 //
                 checkBox_MailEnchanting.Checked = BaseSettings.CurrentSettings.MailSendEnchanting;
                 checkBox_MailEnchanting.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.MailSendEnchanting = !BaseSettings.CurrentSettings.MailSendEnchanting;;
@@ -666,6 +671,7 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Follower_207.Name = "207";
                 checkBox_Follower_467.Name = "467";
                 checkBox_Follower_209.Name = "209";
+                checkBox_Follower_32.Name = "32";
                 checkBox_Follower_170.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(170);
                 checkBox_Follower_189.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(189);
                 checkBox_Follower_190.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(190);
@@ -673,6 +679,7 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Follower_207.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(207);
                 checkBox_Follower_467.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(467);
                 checkBox_Follower_209.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(209);
+                checkBox_Follower_32.Checked = BaseSettings.CurrentSettings.FollowerOptionalList.Contains(32);
                 checkBox_Follower_170.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_189.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_190.CheckedChanged += checkBox_Follower_CheckedChanged;
@@ -680,6 +687,7 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Follower_207.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_467.CheckedChanged += checkBox_Follower_CheckedChanged;
                 checkBox_Follower_209.CheckedChanged += checkBox_Follower_CheckedChanged;
+                checkBox_Follower_32.CheckedChanged += checkBox_Follower_CheckedChanged;
 
                 //Daily Quests
                 checkBox_DailyQuest_Warmill.Checked = BaseSettings.CurrentSettings.DailyWarMillQuestSettings.Enabled;
@@ -1128,10 +1136,19 @@ namespace Herbfunk.GarrisonBase.Config
                 var Objects = Cache.ObjectCacheManager.ObjectCollection.Values.OrderByDescending(o => o.SubType).ThenBy(o => o.Distance).ToList();
                 foreach (var cWoWObject in Objects)
                 {
-                    Color foreColor = (cWoWObject is C_WoWUnit) ? Color.Black : Color.GhostWhite;
-                    Color backColor = (cWoWObject is C_WoWGameObject) ? Color.DarkSlateGray
+                    Color foreColor =
+                        TargetManager.CombatObject != null && TargetManager.CombatObject.Equals(cWoWObject) ? Color.GhostWhite :
+                        TargetManager.LootableObject != null && TargetManager.LootableObject.Equals(cWoWObject) ? Color.Black :
+                        (cWoWObject is C_WoWUnit) ? Color.Black 
+                        : Color.GhostWhite;
+
+                    Color backColor =
+                                TargetManager.CombatObject != null && TargetManager.CombatObject.Equals(cWoWObject) ? Color.DarkRed :
+                                 TargetManager.LootableObject != null && TargetManager.LootableObject.Equals(cWoWObject) ? Color.Gold :
+                                (cWoWObject is C_WoWGameObject) ? Color.DarkSlateGray
                                 : (cWoWObject is C_WoWUnit) ? Color.MediumSeaGreen
                                 : Color.Gray;
+
                     string entryString = cWoWObject.ToString();
                     UserControlDebugEntry entry = new UserControlDebugEntry(entryString, foreColor, backColor);
                     LBDebug.Controls.Add(entry);

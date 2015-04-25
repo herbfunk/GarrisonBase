@@ -10,6 +10,7 @@ using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
@@ -38,6 +39,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             {
                 CacheStaticLookUp.Update();
                 ObjectCacheManager.Initalize();
+                TargetManager.Initalize();
                 //Simple Check if garrison can be accessed!
                 if (Player.Level < 90 || Player.Inventory.GarrisonHearthstone == null)
                 {
@@ -135,11 +137,11 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
                 if (SwitchBehavior != null && CurrentBehavior.Equals(SwitchBehavior))
                 {
-                    SwitchBehaviors.RemoveAt(0);
-                    SwitchBehavior = null;
-
                     CurrentBehavior = Behaviors[0];
                     CurrentBehavior.Initalize();
+
+                    SwitchBehaviors.RemoveAt(0);
+                    SwitchBehavior = null;
                 }
                 else
                 {
@@ -179,7 +181,11 @@ namespace Herbfunk.GarrisonBase.Coroutines
             CurrentBehavior = null;
             SwitchBehavior = null;
 
-            Behaviors.Add(Follower.FollowerQuestBehaviorArray(209));
+            //Behaviors.Add(BehaviorArray_Trapping_ShadowmoonVally);
+            //Behaviors.Add(BehaviorArray_Trapping_Leather_FrostfireRidge);
+            //Behaviors.Add(BehaviorArray_Trapping_Fur_FrostfireRidge);
+            //Behaviors.Add(BehaviorArray_Trapping_Elites_Nagrand);
+            
             //Move to entrance!
             //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
             Behaviors.Add(new BehaviorGetMail());
@@ -244,7 +250,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                         MovementCache.SmallPlot20SafePoint,
                     };
 
-                    var looting = new BehaviorHotspotRunning(b.FirstQuestId, _hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
+                    var looting = new BehaviorHotspotRunning(_hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
                     var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
@@ -261,7 +267,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     else
                         movementPoint = new WoWPoint(6082.979, 4795.821, 149.1655);
 
-                    var looting = new BehaviorHotspotRunning(b.FirstQuestId, new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
+                    var looting = new BehaviorHotspotRunning(new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
                     var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
                     var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
                     behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
@@ -271,9 +277,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 {
                     var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
-                    var looting = new BehaviorHotspotRunning(
-                        b.FirstQuestId,
-                        Player.IsAlliance ?
+                    var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
                         MovementCache.Alliance_Mine_LevelOne.ToArray() :
                         MovementCache.Horde_Mine_LevelOne.ToArray(),
                         CacheStaticLookUp.MineQuestMobIDs.ToArray(),
@@ -290,9 +294,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 {
                     var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
 
-                    var looting = new BehaviorHotspotRunning(
-                        b.FirstQuestId,
-                        Player.IsAlliance ?
+                    var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
                         MovementCache.Alliance_Herb_LevelOne.ToArray() :
                         MovementCache.Horde_Herb_LevelOne.ToArray(),
                         CacheStaticLookUp.HerbQuestMobIDs.ToArray(),
@@ -405,24 +407,144 @@ namespace Herbfunk.GarrisonBase.Coroutines
             Behaviors.Add(new BehaviorMissionStartup());
 
             //Optional follower behaviors (to unlock)
-            Behaviors.Add(new BehaviorArray(new Behavior[]
-            {
-                //Follower.FollowerQuestBehaviorArray(209),
-                Follower.FollowerQuestBehaviorArray(170),
-                Follower.FollowerQuestBehaviorArray(467),
-                Follower.FollowerQuestBehaviorArray(189),
-                Follower.FollowerQuestBehaviorArray(193),
-                Follower.FollowerQuestBehaviorArray(207),
-                Follower.FollowerQuestBehaviorArray(190),
-                new BehaviorCustomAction(() => Common.PreChecks.IgnoreHearthing=false),
-                new BehaviorUseFlightPath(MovementCache.GarrisonEntrance)
-            }));
+            Behaviors.Add(BehaviorArray_Followers.Clone());
            
 
             InitalizedBehaviorList = true;
             
             
         }
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_ShadowmoonVally = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(1234.118, -1664.432, 44.69962), 100f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Leather_ShadowMoonValley,
+                CacheStaticLookUp.Trap_UnitIds_Elekk, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                Movement.IgnoreTaxiCheck = false;
+            }),
+
+
+        },"Trapping Leather Shadowmoon Vally");
+
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_FrostfireRidge = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(6311.582, 6030.6, 168.9311), 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Leather_FrostfireRidge,
+                CacheStaticLookUp.Trap_UnitIds_Clefthoof, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                Movement.IgnoreTaxiCheck = false;
+            }),
+
+
+        }, "Trapping Leather Frostfire Ridge");
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Fur_FrostfireRidge = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(7636.806, 5435.424, 119.276), 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Fur_FrostfireRidge,
+                CacheStaticLookUp.Trap_UnitIds_Wolves, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                Movement.IgnoreTaxiCheck = false;
+            }),
+
+
+        }, "Trapping Fur Frostfire Ridge");
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Elites_Nagrand = new BehaviorArray(new Behavior[]
+        {
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+            
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Elites_Nagrand, 
+                CacheStaticLookUp.Trap_UnitIds_Wolves.Concat(CacheStaticLookUp.Trap_UnitIds_Clefthoof).Concat(CacheStaticLookUp.Trap_UnitIds_Talbulk).ToArray(),
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                Movement.IgnoreTaxiCheck = false;
+            }),
+
+
+        }, "Trapping Elites Nagrand");
+        
+
+        internal static readonly BehaviorArray BehaviorArray_Followers=new BehaviorArray(new Behavior[]
+        {
+                Follower.FollowerQuestBehaviorArray(209), //Abu'Gur (Nagrand)
+                Follower.FollowerQuestBehaviorArray(170), //Goldmaeng (Nagrand)
+
+                Follower.FollowerQuestBehaviorArray(189), //Blook (Gorgrond)
+                Follower.FollowerQuestBehaviorArray(193), //Tormok (Gorgrond)
+
+                Follower.FollowerQuestBehaviorArray(207), //Defender (Talador)
+
+                Follower.FollowerQuestBehaviorArray(467), //Fen Tao (Ashran)
+
+                Follower.FollowerQuestBehaviorArray(32), //Dagg (Frostfire)
+                
+                Follower.FollowerQuestBehaviorArray(190), //Arch Mage (4 different areas)
+
+                //new BehaviorCustomAction(() => Common.PreChecks.IgnoreHearthing=false),
+                //new BehaviorUseFlightPath(MovementCache.GarrisonEntrance)
+            }, "Followers");
 
         internal static void Reset()
         {

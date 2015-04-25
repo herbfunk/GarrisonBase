@@ -49,7 +49,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             _questActionFinished = false;
             _npcMovement = null;
             if (_specialMovementPoints != null)
-                _specialMovement = new Movement(_specialMovementPoints, 2f, true, "QuestTurninSpecialMovement");
+                _specialMovement = new Movement(_specialMovementPoints, 2f, name: "QuestTurninSpecialMovement");
 
             base.Initalize();
         }
@@ -152,9 +152,9 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 #endregion
 
                 if (_npcMovement == null)
-                    _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f);
+                    _npcMovement = new Movement(InteractionObject, InteractionObject.InteractRange - 0.25f);
 
-                await _npcMovement.ClickToMove(false);
+                await _npcMovement.MoveTo(false);
 
                 return true;
             }

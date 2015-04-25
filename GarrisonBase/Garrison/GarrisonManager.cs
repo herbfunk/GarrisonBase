@@ -71,7 +71,7 @@ namespace Herbfunk.GarrisonBase.Garrison
                 PrimalTraderID = 84967;
                 PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.HordePrimalTraderLevel2: MovementCache.HordePrimalTraderLevel3;
 
-                BlackspotManager.AddBlackspots(MovementCache.HordeBlackSpots);
+                //BlackspotManager.AddBlackspots(MovementCache.HordeBlackSpots);
 
                 //ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\HordeGarrison.xml", false);
             }
@@ -89,7 +89,7 @@ namespace Herbfunk.GarrisonBase.Garrison
                 PrimalTraderID = 84246;
                 PrimalTraderPoint = GarrisonLevel == 2 ? MovementCache.AlliancePrimalTraderLevel2 : MovementCache.AlliancePrimalTraderLevel3;
 
-                BlackspotManager.AddBlackspots(MovementCache.AllianceBlackSpots);
+                //BlackspotManager.AddBlackspots(MovementCache.AllianceBlackSpots);
 
                 //if (Character.Player.MapId == 1331)
                 //    ProfileManager.LoadNew(GarrisonBase.GarrisonBasePath + @"\Profiles\AllianceGarrison.xml", false);

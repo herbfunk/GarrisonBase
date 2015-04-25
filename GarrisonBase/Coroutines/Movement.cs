@@ -3,64 +3,99 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
+using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
 using Styx.Common;
 using Styx.Common.Helpers;
+using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
 using Styx.WoWInternals;
+using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Coroutines
 {
     public class Movement
     {
+        public static bool IgnoreTaxiCheck
+        {
+            get { return _ignoreTaxiCheck; }
+            set
+            {
+                GarrisonBase.Debug("Movement Ignore Taxi Check set to {0}", value);
+                _ignoreTaxiCheck = value;
+            }
+        }
+        private static bool _ignoreTaxiCheck;
+
         public enum MovementTypes
         {
             Normal,
-            ClickToMove
+            ClickToMove,
         }
 
         internal Queue<WoWPoint> CurrentMovementQueue = new Queue<WoWPoint>();
         internal Queue<WoWPoint> DequeuedPoints = new Queue<WoWPoint>(); 
         internal List<WoWPoint> DequeuedFinalPlayerPositionPoints = new List<WoWPoint>();
+        internal C_WoWObject WoWObject = null;
 
         private bool _checkedShoulUseFlightPath;
         private bool _didResetStuckChecker = false;
         private bool _checkStuck;
         public float Distance { get; set; }
+
+        
+
         public readonly string Name;
 
-        public Movement(WoWPoint location, float distance, bool ignoreTaxiCheck = false, string name = "", bool checkStuck=false)
-            : this(new[] { location }, distance, ignoreTaxiCheck, name, checkStuck)
+        public Movement(WoWPoint location, float distance, string name = "", bool checkStuck = false)
+            : this(new[] { location }, distance, name: name, checkStuck: checkStuck)
         {
         }
 
-        public Movement(WoWPoint[] locations, bool ignoreTaxiCheck = false, string name = "", bool checkStuck = false)
-            : this(locations, 5f, ignoreTaxiCheck, name, checkStuck)
+        public Movement(WoWPoint[] locations, string name = "", bool checkStuck = false)
+            : this(locations, 5f, name: name, checkStuck: checkStuck)
         {
         }
 
-        public Movement(WoWPoint[] locations, float distance, bool ignoreTaxiCheck = false, string name = "", bool checkStuck = false)
+        public Movement(C_WoWObject obj, float distance, string name = "", bool checkStuck = false)
+            : this(new[] {obj.Location}, distance, name, checkStuck)
+        {
+            WoWObject = obj;
+        }
+
+        public Movement(WoWPoint[] locations, float distance, string name = "", bool checkStuck = false)
         {
             Name = name;
-            _checkedShoulUseFlightPath = ignoreTaxiCheck;
             _checkStuck = checkStuck;
             Distance = distance;
             foreach (var p in locations)
             {
                 CurrentMovementQueue.Enqueue(p);
             }
+            
+        }
+
+        private WoWPoint CurrentLocation
+        {
+            get
+            {
+                if (WoWObject != null) return WoWObject.Location;
+                return CurrentMovementQueue.Count > 0 ? CurrentMovementQueue.Peek() : WoWPoint.Zero;
+            }
         }
 
         public async Task<bool> MoveTo(bool allowDequeue=true)
         {
             if (CurrentMovementQueue.Count == 0)
+            {
                 return false;
+            }
 
-            WoWPoint location = CurrentMovementQueue.Peek();
+            WoWPoint location = CurrentLocation;
             WoWPoint playerPos = Player.Location;
             float currentDistance = location.Distance(playerPos);
             if (currentDistance <= Distance)
@@ -83,12 +118,16 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return true;
             }
 
-            if (!_checkedShoulUseFlightPath)
+            if (!IgnoreTaxiCheck && !_checkedShoulUseFlightPath)
             {
                 _checkedShoulUseFlightPath = true;
                 if (TaxiFlightHelper.ShouldTakeFlightPath(location))
                 {
-                    BehaviorManager.SwitchBehaviors.Add(new BehaviorUseFlightPath(location));
+                    if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.Taxi))
+                    {
+                        BehaviorManager.SwitchBehaviors.Add(new BehaviorUseFlightPath(location));
+                    }
+                    
                     return true;
                 }
             }
@@ -178,7 +217,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (CurrentMovementQueue.Count == 0)
                 return MoveResult.ReachedDestination;
 
-            WoWPoint location = CurrentMovementQueue.Peek();
+            WoWPoint location = CurrentLocation;
             WoWPoint playerPos = Character.Player.Location;
             float currentDistance = location.Distance(playerPos);
             if (currentDistance <= Distance)
@@ -198,7 +237,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                     return MoveResult.ReachedDestination;
                 }
 
-                return MoveResult.ReachedDestination;
+                return MoveResult.Moved;
             }
 
             if (!_didResetStuckChecker)
@@ -264,7 +303,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             if (CurrentMovementQueue.Count == 0)
                 return MoveResult.ReachedDestination;
 
-            WoWPoint location = CurrentMovementQueue.Peek();
+            WoWPoint location = CurrentLocation;
             WoWPoint playerPos = Character.Player.Location;
             float currentDistance = location.Distance(playerPos);
             if (currentDistance <= Distance)
@@ -310,12 +349,13 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             return MoveResult.Moved;
         }
+
         public async Task<bool> ClickToMove(bool allowDequeue = true)
         {
             if (CurrentMovementQueue.Count == 0)
                 return false;
 
-            WoWPoint location = CurrentMovementQueue.Peek();
+            WoWPoint location = CurrentLocation;
             WoWPoint playerPos = Character.Player.Location;
             float currentDistance = location.Distance(playerPos);
             if (currentDistance <= Distance)
@@ -511,6 +551,102 @@ namespace Herbfunk.GarrisonBase.Coroutines
             }
 
         }
-    }
+
+        // Originally contributed by Chinajade.
+        //
+        // LICENSE:
+        // This work is licensed under the
+        //     Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License.
+        //
+        //Modified to work in conjunction with my behavior objects.
+        /// <summary>
+		/// Uses the transport.
+		/// </summary>
+		/// <param name="transportId">The transport identifier.</param>
+		/// <param name="startLocation">The start location.</param>
+		/// <param name="endLocation">The end location.</param>
+		/// <param name="waitAtLocation">The wait at location.</param>
+		/// <param name="standAtLocation">The stand at location.</param>
+		/// <param name="getOffLocation">The get off location.</param>
+		/// <param name="movement">The movement.</param>
+		/// <param name="destination">The destination.</param>
+		/// <param name="navigationFailedAction">
+		///     The action to take if <paramref name="waitAtLocation" /> cant be navigated to
+		/// </param>
+		/// <returns>returns <c>true</c> until done</returns>
+		/// <exception cref="Exception">A delegate callback throws an exception. </exception>
+		public static async Task<bool> UseTransport(
+			int transportId,
+			WoWPoint startLocation,
+			WoWPoint endLocation,
+			WoWPoint waitAtLocation,
+			WoWPoint standAtLocation,
+			WoWPoint getOffLocation,
+			MovementTypes movementType,
+			string destination = null)
+		{
+			if (getOffLocation != WoWPoint.Empty && StyxWoW.Me.Location.DistanceSqr(getOffLocation) < 2 * 2)
+			{
+				return false;
+			}
+
+			var transportLocation = GetTransportLocation(transportId);
+			if (transportLocation != WoWPoint.Empty
+				&& transportLocation.DistanceSqr(startLocation) < 1.5 * 1.5
+                && waitAtLocation.DistanceSqr(Player.Location) < 2 * 2)
+			{
+				TreeRoot.StatusText = "Moving inside transport";
+				Navigator.PlayerMover.MoveTowards(standAtLocation);
+				await CommonCoroutines.SleepForLagDuration();
+				// wait for bot to get on boat.
+				await Coroutine.Wait(12000, () => !StyxWoW.Me.IsMoving || Navigator.AtLocation(standAtLocation));
+			}
+
+			// loop while on transport to prevent bot from doing anything else
+			while (StyxWoW.Me.Transport != null && StyxWoW.Me.Transport.Entry == transportId)
+			{
+				if (transportLocation != WoWPoint.Empty && transportLocation.DistanceSqr(endLocation) < 1.5 * 1.5)
+				{
+					TreeRoot.StatusText = "Moving out of transport";
+					Navigator.PlayerMover.MoveTowards(getOffLocation);
+					await CommonCoroutines.SleepForLagDuration();
+					// Sleep until we stop moving.
+					await Coroutine.Wait(12000, () => !StyxWoW.Me.IsMoving || Navigator.AtLocation(getOffLocation));
+					return true;
+				}
+
+				// Exit loop if in combat or dead.
+				if (StyxWoW.Me.Combat || !StyxWoW.Me.IsAlive)
+					return false;
+
+				TreeRoot.StatusText = "Waiting for the end location";
+				await Coroutine.Yield();
+				// update transport location.
+				transportLocation = GetTransportLocation(transportId);
+			}
+
+			if (waitAtLocation.DistanceSqr(Player.Location) > 2 * 2)
+			{
+			    var _movement = new Movement(waitAtLocation, 2f, name: "TransportWaitAtLocation", checkStuck: false);
+
+                if (movementType == MovementTypes.ClickToMove) 
+                    await _movement.ClickToMove();
+                else
+			        await _movement.MoveTo();
+
+				return true;
+			}
+			await CommonCoroutines.LandAndDismount();
+			TreeRoot.StatusText = "Waiting for transport";
+			return true;
+		}
+
+		private static WoWPoint GetTransportLocation(int transportId)
+		{
+			var transport = ObjectManager.GetObjectsOfType<WoWGameObject>().FirstOrDefault(o => o.Entry == transportId);
+			return transport != null ? transport.WorldLocation : WoWPoint.Zero;
+		}
+	}
+    
 
 }

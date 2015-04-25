@@ -2,6 +2,7 @@
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.WoWInternals.WoWObjects;
 
@@ -17,17 +18,37 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             RefWoWUnit = obj.ToUnit();
         }
 
+        
+        public uint Flags { get; set; }
+        public bool IsEvadeRunningBack { get; set; }
+        public bool CanSelect { get; set; }
+        public bool InCombat { get; set; }
         public bool IsDead { get; set; }
         public bool Attackable { get; set; }
         public bool Lootable { get; set; }
         public bool CanInteract { get; set; }
         public QuestGiverStatus QuestGiverStatus= QuestGiverStatus.None;
+        public bool Trappable
+        {
+            get
+            {
+                if (!_trappable.HasValue)
+                    _trappable = CacheStaticLookUp.TrappingEntryIds.Contains(Entry);
+
+                return _trappable.Value;
+            }
+        }
+        private bool? _trappable;
+        public uint? MaxHealth { get; set; }
+        public uint CurrentHealth { get; set; }
+        public double CurrentHealthPercent { get; set; }
+        public double LastCurrentHealthPercent { get; set; }
 
         public C_WoWUnit(WoWUnit obj)
             : base(obj)
         {
             RefWoWUnit = obj;
-            
+
             if (SubType == WoWObjectTypes.Unknown)
             {
                 SubType = WoWObjectTypes.Unit;
@@ -47,6 +68,11 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 {
                     SubType = WoWObjectTypes.PrimalTrader | WoWObjectTypes.Vendor;
                     IgnoresRemoval = true;
+                }
+                else if (CacheStaticLookUp.TrapWoWObjectEntryIds.Contains(Entry))
+                {
+                    SubType = WoWObjectTypes.Trap;
+                    return;
                 }
 
                 if (MerchantHelper.GarrisonVendorEntryIds.Contains(Entry))
@@ -74,7 +100,6 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 {
                     ShouldKill = true;
                 }
-
             }
         }
 
@@ -82,12 +107,13 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public override bool Update()
         {
             if (!base.Update()) return false;
-            
-            
 
+
+            Flags = RefWoWUnit.Flags;
             Location = RefWoWUnit.Location;
             IsDead=RefWoWUnit.IsDead;
-
+            UpdateHitPoints();
+            
             if (ObjectCacheManager.IsQuesting || IsQuestNpc)
             {
                 CanInteract = RefWoWUnit.CanInteract;
@@ -97,17 +123,88 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             
             if (IsDead)
             {
-                if (ShouldLoot)
+                if (BaseSettings.CurrentSettings.LootAnyMobs || ShouldLoot)
                 {
                     Lootable = RefWoWUnit.Lootable;
                 }
             }
             else if(ShouldKill)
             {
+                InCombat = RefWoWUnit.Combat;
+                CanSelect = RefWoWUnit.CanSelect;
+                IsEvadeRunningBack = RefWoWUnit.IsEvadeRunningBack;
                 Attackable = RefWoWUnit.Attackable;
             }
 
             return true;
+        }
+
+        ///<summary>
+        ///This only updates hitpoints every 5th call to help reduce CPU!
+        ///</summary>
+        public bool UpdateHitPoints()
+        {
+            //Last Target skips the counter checks
+            if (TargetManager.CombatObject != null && Equals(TargetManager.CombatObject))
+            {
+                UpdateCurrentHitPoints();
+                return true;
+            }
+
+
+            _healthChecks++;
+
+            if (_healthChecks > 6)
+                _healthChecks = 1;
+
+            if (_healthChecks == 1)
+                UpdateCurrentHitPoints();
+
+            return true;
+        }
+        private int _healthChecks = 0;
+
+        private void UpdateCurrentHitPoints()
+        {
+            uint currentHealth;
+
+
+            try
+            {
+                currentHealth = RefWoWUnit.CurrentHealth;
+            }
+            catch
+            {
+                GarrisonBase.Debug("Failure to get hitpoint current {0}", this.ToString());
+                //Logger.Write(LogLevel.Cache, "Failure to get hitpoint current {0}", DebugStringSimple);
+                //CurrentHealthPct = null;
+                return;
+            }
+
+            CurrentHealth = currentHealth;
+
+            if (!MaxHealth.HasValue)
+            {
+                try
+                {
+                    MaxHealth = RefWoWUnit.MaxHealth;
+                }
+                catch
+                {
+                    //NeedsRemoved = true;
+                    GarrisonBase.Debug("Failure to get max hitpoints {0}", this.ToString());
+                    return;
+                }
+            }
+
+            var dCurrentHealthPct = CurrentHealth / (float)MaxHealth.Value;
+            CurrentHealthPercent = dCurrentHealthPct;
+
+            //if (dCurrentHealthPct != CurrentHealthPercent)
+            //{
+            //    LastCurrentHealthPercent = CurrentHealthPercent;
+            //    CurrentHealthPercent = dCurrentHealthPct;
+            //}
         }
 
         public override bool ValidForLooting
@@ -118,7 +215,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
                 if (!IsDead || !Lootable) return false;
 
-                if (!ShouldLoot || !LineOfSight) return false;
+                if ((!ShouldLoot && !BaseSettings.CurrentSettings.LootAnyMobs) || !LineOfSight) return false;
 
                 return true;
             }
@@ -130,7 +227,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForCombat) return false;
 
-                if (IsDead || !Attackable) return false;
+                if (IsDead ||!CanSelect || !Attackable) return false;
 
                 if (!ShouldKill || !LineOfSight) return false;
 
@@ -141,16 +238,26 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
 
 
+
+
         public override string ToString()
         {
             return String.Format("{0}\r\n" +
                                  "Lootable {2} ShouldLoot {3}\r\n" +
-                                 "ShouldKill {6} Attackable {7} IsDead {1}\r\n" +
-                                 "IsQuestNPC {8} CanInteract {4} QuestGiverStatus {5}",
+                                 "ShouldKill {6} Attackable {7} IsDead {1} InCombat{15}\r\n" +
+                                 "IsQuestNPC {8} CanInteract {4} QuestGiverStatus {5}\r\n" +
+                                 "Flags {9} IsEvadingRunningBack {10}\r\n" +
+                                 "CurrHPs {11} MaxHPs {12} CurrHP {13}% LastHP {14}",
                                     base.ToString(),
                                     IsDead, Lootable, ShouldLoot,
                                     CanInteract, QuestGiverStatus,
-                                    ShouldKill, Attackable, IsQuestNpc);
+                                    ShouldKill, Attackable, IsQuestNpc,
+                                    Flags.ToString(), IsEvadeRunningBack,
+                                    CurrentHealth, 
+                                    MaxHealth.HasValue?MaxHealth.Value.ToString():"?", 
+                                    CurrentHealthPercent,
+                                    LastCurrentHealthPercent.ToString(),
+                                    InCombat);
         }
     }
 }

@@ -1,4 +1,41 @@
-﻿v1.2.2.2
+﻿
+v1.3.0.0
+
+Movement Class 
+	-Now has constructor for C_WoWObject which will use the location of the given object.
+	-Added Transport method from Questbot Utilities class.
+		*Credit goes to Chinajade for the awesome code!
+
+C_WoWObject
+	-Added property for Rotation, currently only set during construction of object.
+	-Added IsBehindPlayer property and IsBehindObject method.
+	-Added GetBehindPoint and GetFrontPoint location methods.
+
+C_WoWUnit
+	-Added property for HitPoints, CanSelect, InCombat, and Trappable (which uses cache to check entry)
+
+Behaviors
+	-Updated movement in many behaviors now that HB can navigate the garrison properly.
+	-Death handling coroutine should now execute correctly when dead.
+	-Loot Behavior will now ignore target after 3+ interaction attempts.
+	-Flight Path behavior will no longer check for flight paths during its movement to nearest flight master.
+	-Combat Behavior has been broken into steps to better regulate combat.
+	-Added Trapping Behavior into Combat (W.I.P.)
+
+Misc
+	-Added TargetManager class - extracted target related properties and methods from ObjectCacheManager.
+	-GarrisonManager no longer sets any blackspots for garrison.
+	-Added logic array for Dagg -- another follower that can be gathered.
+
+
+User Contributed changes by Mirabis:
+	-Changed all Lua.GetReturnValues using single indexes to Lua.GetReturnVal
+	-Small fix for a global lua variable
+
+
+
+
+v1.2.2.2
 Primal Trader setting has changed to used ID and will require setting it to a value again.
 Added Daily Quests for Warmill/Dwarven Bunker daily scraps and for Alchemy Lab with assigned follower.
 
@@ -12,10 +49,6 @@ Movement
 Behavior
 	-Added Virtual Func for updating the interaction object to allow for custom returns. (Default is by entry id given)
 	-Removed Virtual Movement and Interaction methods as they were never really used.
-
-User Contributed changes by Mirabis:
-	-Changed all Lua.GetReturnValues using single indexes to Lua.GetReturnVal
-	-Small fix for a global lua variable
 
 
 v1.2.2.1

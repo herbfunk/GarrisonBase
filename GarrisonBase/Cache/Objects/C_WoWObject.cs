@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Cache.Enums;
+using Herbfunk.GarrisonBase.Character;
 using Styx;
 using Styx.Common.Helpers;
 using Styx.Helpers;
@@ -16,6 +17,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         {
             RefWoWObject = obj;
             Location = obj.Location;
+            Rotation = obj.Rotation;
             Guid = obj.Guid;
             Entry = obj.Entry;
             Name = obj.Name;
@@ -38,13 +40,30 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
 
         public WoWPoint Location { get; set; }
+        public float Rotation { get; set; }
         public WoWGuid Guid { get; set; }
         public uint Entry { get; set; }
         public string Name { get; set; }
         public WoWObjectType Type { get; set; }
         public BlacklistType BlacklistType { get; set; }
-        public bool ShouldLoot { get; set; }
-        public bool ShouldKill { get; set; }
+        public bool ShouldLoot
+        {
+            get
+            {
+                if (BaseSettings.CurrentSettings.LootAnyMobs) return true;
+                return _shouldLoot;
+            }
+            set { _shouldLoot = value; }
+        }
+        private bool _shouldLoot;
+
+        public bool ShouldKill
+        {
+            get { return _shouldKill; }
+            set { _shouldKill = value; }
+        }
+        private bool _shouldKill;
+
         public bool IsQuestNpc { get; set; }
 
         public WaitTimer IgnoredTimer
@@ -97,6 +116,18 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
         }
 
+        public bool IsBehindPlayer
+        {
+            get
+            {
+                return WoWMathHelper.IsBehind(Location, Player.Location, Player.Rotation, 3.141593f);
+            }
+        }
+
+        public bool IsBehindObject(C_WoWObject obj)
+        {
+            return WoWMathHelper.IsBehind(Location, obj.Location, obj.Rotation, 3.141593f);
+        }
         
         ///<summary>
         ///Flag that determines if the object should be removed from the collection.
@@ -238,20 +269,40 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             get
             {
                 if (!IsValid) return false;
-                float num = InteractRange - 0.1f;
-                return DistanceSqr < num * num;
+                return CheckDistance(InteractRange);
                 //return ref_WoWObject.WithinInteractRange;
             }
         }
 
+        public bool CheckDistance(float distance)
+        {
+            float num = distance - 0.1f;
+            return DistanceSqr < num * num;
+        }
 
 
+        public int InteractionAttempts = 0;
         public void Interact()
         {
             if (!IsValid) return;
             RefWoWObject.Interact();
+            InteractionAttempts++;
         }
 
+        public WoWPoint GetBehindPoint(float distance=5f)
+        {
+            float facing = RefWoWObject.Rotation;
+            facing += WoWMathHelper.DegreesToRadians(180); // was 150 ?
+            facing = WoWMathHelper.NormalizeRadian(facing);
+            return Location.RayCast(facing, distance);
+        }
+
+        public WoWPoint GetFrontPoint(float distance = 5f)
+        {
+            float facing = RefWoWObject.Rotation;
+            facing = WoWMathHelper.NormalizeRadian(facing);
+            return Location.RayCast(facing, distance);
+        }
         public CachedValue<bool> LineOfSight, Collision;
         internal bool LineofsightResult = false;
         internal bool CollisionResult = false;
@@ -294,6 +345,10 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 _collisionWaitTimer.Reset();
             }
         }
+
+
+
+
         private WaitTimer _collisionWaitTimer = WaitTimer.FiveSeconds;
 
         internal static bool TestLineOfSight(C_WoWObject obj)
@@ -374,13 +429,16 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                                  "LOS {7} ( {8} ) Tested {9}ms\r\n" +
                                  "Collision {12} Tested {13}ms\r\n" +
                                  "Valid {10}\r\n" +
-                                 "Update {11}",
+                                 "Update {11}\r\n" +
+                                 "IgnoreTime {14}",
                                  Entry,Name,Guid, Type, SubType,
                                  Location, Distance, 
                                  LineofsightResult, _lineofsightPoint.ToString(), LineofSightWaitTimer.TimeLeft.TotalMilliseconds,
                                  ObjectValidCheck,
                                  RequiresUpdate,
-                                 CollisionResult, CollisionWaitTimer.TimeLeft.TotalMilliseconds);
+                                 CollisionResult, 
+                                 CollisionWaitTimer.TimeLeft.TotalMilliseconds,
+                                 IgnoredTimer.IsFinished?"0":IgnoredTimer.TimeLeft.TotalMilliseconds + "ms");
         }
 
 

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bots.Quest;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
@@ -18,7 +20,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public int Level { get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
-        
+
         public string Quality { get; set; }
         public int ItemLevel { get; set; }
         public int XP { get; set; }
@@ -37,7 +39,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         //    ItemLevel = itemlevel;
         //    XP = xp;
         //    LevelXP = levelxp;
-           
+
         //    Quality = quality;
         //    Abilities = abilities;
         //}
@@ -239,7 +241,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             new FollowerAbility(256, "Treasure Hunter", AbilityCategory.RewardIncrease, -1, CounterCategory.None),
 
         };
-        
+
         #endregion
 
         public static BehaviorArray FollowerQuestBehaviorArray(int followerid)
@@ -253,12 +255,11 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 //Move to location
                 var movementLocation = new WoWPoint(4852.024, 1390.837, 144.9443);
                 var flightPath = new BehaviorUseFlightPath(movementLocation);
-               
+
                 var moveBehavior = new BehaviorMove(movementLocation);
                 //<Hotspot X="4852.024" Y="1390.837" Z="144.9443" />
                 var hotspotBehavior =
                     new BehaviorHotspotRunning(
-                    36037,
                     new[] { movementLocation },
                     new uint[] { 83827, 83824, 83828, 83826, 83871 },
                     BehaviorHotspotRunning.HotSpotType.Killing,
@@ -287,7 +288,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
             }
-            
+
             #endregion
 
             #region Blook (189)
@@ -296,14 +297,13 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             { //Blook
                 //Final quest id 34279
 
-                
+
                 var movementLocation = new WoWPoint(4605.237, 1690.607, 234.7461);
                 var flightPath = new BehaviorUseFlightPath(movementLocation);
                 var moveBehavior = new BehaviorMove(movementLocation);
                 var gossipBehavior = new BehaviorGossipInteract(78030, 0, false, () => BehaviorManager.ObjectNotValidOrNotFound(78030) || BehaviorManager.CanInteractWithUnit(78030));
                 var hotspotBehaviorkill =
                    new BehaviorHotspotRunning(
-                   34279,
                    new[] { movementLocation },
                    new uint[] { 78030 },
                    BehaviorHotspotRunning.HotSpotType.Killing,
@@ -325,7 +325,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                             !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
             }
-            
+
             #endregion
 
             #region Defender Illona / Aeda Brightdawn (207)
@@ -359,7 +359,6 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 //Kill until Not Attackable
                 var hotspotBehavior =
                    new BehaviorHotspotRunning(
-                   questId,
                    new[] { killLoc },
                    new uint[] { mobIds[0] },
                    BehaviorHotspotRunning.HotSpotType.Killing,
@@ -375,7 +374,6 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 //Kill until Not Attackable
                 var hotspotBehavior2 =
                    new BehaviorHotspotRunning(
-                   questId,
                    new[] { killLoc },
                    new uint[] { mobIds[1] },
                    BehaviorHotspotRunning.HotSpotType.Killing,
@@ -401,12 +399,12 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     questTurnin,
                     finalquestTurnin,
                 });
-                newArray.Criteria += () => !QuestHelper.QuestLogFull && 
+                newArray.Criteria += () => !QuestHelper.QuestLogFull &&
                                             BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
                                             !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
             }
-            
+
             #endregion
 
             #region Fen Tao (467)
@@ -436,7 +434,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                             !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
             }
-            
+
             #endregion
 
             #region Image of Archmage Vargoth (190)
@@ -444,14 +442,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             if (followerid == 190)
             {
 
-               
+
                 /* Mysterious Ring Gorgrond
                  * <WoWItem Name="Mysterious Ring" Entry="110459" />
                  */
 
                 uint questidRing = 34463;
                 uint itemidRing = 110459;
-                var locRing=new WoWPoint(7414.815, 1820.695, 88.25874);
+                var locRing = new WoWPoint(7414.815, 1820.695, 88.25874);
                 var flightPathRing = new BehaviorUseFlightPath(locRing);
                 var questPickupRing = new BehaviorQuestPickup(questidRing, locRing, 229330);
                 BehaviorArray arrayRing = new BehaviorArray(new Behavior[]
@@ -464,7 +462,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     Player.Inventory.BagItems.Values.All(item => item.Entry != itemidRing) &&
                     Player.Inventory.BankItems.Values.All(item => item.Entry != itemidRing);
 
-                
+
 
                 /* Mysterious Staff Nagrand
                  */
@@ -506,10 +504,36 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 uint itemidHat = 110470;
                 var locHat = new WoWPoint(2955.57, 3133.576, 33.54591);
                 var flightPathHat = new BehaviorUseFlightPath(locHat);
+
+                //Elevator
+                //"X="" Y="3009.481" Z="" 
+                var transportTop = new WoWPoint(2681.371, 3009.481, 233.3512);
+                var transportBottom = new WoWPoint(2681.371, 3009.481, 69.04865);
+                var transportWaitPointTop = new WoWPoint(2677.393, 3004.31, 234.1084);
+                var transportWaitPointBottom = new WoWPoint(2685.759, 3015.352, 69.64091);
+                var transportTopStandPoint = new WoWPoint(2681.655, 3009.669, 233.9413);
+                var transportBottomStandPoint = new WoWPoint(2682.094, 3010.166, 69.60918);
+                var transportBottomGetOffPoint = new WoWPoint(2687.095, 3016.995, 69.4741);
+                var transportTopGetOffPoint = new WoWPoint(2675.066, 3001.215, 233.9413);
+
+                var ElevatorId = 231934;
+                var elevatorDown = new BehaviorTransport(ElevatorId, transportTop, transportBottom, transportWaitPointTop, transportTopStandPoint,
+                    transportBottomGetOffPoint, Movement.MovementTypes.Normal, "ElevatorDown");
+
+                var elevatorUp = new BehaviorTransport(ElevatorId, transportBottom, transportTop, transportWaitPointBottom, transportBottomStandPoint,
+                     transportTopGetOffPoint, Movement.MovementTypes.Normal, "ElevatorUp");
+                elevatorUp.Criteria += () => Player.Location.Distance(locHat) <= 50f;
+
+                var movePickupHat = new BehaviorMove(locHat);
                 var questPickupHat = new BehaviorQuestPickup(questidHat, locHat, 229331);
+
+
+
                 BehaviorArray arrayHat = new BehaviorArray(new Behavior[]
                 {
                     flightPathHat,
+                    elevatorDown,
+                    movePickupHat,
                     questPickupHat,
                 });
                 arrayHat.Criteria += () =>
@@ -531,7 +555,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                                     BehaviorManager.HasQuest(questidStaff) &&
                                     Player.Inventory.BagItems.Values.Any(item => item.Entry == itemidStaff);
 
-                var questTurninHat= new BehaviorQuestTurnin(questidHat, questTurninLoc, questTurninNpcId);
+                var questTurninHat = new BehaviorQuestTurnin(questidHat, questTurninLoc, questTurninNpcId);
                 questTurninHat.Criteria += () =>
                                     BehaviorManager.HasQuest(questidHat) &&
                                     Player.Inventory.BagItems.Values.Any(item => item.Entry == itemidHat);
@@ -556,7 +580,6 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
                 var hotspotBehavior =
                     new BehaviorHotspotRunning(
-                    0,
                     new[] { finalQuestLoc },
                     new uint[] { },
                     BehaviorHotspotRunning.HotSpotType.Looting,
@@ -581,12 +604,13 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     arrayRing,
                     arrayStaff,
                     arrayHat,
+                    elevatorUp,
                     arrayBoots,
                     arrayQuestTurnin,
                     arrayQuestTurninFinalPart1,
                     questPickupFinalPart2,
                 });
-                newArray.Criteria += () => !QuestHelper.QuestLogFull && 
+                newArray.Criteria += () => !QuestHelper.QuestLogFull &&
                                             BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
                                             !GarrisonManager.FollowerIdsCollected.Contains(followerid);
                 return newArray;
@@ -602,14 +626,13 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 //if have item, open cage, and complete quest 35596 with unit 80083
                 WoWPoint _killposition = new WoWPoint(2034.626, 7016.884, 51.07641);
                 var flightPath = new BehaviorUseFlightPath(_killposition);
-               
+
                 var hotspotBehaviorkill =
                   new BehaviorHotspotRunning(
-                  34279,
                   new[] { _killposition },
                   new uint[] { 80080 },
                   BehaviorHotspotRunning.HotSpotType.Both,
-                  () => Player.Inventory.GetBagItemsById(111863).Count==0);
+                  () => Player.Inventory.GetBagItemsById(111863).Count == 0);
 
                 var interactCage = new BehaviorGossipInteract(80083, 0, true,
                     () => !BehaviorManager.UnitHasQuestGiverStatus(80083, QuestGiverStatus.Available));
@@ -625,9 +648,9 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 });
 
                 //
-                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid) 
-                            && BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid); 
-                    
+                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid)
+                            && BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid);
+
                 return newArray;
             }
 
@@ -663,7 +686,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 var gossip_vitality = new BehaviorGossipInteract(vitality_objectId, 0, true,
                                         () => Player.Inventory.GetBagItemsById(vitality_itemId).Count == 0);
 
-                
+
                 var barray_item_vitality = new BehaviorArray(
                     new Behavior[]
                     {
@@ -682,16 +705,16 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
                 //Second Item - Lure
                 //<GameObject Name="Abu'Gar's Favorite Lure" Entry="233642" X="3056.673" Y="7132.38" Z="1.907172" />
-               
+
                 int lure_objectId = 233642;
                 int lure_itemId = 114245;
                 uint lure_questId = 36072;
-                WoWPoint lure_moveLoc = new WoWPoint(3052.387, 7130.97, 4.490187);
+                WoWPoint lure_moveLoc = new WoWPoint(3051.612, 7142.25, 3.229406);
                 var moveto_lure_move1 = new BehaviorMove(lure_moveLoc);
                 var moveto_lure_move2 = new BehaviorMove(lure_moveLoc, 2f, Movement.MovementTypes.ClickToMove);
                 var gossip_lure = new BehaviorGossipInteract(lure_objectId, 0, true,
                                        () => Player.Inventory.GetBagItemsById(lure_itemId).Count == 0);
-               
+
                 var barray_item_lure = new BehaviorArray(
                     new Behavior[]
                     {
@@ -736,8 +759,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                         final_questPickup,
                     });
                 barray_final.Criteria +=
-                    () => Player.Inventory.GetBagItemsById(new[] {reel_itemId, lure_itemId, vitality_itemId}).Count == 3;
-                
+                    () => Player.Inventory.GetBagItemsById(new[] { reel_itemId, lure_itemId, vitality_itemId }).Count == 3;
+
                 var returnArray = new BehaviorArray(new Behavior[]
                 {
                     barray_item_vitality,
@@ -751,6 +774,81 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 return returnArray;
             }
             #endregion
+
+            #region Dagg (32)
+            if (followerid == 32)
+            {
+                uint daggQuestId = 34733;
+                var garrisonMovePoint = Player.IsAlliance ? new WoWPoint(1740.166, 162.6373, 74.76965) :
+                                                            new WoWPoint(5736.961, 4499.52, 131.8965);
+                var daggGarrisonEntryid = 79492;
+
+                var daggGarrisonMovement = new BehaviorMove(garrisonMovePoint, 15f);
+                var daggQuestTurnin = new BehaviorQuestPickup(daggQuestId, garrisonMovePoint, daggGarrisonEntryid, true);
+                daggQuestTurnin.Criteria += () =>
+                {
+                    var units = ObjectCacheManager.GetUnitsNearPoint(garrisonMovePoint, 100f);
+                    return units.Count > 0 && units.Any(u => u.Entry == daggGarrisonEntryid);
+                };
+
+                var daggFinalQuestArray = new BehaviorArray(new Behavior[]
+                {
+                    daggGarrisonMovement,
+                    daggQuestTurnin
+                });
+                daggFinalQuestArray.Criteria += () => !LuaCommands.IsQuestFlaggedCompleted(daggQuestId.ToString());
+
+                //Free him from two cages found in Frostfire ridge
+                //Meet him in front of garrison and complete quest
+
+                //Cage One
+                var cage1Point = new WoWPoint(5794.33, 3476.851, 130.5595);
+                var dagg1Entryid = 79473;
+                var cage1Entryid = 230498;
+
+                var cage1Movement = new BehaviorMove(new WoWPoint(5791.311, 3470.227, 132.307), 5f);
+                var cage1Gossip = new BehaviorGossipInteract(cage1Entryid, 7f, false);
+                cage1Gossip.RunCondition += () =>
+                {
+                    var units = ObjectCacheManager.GetUnitsNearPoint(cage1Point, 5f);
+                    return units.Count > 0 && units.Any(u => u.Entry == dagg1Entryid);
+                };
+
+
+                //Cage Two
+                var cage2Point = new WoWPoint(7130.164, 5086.299, 91.04395);
+                var dagg2Entryid = 79488;
+                var cage2Entryid = 230506;
+
+                var cage2Movement = new BehaviorMove(new WoWPoint(7134.694, 5079.974, 91.04465), 5f);
+                var cage2Gossip = new BehaviorGossipInteract(cage2Entryid, 7f, false);
+                cage2Gossip.RunCondition += () =>
+                {
+                    var units = ObjectCacheManager.GetUnitsNearPoint(cage2Point, 5f);
+                    return units.Count > 0 && units.Any(u => u.Entry == dagg2Entryid);
+                };
+
+
+
+                var barray = new BehaviorArray(new Behavior[]
+                {
+                    daggFinalQuestArray,
+
+                    cage1Movement,
+                    cage1Gossip,
+
+                    cage2Movement,
+                    cage2Gossip,
+
+                    daggFinalQuestArray
+                });
+                barray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
+                                           !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+
+                return barray;
+            }
+            #endregion
+
 
             return null;
         }

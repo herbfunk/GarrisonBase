@@ -6,6 +6,7 @@ using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
@@ -31,8 +32,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
-            ObjectCacheManager.ShouldKill = false;
-            ObjectCacheManager.ShouldLoot = false;
+            TargetManager.ShouldKill = false;
+            TargetManager.ShouldLoot = false;
 
             Common.CloseOpenFrames();
 

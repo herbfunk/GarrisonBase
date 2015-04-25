@@ -722,5 +722,40 @@ namespace Herbfunk.GarrisonBase
 
 
 
+        public static WoWPoint[] Trapping_Leather_ShadowMoonValley =
+        {
+            new WoWPoint(1163.465, -1726.961, 20.1808),
+            new WoWPoint(1051.413, -1855.072, 3.917787),
+            new WoWPoint(1239.585, -1999.448, 24.20251),
+            new WoWPoint(1055.259, -2070.717, 19.75828),
+            new WoWPoint(760.4904, -1945.726, 26.6032),
+            new WoWPoint(765.1276, -1757.81, 16.09372),
+            new WoWPoint(971.8748, -1454.826, 4.029249),
+        };
+
+        public static WoWPoint[] Trapping_Leather_FrostfireRidge =
+        {
+            new WoWPoint(6344.586, 5875.258, 114.4052),
+            new WoWPoint(6492.797, 5977.817, 114.3966),
+            new WoWPoint(6607.841, 6073.028, 114.3967),
+        };
+
+        public static WoWPoint[] Trapping_Fur_FrostfireRidge =
+        {
+            new WoWPoint(7547.808, 5324.521, 122.8218),
+            new WoWPoint(7548.854, 5421.045, 122.6935),
+        };
+
+        public static WoWPoint[] Trapping_Elites_Nagrand =
+        {
+            new WoWPoint(3538.439, 6571.7, 4.126019),
+            new WoWPoint(3511.338, 6334.348, 20.06054),
+            new WoWPoint(3447.621, 6211.164, 9.633522),
+            new WoWPoint(3327.353, 6402.812, 14.92476),
+        };
+
+
+
+
     }
 }

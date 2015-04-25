@@ -18,5 +18,7 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
         PrimalTrader = 512,
         Vendor = 1024,
         Follower = 2048,
+        Trappable = 4096,
+        Trap = 8192,
     }
 }

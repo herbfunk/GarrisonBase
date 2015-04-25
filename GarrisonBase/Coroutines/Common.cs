@@ -7,6 +7,7 @@ using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.CommonBot.Routines;
+using Styx.Helpers;
 using Styx.TreeSharp;
 
 namespace Herbfunk.GarrisonBase.Coroutines
@@ -15,7 +16,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
     {
         public static readonly BehaviorPrechecks PreChecks = new BehaviorPrechecks();
 
-        private static Composite _lootBehavior, _deathBehavior, _vendorBehavior;
+        private static Composite _lootBehavior, _deathBehavior, _vendorBehavior, _combatBehavior;
         internal static Composite LootBehavior
         {
             get { return _lootBehavior ?? (_lootBehavior = LevelBot.CreateLootBehavior()); }
@@ -28,14 +29,17 @@ namespace Herbfunk.GarrisonBase.Coroutines
         {
             get { return _deathBehavior ?? (_deathBehavior = LevelBot.CreateDeathBehavior()); }
         }
-
         public static async Task<bool> CheckCommonCoroutines()
         {
             if (ObjectCacheManager.ShouldUpdateObjectCollection)
                 ObjectCacheManager.UpdateCache();
-
-            if (StyxWoW.Me.IsDead && StyxWoW.Me.IsGhost && await DeathBehavior.ExecuteCoroutine())
+            
+            if (StyxWoW.Me.IsDead || StyxWoW.Me.IsGhost)
+            {
+                await DeathBehavior.ExecuteCoroutine();
                 return true;
+            }
+                
 
             if (await Combat()) return true;
 

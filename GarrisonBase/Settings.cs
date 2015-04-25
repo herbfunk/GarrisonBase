@@ -206,7 +206,7 @@ namespace Herbfunk.GarrisonBase
         public bool BehaviorRepairSell { get; set; }
         public bool BehaviorSalvaging { get; set; }
         public bool BehaviorLootCache { get; set; }
-
+        public bool LootAnyMobs { get; set; }
 
         public bool HBRelog_SkipToNextTask { get; set; }
 
@@ -306,6 +306,7 @@ namespace Herbfunk.GarrisonBase
             BehaviorRepairSell = true;
             BehaviorSalvaging = true;
             BehaviorLootCache = true;
+            LootAnyMobs = false;
 
             ReservedGarrisonResources = 0;
 

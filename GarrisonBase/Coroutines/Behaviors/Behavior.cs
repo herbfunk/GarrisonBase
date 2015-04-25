@@ -107,8 +107,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         /// </summary>
         public virtual void Initalize()
         {
-            StartMovement = new Movement(MovementPoints.ToArray(), 2f, false, String.Format("StartMovement({0})", Type.ToString()));
-            EndMovement = new Movement(MovementPoints.ToArray().Reverse().ToArray(), 2f, false, String.Format("EndMovement({0})", Type.ToString()));
+            StartMovement = new Movement(MovementPoints.ToArray(), 2f, name: String.Format("StartMovement({0})", Type.ToString()));
+            EndMovement = new Movement(MovementPoints.ToArray().Reverse().ToArray(), 2f, name: String.Format("EndMovement({0})", Type.ToString()));
             _interactionObject = null;
             IsDone = false;
             Initalized = true;
@@ -194,6 +194,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 Type,  IsDone, Initalized, Disposed);
         }
 
+        public virtual Behavior Clone()
+        {
+            return (Behavior)this.MemberwiseClone();
+        }
+
         public static void ResetBehavior(Behavior behavior, bool allParents=false)
         {
             if (behavior.Parent != null)
@@ -213,48 +218,6 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 behavior.Dispose();
                 behavior.Initalize();
             }
-        }
-    }
-
-    public class BehaviorCustomAction : Behavior
-    {
-        public Action CustomAction;
-        public Func<bool> CustomCondition = () => true;
-        public readonly bool RepeatAction;
-        public BehaviorCustomAction(Action action, bool repeat = false)
-        {
-            CustomAction = action;
-            RepeatAction = repeat;
-        }
-
-        public BehaviorCustomAction(Action action, Func<bool> condition, bool repeat = false) : this(action, repeat)
-        {
-            CustomCondition = condition;
-        }
-        private bool CheckCondition()
-        {
-            return CustomCondition.GetInvocationList().Cast<Func<bool>>().All(f => f());
-        }
-        public override async Task<bool> BehaviorRoutine()
-        {
-            if (await base.BehaviorRoutine()) return true;
-
-            if (IsDone) return false;
-
-            if (!CheckCondition())
-            {
-                IsDone = !RepeatAction;
-                return false;
-            }
-
-            CustomAction.Invoke();
-            
-            if (!RepeatAction)
-            {
-                IsDone = true;
-            }
-
-            return RepeatAction;
         }
     }
 

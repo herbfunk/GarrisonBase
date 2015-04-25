@@ -374,7 +374,7 @@ namespace Herbfunk.GarrisonBase.Character
                 }
             }
 
-            return returnHerbs;
+            return returnHerbs.OrderByDescending(h => h.StackCount).ToList();
         }
 
         internal Dictionary<C_WoWItem, string> GetMailItems()
@@ -406,6 +406,22 @@ namespace Herbfunk.GarrisonBase.Character
         }
         private C_WoWItem _garrisonhearthstone;
 
+        public C_WoWItem Trap
+        {
+            get
+            {
+                if (_trap == null)
+                    _trap = BagItems.Values.First(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && CacheStaticLookUp.TrapItemEntryIds.Contains(i.Entry));
+
+                return _trap;
+            }
+           
+        }
+        private C_WoWItem _trap;
+        
+
+
+        
 
         public static readonly List<int> HerbIds = new List<int>
         {

@@ -171,13 +171,20 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
         }
 
+        public DateTime LastUsed = DateTime.MinValue;
         public void Use()
         {
-            ref_WoWItem.Use();
+            if (ref_WoWItem.Use())
+                LastUsed = DateTime.Now;
         }
         public void Interact()
         {
             ref_WoWItem.Interact();
+        }
+
+        public bool OnCooldown
+        {
+            get { return ref_WoWItem.CooldownTimeLeft.TotalMilliseconds > 0f; }
         }
 
         public bool ShouldVendor

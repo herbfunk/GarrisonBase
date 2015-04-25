@@ -7,6 +7,7 @@ using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
@@ -35,6 +36,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private bool _shouldCheckMapId = false;
         public override void Initalize()
         {
+            Movement.IgnoreTaxiCheck = true;
             _selectedTaxiNode = null;
             _taxiMovement = null;
             _taxiNpc = null;
@@ -60,6 +62,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             Initalized = true;
         }
 
+        public override void Dispose()
+        {
+            Movement.IgnoreTaxiCheck = false;
+            base.Dispose();
+        }
 
 
         public override async Task<bool> BehaviorRoutine()
@@ -75,6 +82,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 {
                     //Reset Cache (Garrison was last location)
                     ObjectCacheManager.ResetCache();
+                    TargetManager.Reset();
                 }
                 return false;
             }
@@ -149,7 +157,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
 
-            if (_taxiNpc != null)
+            if (_taxiNpc != null && _taxiNpc.IsValid)
             {//We got a valid object.. so lets move into interact range!
                 if (_taxiNpc.WithinInteractRange)
                 {
@@ -162,7 +170,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
                 if (_taxiMovement == null || _taxiMovement.CurrentMovementQueue.Count == 0)
-                    _taxiMovement = new Movement(_taxiNpc.Location, 5f - 0.25f);
+                    _taxiMovement = new Movement(_taxiNpc.Location, 5f - 0.25f, name: "TaxiNpcMovement");
 
                 await _taxiMovement.MoveTo();
                 return true;
@@ -191,13 +199,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
 
                 GarrisonBase.Debug("Could not find Nearest Flight Merchant, but using nearest flight path location! {0} at {1}", _nearestflightPathInfo.Name, _nearestflightPathInfo.Location);
-                _taxiMovement = new Movement(_nearestflightPathInfo.Location, 20f);
+                _taxiMovement = new Movement(_nearestflightPathInfo.Location, 20f, name: "taxiNpcMovement");
                 return true;
             }
 
             //Found valid npc object..
             _taxiNpc = FlightPaths.NearestFlightMerchant;
-            _taxiMovement = new Movement(_taxiNpc.Location, 5f - 0.25f);
+            _taxiMovement = new Movement(_taxiNpc.Location, 5f - 0.25f, name: "taxinpcMovement");
 
 
             return true;

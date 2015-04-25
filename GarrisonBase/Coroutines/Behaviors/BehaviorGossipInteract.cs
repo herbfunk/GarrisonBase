@@ -19,23 +19,25 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         private readonly int _gossipIndex=-1;
         private readonly string _gossipText = string.Empty;
         private readonly bool _oneTime;
+        private readonly float _interactDistance;
 
-        public BehaviorGossipInteract(int npcId, bool oneTime = false, Func<bool> runCondition = null)
+        public BehaviorGossipInteract(int npcId, float interactDistance = 6f, bool oneTime = false,  Func<bool> runCondition = null)
             : base(WoWPoint.Zero, npcId)
         {
+            _interactDistance = interactDistance;
             _npcId = npcId;
             _oneTime = oneTime;
             if (runCondition != null) RunCondition += runCondition;
             ObjectCacheManager.QuestNpcIds.Add(Convert.ToUInt32(_npcId));
         }
-        public BehaviorGossipInteract(int npcId, int gossipIndex, bool oneTime = false, Func<bool> runCondition = null)
-            : this(npcId, oneTime, runCondition)
+        public BehaviorGossipInteract(int npcId, int gossipIndex, float interactDistance = 6f, bool oneTime = false, Func<bool> runCondition = null)
+            : this(npcId, interactDistance, oneTime, runCondition)
         {
             _gossipIndex = gossipIndex;
         }
 
-        public BehaviorGossipInteract(int npcId, string gossipText, bool oneTime = false, Func<bool> runCondition = null)
-            : this(npcId, oneTime, runCondition)
+        public BehaviorGossipInteract(int npcId, string gossipText, float interactDistance = 6f, bool oneTime = false, Func<bool> runCondition = null)
+            : this(npcId, interactDistance, oneTime, runCondition)
         {
             _gossipText = gossipText.ToLower();
             
@@ -129,13 +131,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
             if (_npcMovement == null)
             {
-                _npcMovement = new Movement(validobj.Location, validobj.InteractRange - 0.25f, false, "GossipInteract");
+                _npcMovement = new Movement(validobj.Location, _interactDistance, name: "GossipInteract");
             }
 
             if (await _npcMovement.MoveTo(false)) 
                 return true;
 
-            if (validobj.WithinInteractRange)
+            if (validobj.CheckDistance(_interactDistance))
             {
                 if (StyxWoW.Me.IsMoving) await CommonCoroutines.StopMoving();
                 await CommonCoroutines.SleepForLagDuration();

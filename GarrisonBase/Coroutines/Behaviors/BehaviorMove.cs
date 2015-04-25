@@ -23,7 +23,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
-            _movement = new Movement(_movementPoints, _distance, false, "BehaviorMove", _stuckCheck);
+            if (_movement==null)
+                _movement = new Movement(_movementPoints, _distance, name: "BehaviorMove", checkStuck: _stuckCheck);
+            else if(BehaviorManager.SwitchBehavior!=null && BehaviorManager.SwitchBehavior.Type == BehaviorType.Taxi)
+                _movement = new Movement(_movementPoints, _distance, name: "BehaviorMove_IgnoreTaxi", checkStuck: _stuckCheck);
+
             base.Initalize();
         }
 

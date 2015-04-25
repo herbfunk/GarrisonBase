@@ -103,6 +103,15 @@ namespace Herbfunk.GarrisonBase
             MovementCache.Initalize(Character.Player.IsAlliance);
             QuestHelper.RefreshQuestLog();
             Cache.Blacklist.Initalize(Character.Player.IsAlliance);
+
+            TrappingEntryIds.Clear();
+            TrappingEntryIds.AddRange(Trap_UnitIds_Boars);
+            TrappingEntryIds.AddRange(Trap_UnitIds_Clefthoof);
+            TrappingEntryIds.AddRange(Trap_UnitIds_Elekk);
+            TrappingEntryIds.AddRange(Trap_UnitIds_Riverbeasts);
+            TrappingEntryIds.AddRange(Trap_UnitIds_Talbulk);
+            TrappingEntryIds.AddRange(Trap_UnitIds_Wolves);
+
             InitalizedCache = true;
         }
 
@@ -437,191 +446,199 @@ namespace Herbfunk.GarrisonBase
             //122591, //Engineering
         };
 
-        #region Trapping Unit Ids
+        #region Trapping
 
         #region Riverbeasts
-        public static readonly List<int> Trap_UnitIds_Riverbeasts = new List<int>
+        public static readonly uint[] Trap_UnitIds_Riverbeasts = 
         {
-            85907,
-            83841,
-            77715,
-            85762,
-            85743,
-            77431,
-            83388,
-            82905,
-            88669,
-            79587,
-            88586,
-            87666,
-            86780,
-            85906,
-            79662,
-            79577,
-            72606,
-            88075,
-            82310,
-            83455,
-            75468,
-            87020,
-            87021,
-            86848,
+            //85907,
+            //83841,
+            //77715,
+            //85762,
+            //85743,
+            //77431,
+            //83388,
+            //82905,
+            //88669,
+            //79587,
+            //88586,
+            //87666,
+            //86780,
+            //85906,
+            //79662,
+            //79577,
+            //72606,
+            //88075,
+            //82310,
+            //83455,
+            //75468,
+            //87020,
+            //87021,
+            //86848,
         };
         
         #endregion
 
         #region Boars
 
-        public static readonly List<int> Trap_UnitIds_Boars = new List<int>
+        public static readonly uint[] Trap_UnitIds_Boars = 
         {
-            82728,
-            75241,
-            77994,
-            75416,
-            79756,
-            76914,
-            77124,
-            77129,
-            84893,
-            86153,
-            80174,
-            88589,
-            83897,
-            86150,
-            86151,
-            88508,
-            77478,
-            82617,
-            82726,
-            72934,
-            77298,
-            75037,
-            83719,
-            86850,
+            //82728,
+            //75241,
+            //77994,
+            //75416,
+            //79756,
+            //76914,
+            //77124,
+            //77129,
+            //84893,
+            //86153,
+            //80174,
+            //88589,
+            //83897,
+            //86150,
+            //86151,
+            //88508,
+            //77478,
+            //82617,
+            //82726,
+            //72934,
+            //77298,
+            //75037,
+            //83719,
+            //86850,
         };
         
         #endregion
 
         #region Wolves
 
-        public static readonly List<int> Trap_UnitIds_Wolves = new List<int>
+        public static readonly uint[] Trap_UnitIds_Wolves = 
         {
-            84045,
-            80261,
-            86932,
-            86931,
             74748,
-            77886,
-            73619,
-            76150,
-            76337,
-            84793,
-            76593,
-            10981,
-            76597,
             76707,
             76705,
-            81000,
-            74712,
-            74169,
-            82912,
-            81774,
-            74206,
-            74208,
-            82209,
-            82205,
-            87107,
-            81902,
-            86414,
-            81001,
-            72991,
-            76181,
-            80160,
-            79755,
-            84044,
-            82307,
-            82308,
-            80263,
-            58456,
-            82535,
-            81718,
-            86851,
+            86932,
+            86931,
+            //84045,
+            //80261,
+            //86932,
+            //86931,
+            //74748,
+            //77886,
+            //73619,
+            //76150,
+            //76337,
+            //84793,
+            //76593,
+            //10981,
+            //76597,
+            //76707,
+            //76705,
+            //81000,
+            //74712,
+            //74169,
+            //82912,
+            //81774,
+            //74206,
+            //74208,
+            //82209,
+            //82205,
+            //87107,
+            //81902,
+            //86414,
+            //81001,
+            //72991,
+            //76181,
+            //80160,
+            //79755,
+            //84044,
+            //82307,
+            //82308,
+            //80263,
+            //58456,
+            //82535,
+            //81718,
+            //86851,
         };
 
         #endregion
 
         #region Talbulk
 
-        public static readonly List<int> Trap_UnitIds_Talbulk = new List<int>
+        public static readonly uint[] Trap_UnitIds_Talbulk = 
         {
-            66605,
-            78277,
-            83843,
-            78279,
-            83470,
-            78278,
-            86729,
-            58454,
-            82778,
-            76442,
-            82031,
-            62763,
-            78274,
-            78276,
-            78275,
-            82116,
-            86728,
             86727,
-            82513,
-            86801,
+            //66605,
+            //78277,
+            //83843,
+            //78279,
+            //83470,
+            //78278,
+            //86729,
+            //58454,
+            //82778,
+            //76442,
+            //82031,
+            //62763,
+            //78274,
+            //78276,
+            //78275,
+            //82116,
+            //86728,
+            //86727,
+            //82513,
+            //86801,
         };
 
         #endregion
 
         #region clefthoof
 
-        public static readonly List<int> Trap_UnitIds_Clefthoof = new List<int>
+        public static readonly uint[] Trap_UnitIds_Clefthoof = 
         {
-
-            78574,
-            76711,
-            76710,
-            73234,
-            82119,
-            86732,
-            72881,
-            76326,
-            77513,
-            83483,
-            75680,
-            86000,
-            77519,
-            85537,
-            76576,
-            78920,
-            78918,
-            84798,
-            80420,
-            78919,
-            78364,
-            86731,
-            86730,
-            81898,
-            78576,
-            78575,
-            85031,
-            80136,
-            50990,
-            86520,
-            79034,
-            76389,
-            75771,
-            78528,
-            78572,
-            78570,
-            78571,
             72162,
-            86847,
+            86730,
+            86731,
+            //78574,
+            //76711,
+            //76710,
+            //73234,
+            //82119,
+            //86732,
+            //72881,
+            //76326,
+            //77513,
+            //83483,
+            //75680,
+            //86000,
+            //77519,
+            //85537,
+            //76576,
+            //78920,
+            //78918,
+            //84798,
+            //80420,
+            //78919,
+            //78364,
+            //86731,
+            //86730,
+            //81898,
+            //78576,
+            //78575,
+            //85031,
+            //80136,
+            //50990,
+            //86520,
+            //79034,
+            //76389,
+            //75771,
+            //78528,
+            //78572,
+            //78570,
+            //78571,
+            //72162,
+            //86847,
 
         };
 
@@ -629,7 +646,7 @@ namespace Herbfunk.GarrisonBase
 
         #region Elekk
 
-        public static readonly List<int> Trap_UnitIds_Elekk = new List<int>
+        public static readonly uint[] Trap_UnitIds_Elekk = 
         {
             87700,
             87698,
@@ -638,6 +655,27 @@ namespace Herbfunk.GarrisonBase
         };
 
         #endregion
+
+        public static List<uint> TrappingEntryIds = new List<uint>();
+
+        public static readonly uint[] TrapItemEntryIds =
+        {
+            113991, //Iron Trap
+            115009, //Improved Iron Trap
+            115010, //Deadly Iron Trap
+        };
+
+        public static readonly List<uint> TrapWoWObjectEntryIds = new List<uint>
+        {
+            83709,83925, //Iron Trap (Unit)
+            //234186, //Iron Trap (Game Object)
+
+            84773, //Improved Iron Trap (Unit)
+            //234189, //Improved Iron Trap (Game Object)
+
+            84774, //Deadly Iron Trap (Unit)
+            //234190, //Deadly Iron Trap (Game Object)
+        };
 
         //
         //

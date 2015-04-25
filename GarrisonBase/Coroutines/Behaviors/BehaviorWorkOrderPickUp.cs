@@ -146,10 +146,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             //Move to the interaction object
             if (_movement == null)
-                _movement = new Movement(WorkOrderObject.Location, WorkOrderObject.InteractRange-0.25f, name: "WorkOrderPickup " + WorkOrderObject.Name);
+                _movement = new Movement(WorkOrderObject, WorkOrderObject.InteractRange-0.25f, name: "WorkOrderPickup " + WorkOrderObject.Name);
 
 
-            await _movement.ClickToMove(false);
+            await _movement.MoveTo(false);
             return true;
         }
 

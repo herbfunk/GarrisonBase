@@ -184,8 +184,8 @@ namespace Herbfunk.GarrisonBase.Helpers
                 {
                     var questNpcId = alliance ? 77377 : 79815;
                     var warmillBunker = GarrisonManager.Buildings[BuildingType.WarMillDwarvenBunker];
-                    var questPickup =  new BehaviorQuestPickup(questid, warmillBunker.EntranceMovementPoint, warmillBunker.SpecialMovementPoints.ToArray(), questNpcId);
-                    var questTurnin = new BehaviorQuestTurnin(questid, warmillBunker.EntranceMovementPoint, warmillBunker.SpecialMovementPoints.ToArray(), questNpcId, BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex);
+                    var questPickup =  new BehaviorQuestPickup(questid, warmillBunker.SpecialMovementPoints[1], questNpcId);
+                    var questTurnin = new BehaviorQuestTurnin(questid, warmillBunker.SpecialMovementPoints[1], questNpcId, BaseSettings.CurrentSettings.DailyWarMillQuestSettings.RewardIndex);
                     var barray = new BehaviorArray(new Behavior[]
                     {
                         questPickup,
@@ -211,7 +211,6 @@ namespace Herbfunk.GarrisonBase.Helpers
                     var questPickup = new BehaviorQuestPickup(
                         questid,
                         alchemyLab.EntranceMovementPoint,
-                        alchemyLab.SpecialMovementPoints.ToArray(),
                         0,
                         true,
                         BaseSettings.CurrentSettings.DailyAlchemyLabQuestSettings.RewardIndex);

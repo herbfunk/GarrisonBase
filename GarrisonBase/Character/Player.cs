@@ -16,6 +16,7 @@ namespace Herbfunk.GarrisonBase.Character
         internal static bool Combat = false;
         internal static bool ActuallyInCombat = false;
         internal static WoWPoint Location = WoWPoint.Zero;
+        internal static float Rotation = 0f;
         internal static WoWPoint TraceLinePosition = WoWPoint.Zero;
 
         internal static CachedValue<uint> MapId;
@@ -44,6 +45,7 @@ namespace Herbfunk.GarrisonBase.Character
             IsAlliance = StyxWoW.Me.IsAlliance;
             Level = StyxWoW.Me.Level;
             Location = StyxWoW.Me.Location;
+            Rotation = StyxWoW.Me.Rotation;
             Class = StyxWoW.Me.Class;
             Combat = StyxWoW.Me.Combat;
             ActuallyInCombat = StyxWoW.Me.IsActuallyInCombat;
@@ -82,6 +84,7 @@ namespace Herbfunk.GarrisonBase.Character
             using (StyxWoW.Memory.AcquireFrame())
             {
                 Location = StyxWoW.Me.Location;
+                Rotation = StyxWoW.Me.Rotation;
                 TraceLinePosition = StyxWoW.Me.GetTraceLinePos();
                 Combat = StyxWoW.Me.Combat;
                 ActuallyInCombat = StyxWoW.Me.IsActuallyInCombat;

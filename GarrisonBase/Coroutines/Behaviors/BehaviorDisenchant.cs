@@ -6,6 +6,7 @@ using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.CommonBot.Coroutines;
 
@@ -30,8 +31,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public override void Initalize()
         {
-            ObjectCacheManager.ShouldKill = false;
-            ObjectCacheManager.ShouldLoot = false;
+            TargetManager.ShouldKill = false;
+            TargetManager.ShouldLoot = false;
             MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].SafeMovementPoint);
             MovementPoints.Add(GarrisonManager.Buildings[BuildingType.EnchantersStudy].EntranceMovementPoint);
             InteractionEntryId = GarrisonManager.DisenchantingEntryId;

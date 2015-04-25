@@ -10,6 +10,7 @@ using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
+using Styx.Common;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
@@ -40,8 +41,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             _checkedReagent = false;
             _interactionAttempts = 0;
             _movement = null;
-            if (Building.SpecialMovementPoints != null)
-                _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f, name: "WorkOrderPickupSpecialMovement");
+            //if (Building.SpecialMovementPoints != null)
+            //    _specialMovement = new Movement(Building.SpecialMovementPoints.ToArray(), 2f, name: "WorkOrderPickupSpecialMovement");
 
             if (Building.Type == BuildingType.Barn)
                 BarnWorkOrderCurrencies = new List<Tuple<CraftingReagents, int>[]>(WorkOrder.BarnWorkOrderItemList);
@@ -136,23 +137,25 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         {
                             return false;
                         }
+
+                        return true;
                     }
+
+                    return false;
                 }
-                else
+
+                GarrisonBase.Debug("Staring Work Order for Barn using {0}", CurrentBarnCurrceny[0].Item1.ToString());
+
+                if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.FurryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyWolf)
+                    BarnWorkOrderGossipString = "i would like to place a work order for fur.";
+                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.LeatheryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyClefthoof)
+                    BarnWorkOrderGossipString = "i would like to place a work order for leather.";
+                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.MeatyCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyRiverbeast)
+                    BarnWorkOrderGossipString = "i would like to place a work order for meat.";
+
+                foreach (var i in removalList)
                 {
-                    GarrisonBase.Debug("Staring Work Order for Barn using {0}", CurrentBarnCurrceny[0].Item1.ToString());
-
-                    if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.FurryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyWolf)
-                        BarnWorkOrderGossipString = "i would like to place a work order for fur.";
-                    else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.LeatheryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyClefthoof)
-                        BarnWorkOrderGossipString = "i would like to place a work order for leather.";
-                    else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.MeatyCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyRiverbeast)
-                        BarnWorkOrderGossipString = "i would like to place a work order for meat.";
-
-                    foreach (var i in removalList)
-                    {
-                        BarnWorkOrderCurrencies.RemoveAt(i);
-                    }
+                    BarnWorkOrderCurrencies.RemoveAt(i);
                 }
             }
 
@@ -170,13 +173,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (await EndMovement.MoveTo())
                 return true;
-
+            
             return false;
         }
 
            
 
-
+        
 
         
         private async Task<bool> Movement()
@@ -267,10 +270,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             #endregion
 
             //Setup the NPC movement!
-            if (_movement == null || _movement.CurrentMovementQueue.Count==0)
-                _movement = new Movement(WorkOrderObject.Location, 4f, name: WorkOrderObject.Name);
+            if (_movement == null)
+                _movement = new Movement(WorkOrderObject, 4f, WorkOrderObject.Name);
 
-            await _movement.ClickToMove();
+            await _movement.MoveTo(false);
             return true;
         }
 

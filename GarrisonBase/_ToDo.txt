@@ -13,3 +13,7 @@ Herbing and Mining
 
 Add support for daily quests
 	-Reagent Trader
+
+World movement should be aware of hostile towns and blacklist accordingly to prevent ambushing from NPCs.
+Setup looting so it also loot anything it kills when moving outside the garrison.
+

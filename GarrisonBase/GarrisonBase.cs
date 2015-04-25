@@ -9,6 +9,7 @@ using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx.Common;
 using Styx.CommonBot;
 using Styx.Helpers;
@@ -19,7 +20,7 @@ namespace Herbfunk.GarrisonBase
     public class GarrisonBase : BotBase
     {
         public static HBRelogApi HbRelogApi;
-        internal static readonly Version Version = new Version(1,2,2,2);
+        internal static readonly Version Version = new Version(1,3,0,0);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {
@@ -49,6 +50,7 @@ namespace Herbfunk.GarrisonBase
             CacheStaticLookUp.InitalizedCache = false;
             BehaviorManager.Reset();
             ObjectCacheManager.ResetCache(true);
+            TargetManager.Reset();
             GarrisonManager.Reset();
             QuestHelper.QuestLog.Clear();
             LuaEvents.ResetFrameVariables();

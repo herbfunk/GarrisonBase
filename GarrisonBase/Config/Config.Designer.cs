@@ -87,6 +87,7 @@
             this.checkBox_Behavior_MineGather = new System.Windows.Forms.CheckBox();
             this.checkBox_Behavior_HerbGather = new System.Windows.Forms.CheckBox();
             this.checkBox_Behavior_LootCache = new System.Windows.Forms.CheckBox();
+            this.checkBox_LootAnything = new System.Windows.Forms.CheckBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -124,6 +125,8 @@
             this.checkBox_Follower_467 = new System.Windows.Forms.CheckBox();
             this.checkBox_Follower_190 = new System.Windows.Forms.CheckBox();
             this.checkBox_Follower_170 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_209 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_32 = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
@@ -189,7 +192,6 @@
             this.checkBox_Debug_IgnoreHearthStone = new System.Windows.Forms.CheckBox();
             this.checkBox_Debug_FakePickupWorkOrder = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBox_Follower_209 = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -831,6 +833,7 @@
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_MineGather);
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_HerbGather);
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_LootCache);
+            this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_LootAnything);
             this.flowLayoutPanel_MiscBehaviors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel_MiscBehaviors.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel_MiscBehaviors.Location = new System.Drawing.Point(3, 16);
@@ -909,6 +912,19 @@
             this.checkBox_Behavior_LootCache.TabIndex = 23;
             this.checkBox_Behavior_LootCache.Text = "Loot Garrison Cache";
             this.checkBox_Behavior_LootCache.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_LootAnything
+            // 
+            this.checkBox_LootAnything.AutoSize = true;
+            this.checkBox_LootAnything.Enabled = false;
+            this.checkBox_LootAnything.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_LootAnything.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_LootAnything.Location = new System.Drawing.Point(157, 33);
+            this.checkBox_LootAnything.Name = "checkBox_LootAnything";
+            this.checkBox_LootAnything.Size = new System.Drawing.Size(144, 24);
+            this.checkBox_LootAnything.TabIndex = 24;
+            this.checkBox_LootAnything.Text = "Loot Any Mobs";
+            this.checkBox_LootAnything.UseVisualStyleBackColor = true;
             // 
             // tabPage8
             // 
@@ -1264,6 +1280,7 @@
             this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_190);
             this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_170);
             this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_209);
+            this.flowLayoutPanel5.Controls.Add(this.checkBox_Follower_32);
             this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel5.Location = new System.Drawing.Point(6, 21);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
@@ -1335,6 +1352,28 @@
             this.checkBox_Follower_170.TabIndex = 5;
             this.checkBox_Follower_170.Text = "Goldmaneg the Skinner (170)";
             this.checkBox_Follower_170.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_209
+            // 
+            this.checkBox_Follower_209.AutoSize = true;
+            this.checkBox_Follower_209.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_209.Location = new System.Drawing.Point(3, 165);
+            this.checkBox_Follower_209.Name = "checkBox_Follower_209";
+            this.checkBox_Follower_209.Size = new System.Drawing.Size(127, 21);
+            this.checkBox_Follower_209.TabIndex = 6;
+            this.checkBox_Follower_209.Text = "Abu\'gar (209)";
+            this.checkBox_Follower_209.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_32
+            // 
+            this.checkBox_Follower_32.AutoSize = true;
+            this.checkBox_Follower_32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_32.Location = new System.Drawing.Point(3, 192);
+            this.checkBox_Follower_32.Name = "checkBox_Follower_32";
+            this.checkBox_Follower_32.Size = new System.Drawing.Size(100, 21);
+            this.checkBox_Follower_32.TabIndex = 7;
+            this.checkBox_Follower_32.Text = "Dagg (32)";
+            this.checkBox_Follower_32.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -1994,18 +2033,6 @@
             this.checkBox_Debug_FakePickupWorkOrder.Text = "Fake Pickup Order";
             this.checkBox_Debug_FakePickupWorkOrder.UseVisualStyleBackColor = true;
             // 
-            // checkBox_Follower_209
-            // 
-            this.checkBox_Follower_209.AutoSize = true;
-            this.checkBox_Follower_209.Enabled = false;
-            this.checkBox_Follower_209.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_209.Location = new System.Drawing.Point(3, 165);
-            this.checkBox_Follower_209.Name = "checkBox_Follower_209";
-            this.checkBox_Follower_209.Size = new System.Drawing.Size(127, 21);
-            this.checkBox_Follower_209.TabIndex = 6;
-            this.checkBox_Follower_209.Text = "Abu\'gar (209)";
-            this.checkBox_Follower_209.UseVisualStyleBackColor = true;
-            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2256,6 +2283,8 @@
         private System.Windows.Forms.ComboBox comboBox_DailyQuest_Alchemy_Rewards;
         private System.Windows.Forms.CheckBox checkBox_DailyQuest_AlchemyLab;
         private System.Windows.Forms.CheckBox checkBox_Follower_209;
+        private System.Windows.Forms.CheckBox checkBox_Follower_32;
+        private System.Windows.Forms.CheckBox checkBox_LootAnything;
 
     }
 }

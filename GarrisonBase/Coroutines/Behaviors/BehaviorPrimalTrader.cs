@@ -43,6 +43,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (GossipHelper.GossipOptions.All(o => o.Type != GossipEntry.GossipEntryType.Vendor))
                 {
                     //Could not find Vendor Option!
+                    GarrisonBase.Err("Primal Trader behavior could not find vendoring gossip!");
                     return false;
                 }
                 var gossipEntryVendor = GossipHelper.GossipOptions.FirstOrDefault(o => o.Type == GossipEntry.GossipEntryType.Vendor);
@@ -91,7 +92,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 }
 
                 if (_npcMovement == null)
-                    _npcMovement = new Movement(InteractionObject.Location, InteractionObject.InteractRange - 0.25f);
+                    _npcMovement = new Movement(InteractionObject, InteractionObject.InteractRange - 0.25f);
 
                 await _npcMovement.MoveTo(false);
                 return true;

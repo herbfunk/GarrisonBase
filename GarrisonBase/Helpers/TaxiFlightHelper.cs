@@ -64,6 +64,30 @@ namespace Herbfunk.GarrisonBase.Helpers
             GarrisonBase.Debug("Added a total of {0} Flight Paths!", FlightPaths.Count);
         }
 
+        public static TaxiNodeInfo NearestTaxiNode
+        {
+            get
+            {
+                var playerMapId = !Player.MapIsContinent
+                    ? Player.ParentMapId
+                    : (int)Player.MapId.Value;
+
+                return NearestTaxiNodeFromLocation(Player.Location, playerMapId);
+            }
+        }
+        public static TaxiNodeInfo NearestTaxiNodeFromLocation(WoWPoint location, int continentId = -1)
+        {
+            //Get flight paths (optionally filtering with continent id)
+            List<TaxiNodeInfo> flightpaths = continentId > -1
+                ? TaxiNodes.Where(fp => fp.Info != null && fp.Info.Continent == continentId)
+                    .OrderBy(fp => fp.Info.Location.Distance(location))
+                    .ToList()
+                : TaxiNodes.Where(fp => fp.Info != null).OrderBy(fp => fp.Info.Location.Distance(location)).ToList();
+
+            return flightpaths.Count > 0 ? flightpaths[0] : null;
+        }
+
+
         public static FlightPathInfo NearestFlightPath
         {
             get
@@ -75,7 +99,6 @@ namespace Herbfunk.GarrisonBase.Helpers
                 return NearestFlightPathFromLocation(Player.Location, playerMapId);
             }
         }
-
         public static FlightPathInfo NearestFlightPathFromLocation(WoWPoint location, int continentId=-1)
         {
             //Get flight paths (optionally filtering with continent id)
@@ -88,6 +111,7 @@ namespace Herbfunk.GarrisonBase.Helpers
             return flightpaths.Count > 0 ? flightpaths[0] : null;
         }
 
+
         public static bool ShouldTakeFlightPath(WoWPoint destination)
         {
             
@@ -96,6 +120,21 @@ namespace Herbfunk.GarrisonBase.Helpers
             if (runTravelTime.TotalSeconds < 90)
             {
                 return Styx.CommonBot.FlightPaths.ShouldTakeFlightpath(Player.Location, destination, 14.7f);
+            }
+            else
+            {
+                var playerMapId = !Player.MapIsContinent
+                    ? Player.ParentMapId
+                    : (int)Player.MapId.Value;
+
+                //Lets verify that our possible destination
+                var destinationTaxi=NearestFlightPathFromLocation(destination);
+                var currentTaxi = NearestFlightPath;
+                if (destinationTaxi.Name == currentTaxi.Name)
+                {
+                    GarrisonBase.Debug("ShouldTakeFlight path return false due to matching names taxi and current taxi");
+                    return false;
+                }
             }
             return true;
         }
@@ -117,7 +156,7 @@ namespace Herbfunk.GarrisonBase.Helpers
                 Known = node.Reachable;
                 var flightpaths = FlightPaths.Where(fp => fp.Name == Name).ToList();
                 if (flightpaths.Count > 0)
-                    Info = flightpaths[0];
+                    Info = flightpaths[0].ShallowCopy();
             }
         }
 
@@ -131,6 +170,7 @@ namespace Herbfunk.GarrisonBase.Helpers
             public string Name { get; set; }
             public uint Continent { get; set; }
             public uint MasterId { get; set; }
+            public bool Known { get; set; }
 
             public FlightPathInfo(string name, WoWPoint loc, uint continent)
             {
@@ -138,6 +178,7 @@ namespace Herbfunk.GarrisonBase.Helpers
                 Location = loc;
                 Continent = continent;
                 MasterId = 9999;
+                Known = true;
             }
             public FlightPathInfo(XmlFlightNode node)
             {
@@ -145,11 +186,17 @@ namespace Herbfunk.GarrisonBase.Helpers
                 Location = node.Location;
                 Continent = node.Continent;
                 MasterId = node.MasterEntry;
+                Known = true;
             }
 
             public override string ToString()
             {
                 return String.Format("FlightPathInfo {0} Continent {1} [{2}]", Name, Continent, Location);
+            }
+
+            public FlightPathInfo ShallowCopy()
+            {
+                return (FlightPathInfo)this.MemberwiseClone();
             }
         }
     }

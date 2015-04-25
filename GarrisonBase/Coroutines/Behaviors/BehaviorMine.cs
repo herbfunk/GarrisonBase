@@ -5,6 +5,7 @@ using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
@@ -43,10 +44,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 ObjectCacheManager.LootIds.Add(deposit);
             }
-            
-            ObjectCacheManager.ShouldLoot = true;
-            ObjectCacheManager.ShouldKill = true;
-            ObjectCacheManager.LootDistance = 25f;
+
+            TargetManager.ShouldLoot = true;
+            TargetManager.ShouldKill = true;
+            TargetManager.LootDistance = 25f;
             ObjectCacheManager.IgnoreLineOfSightFailure = true;
 
             if (_movementQueue != null) return;
@@ -78,8 +79,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override void Dispose()
         {
             //Coroutines.Movement.MovementCache.ResetCache();
-            ObjectCacheManager.ShouldLoot = false;
-            ObjectCacheManager.ShouldKill = false;
+            TargetManager.ShouldLoot = false;
+            TargetManager.ShouldKill = false;
             ObjectCacheManager.IgnoreLineOfSightFailure = false;
 
             foreach (var id in CacheStaticLookUp.MineQuestMobIDs)
@@ -123,8 +124,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
                     if (_movementQueue.Count > 0)
                     {
-                        _movement = new Movement(_movementQueue.Dequeue(), 5f, true, "Mining");
-                        ObjectCacheManager.LootDistance += 10f;
+                        _movement = new Movement(_movementQueue.Dequeue(), 5f, name: "Mining");
+                        TargetManager.LootDistance += 10f;
                     }
                 }
             }
@@ -146,7 +147,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             BaseSettings.CurrentSettings.LastCheckedMineString = LuaCommands.GetGameTime().ToString("yyyy-MM-ddTHH:mm:ss");
             BaseSettings.SerializeToXML(BaseSettings.CurrentSettings);
-            ObjectCacheManager.ShouldLoot = false;
+            TargetManager.ShouldLoot = false;
 
             return false;
         }

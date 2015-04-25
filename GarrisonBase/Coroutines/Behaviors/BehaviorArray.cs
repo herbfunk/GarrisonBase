@@ -16,16 +16,21 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public Queue<Behavior> Behaviors = new Queue<Behavior>();
         private readonly Behavior[] _behaviors;
 
-        public BehaviorArray(Behavior[] behaviors)
+        public string Name { get; set; }
+
+        public BehaviorArray(Behavior[] behaviors, string arrayname="")
         {
             _behaviors = behaviors;
+            Name = arrayname;
         }
+        
 
         public override string GetStatusText
         {
             get
             {
-                return _currentBehavior != null ? _currentBehavior.GetStatusText : base.GetStatusText;
+                return _currentBehavior != null ? _currentBehavior.GetStatusText :
+                    String.Format("Behavior {0} {1} ", Type.ToString(), Name);
             }
         }
 
@@ -105,6 +110,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
             return false;
+        }
+
+        public override Behavior Clone()
+        {
+            var behaviors = (Behavior[])_behaviors.Clone();
+            BehaviorArray clone = new BehaviorArray(behaviors, Name);
+            return clone;
         }
 
         public override string ToString()
