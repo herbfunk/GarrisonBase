@@ -196,6 +196,7 @@ namespace Herbfunk.GarrisonBase
         public string LastCheckedMineString { get; set; }
 
         public bool BehaviorMissionStart { get; set; }
+        public bool BehaviorMissionComplete { get; set; }
         public bool BehaviorHerbGather { get; set; }
         public bool BehaviorMineGather { get; set; }
         public bool BehaviorWorkOrderPickup { get; set; }
@@ -207,6 +208,10 @@ namespace Herbfunk.GarrisonBase
         public bool BehaviorSalvaging { get; set; }
         public bool BehaviorLootCache { get; set; }
         public bool LootAnyMobs { get; set; }
+
+        public bool BarnWorkOrderFur { get; set; }
+        public bool BarnWorkOrderLeather { get; set; }
+        public bool BarnWorkOrderMeat { get; set; }
 
         public bool HBRelog_SkipToNextTask { get; set; }
 
@@ -250,6 +255,9 @@ namespace Herbfunk.GarrisonBase
 
         public DailyQuestSettings DailyWarMillQuestSettings { get; set; }
         public DailyQuestSettings DailyAlchemyLabQuestSettings { get; set; }
+
+        public bool DisableMasterPlanAddon { get; set; }
+
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
@@ -296,6 +304,7 @@ namespace Herbfunk.GarrisonBase
             MailSendItems = new List<MailItem>();
 
             BehaviorMissionStart = true;
+            BehaviorMissionComplete = true;
             BehaviorHerbGather = true;
             BehaviorMineGather = true;
             BehaviorWorkOrderPickup = true;
@@ -307,6 +316,10 @@ namespace Herbfunk.GarrisonBase
             BehaviorSalvaging = true;
             BehaviorLootCache = true;
             LootAnyMobs = false;
+
+            BarnWorkOrderFur = true;
+            BarnWorkOrderLeather = true;
+            BarnWorkOrderMeat = true;
 
             ReservedGarrisonResources = 0;
 
@@ -356,6 +369,7 @@ namespace Herbfunk.GarrisonBase
 
             DailyWarMillQuestSettings=new DailyQuestSettings();
             DailyAlchemyLabQuestSettings=new DailyQuestSettings();
+            DisableMasterPlanAddon = true;
 
             DEBUG_FAKESTARTWORKORDER = false;
             DEBUG_FAKEFINISHQUEST = false;

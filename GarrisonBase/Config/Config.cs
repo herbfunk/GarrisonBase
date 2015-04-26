@@ -366,6 +366,13 @@ namespace Herbfunk.GarrisonBase.Config
                 checkBox_Behavior_StartMissions.Checked = BaseSettings.CurrentSettings.BehaviorMissionStart;
                 checkBox_Behavior_StartMissions.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorMissionStart=!BaseSettings.CurrentSettings.BehaviorMissionStart;
 
+                checkBox_Behavior_CompleteMissions.Checked = BaseSettings.CurrentSettings.BehaviorMissionComplete;
+                checkBox_Behavior_CompleteMissions.CheckedChanged += (sender, args) =>
+                {
+                    BaseSettings.CurrentSettings.BehaviorMissionComplete = !BaseSettings.CurrentSettings.BehaviorMissionComplete;
+                    checkBox_Behavior_StartMissions.Enabled = BaseSettings.CurrentSettings.BehaviorMissionComplete;
+                };
+
                 checkBox_Behavior_WorkOrderPickup.Checked = BaseSettings.CurrentSettings.BehaviorWorkOrderPickup;
                 checkBox_Behavior_WorkOrderPickup.CheckedChanged += (sender, args) =>BaseSettings.CurrentSettings.BehaviorWorkOrderPickup=!BaseSettings.CurrentSettings.BehaviorWorkOrderPickup;
 
@@ -386,6 +393,18 @@ namespace Herbfunk.GarrisonBase.Config
 
                 checkBox_LootAnything.Checked = BaseSettings.CurrentSettings.LootAnyMobs;
                 checkBox_LootAnything.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.LootAnyMobs = !BaseSettings.CurrentSettings.LootAnyMobs;
+
+                checkBox_DisableAddon.Checked = BaseSettings.CurrentSettings.DisableMasterPlanAddon;
+                checkBox_DisableAddon.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.DisableMasterPlanAddon = !BaseSettings.CurrentSettings.DisableMasterPlanAddon;
+
+                checkBox_Barn_Furs.Checked = BaseSettings.CurrentSettings.BarnWorkOrderFur;
+                checkBox_Barn_Furs.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.BarnWorkOrderFur = !BaseSettings.CurrentSettings.BarnWorkOrderFur;
+
+                checkBox_Barn_Leather.Checked = BaseSettings.CurrentSettings.BarnWorkOrderLeather;
+                checkBox_Barn_Leather.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.BarnWorkOrderLeather = !BaseSettings.CurrentSettings.BarnWorkOrderLeather;
+
+                checkBox_Barn_Meat.Checked = BaseSettings.CurrentSettings.BarnWorkOrderMeat;
+                checkBox_Barn_Meat.CheckedChanged += (sender, args) => BaseSettings.CurrentSettings.BarnWorkOrderMeat = !BaseSettings.CurrentSettings.BarnWorkOrderMeat;
 
                 //
                 checkBox_MailEnchanting.Checked = BaseSettings.CurrentSettings.MailSendEnchanting;

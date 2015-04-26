@@ -754,6 +754,12 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(3327.353, 6402.812, 14.92476),
         };
 
+        public static WoWPoint[] Trapping_Meat_Gorgond =
+        {
+            new WoWPoint(7493.459, 1599.028, 75.61114),
+            new WoWPoint(7540.536, 1479.492, 62.68249),
+            new WoWPoint(7607.809, 1558.483, 74.49989),
+        };
 
 
 

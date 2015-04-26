@@ -247,12 +247,21 @@ namespace Herbfunk.GarrisonBase.Character
             return false;
         }
 
-        public List<C_WoWItem> GetCraftingReagentsById(int id)
+        public List<C_WoWItem> GetCraftingReagentsById(int id, bool includeBankItems=true, bool includeBankReagentItems=true)
         {
             var bagItems = BagItems.Values.Where(i => i.Entry == id).ToArray();
-            var reagentBankItems = BankReagentItems.Values.Where(i => i.Entry == id).ToArray();
             List<C_WoWItem> retList = new List<C_WoWItem>(bagItems);
-            retList.AddRange(reagentBankItems);
+
+            if (includeBankItems)
+            {
+                var bankItems = BankItems.Values.Where(i => i.Entry == id).ToArray();
+                retList.AddRange(bankItems);
+            }
+            if (includeBankReagentItems)
+            {
+                var reagentBankItems = BankReagentItems.Values.Where(i => i.Entry == id).ToArray();
+                retList.AddRange(reagentBankItems);
+            }
             return retList;
         }
         public List<C_WoWItem> GetBagItemsById(int id)
@@ -411,7 +420,10 @@ namespace Herbfunk.GarrisonBase.Character
             get
             {
                 if (_trap == null)
-                    _trap = BagItems.Values.First(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && CacheStaticLookUp.TrapItemEntryIds.Contains(i.Entry));
+                {
+                    var traps = BagItems.Values.Where(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && CacheStaticLookUp.TrapItemEntryIds.Contains(i.Entry)).OrderByDescending(i=>i.TrapRank);
+                    _trap = traps.First();
+                }
 
                 return _trap;
             }

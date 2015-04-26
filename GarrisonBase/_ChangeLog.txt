@@ -1,4 +1,17 @@
-﻿
+﻿v1.3.0.1
+
+Settings
+	-Added Option for completing missions (if disabled than starting missions will also be disabled)
+	-Added Option for checking and disabling master plan addon
+	-Added Barn Work Order Startup options for Fur, Leather, Meat
+
+Work Order
+	-Barn work orders should work for non-english and will use elite cages before normal cages.
+
+Misc
+	-Injecting the lua has been moved into the actual behavior and will test/inject during the mission starting behavior.
+
+
 v1.3.0.0
 
 Movement Class 

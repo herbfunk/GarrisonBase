@@ -192,6 +192,13 @@
             this.checkBox_Debug_IgnoreHearthStone = new System.Windows.Forms.CheckBox();
             this.checkBox_Debug_FakePickupWorkOrder = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBox_Behavior_CompleteMissions = new System.Windows.Forms.CheckBox();
+            this.checkBox_DisableAddon = new System.Windows.Forms.CheckBox();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.checkBox_Barn_Furs = new System.Windows.Forms.CheckBox();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_Barn_Leather = new System.Windows.Forms.CheckBox();
+            this.checkBox_Barn_Meat = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -241,6 +248,8 @@
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -469,6 +478,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBox_Behavior_CompleteMissions);
             this.panel1.Controls.Add(this.textBox_ReservedGarrisonResources);
             this.panel1.Controls.Add(this.checkBox_Behavior_StartMissions);
             this.panel1.Controls.Add(this.label12);
@@ -494,7 +504,7 @@
             this.checkBox_Behavior_StartMissions.AutoSize = true;
             this.checkBox_Behavior_StartMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_Behavior_StartMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(5, 3);
+            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(3, 33);
             this.checkBox_Behavior_StartMissions.Name = "checkBox_Behavior_StartMissions";
             this.checkBox_Behavior_StartMissions.Size = new System.Drawing.Size(139, 24);
             this.checkBox_Behavior_StartMissions.TabIndex = 14;
@@ -526,6 +536,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBox18);
             this.tabPage6.Controls.Add(this.groupBox7);
             this.tabPage6.Controls.Add(this.groupBox6);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
@@ -805,6 +816,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.checkBox_DisableAddon);
             this.tabPage7.Controls.Add(this.groupBox9);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
@@ -817,7 +829,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.flowLayoutPanel_MiscBehaviors);
-            this.groupBox9.Location = new System.Drawing.Point(6, 6);
+            this.groupBox9.Location = new System.Drawing.Point(6, 50);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(361, 192);
             this.groupBox9.TabIndex = 23;
@@ -1464,8 +1476,8 @@
             this.comboBox_DailyQuest_WarMill_Rewards.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox_DailyQuest_WarMill_Rewards.FormattingEnabled = true;
             this.comboBox_DailyQuest_WarMill_Rewards.Items.AddRange(new object[] {
-            "Weapon Token",
-            "Armor Token"});
+            "Armor Token",
+            "Weapon Token"});
             this.comboBox_DailyQuest_WarMill_Rewards.Location = new System.Drawing.Point(6, 42);
             this.comboBox_DailyQuest_WarMill_Rewards.Name = "comboBox_DailyQuest_WarMill_Rewards";
             this.comboBox_DailyQuest_WarMill_Rewards.Size = new System.Drawing.Size(166, 23);
@@ -2033,6 +2045,84 @@
             this.checkBox_Debug_FakePickupWorkOrder.Text = "Fake Pickup Order";
             this.checkBox_Debug_FakePickupWorkOrder.UseVisualStyleBackColor = true;
             // 
+            // checkBox_Behavior_CompleteMissions
+            // 
+            this.checkBox_Behavior_CompleteMissions.AutoSize = true;
+            this.checkBox_Behavior_CompleteMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_CompleteMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_CompleteMissions.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_CompleteMissions.Name = "checkBox_Behavior_CompleteMissions";
+            this.checkBox_Behavior_CompleteMissions.Size = new System.Drawing.Size(175, 24);
+            this.checkBox_Behavior_CompleteMissions.TabIndex = 16;
+            this.checkBox_Behavior_CompleteMissions.Text = "Complete Missions";
+            this.checkBox_Behavior_CompleteMissions.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_DisableAddon
+            // 
+            this.checkBox_DisableAddon.AutoSize = true;
+            this.checkBox_DisableAddon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_DisableAddon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_DisableAddon.Location = new System.Drawing.Point(9, 6);
+            this.checkBox_DisableAddon.Name = "checkBox_DisableAddon";
+            this.checkBox_DisableAddon.Size = new System.Drawing.Size(242, 24);
+            this.checkBox_DisableAddon.TabIndex = 24;
+            this.checkBox_DisableAddon.Text = "Disable Master Plan Addon";
+            this.checkBox_DisableAddon.UseVisualStyleBackColor = true;
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.flowLayoutPanel7);
+            this.groupBox18.Location = new System.Drawing.Point(457, 235);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(272, 259);
+            this.groupBox18.TabIndex = 10;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Barn";
+            // 
+            // checkBox_Barn_Furs
+            // 
+            this.checkBox_Barn_Furs.AutoSize = true;
+            this.checkBox_Barn_Furs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Furs.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Barn_Furs.Name = "checkBox_Barn_Furs";
+            this.checkBox_Barn_Furs.Size = new System.Drawing.Size(50, 17);
+            this.checkBox_Barn_Furs.TabIndex = 1;
+            this.checkBox_Barn_Furs.Text = "Furs";
+            this.checkBox_Barn_Furs.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Furs);
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Leather);
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Meat);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(266, 240);
+            this.flowLayoutPanel7.TabIndex = 0;
+            // 
+            // checkBox_Barn_Leather
+            // 
+            this.checkBox_Barn_Leather.AutoSize = true;
+            this.checkBox_Barn_Leather.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Leather.Location = new System.Drawing.Point(59, 3);
+            this.checkBox_Barn_Leather.Name = "checkBox_Barn_Leather";
+            this.checkBox_Barn_Leather.Size = new System.Drawing.Size(69, 17);
+            this.checkBox_Barn_Leather.TabIndex = 2;
+            this.checkBox_Barn_Leather.Text = "Leather";
+            this.checkBox_Barn_Leather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Meat
+            // 
+            this.checkBox_Barn_Meat.AutoSize = true;
+            this.checkBox_Barn_Meat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Meat.Location = new System.Drawing.Point(134, 3);
+            this.checkBox_Barn_Meat.Name = "checkBox_Barn_Meat";
+            this.checkBox_Barn_Meat.Size = new System.Drawing.Size(54, 17);
+            this.checkBox_Barn_Meat.TabIndex = 3;
+            this.checkBox_Barn_Meat.Text = "Meat";
+            this.checkBox_Barn_Meat.UseVisualStyleBackColor = true;
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2073,6 +2163,7 @@
             this.tabPage5.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
+            this.tabPage7.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.PerformLayout();
@@ -2116,6 +2207,9 @@
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.groupBox18.ResumeLayout(false);
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2285,6 +2379,13 @@
         private System.Windows.Forms.CheckBox checkBox_Follower_209;
         private System.Windows.Forms.CheckBox checkBox_Follower_32;
         private System.Windows.Forms.CheckBox checkBox_LootAnything;
+        private System.Windows.Forms.CheckBox checkBox_Behavior_CompleteMissions;
+        private System.Windows.Forms.CheckBox checkBox_DisableAddon;
+        private System.Windows.Forms.GroupBox groupBox18;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.CheckBox checkBox_Barn_Furs;
+        private System.Windows.Forms.CheckBox checkBox_Barn_Leather;
+        private System.Windows.Forms.CheckBox checkBox_Barn_Meat;
 
     }
 }

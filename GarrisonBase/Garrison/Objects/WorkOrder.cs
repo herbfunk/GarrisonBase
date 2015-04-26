@@ -447,12 +447,14 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         internal static readonly List<Tuple<CraftingReagents, int>[]> BarnWorkOrderItemList = new List
             <Tuple<CraftingReagents, int>[]>
         {
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyRiverbeast, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyWolf, 1)},
+            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyClefthoof, 1)},
+
             new[] {new Tuple<CraftingReagents, int>(CraftingReagents.FurryCagedBeast, 1)},
             new[] {new Tuple<CraftingReagents, int>(CraftingReagents.LeatheryCagedBeast, 1)},
             new[] {new Tuple<CraftingReagents, int>(CraftingReagents.MeatyCagedBeast, 1)},
-            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyClefthoof, 1)},
-            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyRiverbeast, 1)},
-            new[] {new Tuple<CraftingReagents, int>(CraftingReagents.CagedMightyWolf, 1)},
+            
         };
 
         public static int GetWorkOrderNpcEntryId(BuildingType type, bool ally)

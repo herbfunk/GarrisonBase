@@ -23,6 +23,17 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public bool IsSoulbound { get; set; }
         public bool IsAccountBound { get;set; }
 
+        public int TrapRank
+        {
+            get
+            {
+                if (Entry == 113991) return 0; //Iron Trap
+                if (Entry == 115009) return 1; //Improved Iron Trap
+                if (Entry == 115010) return 2; //Deadly Iron Trap
+                return -1;
+            }
+        }
+
         public readonly WoWItem ref_WoWItem;
         public C_WoWItem(WoWItem item)
         {

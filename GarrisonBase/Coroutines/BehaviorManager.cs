@@ -62,19 +62,19 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //We need "open" the garrison up and initalize it.. (so we don't get errors trying to inject!)
             if (await Common.PreChecks.InitalizeGarrisonManager()) return true;
 
-            //Inject our lua addon code for mission success function
-            if (!LuaEvents.LuaAddonInjected)
-            {
-                if (LuaCommands.TestLuaInjectionCode())
-                {//Prevent multiple injections by checking simple function return!
-                    LuaEvents.LuaAddonInjected = true;
-                }
-                else
-                {
-                    await LuaEvents.InjectLuaAddon();
-                    return true;
-                }
-            }
+            ////Inject our lua addon code for mission success function
+            //if (!LuaEvents.LuaAddonInjected)
+            //{
+            //    if (LuaCommands.TestLuaInjectionCode())
+            //    {//Prevent multiple injections by checking simple function return!
+            //        LuaEvents.LuaAddonInjected = true;
+            //    }
+            //    else
+            //    {
+            //        await LuaEvents.InjectLuaAddon();
+            //        return true;
+            //    }
+            //}
             
             
 
@@ -185,6 +185,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //Behaviors.Add(BehaviorArray_Trapping_Leather_FrostfireRidge);
             //Behaviors.Add(BehaviorArray_Trapping_Fur_FrostfireRidge);
             //Behaviors.Add(BehaviorArray_Trapping_Elites_Nagrand);
+            //Behaviors.Add(BehaviorArray_Trapping_Boars_Gorgond);
             
             //Move to entrance!
             //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
@@ -500,8 +501,39 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
         }, "Trapping Fur Frostfire Ridge");
 
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Boars_Gorgond = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(MovementCache.Trapping_Meat_Gorgond[0], 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+            
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Meat_Gorgond, 
+                CacheStaticLookUp.Trap_UnitIds_Boars,
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                Movement.IgnoreTaxiCheck = false;
+            }),
+
+
+        }, "Trapping Elites Nagrand");
+
         internal static readonly BehaviorArray BehaviorArray_Trapping_Elites_Nagrand = new BehaviorArray(new Behavior[]
         {
+            //
+            new BehaviorMove(MovementCache.Trapping_Elites_Nagrand[0], 200f),
+
             new BehaviorCustomAction(() =>
             {
                 TargetManager.PullDistance = 5;

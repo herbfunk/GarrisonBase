@@ -134,7 +134,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             await Coroutine.Yield();
             await Coroutine.Sleep(StyxWoW.Random.Next(1200, 2522));
-            if (!LuaCommands.IsAddonLoaded("MasterPlan"))
+            if (!BaseSettings.CurrentSettings.DisableMasterPlanAddon || !LuaCommands.IsAddonLoaded("MasterPlan"))
             {
                 _checkedMasterPlanAddon = true;
                 return false;

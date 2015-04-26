@@ -483,6 +483,8 @@ namespace Herbfunk.GarrisonBase
 
         public static readonly uint[] Trap_UnitIds_Boars = 
         {
+            88508,
+            86850,
             //82728,
             //75241,
             //77994,

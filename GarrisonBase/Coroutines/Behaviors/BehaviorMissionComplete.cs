@@ -23,7 +23,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (Character.Player.MinimapZoneText != "Town Hall" || CommandTable == null)
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
 
-            Criteria += () => GarrisonManager.CompletedMissionIds.Count > 0;
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorMissionComplete && GarrisonManager.CompletedMissionIds.Count > 0;
         }
 
         public override void Initalize()

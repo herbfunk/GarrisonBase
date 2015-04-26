@@ -23,7 +23,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
 
             Criteria += () => 
-                BaseSettings.CurrentSettings.BehaviorMissionStart && 
+                BaseSettings.CurrentSettings.BehaviorMissionStart && BaseSettings.CurrentSettings.BehaviorMissionComplete &&
                 GarrisonManager.AvailableMissionIds.Count > 0 &&
                 GarrisonManager.CurrentActiveFollowers <= GarrisonManager.MaxActiveFollowers;
         }
@@ -42,6 +42,20 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
+
+            //Inject our lua addon code for mission success function
+            if (!LuaEvents.LuaAddonInjected)
+            {
+                if (LuaCommands.TestLuaInjectionCode())
+                {//Prevent multiple injections by checking simple function return!
+                    LuaEvents.LuaAddonInjected = true;
+                }
+                else
+                {
+                    await LuaEvents.InjectLuaAddon();
+                    return true;
+                }
+            }
 
             if (await StartMovement.MoveTo()) return true;
 
