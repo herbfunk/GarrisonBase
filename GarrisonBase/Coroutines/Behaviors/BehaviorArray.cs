@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Styx.CommonBot;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
@@ -23,7 +22,6 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             _behaviors = behaviors;
             Name = arrayname;
         }
-        
 
         public override string GetStatusText
         {
@@ -112,17 +110,22 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             return false;
         }
 
-        public override Behavior Clone()
+        public new BehaviorArray Clone()
         {
             var behaviors = (Behavior[])_behaviors.Clone();
-            BehaviorArray clone = new BehaviorArray(behaviors, Name);
+            BehaviorArray clone = new BehaviorArray(behaviors, Name)
+            {
+                Criteria=this.Criteria,
+                RunCondition=this.RunCondition,
+                DisposalAction=this.DisposalAction,
+            };
             return clone;
         }
 
         public override string ToString()
         {
             string childrenStrs = Behaviors.Aggregate(string.Empty, (current, b) => current + b.ToString() + "\r\n\t");
-            return String.Format("{0} ({5}) IsDone {3}\r\n" +
+            return String.Format("{0} {6} ({5}) IsDone {3}\r\n" +
                                  "{1} {2}\r\n" +
                                  "Children:\r\n{4}", 
                 Type,
@@ -130,7 +133,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 TopParent != null ? "TopParent[" + TopParent.GetHashCode().ToString() + "]" : "",
                 IsDone,
                 childrenStrs,
-                GetHashCode().ToString());
+                GetHashCode().ToString(), Name);
         }
 
 

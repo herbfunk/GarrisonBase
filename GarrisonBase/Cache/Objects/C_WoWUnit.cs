@@ -1,9 +1,11 @@
 ﻿using System;
 using Herbfunk.GarrisonBase.Cache.Enums;
+using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
+using Styx.WoWInternals;
 using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Cache.Objects
@@ -18,7 +20,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             RefWoWUnit = obj.ToUnit();
         }
 
-        
+
         public uint Flags { get; set; }
         public bool IsEvadeRunningBack { get; set; }
         public bool CanSelect { get; set; }
@@ -26,8 +28,18 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public bool IsDead { get; set; }
         public bool Attackable { get; set; }
         public bool Lootable { get; set; }
+        public bool Skinnable { get; set; }
+        public bool ShouldSkin { get; set; }
         public bool CanInteract { get; set; }
-        public QuestGiverStatus QuestGiverStatus= QuestGiverStatus.None;
+        public bool IsTagged { get; set; }
+        public bool TaggedByMe { get; set; }
+        public WoWGuid TargetGuid { get; set; }
+
+        public bool IsTargetingMe
+        {
+            get { return TargetGuid == Player.PlayerGuid; }
+        }
+        public QuestGiverStatus QuestGiverStatus = QuestGiverStatus.None;
         public bool Trappable
         {
             get
@@ -48,62 +60,46 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             : base(obj)
         {
             RefWoWUnit = obj;
-
-            if (SubType == WoWObjectTypes.Unknown)
+            TargetGuid = obj.CurrentTargetGuid;
+            switch (SubType)
             {
-                SubType = WoWObjectTypes.Unit;
-                if (WorkOrder.WorkOrderNpcIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.GarrisonWorkOrderNpc;
-                    InteractRange = 5.4f;
-                    IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.GarrisonCommandTable;
+                case WoWObjectTypes.GarrisonCommandTable:
                     InteractRange = 4.55f;
                     IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.PrimalTraderIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.PrimalTrader | WoWObjectTypes.Vendor;
-                    IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.TrapWoWObjectEntryIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.Trap;
                     return;
-                }
-
-                if (MerchantHelper.GarrisonVendorEntryIds.Contains(Entry))
-                {
-                    if (SubType== WoWObjectTypes.Unknown)
-                        SubType = WoWObjectTypes.Vendor;
-                    else
-                        SubType |= WoWObjectTypes.Vendor;
-
-                    IgnoresRemoval = true;
-                }
-
-                if (ObjectCacheManager.QuestNpcIds.Contains(Entry))
-                {
+                case WoWObjectTypes.GarrisonWorkOrderNpc:
                     InteractRange = 5.4f;
-                    IsQuestNpc = true;
-                }
+                    IgnoresRemoval = true;
+                    return;
+                case WoWObjectTypes.PrimalTrader:
+                    IgnoresRemoval = true;
+                    return;
+                case WoWObjectTypes.Vendor:
+                    IgnoresRemoval = Player.InsideGarrison;
+                    return;
+                case WoWObjectTypes.Trap:
+                    Location.Normalize();
+                    return;
+            }
 
-                if (ObjectCacheManager.LootIds.Contains(Entry))
-                {
-                    ShouldLoot = true;
-                }
+            if (ObjectCacheManager.QuestNpcIds.Contains(Entry))
+            {
+                InteractRange = 5.4f;
+                IsQuestNpc = true;
+            }
 
-                if (ObjectCacheManager.CombatIds.Contains(Entry))
-                {
-                    ShouldKill = true;
-                }
+            if (TargetManager.CheckLootFlag(TargetManager.LootFlags.Units) || ObjectCacheManager.LootIds.Contains(Entry))
+            {
+                ShouldLoot = true;
+            }
+
+            if (ObjectCacheManager.CombatIds.Contains(Entry))
+            {
+                ShouldKill = true;
             }
         }
 
-  
+
         public override bool Update()
         {
             if (!base.Update()) return false;
@@ -111,29 +107,43 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
             Flags = RefWoWUnit.Flags;
             Location = RefWoWUnit.Location;
-            IsDead=RefWoWUnit.IsDead;
+            IsDead = RefWoWUnit.IsDead;
             UpdateHitPoints();
-            
+
+
+
             if (ObjectCacheManager.IsQuesting || IsQuestNpc)
             {
                 CanInteract = RefWoWUnit.CanInteract;
                 QuestGiverStatus = RefWoWUnit.QuestGiverStatus;
             }
-           
-            
+
+
             if (IsDead)
             {
-                if (BaseSettings.CurrentSettings.LootAnyMobs || ShouldLoot)
+                if (ShouldLoot)
                 {
                     Lootable = RefWoWUnit.Lootable;
                 }
+
+                if (TargetManager.CheckLootFlag(TargetManager.LootFlags.Skinning))
+                {
+                    Skinnable = RefWoWUnit.Skinnable;
+                }
             }
-            else if(ShouldKill)
+            else
             {
-                InCombat = RefWoWUnit.Combat;
-                CanSelect = RefWoWUnit.CanSelect;
-                IsEvadeRunningBack = RefWoWUnit.IsEvadeRunningBack;
-                Attackable = RefWoWUnit.Attackable;
+                TargetGuid = RefWoWUnit.CurrentTargetGuid;
+
+                if (ShouldKill)
+                {
+                    InCombat = RefWoWUnit.Combat;
+                    CanSelect = RefWoWUnit.CanSelect;
+                    IsEvadeRunningBack = RefWoWUnit.IsEvadeRunningBack;
+                    Attackable = RefWoWUnit.Attackable;
+                    TaggedByMe = RefWoWUnit.TaggedByMe;
+                    IsTagged = RefWoWUnit.IsTagged;
+                }
             }
 
             return true;
@@ -213,9 +223,15 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForTargeting) return false;
 
-                if (!IsDead || !Lootable) return false;
+                if (!IsDead) return false;
 
-                if ((!ShouldLoot && !BaseSettings.CurrentSettings.LootAnyMobs) || !LineOfSight) return false;
+                if ((!ShouldLoot || !TargetManager.CheckLootFlag(TargetManager.LootFlags.Units) || !Lootable) &&
+                    (!ShouldSkin || !TargetManager.CheckLootFlag(TargetManager.LootFlags.Skinning) || !Skinnable))
+                {
+                    return false;
+                }
+
+                if (!LineOfSight) return false;
 
                 return true;
             }
@@ -227,11 +243,11 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForCombat) return false;
 
-                if (IsDead ||!CanSelect || !Attackable) return false;
+                if (IsDead || !CanSelect || !Attackable) return false;
 
                 if (!ShouldKill || !LineOfSight) return false;
 
-
+                if (InCombat && IsTagged && !TaggedByMe) return false;
 
                 return true;
             }
@@ -253,8 +269,8 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                                     CanInteract, QuestGiverStatus,
                                     ShouldKill, Attackable, IsQuestNpc,
                                     Flags.ToString(), IsEvadeRunningBack,
-                                    CurrentHealth, 
-                                    MaxHealth.HasValue?MaxHealth.Value.ToString():"?", 
+                                    CurrentHealth,
+                                    MaxHealth.HasValue ? MaxHealth.Value.ToString() : "?",
                                     CurrentHealthPercent,
                                     LastCurrentHealthPercent.ToString(),
                                     InCombat);

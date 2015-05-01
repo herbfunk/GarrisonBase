@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Coroutines;
+using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.Helpers;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.Common.Helpers;
-using Styx.Pathing;
 using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Garrison
@@ -56,11 +60,11 @@ namespace Herbfunk.GarrisonBase.Garrison
 
             
 
-            if (!Character.Player.IsAlliance)
+            if (!Player.IsAlliance)
             {
-                GarrisonLevel = Character.Player.MapId == 1153? 3: Character.Player.MapId == 1330 ? 2: 1;
+                GarrisonLevel = Player.MapId == 1153? 3: Player.MapId == 1330 ? 2: 1;
 
-                CommandTableEntryId = Character.Player.MapId == 1153 ? 85805 : 86031;
+                CommandTableEntryId = Player.MapId == 1153 ? 85805 : 86031;
                 //1153 == level 3 garrison
                 //1330 == level 2 garrison
 
@@ -77,9 +81,9 @@ namespace Herbfunk.GarrisonBase.Garrison
             }
             else
             {
-                GarrisonLevel = Character.Player.MapId == 1159 ? 3 : Character.Player.MapId == 1331 ? 2 : 1;
+                GarrisonLevel = Player.MapId == 1159 ? 3 : Player.MapId == 1331 ? 2 : 1;
 
-                CommandTableEntryId = Character.Player.MapId == 1331 ? 84224 : 84698;
+                CommandTableEntryId = Player.MapId == 1331 ? 84224 : 84698;
                 //1331 == level 2 garrison
                 //1159 == level 3 garrison
                 
@@ -362,7 +366,7 @@ namespace Herbfunk.GarrisonBase.Garrison
             var _options = options ?? SuccessOnlyOptions;
             var result = GarrisonMissionSimulator.Simulate(mission.refGarrisonMission, followers, _options);
            
-            string followernames = result.Followers.Aggregate(string.Empty, (current, f) => current + f.Name + "\t");
+            string followernames = result.Followers.Aggregate(String.Empty, (current, f) => current + f.Name + "\t");
             GarrisonBase.Log("Result: Success {0}%, Followers {1}", result.SuccessChance, followernames);
 
             return result;
@@ -416,7 +420,7 @@ namespace Herbfunk.GarrisonBase.Garrison
                 {
                     HasDisenchant = true;
 
-                    if (!Character.Player.IsAlliance)
+                    if (!Player.IsAlliance)
                     {
                         if(b.Level==1)
                             DisenchantingEntryId = 237132;
@@ -497,6 +501,215 @@ namespace Herbfunk.GarrisonBase.Garrison
             new PrimalTraderItem(PrimalTraderItemTypes.BurnishedLeather, "Burnished Leather", 10),
             new PrimalTraderItem(PrimalTraderItemTypes.HexweaveCloth, "Hexweave Cloth", 10),
         };
+
+        internal static readonly List<uint> GarrisonZoneIds = new List<uint>
+        {
+            7004, //Frostwall
+            7078, //Lunarfall
+        };
+
+        internal static readonly List<uint> GarrisonMineZoneIds = new List<uint>
+        {
+            7327, //Frostwall Mine 1
+            7328, //Frostwall Mine 2
+            7329, //Frostwall Mine 3
+            7324, //Lunarfall Excavation 1
+            7325, //Lunarfall Excavation 2
+            7326, //Lunarfall Excavation 3
+        };
+
+        internal static Behavior[] GetGarrisonBehaviors()
+        {
+            var retBehaviorList = new List<Behavior>
+            {
+                new BehaviorGetMail(),
+                new BehaviorMissionComplete(),
+                new BehaviorCache()
+            };
+
+            //Finalize Plots
+            foreach (var b in Buildings.Values.Where(b => b.CanActivate)) retBehaviorList.Add(new BehaviorFinalizePlots(b));
+
+            #region Building First Quest Behaviors
+            foreach (var b in Buildings.Values.Where(b => !b.FirstQuestCompleted && !b.IsBuilding && b.FirstQuestNpcId > -1 && b.FirstQuestId > -1))
+            {
+                retBehaviorList.Add(QuestHelper.GetGarrisonBuildingFirstQuestArray(b, Player.IsAlliance));
+            }
+
+            #endregion
+
+            #region Herbing and Mining
+
+            if (Buildings.Values.Any(b => b.Type == BuildingType.Mines))
+            {
+                var miningMoveTo = new BehaviorMove(MovementCache.MinePlot59SafePoint);
+                miningMoveTo.Criteria += () => !GarrisonMineZoneIds.Contains(Player.ZoneId.Value);
+
+                var miningArray = new BehaviorArray(new Behavior[]
+                {
+                    new BehaviorCustomAction(() =>
+                    {
+                        TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Ore;
+                    }),
+
+                    miningMoveTo,
+                    new BehaviorMine()
+                });
+                miningArray.Criteria += () => (!Buildings[BuildingType.Mines].IsBuilding &&
+                                               !Buildings[BuildingType.Mines].CanActivate &&
+                                               Buildings[BuildingType.Mines].FirstQuestCompleted &&
+                                               LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) &&
+                                               BaseSettings.CurrentSettings.BehaviorMineGather);
+                miningArray.DisposalAction = () =>
+                {
+                    TargetManager.LootType = TargetManager.LootFlags.None;
+                };
+
+                retBehaviorList.Add(miningArray);
+                retBehaviorList.Add(new BehaviorWorkOrderPickUp(Buildings[BuildingType.Mines]));
+                retBehaviorList.Add(new BehaviorWorkOrderStartUp(Buildings[BuildingType.Mines]));
+            }
+
+            if (Buildings.Values.Any(b => b.Type == BuildingType.HerbGarden))
+            {
+                var herbingArray = new BehaviorArray(new Behavior[]
+                {
+                    new BehaviorCustomAction(() =>
+                    {
+                        TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Herbs;
+                    }),
+
+                    new BehaviorMove(MovementCache.GardenPlot63SafePoint),
+                    new BehaviorHerb()
+                });
+                herbingArray.Criteria += () => (!Buildings[BuildingType.HerbGarden].IsBuilding &&
+                               !Buildings[BuildingType.HerbGarden].CanActivate &&
+                               Buildings[BuildingType.HerbGarden].FirstQuestCompleted &&
+                               LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedHerb) &&
+                               BaseSettings.CurrentSettings.BehaviorHerbGather);
+                herbingArray.DisposalAction = () =>
+                {
+                    TargetManager.LootType = TargetManager.LootFlags.None;
+                };
+
+                retBehaviorList.Add(herbingArray);
+                retBehaviorList.Add(new BehaviorWorkOrderPickUp(Buildings[BuildingType.HerbGarden]));
+                retBehaviorList.Add(new BehaviorWorkOrderStartUp(Buildings[BuildingType.HerbGarden]));
+            }
+
+            #endregion
+
+            #region Professions
+            foreach (var skill in Player.Professions.ProfessionSkills)
+            {
+                if (skill == SkillLine.Inscription)
+                    retBehaviorList.Add(new BehaviorMilling());
+
+                int[] spellIds = PlayerProfessions.ProfessionDailyCooldownSpellIds[skill];
+                retBehaviorList.Add(new BehaviorCraftingProfession(skill, spellIds[1]));
+                retBehaviorList.Add(new BehaviorCraftingProfession(skill, spellIds[0]));
+            }
+            #endregion
+
+            #region Salvaging
+            if (Buildings.Values.Any(b => b.Type == BuildingType.SalvageYard))
+            {
+                retBehaviorList.Add(new BehaviorSalvage());
+            }
+            #endregion
+
+            #region Work Order Pickup && Startup
+            foreach (var b in Buildings.Values.Where(b => b.FirstQuestId <= 0 || b.FirstQuestCompleted).OrderBy(b => b.Plot))
+            {
+                if (b.Type != BuildingType.Mines || b.Type != BuildingType.HerbGarden)
+                {
+                    if (b.WorkOrder != null)
+                    {
+                        retBehaviorList.Add(new BehaviorWorkOrderPickUp(b));
+
+                        if (b.Type == BuildingType.EnchantersStudy)
+                            retBehaviorList.Add(new BehaviorDisenchant()); //Disenchanting!
+                        else if (b.Type == BuildingType.ScribesQuarters)
+                            retBehaviorList.Add(new BehaviorMilling()); //Milling!
+                        else if (b.Type == BuildingType.Barn)
+                        {
+                            if (Player.Inventory.Trap != null)
+                            {
+                                GarrisonBase.Log("Adding Trapping Behavior");
+
+                                if (Player.Inventory.Trap.TrapRank > 1)
+                                {
+                                    retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Elites_Nagrand.Clone());
+                                }
+
+                                if (Player.IsAlliance)
+                                {
+                                    retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Leather_ShadowmoonVally.Clone());
+                                    retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Fur_ShadowmoonValley.Clone());
+                                }
+                                else
+                                {
+                                    retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Leather_FrostfireRidge.Clone());
+                                    retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Fur_Nagrand_Horde.Clone());
+                                }
+
+                                retBehaviorList.Add(BehaviorManager.BehaviorArray_Trapping_Boars_Gorgond.Clone());
+                            }
+                        }
+
+                        retBehaviorList.Add(new BehaviorWorkOrderStartUp(b));
+
+                        if (b.Type == BuildingType.WarMillDwarvenBunker && b.Level == 3)
+                        {
+                            var questid = Player.IsAlliance ? 38175 : 38188;
+                            retBehaviorList.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(questid), Player.IsAlliance));
+                        }
+                        else if (b.Type == BuildingType.AlchemyLab && b.HasFollowerWorking)
+                        {
+                            retBehaviorList.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(37270), Player.IsAlliance));
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            //Primal Spirit Exchange
+            retBehaviorList.Add(new BehaviorPrimalTrader());
+
+            var forceBagCheck=new BehaviorCustomAction(() =>
+            {
+                VendorBehavior.ForceBagCheck = true;
+            });
+            retBehaviorList.Add(forceBagCheck);
+
+            //Finally, start some new missions!
+            retBehaviorList.Add(new BehaviorMissionStartup());
+
+            //Optional follower behaviors (to unlock)
+            retBehaviorList.Add(BehaviorArrayFollowers.Clone());
+
+            return retBehaviorList.ToArray();
+        }
+
+        internal static readonly BehaviorArray BehaviorArrayFollowers = new BehaviorArray(new Behavior[]
+        {
+            Follower.FollowerQuestBehaviorArray(209), //Abu'Gur (Nagrand)
+            Follower.FollowerQuestBehaviorArray(170), //Goldmaeng (Nagrand)
+
+            Follower.FollowerQuestBehaviorArray(189), //Blook (Gorgrond)
+            Follower.FollowerQuestBehaviorArray(193), //Tormok (Gorgrond)
+
+            Follower.FollowerQuestBehaviorArray(207), //Defender (Talador)
+
+            Follower.FollowerQuestBehaviorArray(467), //Fen Tao (Ashran)
+
+            Follower.FollowerQuestBehaviorArray(32), //Dagg (Frostfire)
+                
+            Follower.FollowerQuestBehaviorArray(190), //Arch Mage (4 different areas)
+
+            //new BehaviorCustomAction(() => Common.PreChecks.IgnoreHearthing=false),
+            //new BehaviorUseFlightPath(MovementCache.GarrisonEntrance)
+        }, "Followers");
 
         /*
          * Primal Trader EntryID

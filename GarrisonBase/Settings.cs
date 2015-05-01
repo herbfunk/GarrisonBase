@@ -95,6 +95,27 @@ namespace Herbfunk.GarrisonBase
         }
     }
 
+    public class TrappingSettings
+    {
+        public CraftingReagents ItemType { get; set; }
+        public bool Enabled { get; set; }
+        public int MaximumItemCount { get; set; }
+
+        public TrappingSettings()
+        {
+            ItemType= CraftingReagents.None;
+            Enabled = false;
+            MaximumItemCount = 0;
+        }
+
+        public TrappingSettings(CraftingReagents type, bool enabled, int itemcount)
+        {
+            ItemType = type;
+            Enabled = enabled;
+            MaximumItemCount = itemcount;
+        }
+    }
+
     public class BaseSettings
     {
         internal static BaseSettings CurrentSettings = new BaseSettings();
@@ -213,6 +234,14 @@ namespace Herbfunk.GarrisonBase
         public bool BarnWorkOrderLeather { get; set; }
         public bool BarnWorkOrderMeat { get; set; }
 
+        public TrappingSettings TrapSettings_NonElite_Fur { get; set; }
+        public TrappingSettings TrapSettings_NonElite_Leather { get; set; }
+        public TrappingSettings TrapSettings_NonElite_Meat { get; set; }
+        public TrappingSettings TrapSettings_Elite_Fur { get; set; }
+        public TrappingSettings TrapSettings_Elite_Leather { get; set; }
+        public TrappingSettings TrapSettings_Elite_Meat { get; set; }
+
+
         public bool HBRelog_SkipToNextTask { get; set; }
 
         public bool ExchangePrimalSpirits { get; set; }
@@ -255,9 +284,6 @@ namespace Herbfunk.GarrisonBase
 
         public DailyQuestSettings DailyWarMillQuestSettings { get; set; }
         public DailyQuestSettings DailyAlchemyLabQuestSettings { get; set; }
-
-        public bool DisableMasterPlanAddon { get; set; }
-
 
         public bool DEBUG_FAKESTARTWORKORDER { get; set; }
         public bool DEBUG_FAKEFINISHQUEST { get; set; }
@@ -320,6 +346,13 @@ namespace Herbfunk.GarrisonBase
             BarnWorkOrderFur = true;
             BarnWorkOrderLeather = true;
             BarnWorkOrderMeat = true;
+            TrapSettings_NonElite_Fur = new TrappingSettings(CraftingReagents.FurryCagedBeast, false, 21);
+            TrapSettings_NonElite_Leather= new TrappingSettings(CraftingReagents.LeatheryCagedBeast, false, 21);
+            TrapSettings_NonElite_Meat = new TrappingSettings(CraftingReagents.MeatyCagedBeast, false, 21);
+           
+            TrapSettings_Elite_Fur = new TrappingSettings(CraftingReagents.CagedMightyWolf, false, 21);
+            TrapSettings_Elite_Leather = new TrappingSettings(CraftingReagents.CagedMightyClefthoof, false, 21);
+            TrapSettings_Elite_Meat = new TrappingSettings(CraftingReagents.CagedMightyRiverbeast, false, 21);
 
             ReservedGarrisonResources = 0;
 
@@ -329,12 +362,12 @@ namespace Herbfunk.GarrisonBase
             MissionReward_FollowerToken_WeaponSet615 = true;
             MissionReward_FollowerToken_WeaponSet630 = true;
             MissionReward_FollowerToken_WeaponSet645 = true;
-            MissionReward_CharacterToken_ItemLevel = 519;
+            MissionReward_CharacterToken_ItemLevel = 600;
 
             HBRelog_SkipToNextTask = true;
 
-            ExchangePrimalSpirits = false;
-            PrimalSpiritItemId = 0;
+            ExchangePrimalSpirits = true;
+            PrimalSpiritItemId = 118472;
             TradePostReagents= WorkOrder.TradePostReagentTypes.All;
             WorkOrderTypes = WorkOrderType.All;
 
@@ -369,7 +402,6 @@ namespace Herbfunk.GarrisonBase
 
             DailyWarMillQuestSettings=new DailyQuestSettings();
             DailyAlchemyLabQuestSettings=new DailyQuestSettings();
-            DisableMasterPlanAddon = true;
 
             DEBUG_FAKESTARTWORKORDER = false;
             DEBUG_FAKEFINISHQUEST = false;

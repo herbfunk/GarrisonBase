@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Styx.Common;
 using Styx.CommonBot.Frames;
 using Styx.Helpers;
 using Styx.WoWInternals;

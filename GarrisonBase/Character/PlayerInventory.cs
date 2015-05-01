@@ -142,9 +142,6 @@ namespace Herbfunk.GarrisonBase.Character
         public void UpdateBagItems()
         {
             BagItems.Clear();
-            VendorItems.Clear();
-            DisenchantItems.Clear();
-            MailItems.Clear();
 
             using (StyxWoW.Memory.AcquireFrame())
             {
@@ -152,43 +149,9 @@ namespace Herbfunk.GarrisonBase.Character
                 {
                     var newItem = new C_WoWItem(item);
                     BagItems.Add(item.Guid, newItem);
-
-                    //if (newItem.ShouldMail) 
-                    //    MailItems.Add(newItem);
-                    if (GarrisonManager.HasDisenchant && newItem.ShouldDisenchant) 
-                        DisenchantItems.Add(newItem);
-                    else if (ShouldVendor && newItem.ShouldVendor) 
-                        VendorItems.Add(newItem);
-                    
                 }
             }
 
-            if (TotalFreeSlots < BaseSettings.CurrentSettings.MinimumBagSlotsFree)
-            {
-                if (GarrisonManager.Initalized)
-                {
-                    if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.SellRepair))
-                        BehaviorManager.SwitchBehaviors.Insert(0, new BehaviorSellRepair());
-
-                    if (BehaviorManager.SwitchBehaviors.All(b => b.Type != BehaviorType.Disenchanting))
-                        BehaviorManager.SwitchBehaviors.Add(new BehaviorDisenchant());
-                }
-
-                if (!ShouldVendor)
-                {
-                    //We didn't update our vendor list last time.. (so we will require another update next loop.)
-                    ShouldVendor = true;
-                    return;
-                }
-
-                ShouldVendor = true;
-            }
-            else
-            {
-                //When current behavior is vendoring.. we should continue to update the vendor list.
-                ShouldVendor = BehaviorManager.CurrentBehavior!=null &&
-                                BehaviorManager.CurrentBehavior.Type == BehaviorType.SellRepair;
-            }
 
             ShouldUpdateBagItems = false;
         }
@@ -327,6 +290,14 @@ namespace Herbfunk.GarrisonBase.Character
             return BagItems.Values.Where(i => OreIds.Contains((int)i.Entry)).ToList();
         }
 
+        public List<C_WoWItem> GetBagVendorItems()
+        {
+            return BagItems.Values.Where(i => i.ShouldVendor).ToList();
+        }
+        public List<C_WoWItem> GetBagDisenchantingItems()
+        {
+            return BagItems.Values.Where(i => i.ShouldDisenchant).ToList();
+        }
         public List<C_WoWItem> GetBagItemsMilling()
         {
             var returnHerbs = new List<C_WoWItem>();
@@ -421,7 +392,7 @@ namespace Herbfunk.GarrisonBase.Character
             {
                 if (_trap == null)
                 {
-                    var traps = BagItems.Values.Where(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && CacheStaticLookUp.TrapItemEntryIds.Contains(i.Entry)).OrderByDescending(i=>i.TrapRank);
+                    var traps = BagItems.Values.Where(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && TrapItemEntryIds.Contains(i.Entry)).OrderByDescending(i=>i.TrapRank);
                     _trap = traps.First();
                 }
 
@@ -430,10 +401,43 @@ namespace Herbfunk.GarrisonBase.Character
            
         }
         private C_WoWItem _trap;
-        
 
+        public bool HasSkinningKnife
+        {
+            get
+            {
+                if (!_hasSkinningKnife.HasValue || !_hasSkinningKnife.Value)
+                    _hasSkinningKnife = BagItems.Values.Any(i => i.ref_WoWItem != null && i.ref_WoWItem.IsValid && SkinningKnifeEntryIds.Contains(i.Entry));
 
-        
+                return _hasSkinningKnife.Value;
+            }
+        }
+        private bool? _hasSkinningKnife;
+
+        public static uint GetTotalStackCount(C_WoWItem[] items)
+        {
+            uint count = 0;
+            foreach (var item in items)
+            {
+                count += item.StackCount;
+            }
+            return count;
+        }
+
+        public static readonly uint[] SkinningKnifeEntryIds =
+        {
+            7005, //Skinning Knife
+            40772, //Gnomish Army Knife
+            69618, //Zulian Slasher
+            118724, //Finkle's Flenser
+        };
+
+        public static readonly uint[] TrapItemEntryIds =
+        {
+            113991, //Iron Trap
+            115009, //Improved Iron Trap
+            115010, //Deadly Iron Trap
+        };
 
         public static readonly List<int> HerbIds = new List<int>
         {

@@ -1,23 +1,46 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Cache.Objects;
+using Styx;
 using Styx.CommonBot;
 
 namespace Herbfunk.GarrisonBase.TargetHandling
 {
     public static class TargetManager
     {
+        [Flags]
         public enum CombatFlags
         {
-            Normal,
-            Trapping,
+            None = 0,
+            PrecombatBuffs = 1,
+            Pull = 2,
+            Heal = 4,
+            CombatBuffs = 8,
+            Combat = 16,
+            Normal = PrecombatBuffs | Pull | Heal | CombatBuffs | Combat,
+            Trapping = PrecombatBuffs | Heal | Combat,
+        }
+
+        [Flags]
+        public enum LootFlags
+        {
+            None = 0,
+            Units = 1,
+            Herbs = 2,
+            Skinning = 4,
+            Ore = 8,
+            Lumber = 16,
+
+            Harvest = Herbs | Ore | Lumber | Skinning,
+            All = Harvest | Units,
         }
 
         #region Properties
         public static List<C_WoWObject> ValidLootableObjects = new List<C_WoWObject>();
         public static List<C_WoWUnit> ValidCombatObjects = new List<C_WoWUnit>();
-       
+
         internal static C_WoWObject LootableObject { get; set; }
         internal static C_WoWUnit CombatObject { get; set; }
 
@@ -46,6 +69,17 @@ namespace Herbfunk.GarrisonBase.TargetHandling
             }
         }
         private static bool _shouldKill;
+
+        public static bool ShouldSkin
+        {
+            get { return _shouldSkin; }
+            set
+            {
+                _shouldSkin = value;
+                GarrisonBase.Debug("Targeting Should Skin set to {0}", value);
+            }
+        }
+        private static bool _shouldSkin;
 
         public static double KillDistance
         {
@@ -91,6 +125,17 @@ namespace Herbfunk.GarrisonBase.TargetHandling
         }
         private static CombatFlags _combatType = CombatFlags.Normal;
 
+        public static LootFlags LootType
+        {
+            get { return _lootType; }
+            set
+            {
+                _lootType = value;
+                GarrisonBase.Debug("Targeting Loot Type set to {0}", value.ToString());
+            }
+        }
+        private static LootFlags _lootType = LootFlags.None;
+
         #endregion
 
         internal static void Initalize()
@@ -106,10 +151,21 @@ namespace Herbfunk.GarrisonBase.TargetHandling
             CombatObject = null;
             ShouldLoot = false;
             ShouldKill = false;
+            ShouldSkin = false;
             KillDistance = 100;
             LootDistance = 100;
             PullDistance = Targeting.PullDistance;
-            CombatType = CombatFlags.Normal;
+            ResetTargetingTypeFlags();
+        }
+
+        internal static void ResetTargetingTypeFlags()
+        {
+            CombatType =
+                StyxWoW.Me.CurrentMap.IsGarrison
+                    ? CombatFlags.Heal | CombatFlags.Combat
+                    : CombatFlags.Normal;
+
+            LootType = LootFlags.None;
         }
 
         /// <summary>
@@ -173,6 +229,15 @@ namespace Herbfunk.GarrisonBase.TargetHandling
                 CombatObject = target;
                 break;
             }
+        }
+
+        internal static bool CheckCombatFlag(CombatFlags flag)
+        {
+            return (CombatType & flag) != 0;
+        }
+        internal static bool CheckLootFlag(LootFlags flag)
+        {
+            return (LootType & flag) != 0;
         }
     }
 }

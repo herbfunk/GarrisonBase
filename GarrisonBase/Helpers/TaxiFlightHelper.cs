@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Herbfunk.GarrisonBase.Character;
 using Styx;
-using Styx.Common;
 using Styx.CommonBot;
 using Styx.CommonBot.Frames;
 

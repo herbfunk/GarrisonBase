@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Styx;
 using Styx.Helpers;
 using Styx.WoWInternals;
 using Styx.WoWInternals.Garrison;
@@ -112,8 +113,8 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
 
                     if (RewardTypes.HasFlag(RewardTypes.CharacterToken))
                     {
-                        if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward) &&
-                            CacheStaticLookUp.DictItemRewards_CharacterTokens[ItemIdReward].Item2<BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel)
+                        if (DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward) &&
+                            DictItemRewards_CharacterTokens[ItemIdReward].Item2<BaseSettings.CurrentSettings.MissionReward_CharacterToken_ItemLevel)
                         {
                             _priority = 0;
                         }
@@ -125,32 +126,32 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     }
                     else if (RewardTypes.HasFlag(RewardTypes.FollowerToken))
                     {
-                        if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor615 == ItemIdReward &&
+                        if (ItemRewards_FollowerToken_Armor615 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet615)
                         {
                             _priority = 0;
                         }
-                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor630 == ItemIdReward &&
+                        else if (ItemRewards_FollowerToken_Armor630 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet630)
                         {
                             _priority = 0;
                         }
-                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Armor645 == ItemIdReward &&
+                        else if (ItemRewards_FollowerToken_Armor645 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_ArmorSet645)
                         {
                             _priority = 0;
                         }
-                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon615 == ItemIdReward &&
+                        else if (ItemRewards_FollowerToken_Weapon615 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet615)
                         {
                             _priority = 0;
                         }
-                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon630 == ItemIdReward &&
+                        else if (ItemRewards_FollowerToken_Weapon630 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet630)
                         {
                             _priority = 0;
                         }
-                        else if (CacheStaticLookUp.ItemRewards_FollowerToken_Weapon645 == ItemIdReward &&
+                        else if (ItemRewards_FollowerToken_Weapon645 == ItemIdReward &&
                             !BaseSettings.CurrentSettings.MissionReward_FollowerToken_WeaponSet645)
                         {
                             _priority = 0;
@@ -300,32 +301,32 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             if (ApexisReward > 0) RewardTypes |= RewardTypes.ApexisCrystal;
             if (ItemIdReward > 0)
             {
-                if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward))
+                if (DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward))
                     RewardTypes |= RewardTypes.CharacterToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTokens.Contains(ItemIdReward))
+                else if (ItemRewards_FollowerTokens.Contains(ItemIdReward))
                     RewardTypes |= RewardTypes.FollowerToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerRetraining.Contains(ItemIdReward))
+                else if (ItemRewards_FollowerRetraining.Contains(ItemIdReward))
                     RewardTypes |= RewardTypes.RetrainingCertificate;
-                else if (CacheStaticLookUp.ItemRewards_Contracts.Contains(ItemIdReward))
+                else if (ItemRewards_Contracts.Contains(ItemIdReward))
                     RewardTypes |= RewardTypes.FollowerContract;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTraits.Contains(ItemIdReward))
+                else if (ItemRewards_FollowerTraits.Contains(ItemIdReward))
                     RewardTypes |= RewardTypes.FollowerTrait;
-                else if (CacheStaticLookUp.ItemRewards_RushOrders.Contains(ItemIdReward))
+                else if (ItemRewards_RushOrders.Contains(ItemIdReward))
                     RewardTypes |= RewardTypes.RushOrder;
             }
             if (ItemIdReward2 > 0)
             {
-                if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward2))
+                if (DictItemRewards_CharacterTokens.ContainsKey(ItemIdReward2))
                     RewardTypes |= RewardTypes.CharacterToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTokens.Contains(ItemIdReward2))
+                else if (ItemRewards_FollowerTokens.Contains(ItemIdReward2))
                     RewardTypes |= RewardTypes.FollowerToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerRetraining.Contains(ItemIdReward2))
+                else if (ItemRewards_FollowerRetraining.Contains(ItemIdReward2))
                     RewardTypes |= RewardTypes.RetrainingCertificate;
-                else if (CacheStaticLookUp.ItemRewards_Contracts.Contains(ItemIdReward2))
+                else if (ItemRewards_Contracts.Contains(ItemIdReward2))
                     RewardTypes |= RewardTypes.FollowerContract;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTraits.Contains(ItemIdReward2))
+                else if (ItemRewards_FollowerTraits.Contains(ItemIdReward2))
                     RewardTypes |= RewardTypes.FollowerTrait;
-                else if (CacheStaticLookUp.ItemRewards_RushOrders.Contains(ItemIdReward2))
+                else if (ItemRewards_RushOrders.Contains(ItemIdReward2))
                     RewardTypes |= RewardTypes.RushOrder;
             }
             if (currencyId > 0)
@@ -371,25 +372,25 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 else
                     ItemIdReward2 = reward.ItemId;
 
-                if (CacheStaticLookUp.DictItemRewards_CharacterTokens.ContainsKey(reward.ItemId))
+                if (DictItemRewards_CharacterTokens.ContainsKey(reward.ItemId))
                     RewardTypes |= RewardTypes.CharacterToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTokens.Contains(reward.ItemId))
+                else if (ItemRewards_FollowerTokens.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.FollowerToken;
-                else if (CacheStaticLookUp.ItemRewards_FollowerRetraining.Contains(reward.ItemId))
+                else if (ItemRewards_FollowerRetraining.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.RetrainingCertificate;
-                else if (CacheStaticLookUp.ItemRewards_Contracts.Contains(reward.ItemId))
+                else if (ItemRewards_Contracts.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.FollowerContract;
-                else if (CacheStaticLookUp.ItemRewards_FollowerTraits.Contains(reward.ItemId))
+                else if (ItemRewards_FollowerTraits.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.FollowerTrait;
-                else if (CacheStaticLookUp.ItemRewards_RushOrders.Contains(reward.ItemId))
+                else if (ItemRewards_RushOrders.Contains(reward.ItemId))
                     RewardTypes |= RewardTypes.RushOrder;
-                else if (CacheStaticLookUp.ItemReward_AbrogatorStone==reward.ItemId)
+                else if (ItemReward_AbrogatorStone==reward.ItemId)
                     RewardTypes |= RewardTypes.AbrogatorStone;
-                else if (CacheStaticLookUp.ItemReward_ElementalRune == reward.ItemId)
+                else if (ItemReward_ElementalRune == reward.ItemId)
                     RewardTypes |= RewardTypes.ElementalRune;
-                else if (CacheStaticLookUp.ItemReward_SavageBlood == reward.ItemId)
+                else if (ItemReward_SavageBlood == reward.ItemId)
                     RewardTypes |= RewardTypes.SavageBlood;
-                else if (CacheStaticLookUp.ItemReward_PrimalSpirit == reward.ItemId)
+                else if (ItemReward_PrimalSpirit == reward.ItemId)
                     RewardTypes |= RewardTypes.PrimalSpirit;
                 else
                     RewardTypes |= RewardTypes.Items;
@@ -492,5 +493,154 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             Mission p = (Mission)obj;
             return (Id == p.Id);
         }
+
+
+        #region Static Cache Item Rewards
+        public static readonly Dictionary<int, Tuple<InventoryType, int>> DictItemRewards_CharacterTokens = new Dictionary
+           <int, Tuple<InventoryType, int>>
+        {
+            {114100, new Tuple<InventoryType, int>(InventoryType.Shoulder, 610)},
+            {114105, new Tuple<InventoryType, int>(InventoryType.Trinket, 600)},
+            {114097, new Tuple<InventoryType, int>(InventoryType.Hand, 590)},
+            {114099, new Tuple<InventoryType, int>(InventoryType.Legs, 580)},
+            {114094, new Tuple<InventoryType, int>(InventoryType.Wrist, 570)},
+            {114108, new Tuple<InventoryType, int>(InventoryType.Weapon, 560)},
+            {114096, new Tuple<InventoryType, int>(InventoryType.Feet, 550)},
+            {114098, new Tuple<InventoryType, int>(InventoryType.Head, 540)},
+            {114101, new Tuple<InventoryType, int>(InventoryType.Waist, 530)},
+            {114053, new Tuple<InventoryType, int>(InventoryType.Hand, 512)},
+            {114052, new Tuple<InventoryType, int>(InventoryType.Finger, 519)},
+
+            ////615
+            {114063, new Tuple<InventoryType, int>(InventoryType.Shoulder, 615)},
+            {114057, new Tuple<InventoryType, int>(InventoryType.Wrist, 615)},
+            {114058, new Tuple<InventoryType, int>(InventoryType.Chest, 615)},
+            {114068, new Tuple<InventoryType, int>(InventoryType.Trinket, 615)},
+            {114066, new Tuple<InventoryType, int>(InventoryType.Neck, 615)},
+            {114109, new Tuple<InventoryType, int>(InventoryType.Weapon, 615)},
+            {114059, new Tuple<InventoryType, int>(InventoryType.Feet, 615)},
+
+            ////630
+            {114080, new Tuple<InventoryType, int>(InventoryType.Trinket, 630)},
+            {114071, new Tuple<InventoryType, int>(InventoryType.Feet, 630)},
+            {114075, new Tuple<InventoryType, int>(InventoryType.Shoulder, 630)},
+            {114078, new Tuple<InventoryType, int>(InventoryType.Neck, 630)},
+            {114110, new Tuple<InventoryType, int>(InventoryType.Weapon, 630)},
+            {114070, new Tuple<InventoryType, int>(InventoryType.Chest, 630)},
+            {114069, new Tuple<InventoryType, int>(InventoryType.Wrist, 630)},
+
+            ////645
+            {114085, new Tuple<InventoryType, int>(InventoryType.Shoulder, 645)},
+            {114083, new Tuple<InventoryType, int>(InventoryType.Chest, 645)},
+            {114084, new Tuple<InventoryType, int>(InventoryType.Feet, 645)},
+            {114082, new Tuple<InventoryType, int>(InventoryType.Wrist, 645)},
+            {114112, new Tuple<InventoryType, int>(InventoryType.Weapon, 645)},
+            {114087, new Tuple<InventoryType, int>(InventoryType.Trinket, 645)},
+            {114086, new Tuple<InventoryType, int>(InventoryType.Neck, 645)},
+
+            ////Highmaul Caches
+            {118531, new Tuple<InventoryType, int>(InventoryType.None, 685)},
+            {118530, new Tuple<InventoryType, int>(InventoryType.None, 670)},
+            {118529, new Tuple<InventoryType, int>(InventoryType.None, 665)},
+        };
+
+        public static int ItemRewards_FollowerToken_ArmorEnhancement = 120301;
+        public static int ItemRewards_FollowerToken_WeaponEnhancement = 120302;
+        public static int ItemRewards_FollowerToken_Armor615 = 114807;
+        public static int ItemRewards_FollowerToken_Weapon615 = 114616;
+        public static int ItemRewards_FollowerToken_Armor630 = 114806;
+        public static int ItemRewards_FollowerToken_Weapon630 = 114081;
+        public static int ItemRewards_FollowerToken_Armor645 = 114746;
+        public static int ItemRewards_FollowerToken_Weapon645 = 114622;
+
+        public static readonly List<int> ItemRewards_FollowerTokens = new List<int>
+        {
+            ItemRewards_FollowerToken_ArmorEnhancement, //Armor Enhancement Token
+            ItemRewards_FollowerToken_WeaponEnhancement, //Weapon Enhancement Token
+
+            ItemRewards_FollowerToken_Weapon615, //war-ravaged-weaponry
+            ItemRewards_FollowerToken_Armor615, //war-ravaged-armor-set
+
+            ItemRewards_FollowerToken_Armor630, //blackrock-armor-set 
+            ItemRewards_FollowerToken_Weapon630, //blackrock-weaponry
+
+            ItemRewards_FollowerToken_Armor645, //goredrenched-armor-set
+            ItemRewards_FollowerToken_Weapon630, //goredrenched-weaponry
+
+            114822, //heavily-reinforced-armor-enhancement (+9)
+            114131, //power-overrun-weapon-enhancement (+9)
+        };
+
+        public static readonly List<int> ItemRewards_Contracts = new List<int>
+        {
+            114825, //Contract: Ulna Thresher
+            112848, //Contract: Daleera Moonfang
+            114826, //Contract: Bruma Swiftstone
+            112737, //Contract: Ka'la of the Frostwolves
+        };
+
+        //118354 = Follower Re-training Certificate
+        //122272 = Follower Ability Retraining
+        //122273 = Follower Trait Retraining
+        //123858 = Follower Retraining Scroll Case
+        public static readonly int ItemReward_FollowerRetrainingCertificate = 118354;
+        public static readonly int ItemReward_FollowerAbilityRetrainingManual = 122272;
+        public static readonly int ItemReward_FollowerTraitRetrainingGuide = 122273;
+        public static readonly int ItemReward_FollowerRetrainingScrollCase = 123858;
+        //
+        public static readonly List<int> ItemRewards_FollowerRetraining = new List<int>
+        {
+            ItemReward_FollowerRetrainingCertificate,
+            ItemReward_FollowerAbilityRetrainingManual,
+            ItemReward_FollowerTraitRetrainingGuide,
+            ItemReward_FollowerRetrainingScrollCase
+        };
+
+        public static readonly int ItemReward_TraitDancing = 118474;
+        public static readonly int ItemReward_TraitHearthstone = 118475;
+        public static readonly int ItemReward_TraitSuntouchedFeather = 122275;
+        public static readonly int ItemReward_TraitOgreBuddyHandbook = 122580;
+        public static readonly int ItemReward_TraitGreaseMonkeyGuide = 122583;
+        public static readonly int ItemReward_TraitWinningwithWildlings = 122584;
+        public static readonly int ItemReward_TraitGuidetoArakkoaRelations = 122582;
+
+        public static readonly List<int> ItemRewards_FollowerTraits = new List<int>
+        {
+            ItemReward_TraitDancing,
+            ItemReward_TraitHearthstone,
+            ItemReward_TraitSuntouchedFeather,
+            ItemReward_TraitOgreBuddyHandbook,
+            ItemReward_TraitGreaseMonkeyGuide,
+            ItemReward_TraitWinningwithWildlings,
+            ItemReward_TraitGuidetoArakkoaRelations
+        };
+
+        public static readonly int ItemReward_ElementalRune = 115510;
+        public static readonly int ItemReward_AbrogatorStone = 115280;
+        public static readonly int ItemReward_PrimalSpirit = 120945;
+        public static readonly int ItemReward_SavageBlood = 118472;
+
+        //115510 = Elemental Rune
+        //115280 = Abrogator Stone
+        //120945 = Primal Spirit
+        //118472 = Salvage Blood
+
+
+
+        //118474 = Supreme Manual of Dance
+        //118475 = Hearthstone Strategy Guide
+        //122275 = Sun-touched Feather of Rukhmar
+        public static readonly List<int> ItemRewards_RushOrders = new List<int>
+        {
+            (int)RushOrders.AlchemyLab,
+            (int)RushOrders.EnchantersStudy,
+            (int)RushOrders.Forge,
+            (int)RushOrders.Tailoring,
+            (int)RushOrders.Gem,
+            (int)RushOrders.Tannery,
+            (int)RushOrders.Scribe,
+            (int)RushOrders.Engineering,
+        };
+        #endregion
     }
 }

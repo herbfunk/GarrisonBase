@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
-using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 
@@ -34,7 +33,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             //Coroutines.Movement.MovementCache.ShouldRecord = true;
 
-            foreach (var mobId in CacheStaticLookUp.MineQuestMobIDs)
+            foreach (var mobId in QuestHelper.MineQuestMobIDs)
             {
                 ObjectCacheManager.CombatIds.Add(mobId);
                 ObjectCacheManager.LootIds.Add(mobId);
@@ -83,7 +82,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             TargetManager.ShouldKill = false;
             ObjectCacheManager.IgnoreLineOfSightFailure = false;
 
-            foreach (var id in CacheStaticLookUp.MineQuestMobIDs)
+            foreach (var id in QuestHelper.MineQuestMobIDs)
             {
                 ObjectCacheManager.CombatIds.Remove(id);
                 ObjectCacheManager.LootIds.Remove(id);

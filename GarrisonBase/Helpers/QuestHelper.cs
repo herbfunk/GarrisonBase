@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bots.Quest;
 using Herbfunk.GarrisonBase.Cache;
-using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Character;
+using Herbfunk.GarrisonBase.Coroutines;
 using Herbfunk.GarrisonBase.Coroutines.Behaviors;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
@@ -88,7 +89,7 @@ namespace Herbfunk.GarrisonBase.Helpers
 
         public static int GetActiveQuestIndexFromGossipFrame(uint id)
         {
-            foreach (var q in Bots.Quest.QuestManager.GossipFrame.ActiveQuests)
+            foreach (var q in QuestManager.GossipFrame.ActiveQuests)
             {
                 if (q.Id==id)
                     return q.Index;
@@ -98,7 +99,7 @@ namespace Herbfunk.GarrisonBase.Helpers
         }
         public static int GetAvailableQuestIndexFromGossipFrame(uint id)
         {
-            foreach (var q in Bots.Quest.QuestManager.GossipFrame.AvailableQuests)
+            foreach (var q in QuestManager.GossipFrame.AvailableQuests)
             {
                 if (q.Id == id)
                     return q.Index;
@@ -241,6 +242,145 @@ namespace Herbfunk.GarrisonBase.Helpers
 
             return null;
         }
+
+        internal static BehaviorArray GetGarrisonBuildingFirstQuestArray(Building b, bool alliance)
+        {
+            if (b.Type == BuildingType.SalvageYard)
+            {
+                //var abandon = new Behaviors.BehaviorQuestAbandon(b.FirstQuestID);
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
+                var itemInteraction = new BehaviorItemInteraction(118473);
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, itemInteraction, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else if (b.Type == BuildingType.TradingPost)
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
+                var moveLoc = Player.IsAlliance
+                    ? new WoWPoint(1764.08, 150.39, 76.02)
+                    : new WoWPoint(5745.101, 4570.491, 138.8332);
+
+                var moveto = new BehaviorMove(moveLoc, 7f);
+                var npcId = Player.IsAlliance ? 87288 : 87260;
+                var target = new BehaviorSelectTarget(moveLoc);
+                var interact = new BehaviorItemInteraction(118418, true);
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
+
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, moveto, target, interact, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else if (b.Type == BuildingType.Storehouse)
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                List<WoWPoint> _hotSpots = new List<WoWPoint>
+                {
+                        MovementCache.GarrisonEntrance,
+
+                        MovementCache.GardenPlot63SafePoint,
+                        MovementCache.MinePlot59SafePoint,
+
+                        MovementCache.MediumPlot22SafePoint,
+                        MovementCache.LargePlot23SafePoint,
+                        MovementCache.LargePlot24SafePoint,
+                        MovementCache.MediumPlot25SafePoint,
+
+                        MovementCache.SmallPlot18SafePoint,
+                        MovementCache.SmallPlot19SafePoint,
+                        MovementCache.SmallPlot20SafePoint,
+                    };
+
+                var looting = new BehaviorHotspotRunning(_hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => BehaviorManager.HasQuestAndNotCompleted(b.FirstQuestId));
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else if (b.Type == BuildingType.Lumbermill)
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                WoWPoint movementPoint;
+                if (Player.IsAlliance)
+                    movementPoint = new WoWPoint(1555.087, 173.8229, 72.59766);
+                else
+                    movementPoint = new WoWPoint(6082.979, 4795.821, 149.1655);
+
+                var looting = new BehaviorHotspotRunning(new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => BehaviorManager.HasQuestAndNotCompleted(b.FirstQuestId));
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else if (b.Type == BuildingType.Mines)
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
+                    MovementCache.Alliance_Mine_LevelOne.ToArray() :
+                    MovementCache.Horde_Mine_LevelOne.ToArray(),
+                    MineQuestMobIDs.ToArray(),
+                    BehaviorHotspotRunning.HotSpotType.Killing,
+                    () => BehaviorManager.HasQuestAndNotCompleted(b.FirstQuestId));
+
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else if (b.Type == BuildingType.HerbGarden)
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
+                    MovementCache.Alliance_Herb_LevelOne.ToArray() :
+                    MovementCache.Horde_Herb_LevelOne.ToArray(),
+                    HerbQuestMobIDs.ToArray(),
+                    BehaviorHotspotRunning.HotSpotType.Killing,
+                    () => BehaviorManager.HasQuestAndNotCompleted(b.FirstQuestId));
+
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
+
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+            else
+            {
+                var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.FirstQuestNpcId);
+                var workorder = new BehaviorQuestWorkOrder(b);
+                var workorderPickup = new BehaviorQuestWorkOrderPickup(b);
+                var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
+                var behaviorArray = new BehaviorArray(new Behavior[] { pickup, workorder, workorderPickup, turnin });
+                behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
+                return behaviorArray;
+            }
+        }
+
+        internal static List<uint> MineQuestMobIDs = new List<uint>
+        {
+            81396,
+            81362,81398, //Horde
+            83628, 83629, //Ally
+            85294,
+        };
+
+        internal static List<uint> HerbQuestMobIDs = new List<uint>
+        {
+            85341, 81967,
+            85412, 85411, 85410, 85408, 85409, 85407,
+        };
+
+        internal static List<uint> StoreHouseQuestIDs = new List<uint>
+        {
+            237257,
+            237039
+        };
 
         /* Daily Town Hall Trader Info
          * 

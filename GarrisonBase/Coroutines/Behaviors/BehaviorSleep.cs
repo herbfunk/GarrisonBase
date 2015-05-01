@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Styx.Common.Helpers;
-using Styx.CommonBot.Coroutines;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {

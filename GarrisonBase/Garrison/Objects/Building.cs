@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx;
@@ -22,22 +23,6 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
         public WorkOrderType WorkOrderType { get; set; }
         public int WorkOrderObjectEntryId { get; set; }
         public string WorkOrderObjectName { get; set; }
-
-
-        public WoWGameObject WorkOrderObject
-        {
-            get
-            {
-                if (_workOrderObject == null)
-                    _workOrderObject = CacheStaticLookUp.GetWoWObject(WorkOrderObjectName).ToGameObject();
-                else if (!_workOrderObject.IsValid)
-                    _workOrderObject = null;
-                return _workOrderObject;
-            }
-            set { _workOrderObject = value; }
-        }
-        private WoWGameObject _workOrderObject;
-
         public bool CheckedWorkOrderPickUp { get; set; }
         public bool CheckedWorkOrderStartUp { get; set; }
 
@@ -46,14 +31,15 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             get
             {
                 if (Type == BuildingType.TradingPost && _workorderNpcEntryid==-1)
-                {
+                {//Trade Post Varies from day to day, so we continue to update it until we find a match
+                    
                     uint[] entryIds = Player.IsAlliance
                         ? WorkOrder.AllianceTradePostNpcIds.ToArray()
                         : WorkOrder.HordeTradePostNpcIds.ToArray();
 
-                    var validunit = CacheStaticLookUp.GetWoWUnits(entryIds).FirstOrDefault();
-                    if (validunit != null)
-                        _workorderNpcEntryid = Convert.ToInt32(validunit.Entry);
+                    var units = ObjectCacheManager.GetWoWUnits(entryIds);
+
+                    if (units.Count>0) _workorderNpcEntryid = Convert.ToInt32(units.First().Entry);
                 }
                 return _workorderNpcEntryid;
             }

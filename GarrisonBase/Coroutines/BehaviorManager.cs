@@ -13,10 +13,6 @@ using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.CommonBot;
-using Styx.CommonBot.Coroutines;
-using Styx.WoWInternals;
-using Styx.WoWInternals.DB;
-using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Coroutines
 {
@@ -25,7 +21,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
         internal static Behavior CurrentBehavior { get; private set; }
         internal static List<Behavior> Behaviors = new List<Behavior>();
 
-        
+
         /// <summary>
         /// Used to switch the current behavior
         /// </summary>
@@ -40,6 +36,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 CacheStaticLookUp.Update();
                 ObjectCacheManager.Initalize();
                 TargetManager.Initalize();
+                Movement.IgnoreTaxiCheck = false;
+
                 //Simple Check if garrison can be accessed!
                 if (Player.Level < 90 || Player.Inventory.GarrisonHearthstone == null)
                 {
@@ -57,7 +55,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return true;
 
             //Disable and reload UI if master plan is enabled..
-            if (await Common.PreChecks.CheckAddons()) return true;
+            //if (await Common.PreChecks.CheckAddons()) return true;
 
             //We need "open" the garrison up and initalize it.. (so we don't get errors trying to inject!)
             if (await Common.PreChecks.InitalizeGarrisonManager()) return true;
@@ -75,8 +73,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
             //        return true;
             //    }
             //}
-            
-            
+
+
 
 
             if (!InitalizedBehaviorList)
@@ -117,7 +115,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                         }
                     }
                 }
-                
+
                 if (SwitchBehavior != null && CurrentBehavior != SwitchBehavior)
                 {
                     GarrisonBase.Debug("Switching behaviors to {0}", SwitchBehavior.Type);
@@ -153,15 +151,15 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 return true;
             }
 
-            if (Common.PreChecks.DisabledMasterPlanAddon)
-            {
-                Common.PreChecks.ShouldCheckAddons = false;
-                LuaCommands.EnableAddon("MasterPlan");
-                LuaCommands.ReloadUI();
-                Common.PreChecks.DisabledMasterPlanAddon = false;
-                await Coroutine.Wait(6000, () => StyxWoW.IsInGame);
-                return true;
-            }
+            //if (Common.PreChecks.DisabledMasterPlanAddon)
+            //{
+            //    Common.PreChecks.ShouldCheckAddons = false;
+            //    LuaCommands.EnableAddon("MasterPlan");
+            //    LuaCommands.ReloadUI();
+            //    Common.PreChecks.DisabledMasterPlanAddon = false;
+            //    await Coroutine.Wait(6000, () => StyxWoW.IsInGame);
+            //    return true;
+            //}
 
 
 
@@ -181,402 +179,13 @@ namespace Herbfunk.GarrisonBase.Coroutines
             CurrentBehavior = null;
             SwitchBehavior = null;
 
-            //Behaviors.Add(BehaviorArray_Trapping_ShadowmoonVally);
-            //Behaviors.Add(BehaviorArray_Trapping_Leather_FrostfireRidge);
-            //Behaviors.Add(BehaviorArray_Trapping_Fur_FrostfireRidge);
-            //Behaviors.Add(BehaviorArray_Trapping_Elites_Nagrand);
-            //Behaviors.Add(BehaviorArray_Trapping_Boars_Gorgond);
-            
-            //Move to entrance!
-            //Behaviors.Add(new Behaviors.BehaviorMove(MovementCache.GarrisonEntrance, 7f));
-            Behaviors.Add(new BehaviorGetMail());
-
-            Behaviors.Add(new BehaviorMissionComplete()); //Mission Complete
-            Behaviors.Add(new BehaviorCache()); //Garrison Cache
-
-            //Finalize Plots
-            foreach (var b in GarrisonManager.Buildings.Values.Where(b => b.CanActivate))
-                Behaviors.Add(new BehaviorFinalizePlots(b));
-
-
-            //Buildings that are active but have not completed the quest yet (that are setup already)
-            #region Building First Quest Behaviors
-            foreach (var b in GarrisonManager.Buildings.Values.Where(b => !b.FirstQuestCompleted && !b.IsBuilding && b.FirstQuestNpcId > -1 && b.FirstQuestId > -1))
-            {
-                if (b.Type == BuildingType.SalvageYard)
-                {
-                    //var abandon = new Behaviors.BehaviorQuestAbandon(b.FirstQuestID);
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
-                    var itemInteraction = new BehaviorItemInteraction(118473);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, itemInteraction, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else if (b.Type == BuildingType.TradingPost)
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
-                    var moveLoc = Player.IsAlliance
-                        ? new WoWPoint(1764.08, 150.39, 76.02)
-                        : new WoWPoint(5745.101, 4570.491, 138.8332);
-
-                    var moveto = new BehaviorMove(moveLoc, 7f);
-                    var npcId = Player.IsAlliance ? 87288 : 87260;
-                    var target = new BehaviorSelectTarget(moveLoc);
-                    var interact = new BehaviorItemInteraction(118418, true);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
-
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, moveto, target, interact, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else if (b.Type == BuildingType.Storehouse)
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    List<WoWPoint> _hotSpots = new List<WoWPoint>
-                    {
-                        MovementCache.GarrisonEntrance,
-
-                        MovementCache.GardenPlot63SafePoint,
-                        MovementCache.MinePlot59SafePoint,
-
-                        MovementCache.MediumPlot22SafePoint,
-                        MovementCache.LargePlot23SafePoint,
-                        MovementCache.LargePlot24SafePoint,
-                        MovementCache.MediumPlot25SafePoint,
-
-                        MovementCache.SmallPlot18SafePoint,
-                        MovementCache.SmallPlot19SafePoint,
-                        MovementCache.SmallPlot20SafePoint,
-                    };
-
-                    var looting = new BehaviorHotspotRunning(_hotSpots.ToArray(), BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else if (b.Type == BuildingType.Lumbermill)
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    WoWPoint movementPoint;
-                    if (Player.IsAlliance)
-                        movementPoint = new WoWPoint(1555.087, 173.8229, 72.59766);
-                    else
-                        movementPoint = new WoWPoint(6082.979, 4795.821, 149.1655);
-
-                    var looting = new BehaviorHotspotRunning(new[] { movementPoint }, new uint[] { 234021, 233922 }, BehaviorHotspotRunning.HotSpotType.Looting, () => HasQuestAndNotCompleted(b.FirstQuestId));
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else if (b.Type == BuildingType.Mines)
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
-                        MovementCache.Alliance_Mine_LevelOne.ToArray() :
-                        MovementCache.Horde_Mine_LevelOne.ToArray(),
-                        CacheStaticLookUp.MineQuestMobIDs.ToArray(),
-                        BehaviorHotspotRunning.HotSpotType.Killing,
-                        () => HasQuestAndNotCompleted(b.FirstQuestId));
-
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else if (b.Type == BuildingType.HerbGarden)
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    var looting = new BehaviorHotspotRunning(Player.IsAlliance ?
-                        MovementCache.Alliance_Herb_LevelOne.ToArray() :
-                        MovementCache.Horde_Herb_LevelOne.ToArray(),
-                        CacheStaticLookUp.HerbQuestMobIDs.ToArray(),
-                        BehaviorHotspotRunning.HotSpotType.Killing,
-                        () => HasQuestAndNotCompleted(b.FirstQuestId));
-
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.EntranceMovementPoint, b.FirstQuestNpcId);
-
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, looting, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-                else
-                {
-                    var pickup = new BehaviorQuestPickup(b.FirstQuestId, b.SafeMovementPoint, b.FirstQuestNpcId);
-                    var workorder = new BehaviorQuestWorkOrder(b);
-                    var workorderPickup = new BehaviorQuestWorkOrderPickup(b);
-                    var turnin = new BehaviorQuestTurnin(b.FirstQuestId, b.SafeMovementPoint, b.WorkOrderNpcEntryId);
-                    var behaviorArray = new BehaviorArray(new Behavior[] { pickup, workorder, workorderPickup, turnin });
-                    behaviorArray.Criteria += () => BaseSettings.CurrentSettings.BehaviorQuests;
-                    Behaviors.Add(behaviorArray);
-                }
-            }
-
-            #endregion
-
-            #region Herbing and Mining
-
-            if (GarrisonManager.Buildings.Values.Any(b => b.Type == BuildingType.Mines))
-            {
-                var miningArray = new BehaviorArray(new Behavior[]
-                {
-                    new BehaviorMove(MovementCache.MinePlot59SafePoint),
-                    new BehaviorMine()
-                });
-                miningArray.Criteria += () => (!GarrisonManager.Buildings[BuildingType.Mines].IsBuilding &&
-                                               !GarrisonManager.Buildings[BuildingType.Mines].CanActivate &&
-                                               GarrisonManager.Buildings[BuildingType.Mines].FirstQuestCompleted &&
-                                               LuaCommands.CheckForDailyReset(BaseSettings.CurrentSettings.LastCheckedMine) &&
-                                               BaseSettings.CurrentSettings.BehaviorMineGather);
-
-                Behaviors.Add(miningArray);
-                Behaviors.Add(new BehaviorWorkOrderPickUp(GarrisonManager.Buildings[BuildingType.Mines]));
-                Behaviors.Add(new BehaviorWorkOrderStartUp(GarrisonManager.Buildings[BuildingType.Mines]));
-            }
-
-            if (GarrisonManager.Buildings.Values.Any(b => b.Type == BuildingType.HerbGarden))
-            {
-                Behaviors.Add(new BehaviorHerb());
-                Behaviors.Add(new BehaviorWorkOrderPickUp(GarrisonManager.Buildings[BuildingType.HerbGarden]));
-                Behaviors.Add(new BehaviorWorkOrderStartUp(GarrisonManager.Buildings[BuildingType.HerbGarden]));
-            }
-
-            #endregion
-
-            //Profession Crafting
-            foreach (var skill in Player.Professions.ProfessionSkills)
-            {
-                if (skill == SkillLine.Inscription)
-                    Behaviors.Add(new BehaviorMilling());
-                
-                int[] spellIds = PlayerProfessions.ProfessionDailyCooldownSpellIds[skill];
-                Behaviors.Add(new BehaviorCraftingProfession(skill, spellIds[1]));
-                Behaviors.Add(new BehaviorCraftingProfession(skill, spellIds[0]));
-            }
-
-            //Salvaging Behavior
-            if (GarrisonManager.Buildings.Values.Any(b => b.Type == BuildingType.SalvageYard))
-            {
-                var b = GarrisonManager.Buildings.Values.First(building => building.Type == BuildingType.SalvageYard);
-                Behaviors.Add(new BehaviorSalvage());
-            }
-
-            //Work Order Pickup and Startup (and Mine/Herb)
-            foreach (var b in GarrisonManager.Buildings.Values.Where(b => b.FirstQuestId <= 0 || b.FirstQuestCompleted).OrderBy(b => b.Plot))
-            {
-                if (b.Type != BuildingType.Mines || b.Type != BuildingType.HerbGarden)
-                {
-                    if (b.WorkOrder != null)
-                    {
-                        Behaviors.Add(new BehaviorWorkOrderPickUp(b));
-
-                        if (b.Type == BuildingType.EnchantersStudy) 
-                            Behaviors.Add(new BehaviorDisenchant()); //Disenchanting!
-                        else if(b.Type== BuildingType.ScribesQuarters)
-                            Behaviors.Add(new BehaviorMilling()); //Milling!
-
-                        Behaviors.Add(new BehaviorWorkOrderStartUp(b));
-
-                        if (b.Type == BuildingType.WarMillDwarvenBunker && b.Level == 3)
-                        {
-                            var questid = Player.IsAlliance ? 38175 : 38188;
-                            Behaviors.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(questid), Player.IsAlliance));
-                        }
-                        else if (b.Type == BuildingType.AlchemyLab && b.HasFollowerWorking)
-                        {
-                            Behaviors.Add(QuestHelper.GetDailyQuestArray(Convert.ToUInt32(37270), Player.IsAlliance));
-                        }
-                    }
-                }
-            }
-
-            //Primal Spirit Exchange
-            Behaviors.Add(new BehaviorPrimalTrader());
-
-            //Send any mail..
-            Behaviors.Add(new BehaviorSendMail());
-
-            //Finally, start some new missions!
-            Behaviors.Add(new BehaviorMissionStartup());
-
-            //Optional follower behaviors (to unlock)
-            Behaviors.Add(BehaviorArray_Followers.Clone());
-           
+            //Garrison Related!
+            Behaviors.AddRange(GarrisonManager.GetGarrisonBehaviors());
 
             InitalizedBehaviorList = true;
-            
-            
+
+
         }
-
-        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_ShadowmoonVally = new BehaviorArray(new Behavior[]
-        {
-            //
-            new BehaviorMove(new WoWPoint(1234.118, -1664.432, 44.69962), 100f),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = 5;
-                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
-                Movement.IgnoreTaxiCheck = true;
-            }),
-
-            new BehaviorHotspotRunning(
-                MovementCache.Trapping_Leather_ShadowMoonValley,
-                CacheStaticLookUp.Trap_UnitIds_Elekk, 
-                BehaviorHotspotRunning.HotSpotType.Both, 
-                () => true),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = Targeting.PullDistance;
-                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
-                Movement.IgnoreTaxiCheck = false;
-            }),
-
-
-        },"Trapping Leather Shadowmoon Vally");
-
-
-        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_FrostfireRidge = new BehaviorArray(new Behavior[]
-        {
-            //
-            new BehaviorMove(new WoWPoint(6311.582, 6030.6, 168.9311), 200f),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = 5;
-                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
-                Movement.IgnoreTaxiCheck = true;
-            }),
-
-            new BehaviorHotspotRunning(
-                MovementCache.Trapping_Leather_FrostfireRidge,
-                CacheStaticLookUp.Trap_UnitIds_Clefthoof, 
-                BehaviorHotspotRunning.HotSpotType.Both, 
-                () => true),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = Targeting.PullDistance;
-                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
-                Movement.IgnoreTaxiCheck = false;
-            }),
-
-
-        }, "Trapping Leather Frostfire Ridge");
-
-        internal static readonly BehaviorArray BehaviorArray_Trapping_Fur_FrostfireRidge = new BehaviorArray(new Behavior[]
-        {
-            //
-            new BehaviorMove(new WoWPoint(7636.806, 5435.424, 119.276), 200f),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = 5;
-                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
-                Movement.IgnoreTaxiCheck = true;
-            }),
-
-            new BehaviorHotspotRunning(
-                MovementCache.Trapping_Fur_FrostfireRidge,
-                CacheStaticLookUp.Trap_UnitIds_Wolves, 
-                BehaviorHotspotRunning.HotSpotType.Both, 
-                () => true),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = Targeting.PullDistance;
-                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
-                Movement.IgnoreTaxiCheck = false;
-            }),
-
-
-        }, "Trapping Fur Frostfire Ridge");
-
-        internal static readonly BehaviorArray BehaviorArray_Trapping_Boars_Gorgond = new BehaviorArray(new Behavior[]
-        {
-            //
-            new BehaviorMove(MovementCache.Trapping_Meat_Gorgond[0], 200f),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = 5;
-                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
-                Movement.IgnoreTaxiCheck = true;
-            }),
-            
-            new BehaviorHotspotRunning(
-                MovementCache.Trapping_Meat_Gorgond, 
-                CacheStaticLookUp.Trap_UnitIds_Boars,
-                BehaviorHotspotRunning.HotSpotType.Both, 
-                () => true),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = Targeting.PullDistance;
-                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
-                Movement.IgnoreTaxiCheck = false;
-            }),
-
-
-        }, "Trapping Elites Nagrand");
-
-        internal static readonly BehaviorArray BehaviorArray_Trapping_Elites_Nagrand = new BehaviorArray(new Behavior[]
-        {
-            //
-            new BehaviorMove(MovementCache.Trapping_Elites_Nagrand[0], 200f),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = 5;
-                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
-                Movement.IgnoreTaxiCheck = true;
-            }),
-            
-            new BehaviorHotspotRunning(
-                MovementCache.Trapping_Elites_Nagrand, 
-                CacheStaticLookUp.Trap_UnitIds_Wolves.Concat(CacheStaticLookUp.Trap_UnitIds_Clefthoof).Concat(CacheStaticLookUp.Trap_UnitIds_Talbulk).ToArray(),
-                BehaviorHotspotRunning.HotSpotType.Both, 
-                () => true),
-
-            new BehaviorCustomAction(() =>
-            {
-                TargetManager.PullDistance = Targeting.PullDistance;
-                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
-                Movement.IgnoreTaxiCheck = false;
-            }),
-
-
-        }, "Trapping Elites Nagrand");
-        
-
-        internal static readonly BehaviorArray BehaviorArray_Followers=new BehaviorArray(new Behavior[]
-        {
-                Follower.FollowerQuestBehaviorArray(209), //Abu'Gur (Nagrand)
-                Follower.FollowerQuestBehaviorArray(170), //Goldmaeng (Nagrand)
-
-                Follower.FollowerQuestBehaviorArray(189), //Blook (Gorgrond)
-                Follower.FollowerQuestBehaviorArray(193), //Tormok (Gorgrond)
-
-                Follower.FollowerQuestBehaviorArray(207), //Defender (Talador)
-
-                Follower.FollowerQuestBehaviorArray(467), //Fen Tao (Ashran)
-
-                Follower.FollowerQuestBehaviorArray(32), //Dagg (Frostfire)
-                
-                Follower.FollowerQuestBehaviorArray(190), //Arch Mage (4 different areas)
-
-                //new BehaviorCustomAction(() => Common.PreChecks.IgnoreHearthing=false),
-                //new BehaviorUseFlightPath(MovementCache.GarrisonEntrance)
-            }, "Followers");
 
         internal static void Reset()
         {
@@ -588,6 +197,266 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 behavior.Dispose();
             }
         }
+
+
+        #region Behavior Trapping Leather Shadowmoon Valley
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_ShadowmoonVally = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(1234.118, -1664.432, 44.69962), 250f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Leather_ShadowMoonValley,
+                CacheStaticLookUp.Trap_UnitIds_Elekk, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+        }, "Trapping Leather Shadowmoon Vally")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+        #region Behavior Trapping Leather Frostfire Ridge
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Leather_FrostfireRidge = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(6311.582, 6030.6, 168.9311), 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Leather_FrostfireRidge,
+                CacheStaticLookUp.Trap_UnitIds_Clefthoof, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+        }, "Trapping Leather Frostfire Ridge")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+        #region Behavior Trapping Fur Nagrand Horde
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Fur_Nagrand_Horde = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(new WoWPoint(3222.156, 4476.665, 142.0599), 100f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Fur_Nagrand_Horde,
+                CacheStaticLookUp.Trap_UnitIds_Wolves.Concat(CacheStaticLookUp.Trap_UnitIds_Talbulk).ToArray(), 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+
+        }, "Trapping Fur Nagrand")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+        #region Behavior Trapping Fur Shadowmoon Valley
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Fur_ShadowmoonValley = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(MovementCache.Trapping_Fur_ShadowmoonValley[0], 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Fur_ShadowmoonValley,
+                CacheStaticLookUp.Trap_UnitIds_Wolves, 
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+
+        }, "Trapping Fur Shadowmoon Valley")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+        #region Behavior Trapping Meat Gorgond
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Boars_Gorgond = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(MovementCache.Trapping_Meat_Gorgond[0], 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+            
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Meat_Gorgond, 
+                CacheStaticLookUp.Trap_UnitIds_Boars,
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+        }, "Trapping Meat Nagrand")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+        #region Behavior Trapping Elite Wolves Nagrand
+
+        internal static readonly BehaviorArray BehaviorArray_Trapping_Elites_Nagrand = new BehaviorArray(new Behavior[]
+        {
+            //
+            new BehaviorMove(MovementCache.Trapping_Elites_Nagrand[0], 200f),
+
+            new BehaviorCustomAction(() =>
+            {
+                TargetManager.PullDistance = 5;
+                TargetManager.CombatType = TargetManager.CombatFlags.Trapping;
+                TargetManager.LootType = TargetManager.LootFlags.Units | TargetManager.LootFlags.Skinning;
+                Movement.IgnoreTaxiCheck = true;
+            }),
+            
+            new BehaviorHotspotRunning(
+                MovementCache.Trapping_Elites_Nagrand, 
+                CacheStaticLookUp.Trap_UnitIds_Wolves.Concat(CacheStaticLookUp.Trap_UnitIds_Clefthoof).Concat(CacheStaticLookUp.Trap_UnitIds_Talbulk).ToArray(),
+                BehaviorHotspotRunning.HotSpotType.Both, 
+                () => true),
+
+
+        }, "Trapping Elites Nagrand")
+        {
+            Criteria = () => BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.Enabled,
+            RunCondition = () =>
+                BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.MaximumItemCount >
+                PlayerInventory.GetTotalStackCount(
+                    Player.Inventory.GetCraftingReagentsById(
+                        (int)BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.ItemType).ToArray()),
+
+            DisposalAction = () =>
+            {
+                TargetManager.PullDistance = Targeting.PullDistance;
+                TargetManager.CombatType = TargetManager.CombatFlags.Normal;
+                TargetManager.LootType = TargetManager.LootFlags.None;
+                Movement.IgnoreTaxiCheck = false;
+            }
+
+        };
+
+        #endregion
+
+
+
+
 
         internal static bool HasQuest(uint questId)
         {

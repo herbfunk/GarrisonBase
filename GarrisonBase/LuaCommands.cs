@@ -4,7 +4,6 @@ using System.Linq;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx;
-using Styx.Common;
 using Styx.Helpers;
 using Styx.WoWInternals;
 
@@ -144,7 +143,7 @@ namespace Herbfunk.GarrisonBase
         public static bool HasNewMail()
         {
             GarrisonBase.Debug("LuaCommand: HasNewMail");
-            return Lua.GetReturnVal<bool>(String.Format("return return HasNewMail()"), 0);
+            return Lua.GetReturnVal<bool>(String.Format("return HasNewMail()"), 0);
         }
         public static void ClickMailItemButton(int index)
         {

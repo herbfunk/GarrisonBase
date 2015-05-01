@@ -694,7 +694,7 @@ namespace Herbfunk.GarrisonBase
             get { return _sellRepairNpcLocation; }
             set { _sellRepairNpcLocation = value; }
         }
-        private static WoWPoint _sellRepairNpcLocation;
+        private static WoWPoint _sellRepairNpcLocation=WoWPoint.Zero;
 
         public static WoWPoint FlightPathNpcLocation
         {
@@ -761,6 +761,22 @@ namespace Herbfunk.GarrisonBase
             new WoWPoint(7607.809, 1558.483, 74.49989),
         };
 
+        public static WoWPoint[] Trapping_Fur_Nagrand_Horde =
+        {
+            new WoWPoint(3092.758, 4383.859, 151.2671),
+            new WoWPoint(3094.84, 4285.589, 165.1676),
+            new WoWPoint(3033.612, 4455.098, 146.5908),
+        };
+
+        public static WoWPoint[] Trapping_Fur_ShadowmoonValley =
+        {
+            new WoWPoint(1259.823, 76.60919, 74.58547),
+            new WoWPoint(1339.218, 152.0948, 63.06612),
+            new WoWPoint(1230.288, 276.2763, 42.80136),
+            new WoWPoint(1275.678, 379.322, 60.00982),
+            new WoWPoint(1394.757, 508.1465, 71.78506),
+
+        };
 
 
     }

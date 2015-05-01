@@ -11,7 +11,6 @@ using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Herbfunk.GarrisonBase.Helpers;
 using Styx;
-using Styx.Common;
 using Styx.CommonBot;
 using Styx.CommonBot.Coroutines;
 using Styx.Pathing;
@@ -58,12 +57,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         public override BehaviorType Type { get { return BehaviorType.WorkOrderStartUp; } }
         public Building Building { get; set; }
 
-        private Movement _movement, _specialMovement;
+        private Movement _movement;
         private int _interactionAttempts = 0;
         private bool _checkedReagent = false;
         private List<Tuple<CraftingReagents, int>[]> BarnWorkOrderCurrencies;
         private Tuple<CraftingReagents, int>[] CurrentBarnCurrceny;
-        private string BarnWorkOrderGossipString = String.Empty;
         private int BarnWorkOrderGossipStartingIndex = 1;
 
         public C_WoWUnit WorkOrderObject
@@ -205,16 +203,16 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 if (!found)
                 {
                     Building.CheckedWorkOrderStartUp = true;
-                    if (_specialMovement != null)
-                    {
-                        _specialMovement.UseDeqeuedPoints(true);
-                        if (_specialMovement.CurrentMovementQueue.Count == 0)
-                        {
-                            return false;
-                        }
+                    //if (_specialMovement != null)
+                    //{
+                    //    _specialMovement.UseDeqeuedPoints(true);
+                    //    if (_specialMovement.CurrentMovementQueue.Count == 0)
+                    //    {
+                    //        return false;
+                    //    }
 
-                        return true;
-                    }
+                    //    return true;
+                    //}
 
                     return false;
                 }
@@ -222,13 +220,6 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 
                 _updateBarnGossipWorkOrderEntries();
                 GarrisonBase.Debug("Staring Work Order for Barn using {0} at gossip index {1}", CurrentBarnCurrceny[0].Item1.ToString(), BarnGossipIndex);
-
-                if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.FurryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyWolf)
-                    BarnWorkOrderGossipString = "i would like to place a work order for fur.";
-                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.LeatheryCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyClefthoof)
-                    BarnWorkOrderGossipString = "i would like to place a work order for leather.";
-                else if (CurrentBarnCurrceny[0].Item1 == CraftingReagents.MeatyCagedBeast || CurrentBarnCurrceny[0].Item1 == CraftingReagents.CagedMightyRiverbeast)
-                    BarnWorkOrderGossipString = "i would like to place a work order for meat.";
 
                 foreach (var i in removalList.OrderByDescending(i=>i))
                 {
@@ -245,8 +236,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await Interaction())
                 return true;
 
-            if (_specialMovement != null && await _specialMovement.ClickToMove())
-                return true;
+            //if (_specialMovement != null && await _specialMovement.ClickToMove())
+            //    return true;
 
             if (await EndMovement.MoveTo())
                 return true;
@@ -318,40 +309,39 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 return true;
             }
 
-            #region SpecialMovement
 
-            if (_specialMovement != null)
-            {
-                //Special Movement for navigating inside buildings using Click To Move
+            //if (_specialMovement != null)
+            //{
+            //    //Special Movement for navigating inside buildings using Click To Move
 
-                if (_specialMovement.CurrentMovementQueue.Count > 0)
-                {
-                    //find the nearest point to the npc in our special movement queue 
-                    var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location,
-                        _specialMovement.CurrentMovementQueue.ToList());
-                    //click to move.. but don't dequeue
-                    var result = await _specialMovement.ClickToMove_Result(false);
+            //    if (_specialMovement.CurrentMovementQueue.Count > 0)
+            //    {
+            //        //find the nearest point to the npc in our special movement queue 
+            //        var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location,
+            //            _specialMovement.CurrentMovementQueue.ToList());
+            //        //click to move.. but don't dequeue
+            //        var result = await _specialMovement.ClickToMove_Result(false);
 
-                    if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
-                    {
-                        //force dequeue now since its not nearest point
-                        if (result == MoveResult.ReachedDestination)
-                            _specialMovement.ForceDequeue(true);
+            //        if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
+            //        {
+            //            //force dequeue now since its not nearest point
+            //            if (result == MoveResult.ReachedDestination)
+            //                _specialMovement.ForceDequeue(true);
 
-                        return true;
-                    }
+            //            return true;
+            //        }
 
 
-                    //Last position was nearest and we reached our destination.. so lets finish special movement!
-                    if (result == MoveResult.ReachedDestination)
-                    {
-                        _specialMovement.ForceDequeue(true);
-                        _specialMovement.DequeueAll(false);
-                    }
-                }
-            }
+            //        //Last position was nearest and we reached our destination.. so lets finish special movement!
+            //        if (result == MoveResult.ReachedDestination)
+            //        {
+            //            _specialMovement.ForceDequeue(true);
+            //            _specialMovement.DequeueAll(false);
+            //        }
+            //    }
+            //}
 
-            #endregion
+
 
             //Setup the NPC movement!
             if (_movement == null)
@@ -372,7 +362,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 Building.WorkOrder.TotalWorkorderStartups() == 0)
             {
                 Building.CheckedWorkOrderStartUp = true;
-                if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
+                //if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                 return false;
             }
 
@@ -392,7 +382,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         BarnWorkOrderCurrencies.RemoveAt(0);
                     }
 
-                    if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
+                    //if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                     GarrisonBase.Log("Order Button Disabled!");
                     Building.WorkOrder.Refresh();
                     LuaUI.WorkOrder.Close.Click();

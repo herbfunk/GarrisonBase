@@ -79,7 +79,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         hearthstone.Use();
                         await CommonCoroutines.SleepForRandomUiInteractionTime();
                         await Coroutine.Wait(10000, () => StyxWoW.Me.IsCasting);
-                        if (!await Coroutine.Wait(25000, () => CacheStaticLookUp.GarrisonsZonesId.Contains(StyxWoW.Me.ZoneId)))
+                        if (!await Coroutine.Wait(25000, () => Player.InsideGarrison))
                         {
                             GarrisonBase.Err("Used garrison hearthstone but not in garrison yet.");
                             return false;
@@ -126,27 +126,27 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             return playerMapId == 1116;
         }
 
-        private bool _checkedMasterPlanAddon = false;
-        internal async Task<bool> CheckAddons()
-        {
-            if (_checkedMasterPlanAddon) return false;
-            if (DisabledMasterPlanAddon) return false;
+        //private bool _checkedMasterPlanAddon = false;
+        //internal async Task<bool> CheckAddons()
+        //{
+        //    if (_checkedMasterPlanAddon) return false;
+        //    if (DisabledMasterPlanAddon) return false;
 
-            await Coroutine.Yield();
-            await Coroutine.Sleep(StyxWoW.Random.Next(1200, 2522));
-            if (!BaseSettings.CurrentSettings.DisableMasterPlanAddon || !LuaCommands.IsAddonLoaded("MasterPlan"))
-            {
-                _checkedMasterPlanAddon = true;
-                return false;
-            }
+        //    await Coroutine.Yield();
+        //    await Coroutine.Sleep(StyxWoW.Random.Next(1200, 2522));
+        //    if (!BaseSettings.CurrentSettings.DisableMasterPlanAddon || !LuaCommands.IsAddonLoaded("MasterPlan"))
+        //    {
+        //        _checkedMasterPlanAddon = true;
+        //        return false;
+        //    }
 
-            LuaCommands.DisableAddon("MasterPlan");
-            LuaCommands.ReloadUI();
-            DisabledMasterPlanAddon = true;
-            _checkedMasterPlanAddon = true;
-            await Coroutine.Wait(6000, () => !StyxWoW.IsInGame);
-            return true;
-        }
+        //    LuaCommands.DisableAddon("MasterPlan");
+        //    LuaCommands.ReloadUI();
+        //    DisabledMasterPlanAddon = true;
+        //    _checkedMasterPlanAddon = true;
+        //    await Coroutine.Wait(6000, () => !StyxWoW.IsInGame);
+        //    return true;
+        //}
 
         internal async Task<bool> InitalizeGarrisonManager()
         {

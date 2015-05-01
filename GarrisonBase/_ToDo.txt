@@ -1,19 +1,8 @@
-﻿Code
-	-BehaviorArray parent and top parent todo
+﻿Implement Clustering of objects
+	-Create class with cluster properties and criteria for the objects
 	
-Cache
+Implement Vendoring and Repair behavior within common checks
 
-Building Behavior
-	-Setting up new buildings
-	-Upgrading existing buildings
+Add Lumber Harvesting
 
-Herbing and Mining
-	Add check and use for Coffee and Miners pick during mine behavior.
-	Add a movement cache to remove redudant locations visited during gathering.
-
-Add support for daily quests
-	-Reagent Trader
-
-World movement should be aware of hostile towns and blacklist accordingly to prevent ambushing from NPCs.
-Setup looting so it also loot anything it kills when moving outside the garrison.
 

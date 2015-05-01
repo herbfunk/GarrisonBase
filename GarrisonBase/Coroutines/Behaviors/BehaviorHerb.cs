@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Enums;
+using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 
@@ -25,7 +26,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             base.Initalize();
 
-            foreach (var mobId in CacheStaticLookUp.HerbQuestMobIDs)
+            foreach (var mobId in QuestHelper.HerbQuestMobIDs)
             {
                 ObjectCacheManager.CombatIds.Add(mobId);
                 ObjectCacheManager.LootIds.Add(mobId);
@@ -55,7 +56,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             TargetManager.ShouldLoot = false;
             TargetManager.ShouldKill = false;
-            foreach (var id in CacheStaticLookUp.HerbQuestMobIDs)
+            foreach (var id in QuestHelper.HerbQuestMobIDs)
             {
                 ObjectCacheManager.CombatIds.Remove(id);
                 ObjectCacheManager.LootIds.Remove(id);

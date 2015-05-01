@@ -31,6 +31,12 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             base.Initalize();
         }
 
+        public override void Dispose()
+        {
+            _movement = null;
+            base.Dispose();
+        }
+
         private bool _stuckCheck;
         private readonly WoWPoint[] _movementPoints;
         private readonly float _distance;

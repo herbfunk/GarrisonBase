@@ -55,7 +55,59 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cache\EntryCollection.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Cache\EntryList.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Cache\Static\EntryCache.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Cache\Static\ObjectEntryInfo.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Cache\Objects\EntryBase.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\DialogBox.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\DialogBox.Designer.cs">
+      <DependentUpon>DialogBox.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_CheckBox.cs">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_CheckBox.Designer.cs">
+      <DependentUpon>UserControl_CheckBox.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Combobox.cs">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Combobox.Designer.cs">
+      <DependentUpon>UserControl_Combobox.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Textbox.cs">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Textbox.Designer.cs">
+      <DependentUpon>UserControl_Textbox.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Trackbar.cs">
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Config\UserControl_Trackbar.Designer.cs">
+      <DependentUpon>UserControl_Trackbar.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Coroutines\Behaviors\Behavior.cs">
@@ -142,12 +194,6 @@
     <Compile Include="Coroutines\Behaviors\BehaviorSelectTarget.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="Coroutines\Behaviors\BehaviorSellRepair.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Coroutines\Behaviors\BehaviorSendMail.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Coroutines\Behaviors\BehaviorTransport.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -180,25 +226,25 @@
       <DependentUpon>MailAddNewItem.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Coroutines\LootBehavior.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Coroutines\CombatBehavior.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Coroutines\Common.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Coroutines\Common.Combat.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Common.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Coroutines\Common.LootObject.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Common.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Coroutines\Common.CheckLootFrame.cs">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Common.cs</DependentUpon>
     </Compile>
     <Compile Include="Coroutines\Movement.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Coroutines\VendorBehavior.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Helpers\GossipHelper.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Helpers\MailHelper.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Helpers\MerchantHelper.cs">
@@ -364,6 +410,10 @@
   <ItemGroup>
     <EmbeddedResource Include="Config\Config.resx">
       <DependentUpon>Config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Config\DialogBox.resx">
+      <DependentUpon>DialogBox.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Config\MailAddNewItem.resx">
       <DependentUpon>MailAddNewItem.cs</DependentUpon>

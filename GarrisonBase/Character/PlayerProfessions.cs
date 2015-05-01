@@ -11,17 +11,19 @@ namespace Herbfunk.GarrisonBase.Character
     {
         public List<SkillLine> ProfessionSkills = new List<SkillLine>();
         public List<int> ProfessionDailySkillIds = new List<int>();
-
+        public bool Skinning = false;
         public PlayerProfessions()
         {
             ProfessionSkills = SkillsLearnt.ToList();
             ProfessionDailySkillIds.Clear();
             foreach (var skill in ProfessionSkills)
             {
-                ProfessionDailySkillIds.AddRange(ProfessionDailyCooldownSpellIds[skill]);
+                if (ProfessionDailyCooldownSpellIds.ContainsKey(skill))
+                    ProfessionDailySkillIds.AddRange(ProfessionDailyCooldownSpellIds[skill]);
             }
             GarrisonBase.Log("Profession Daily Skills #{0}", ProfessionDailySkillIds.Count);
-            
+
+            Skinning = StyxWoW.Me.GetSkill(SkillLine.Skinning).CurrentValue > 0;
         }
         
         /// <summary> 

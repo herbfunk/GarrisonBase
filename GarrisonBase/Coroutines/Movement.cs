@@ -31,6 +31,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
         }
         private static bool _ignoreTaxiCheck;
 
+        
         public enum MovementTypes
         {
             Normal,
@@ -41,7 +42,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
         internal Queue<WoWPoint> DequeuedPoints = new Queue<WoWPoint>(); 
         internal List<WoWPoint> DequeuedFinalPlayerPositionPoints = new List<WoWPoint>();
         internal C_WoWObject WoWObject = null;
-
+        public int CanNavigateFailures = 0;
         private bool _checkedShoulUseFlightPath;
         private bool _didResetStuckChecker = false;
         private bool _checkStuck;
@@ -146,18 +147,8 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
             }
 
-            bool canNavigate = true;
-            try
-            {
-                canNavigate = Navigator.CanNavigateWithin(playerPos, location, Distance);
-            }
-            catch (Exception ex)
-            {
 
-            }
-            
-
-            if (!canNavigate)
+            if (!CheckCanNavigate())
             {
                 Log("MoveTo", "Can Navigate Return False " + location.ToString());
                 return false;
@@ -254,16 +245,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 }
             }
 
-            bool canNavigate = true;
-            try
-            {
-                canNavigate = Navigator.CanNavigateWithin(playerPos, location, Distance);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            if (!canNavigate)
+            if (!CheckCanNavigate())
             {
                 Log("MoveToResult", "Can Navigate Return False " + location.ToString());
                 return MoveResult.Failed;
@@ -403,6 +385,22 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 MovementCache.AddPosition(playerPos, Distance);
 
             return true;
+        }
+
+        private bool CheckCanNavigate()
+        {
+            bool canNavigate = true;
+            try
+            {
+                canNavigate = Navigator.CanNavigateWithin(Player.Location, CurrentLocation, Distance);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            if (!canNavigate) CanNavigateFailures++;
+            return canNavigate;
         }
         
         public void Reset()

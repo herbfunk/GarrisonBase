@@ -2,6 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Herbfunk.GarrisonBase.Garrison.Objects;
@@ -50,7 +51,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 InteractionObject.Interact();
                 await CommonCoroutines.SleepForRandomUiInteractionTime();
 
-                await Coroutine.Wait(5000, () => !StyxWoW.Me.IsCasting && CacheStaticLookUp.GetWoWObject(entryId) == null);
+                await Coroutine.Wait(5000, () => !StyxWoW.Me.IsCasting && !InteractionObject.IsValid);
                 await Coroutine.Sleep(StyxWoW.Random.Next(1999, 3001));
                 return true;
             }
@@ -77,9 +78,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 if (_interactionObject == null)
                 {
-                    var objs = ObjectCacheManager.GetWoWGameObjects(CacheStaticLookUp.FinalizeGarrisonPlotIds.ToArray());
-                    if (objs.Count > 0)
-                        _interactionObject = objs.OrderBy(o => o.Distance).First();
+                    return ObjectCacheManager.GetWoWGameObjects(WoWObjectTypes.GarrisonFinalizePlot).FirstOrDefault();
                 }
                 return _interactionObject;
             }

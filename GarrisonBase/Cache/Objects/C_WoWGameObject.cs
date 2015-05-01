@@ -1,6 +1,8 @@
 ﻿using System;
 using Herbfunk.GarrisonBase.Cache.Enums;
+using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison.Objects;
+using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.Common.Helpers;
 using Styx.WoWInternals.WoWObjects;
@@ -16,73 +18,52 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             RefWoWGameObject = obj.ToGameObject();
         }
 
-        public WoWGameObjectType GameObjectType { get; set; }
-
 
         public C_WoWGameObject(WoWGameObject obj)
             : base(obj)
         {
             RefWoWGameObject = obj;
-            GameObjectType = obj.SubType;
 
-            if (SubType == WoWObjectTypes.Unknown)
+            switch (SubType)
             {
-                if (CacheStaticLookUp.FinalizeGarrisonPlotIds.Contains(Entry))
-                    SubType = WoWObjectTypes.GarrisonFinalizePlot;
-                else if (CacheStaticLookUp.MineDeposits.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.OreVein;
-                    //ShouldLoot = true;
-                    IgnoresRemoval = true;
+                case WoWObjectTypes.OreVein:
+                    ShouldLoot = TargetManager.CheckLootFlag(TargetManager.LootFlags.Ore);
+                    IgnoresRemoval = Player.InsideGarrison;
                     InteractRange = 6f;
                     LineofSightWaitTimer = new WaitTimer(new TimeSpan(0, 0, 0, 2, 500));
                     LineofSightWaitTimer.Stop();
-                }
-                else if (CacheStaticLookUp.HerbDeposits.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.Herb;
-                    //ShouldLoot = true;
-                    IgnoresRemoval = true;
+                    break;
+                case WoWObjectTypes.Herb:
+                    ShouldLoot = TargetManager.CheckLootFlag(TargetManager.LootFlags.Herbs);
+                    IgnoresRemoval = Player.InsideGarrison;
                     InteractRange = 5f;
-                }
-                else if (CacheStaticLookUp.CommandTableIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.GarrisonCommandTable;
+                    break;
+                case WoWObjectTypes.GarrisonCommandTable:
+                case WoWObjectTypes.GarrisonCache:
                     IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.ResourceCacheIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.GarrisonCache;
-                    IgnoresRemoval = true;
-                }
-                else if (WorkOrder.WorkOrderPickupNames.ContainsValue(Name) || GameObjectType== WoWGameObjectType.GarrisonShipment)
-                {
-                    SubType = WoWObjectTypes.GarrisonShipment;
+                    return;
+                case WoWObjectTypes.GarrisonShipment:
                     InteractRange = 5.8f;
                     IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.GarrisonsMailboxIds.Contains(Entry))
-                {
-                    SubType = WoWObjectTypes.Mailbox;
+                    return;
+                case WoWObjectTypes.GarrisonFinalizePlot:
+                    break;
+                case WoWObjectTypes.Mailbox:
                     InteractRange = 6f;
                     IgnoresRemoval = true;
-                }
-                else if (CacheStaticLookUp.StoreHouseQuestIDs.Contains(Entry))
-                {
-                    ShouldLoot = true;
+                    return;
+                case WoWObjectTypes.Timber:
+                    ShouldLoot = TargetManager.CheckLootFlag(TargetManager.LootFlags.Lumber);
                     InteractRange = 5f;
-                }
-                else
-                {
-                    //Don't update objects we don't know..
+                    break;
+                case WoWObjectTypes.Unknown:
                     RequiresUpdate = false;
-                }
-
-                if (!ObjectCacheManager.LootIds.Contains(Entry)) return;
-
-                ShouldLoot = true;
-                RequiresUpdate = true;
+                    break;
             }
+
+            if (!ObjectCacheManager.LootIds.Contains(Entry)) return;
+            ShouldLoot = true;
+            RequiresUpdate = true;
         }
 
 
@@ -100,8 +81,23 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             {
                 if (!base.ValidForTargeting) return false;
 
-                if (!ShouldLoot || (!ObjectCacheManager.IgnoreLineOfSightFailure && !LineOfSight)) return false;
+                if (!ShouldLoot) return false;
 
+                switch (SubType)
+                {
+                    case WoWObjectTypes.Herb:
+                        if (!TargetManager.CheckLootFlag(TargetManager.LootFlags.Herbs)) return false;
+                        break;
+                    case WoWObjectTypes.OreVein:
+                        if (!TargetManager.CheckLootFlag(TargetManager.LootFlags.Ore)) return false;
+                        break;
+                    case WoWObjectTypes.Timber:
+                        if (!TargetManager.CheckLootFlag(TargetManager.LootFlags.Lumber)) return false;
+                        break;
+                }
+
+                if (!ObjectCacheManager.IgnoreLineOfSightFailure && !LineOfSight) return false;
+                
                 return true;
             }
         }

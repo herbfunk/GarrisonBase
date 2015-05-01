@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
+using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Herbfunk.GarrisonBase.Garrison;
 using Styx;
@@ -27,7 +28,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public C_WoWGameObject GarrisonResourceCacheObject
         {
-            get { return ObjectCacheManager.GetWoWGameObjects(CacheStaticLookUp.ResourceCacheIds.ToArray()).FirstOrDefault(); }
+            get
+            {
+                return ObjectCacheManager.GetWoWGameObjects(WoWObjectTypes.GarrisonCache).FirstOrDefault();
+            }
         }
 
         private async Task<bool> Movement()

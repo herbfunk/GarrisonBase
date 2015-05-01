@@ -123,8 +123,13 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             IsDone = true;
             Disposed = true;
+            if (DisposalAction!=null) DisposalAction.Invoke();
             GarrisonBase.Debug("Behavior {0} has been disposed", Type);
         }
+        /// <summary>
+        /// Custom disposal action to be preformed during disposal
+        /// </summary>
+        public Action DisposalAction { get; set; }
 
         /// <summary>
         /// A convient way to end the behavior!

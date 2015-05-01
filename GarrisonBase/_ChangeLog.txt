@@ -1,5 +1,48 @@
-﻿v1.3.0.1
+﻿v1.4.0.0
 
+Behaviors
+	Completing missions no longer requires the UI to interact with and now works with Master Plan enabled.
+	Salvaging no longer uses CTM movement.
+	Barn Trapping
+		-Options to farm for Leather/Fur/Meat when below desired amount.
+		-Elite support only added for wolves in nagrand currently.
+
+Common Behaviors
+	Added new Vendor Behavior Class to handle vendoring, sending mail, and disenchanting.
+	Combat behavior has been overhauled using the code taken from the botbase CombatBot.
+		-Each of the default behaviors can be disabled by using the flag property from TargetManager.CombatType
+	Loot Behavior has been broken into steps to better regulate looting.
+		-Looting will now ignore object after 2 attempts
+
+TargetManager
+	Added CombatFlags Enum and CombatType Property to define what behaviors are active.
+	Added LootFlags Enum and LootType Property to define looting options.
+
+Player
+	Added PlayerGuid, CurrentTargetGuid, and ZoneId properties.
+
+Cache
+	Added Entry Cache to quickly lookup predefined entry ids for Type and Subtype of the id.
+	C_WoWUnit added propreties IsTagged, TaggedByMe, TargetGuid, TargetingMe, and Skinnable.
+	C_WoWObject 
+		-now inherits EntryBase class which defines Entry, Type, Subtype, and Name of the object.
+		-fixed WithinInteractionRange (now accepts equal to)
+
+Settings
+	Added TrappingSettings for both normal/elite types.
+	Primal Exchange is now savage blood and enabled by default.
+	Removed Master Plan disabling.
+	
+Config
+	Added option to reset to default settings.
+	Overhauled to allow reloading of settings without closing.
+		-Added custom usercontrols for Textbox, Slider, Checkbox to remove event handling.
+
+Misc
+	Fixed typo in LuaCommands.HasNewMail
+
+
+v1.3.0.1
 Settings
 	-Added Option for completing missions (if disabled than starting missions will also be disabled)
 	-Added Option for checking and disabling master plan addon

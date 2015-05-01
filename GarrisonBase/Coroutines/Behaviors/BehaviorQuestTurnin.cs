@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Documents;
 using Buddy.Coroutines;
 using Herbfunk.GarrisonBase.Cache;
 using Herbfunk.GarrisonBase.Garrison;
@@ -11,7 +10,6 @@ using Styx;
 using Styx.CommonBot.Coroutines;
 using Styx.CommonBot.Frames;
 using Styx.Pathing;
-using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using Herbfunk.GarrisonBase.Garrison;
 using Styx;
 using Styx.Helpers;
+using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Character
 {
@@ -18,11 +20,23 @@ namespace Herbfunk.GarrisonBase.Character
         internal static WoWPoint Location = WoWPoint.Zero;
         internal static float Rotation = 0f;
         internal static WoWPoint TraceLinePosition = WoWPoint.Zero;
+        internal static WoWGuid PlayerGuid = WoWGuid.Empty;
+        internal static WoWGuid CurrentTargetGuid = WoWGuid.Empty;
 
         internal static CachedValue<uint> MapId;
         internal static CachedValue<int> ParentMapId;
         internal static CachedValue<uint> MapExpansionId;
         internal static CachedValue<bool> MapIsContinent;
+        internal static CachedValue<uint> ZoneId;
+
+        internal static bool InsideGarrison
+        {
+            get
+            {
+                var id = ZoneId.Value;
+                return GarrisonManager.GarrisonZoneIds.Contains(id) || GarrisonManager.GarrisonMineZoneIds.Contains(id);
+            }
+        }
 
         internal static CachedValue<int> GarrisonResource;
         internal static CachedValue<string> MinimapZoneText;
@@ -41,12 +55,13 @@ namespace Herbfunk.GarrisonBase.Character
 
         internal static void Initalize()
         {
-            
+            PlayerGuid = StyxWoW.Me.Guid;
             IsAlliance = StyxWoW.Me.IsAlliance;
             Level = StyxWoW.Me.Level;
             Location = StyxWoW.Me.Location;
             Rotation = StyxWoW.Me.Rotation;
             Class = StyxWoW.Me.Class;
+            CurrentTargetGuid = StyxWoW.Me.CurrentTargetGuid;
             Combat = StyxWoW.Me.Combat;
             ActuallyInCombat = StyxWoW.Me.IsActuallyInCombat;
             TraceLinePosition = StyxWoW.Me.GetTraceLinePos();
@@ -58,6 +73,7 @@ namespace Herbfunk.GarrisonBase.Character
             ParentMapId = new CachedValue<int>(() => StyxWoW.Me.CurrentMap.ParentMapId);
             MapExpansionId = new CachedValue<uint>(() => StyxWoW.Me.CurrentMap.ExpansionId);
             MapIsContinent = new CachedValue<bool>(() => StyxWoW.Me.CurrentMap.IsContinent);
+            ZoneId = new CachedValue<uint>(() => StyxWoW.Me.ZoneId);
             // 
             GarrisonResource = new CachedValue<int>(() => LuaCommands.GetCurrencyCount(824));
             CurrentPendingCursorSpellId = new CachedValue<int>(_updateCurrentPendingCursorSpellId);
@@ -69,6 +85,8 @@ namespace Herbfunk.GarrisonBase.Character
                 ParentMapId.Reset();
                 MapExpansionId.Reset();
                 MapIsContinent.Reset();
+                MinimapZoneText.Reset();
+                ZoneId.Reset();
             };
 
             LuaEvents.OnZoneChanged += () => MinimapZoneText.Reset();
@@ -88,6 +106,7 @@ namespace Herbfunk.GarrisonBase.Character
                 TraceLinePosition = StyxWoW.Me.GetTraceLinePos();
                 Combat = StyxWoW.Me.Combat;
                 ActuallyInCombat = StyxWoW.Me.IsActuallyInCombat;
+                CurrentTargetGuid = StyxWoW.Me.CurrentTargetGuid;
                 RefreshAuraIds();
                 Inventory.Update();
             }

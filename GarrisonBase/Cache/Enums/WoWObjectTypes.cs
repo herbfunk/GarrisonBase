@@ -20,5 +20,6 @@ namespace Herbfunk.GarrisonBase.Cache.Enums
         Follower = 2048,
         Trappable = 4096,
         Trap = 8192,
+        Timber = 16384,
     }
 }

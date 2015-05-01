@@ -39,28 +39,60 @@
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label_ItemReward_CharacterTokenLevel = new System.Windows.Forms.Label();
-            this.trackBar_ItemReward_CharacterTokenLevel = new System.Windows.Forms.TrackBar();
+            this.trackBar_ItemReward_CharacterTokenLevel = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new System.Windows.Forms.CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new System.Windows.Forms.CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox_ReservedGarrisonResources = new System.Windows.Forms.TextBox();
-            this.checkBox_Behavior_StartMissions = new System.Windows.Forms.CheckBox();
+            this.checkBox_Behavior_CompleteMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Behavior_StartMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.trackBar_ReservedGarrisonResources = new System.Windows.Forms.TrackBar();
+            this.trackBar_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.tabControl4 = new System.Windows.Forms.TabControl();
+            this.tabPage13 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_WorkOrderTypes = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Behavior_WorkOrderPickup = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_WorkOrderStart = new System.Windows.Forms.CheckBox();
+            this.checkBox_Behavior_WorkOrderPickup = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_WorkOrderStart = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.tabPage14 = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_TradePostReagents = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage15 = new System.Windows.Forms.TabPage();
+            this.groupBox19 = new System.Windows.Forms.GroupBox();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.groupBox21 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.groupBox20 = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.checkBox_Barn_Furs = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Barn_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Barn_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl_Professions = new System.Windows.Forms.TabControl();
             this.tabPage_Alchemy = new System.Windows.Forms.TabPage();
@@ -69,74 +101,75 @@
             this.tabPage_Engineering = new System.Windows.Forms.TabPage();
             this.tabPage_Inscription = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Milling = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Milling_Enabled = new System.Windows.Forms.CheckBox();
+            this.checkBox_Milling_Enabled = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox_Milling_RequiredAmount = new System.Windows.Forms.TextBox();
+            this.textBox_Milling_RequiredAmount = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.panel_Professions_Inscripition = new System.Windows.Forms.Panel();
             this.tabPage_Jewelcrafting = new System.Windows.Forms.TabPage();
             this.tabPage_Leatherworking = new System.Windows.Forms.TabPage();
             this.tabPage_Tailoring = new System.Windows.Forms.TabPage();
-            this.checkBox_Behavior_Professions = new System.Windows.Forms.CheckBox();
+            this.checkBox_Behavior_Professions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_MiscBehaviors = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Behavior_RepairSell = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_Disenchant = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_Salvaging = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_MineGather = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_HerbGather = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_LootCache = new System.Windows.Forms.CheckBox();
-            this.checkBox_LootAnything = new System.Windows.Forms.CheckBox();
+            this.checkBox_Behavior_Salvaging = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_MineGather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_HerbGather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_LootCache = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_LootAnything = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.checkBox_Behavior_RepairSell = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox_MinimumBagSlotsFree = new System.Windows.Forms.TextBox();
-            this.trackBar_MinimumBagSlotsFree = new System.Windows.Forms.TrackBar();
+            this.textBox_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.trackBar_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Vendor_Junk = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Common = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Uncommon = new System.Windows.Forms.CheckBox();
-            this.checkBox_Vendor_Rare = new System.Windows.Forms.CheckBox();
+            this.checkBox_Vendor_Junk = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Vendor_Common = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Vendor_Uncommon = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Vendor_Rare = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.checkBox_Behavior_Disenchant = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox_Disenchanting_EpicSoulbound = new System.Windows.Forms.CheckBox();
-            this.checkBox_Disenchanting_RareSoulbound = new System.Windows.Forms.CheckBox();
-            this.textBox_Disenchanting_EpicLevel = new System.Windows.Forms.TextBox();
-            this.checkBox_Disenchanting_Epic = new System.Windows.Forms.CheckBox();
-            this.textBox_Disenchanting_RareLevel = new System.Windows.Forms.TextBox();
-            this.checkBox_Disenchanting_RareItems = new System.Windows.Forms.CheckBox();
-            this.checkBox_Disenchanting_UncommonItems = new System.Windows.Forms.CheckBox();
-            this.textBox_Disenchanting_UncommonLevel = new System.Windows.Forms.TextBox();
-            this.checkBox_Disenchanting_UncommonSoulbound = new System.Windows.Forms.CheckBox();
+            this.checkBox_Disenchanting_EpicSoulbound = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Disenchanting_RareSoulbound = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Disenchanting_EpicLevel = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Disenchanting_Epic = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Disenchanting_RareLevel = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Disenchanting_RareItems = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Disenchanting_UncommonItems = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Disenchanting_UncommonLevel = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Disenchanting_UncommonSoulbound = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox_ExchangePrimalSpirits = new System.Windows.Forms.CheckBox();
-            this.comboBox_PrimalSpiritItems = new System.Windows.Forms.ComboBox();
+            this.checkBox_ExchangePrimalSpirits = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.comboBox_PrimalSpiritItems = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.checkBox_HBRelogSkipTask = new System.Windows.Forms.CheckBox();
+            this.checkBox_HBRelogSkipTask = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Follower_193 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_189 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_207 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_467 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_190 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_170 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_209 = new System.Windows.Forms.CheckBox();
-            this.checkBox_Follower_32 = new System.Windows.Forms.CheckBox();
+            this.checkBox_Follower_193 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_189 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_207 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_467 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_190 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_170 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_209 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_32 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DailyQuest_Alchemy_Rewards = new System.Windows.Forms.ComboBox();
-            this.checkBox_DailyQuest_AlchemyLab = new System.Windows.Forms.CheckBox();
+            this.comboBox_DailyQuest_Alchemy_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
+            this.checkBox_DailyQuest_AlchemyLab = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DailyQuest_WarMill_Rewards = new System.Windows.Forms.ComboBox();
-            this.checkBox_DailyQuest_Warmill = new System.Windows.Forms.CheckBox();
-            this.checkBox_Behavior_Quests = new System.Windows.Forms.CheckBox();
+            this.comboBox_DailyQuest_WarMill_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
+            this.checkBox_DailyQuest_Warmill = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_Quests = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView_MailItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -148,57 +181,66 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button_MailItem_AddFromBags = new System.Windows.Forms.Button();
-            this.textBox_MailEnchanting = new System.Windows.Forms.TextBox();
-            this.checkBox_MailEnchanting = new System.Windows.Forms.CheckBox();
-            this.textBox_MailOre = new System.Windows.Forms.TextBox();
-            this.checkBox_MailOre = new System.Windows.Forms.CheckBox();
-            this.textBox_MailHerbs = new System.Windows.Forms.TextBox();
-            this.checkBox_MailHerbs = new System.Windows.Forms.CheckBox();
+            this.textBox_MailEnchanting = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_MailEnchanting = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_MailOre = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_MailOre = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_MailHerbs = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_MailHerbs = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox_MailEpic = new System.Windows.Forms.TextBox();
-            this.textBox_MailRare = new System.Windows.Forms.TextBox();
-            this.textBox_MailUncommon = new System.Windows.Forms.TextBox();
-            this.checkBox_MailEpic = new System.Windows.Forms.CheckBox();
-            this.checkBox_MailRare = new System.Windows.Forms.CheckBox();
-            this.checkBox_MailUncommon = new System.Windows.Forms.CheckBox();
+            this.textBox_MailEpic = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.textBox_MailRare = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.textBox_MailUncommon = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_MailEpic = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MailRare = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MailUncommon = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.textBox_MailItem_Name = new System.Windows.Forms.TextBox();
+            this.textBox_MailItem_Name = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.label16 = new System.Windows.Forms.Label();
             this.button_MailItem_Add = new System.Windows.Forms.Button();
-            this.textBox_MailItem_Count = new System.Windows.Forms.TextBox();
+            this.textBox_MailItem_Count = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.label14 = new System.Windows.Forms.Label();
-            this.textBox_MailItem_Recipient = new System.Windows.Forms.TextBox();
+            this.textBox_MailItem_Recipient = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBox_MailItem_EntryId = new System.Windows.Forms.TextBox();
+            this.textBox_MailItem_EntryId = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.label11 = new System.Windows.Forms.Label();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_MailAutoSend = new System.Windows.Forms.CheckBox();
-            this.checkBox_MailAutoGet = new System.Windows.Forms.CheckBox();
+            this.checkBox_MailAutoSend = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MailAutoGet = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.LBDebug = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.garrisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFollowersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBuildingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpMissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.garrisonInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpMissionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBuildingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFollowersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.behaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpCurrentBehaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpObjectsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpReagentBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpQuestLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFlightPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Debug_FakeStartWorkOrder = new System.Windows.Forms.CheckBox();
-            this.checkBox_Debug_FakeFinishQuest = new System.Windows.Forms.CheckBox();
-            this.checkBox_Debug_IgnoreHearthStone = new System.Windows.Forms.CheckBox();
-            this.checkBox_Debug_FakePickupWorkOrder = new System.Windows.Forms.CheckBox();
+            this.checkBox_Debug_FakeStartWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_FakeFinishQuest = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_IgnoreHearthStone = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_FakePickupWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.checkBox_Behavior_CompleteMissions = new System.Windows.Forms.CheckBox();
-            this.checkBox_DisableAddon = new System.Windows.Forms.CheckBox();
-            this.groupBox18 = new System.Windows.Forms.GroupBox();
-            this.checkBox_Barn_Furs = new System.Windows.Forms.CheckBox();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Barn_Leather = new System.Windows.Forms.CheckBox();
-            this.checkBox_Barn_Meat = new System.Windows.Forms.CheckBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -212,9 +254,19 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).BeginInit();
             this.tabPage6.SuspendLayout();
+            this.tabControl4.SuspendLayout();
+            this.tabPage13.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            this.tabPage14.SuspendLayout();
             this.groupBox6.SuspendLayout();
+            this.tabPage15.SuspendLayout();
+            this.groupBox19.SuspendLayout();
+            this.groupBox22.SuspendLayout();
+            this.groupBox21.SuspendLayout();
+            this.groupBox20.SuspendLayout();
+            this.groupBox18.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tabControl_Professions.SuspendLayout();
             this.tabPage_Inscription.SuspendLayout();
@@ -247,9 +299,9 @@
             this.flowLayoutPanel3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
-            this.groupBox18.SuspendLayout();
-            this.flowLayoutPanel7.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -261,10 +313,10 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Location = new System.Drawing.Point(0, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(745, 609);
+            this.tabControl1.Size = new System.Drawing.Size(745, 585);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPage1
@@ -274,7 +326,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(737, 583);
+            this.tabPage1.Size = new System.Drawing.Size(737, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Missions";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -287,7 +339,7 @@
             this.tabControl2.Location = new System.Drawing.Point(3, 66);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(731, 514);
+            this.tabControl2.Size = new System.Drawing.Size(731, 490);
             this.tabControl2.TabIndex = 15;
             // 
             // tabPage_Mission_Priorities
@@ -296,7 +348,7 @@
             this.tabPage_Mission_Priorities.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Mission_Priorities.Name = "tabPage_Mission_Priorities";
             this.tabPage_Mission_Priorities.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Mission_Priorities.Size = new System.Drawing.Size(723, 488);
+            this.tabPage_Mission_Priorities.Size = new System.Drawing.Size(723, 464);
             this.tabPage_Mission_Priorities.TabIndex = 0;
             this.tabPage_Mission_Priorities.Text = "Priorities";
             this.tabPage_Mission_Priorities.UseVisualStyleBackColor = true;
@@ -307,7 +359,7 @@
             this.groupBox10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox10.Location = new System.Drawing.Point(3, 3);
             this.groupBox10.Name = "groupBox10";
-            this.groupBox10.Size = new System.Drawing.Size(717, 482);
+            this.groupBox10.Size = new System.Drawing.Size(717, 458);
             this.groupBox10.TabIndex = 14;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Mission Priorities";
@@ -318,9 +370,8 @@
             this.flowLayoutPanel_MissionRewards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel_MissionRewards.Location = new System.Drawing.Point(3, 16);
             this.flowLayoutPanel_MissionRewards.Name = "flowLayoutPanel_MissionRewards";
-            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(711, 463);
+            this.flowLayoutPanel_MissionRewards.Size = new System.Drawing.Size(711, 439);
             this.flowLayoutPanel_MissionRewards.TabIndex = 12;
-            this.flowLayoutPanel_MissionRewards.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tabPage_Mission_Items
             // 
@@ -329,7 +380,7 @@
             this.tabPage_Mission_Items.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Mission_Items.Name = "tabPage_Mission_Items";
             this.tabPage_Mission_Items.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Mission_Items.Size = new System.Drawing.Size(723, 488);
+            this.tabPage_Mission_Items.Size = new System.Drawing.Size(723, 464);
             this.tabPage_Mission_Items.TabIndex = 1;
             this.tabPage_Mission_Items.Text = "Items";
             this.tabPage_Mission_Items.UseVisualStyleBackColor = true;
@@ -377,7 +428,6 @@
             this.trackBar_ItemReward_CharacterTokenLevel.TabIndex = 10;
             this.trackBar_ItemReward_CharacterTokenLevel.TickFrequency = 10;
             this.trackBar_ItemReward_CharacterTokenLevel.Value = 519;
-            this.trackBar_ItemReward_CharacterTokenLevel.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // groupBox13
             // 
@@ -489,6 +539,18 @@
             this.panel1.Size = new System.Drawing.Size(731, 63);
             this.panel1.TabIndex = 16;
             // 
+            // checkBox_Behavior_CompleteMissions
+            // 
+            this.checkBox_Behavior_CompleteMissions.AutoSize = true;
+            this.checkBox_Behavior_CompleteMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_CompleteMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_CompleteMissions.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_CompleteMissions.Name = "checkBox_Behavior_CompleteMissions";
+            this.checkBox_Behavior_CompleteMissions.Size = new System.Drawing.Size(175, 24);
+            this.checkBox_Behavior_CompleteMissions.TabIndex = 16;
+            this.checkBox_Behavior_CompleteMissions.Text = "Complete Missions";
+            this.checkBox_Behavior_CompleteMissions.UseVisualStyleBackColor = true;
+            // 
             // textBox_ReservedGarrisonResources
             // 
             this.textBox_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -497,7 +559,6 @@
             this.textBox_ReservedGarrisonResources.Size = new System.Drawing.Size(61, 29);
             this.textBox_ReservedGarrisonResources.TabIndex = 15;
             this.textBox_ReservedGarrisonResources.Text = "10000";
-            this.textBox_ReservedGarrisonResources.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_GarrisonReservered_KeyPress);
             // 
             // checkBox_Behavior_StartMissions
             // 
@@ -532,30 +593,50 @@
             this.trackBar_ReservedGarrisonResources.TabIndex = 9;
             this.trackBar_ReservedGarrisonResources.TickFrequency = 500;
             this.trackBar_ReservedGarrisonResources.Value = 1;
-            this.trackBar_ReservedGarrisonResources.MouseEnter += new System.EventHandler(this.Control_MouseEnter);
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.groupBox18);
-            this.tabPage6.Controls.Add(this.groupBox7);
-            this.tabPage6.Controls.Add(this.groupBox6);
+            this.tabPage6.Controls.Add(this.tabControl4);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage6.Size = new System.Drawing.Size(737, 583);
+            this.tabPage6.Size = new System.Drawing.Size(737, 559);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Work Orders";
             this.tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabControl4
+            // 
+            this.tabControl4.Controls.Add(this.tabPage13);
+            this.tabControl4.Controls.Add(this.tabPage14);
+            this.tabControl4.Controls.Add(this.tabPage15);
+            this.tabControl4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl4.Location = new System.Drawing.Point(3, 3);
+            this.tabControl4.Name = "tabControl4";
+            this.tabControl4.SelectedIndex = 0;
+            this.tabControl4.Size = new System.Drawing.Size(731, 553);
+            this.tabControl4.TabIndex = 0;
+            // 
+            // tabPage13
+            // 
+            this.tabPage13.Controls.Add(this.groupBox7);
+            this.tabPage13.Location = new System.Drawing.Point(4, 22);
+            this.tabPage13.Name = "tabPage13";
+            this.tabPage13.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage13.Size = new System.Drawing.Size(723, 527);
+            this.tabPage13.TabIndex = 0;
+            this.tabPage13.Text = "Work Orders";
+            this.tabPage13.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.groupBox8);
             this.groupBox7.Controls.Add(this.checkBox_Behavior_WorkOrderPickup);
             this.groupBox7.Controls.Add(this.checkBox_Behavior_WorkOrderStart);
-            this.groupBox7.Location = new System.Drawing.Point(8, 6);
+            this.groupBox7.Location = new System.Drawing.Point(1, 6);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(721, 223);
-            this.groupBox7.TabIndex = 9;
+            this.groupBox7.TabIndex = 12;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Work Orders";
             // 
@@ -603,13 +684,24 @@
             this.checkBox_Behavior_WorkOrderStart.Text = "Work Order Start";
             this.checkBox_Behavior_WorkOrderStart.UseVisualStyleBackColor = true;
             // 
+            // tabPage14
+            // 
+            this.tabPage14.Controls.Add(this.groupBox6);
+            this.tabPage14.Location = new System.Drawing.Point(4, 22);
+            this.tabPage14.Name = "tabPage14";
+            this.tabPage14.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage14.Size = new System.Drawing.Size(723, 527);
+            this.tabPage14.TabIndex = 1;
+            this.tabPage14.Text = "Trade Post";
+            this.tabPage14.UseVisualStyleBackColor = true;
+            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.flowLayoutPanel_TradePostReagents);
-            this.groupBox6.Location = new System.Drawing.Point(8, 235);
+            this.groupBox6.Location = new System.Drawing.Point(6, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(443, 262);
-            this.groupBox6.TabIndex = 8;
+            this.groupBox6.TabIndex = 12;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Trade Post Reagents";
             // 
@@ -621,6 +713,285 @@
             this.flowLayoutPanel_TradePostReagents.Size = new System.Drawing.Size(437, 243);
             this.flowLayoutPanel_TradePostReagents.TabIndex = 7;
             // 
+            // tabPage15
+            // 
+            this.tabPage15.Controls.Add(this.groupBox19);
+            this.tabPage15.Controls.Add(this.groupBox18);
+            this.tabPage15.Location = new System.Drawing.Point(4, 22);
+            this.tabPage15.Name = "tabPage15";
+            this.tabPage15.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage15.Size = new System.Drawing.Size(723, 527);
+            this.tabPage15.TabIndex = 2;
+            this.tabPage15.Text = "Barn";
+            this.tabPage15.UseVisualStyleBackColor = true;
+            // 
+            // groupBox19
+            // 
+            this.groupBox19.Controls.Add(this.groupBox22);
+            this.groupBox19.Controls.Add(this.groupBox21);
+            this.groupBox19.Controls.Add(this.groupBox20);
+            this.groupBox19.Location = new System.Drawing.Point(6, 55);
+            this.groupBox19.Name = "groupBox19";
+            this.groupBox19.Size = new System.Drawing.Size(636, 333);
+            this.groupBox19.TabIndex = 15;
+            this.groupBox19.TabStop = false;
+            this.groupBox19.Text = "Trapping";
+            // 
+            // groupBox22
+            // 
+            this.groupBox22.Controls.Add(this.label17);
+            this.groupBox22.Controls.Add(this.textBox_Trapping_Elite_Meat);
+            this.groupBox22.Controls.Add(this.checkBox_Trapping_Elite_Meat);
+            this.groupBox22.Controls.Add(this.label18);
+            this.groupBox22.Controls.Add(this.textBox_Trapping_NonElite_Meat);
+            this.groupBox22.Controls.Add(this.checkBox_Trapping_NonElite_Meat);
+            this.groupBox22.Location = new System.Drawing.Point(6, 211);
+            this.groupBox22.Name = "groupBox22";
+            this.groupBox22.Size = new System.Drawing.Size(350, 70);
+            this.groupBox22.TabIndex = 2;
+            this.groupBox22.TabStop = false;
+            this.groupBox22.Text = "Meat";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(155, 45);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(81, 13);
+            this.label17.TabIndex = 5;
+            this.label17.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_Elite_Meat
+            // 
+            this.textBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Meat.Name = "textBox_Trapping_Elite_Meat";
+            this.textBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Meat.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Meat
+            // 
+            this.checkBox_Trapping_Elite_Meat.AutoSize = true;
+            this.checkBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Meat.Name = "checkBox_Trapping_Elite_Meat";
+            this.checkBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(148, 17);
+            this.checkBox_Trapping_Elite_Meat.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Meat.Text = "Caged Mighty Riverbeast ";
+            this.checkBox_Trapping_Elite_Meat.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(155, 19);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(81, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_NonElite_Meat
+            // 
+            this.textBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Meat.Name = "textBox_Trapping_NonElite_Meat";
+            this.textBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Meat.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Meat
+            // 
+            this.checkBox_Trapping_NonElite_Meat.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Meat.Name = "checkBox_Trapping_NonElite_Meat";
+            this.checkBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(122, 17);
+            this.checkBox_Trapping_NonElite_Meat.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Meat.Text = "Meaty Caged Beast ";
+            this.checkBox_Trapping_NonElite_Meat.UseVisualStyleBackColor = true;
+            // 
+            // groupBox21
+            // 
+            this.groupBox21.Controls.Add(this.label10);
+            this.groupBox21.Controls.Add(this.textBox_Trapping_Elite_Leather);
+            this.groupBox21.Controls.Add(this.checkBox_Trapping_Elite_Leather);
+            this.groupBox21.Controls.Add(this.label15);
+            this.groupBox21.Controls.Add(this.textBox_Trapping_NonElite_Leather);
+            this.groupBox21.Controls.Add(this.checkBox_Trapping_NonElite_Leather);
+            this.groupBox21.Location = new System.Drawing.Point(6, 115);
+            this.groupBox21.Name = "groupBox21";
+            this.groupBox21.Size = new System.Drawing.Size(350, 70);
+            this.groupBox21.TabIndex = 1;
+            this.groupBox21.TabStop = false;
+            this.groupBox21.Text = "Leather";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(155, 45);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_Elite_Leather
+            // 
+            this.textBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Leather.Name = "textBox_Trapping_Elite_Leather";
+            this.textBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Leather.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Leather
+            // 
+            this.checkBox_Trapping_Elite_Leather.AutoSize = true;
+            this.checkBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Leather.Name = "checkBox_Trapping_Elite_Leather";
+            this.checkBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(139, 17);
+            this.checkBox_Trapping_Elite_Leather.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Leather.Text = "Caged Mighty Clefthoof ";
+            this.checkBox_Trapping_Elite_Leather.UseVisualStyleBackColor = true;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(155, 19);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(81, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_NonElite_Leather
+            // 
+            this.textBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Leather.Name = "textBox_Trapping_NonElite_Leather";
+            this.textBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Leather.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Leather
+            // 
+            this.checkBox_Trapping_NonElite_Leather.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Leather.Name = "checkBox_Trapping_NonElite_Leather";
+            this.checkBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(131, 17);
+            this.checkBox_Trapping_NonElite_Leather.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Leather.Text = "Leathery Caged Beast";
+            this.checkBox_Trapping_NonElite_Leather.UseVisualStyleBackColor = true;
+            // 
+            // groupBox20
+            // 
+            this.groupBox20.Controls.Add(this.label9);
+            this.groupBox20.Controls.Add(this.textBox_Trapping_Elite_Fur);
+            this.groupBox20.Controls.Add(this.checkBox_Trapping_Elite_Fur);
+            this.groupBox20.Controls.Add(this.label8);
+            this.groupBox20.Controls.Add(this.textBox_Trapping_NonElite_Fur);
+            this.groupBox20.Controls.Add(this.checkBox_Trapping_NonElite_Fur);
+            this.groupBox20.Location = new System.Drawing.Point(6, 19);
+            this.groupBox20.Name = "groupBox20";
+            this.groupBox20.Size = new System.Drawing.Size(350, 71);
+            this.groupBox20.TabIndex = 0;
+            this.groupBox20.TabStop = false;
+            this.groupBox20.Text = "Fur";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(155, 45);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(81, 13);
+            this.label9.TabIndex = 5;
+            this.label9.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_Elite_Fur
+            // 
+            this.textBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Fur.Name = "textBox_Trapping_Elite_Fur";
+            this.textBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Fur.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Fur
+            // 
+            this.checkBox_Trapping_Elite_Fur.AutoSize = true;
+            this.checkBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Fur.Name = "checkBox_Trapping_Elite_Fur";
+            this.checkBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(116, 17);
+            this.checkBox_Trapping_Elite_Fur.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Fur.Text = "Caged Mighty Wolf";
+            this.checkBox_Trapping_Elite_Fur.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(155, 19);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 13);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Max Item Count";
+            // 
+            // textBox_Trapping_NonElite_Fur
+            // 
+            this.textBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Fur.Name = "textBox_Trapping_NonElite_Fur";
+            this.textBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Fur.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Fur
+            // 
+            this.checkBox_Trapping_NonElite_Fur.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Fur.Name = "checkBox_Trapping_NonElite_Fur";
+            this.checkBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(113, 17);
+            this.checkBox_Trapping_NonElite_Fur.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Fur.Text = "Furry Caged Beast";
+            this.checkBox_Trapping_NonElite_Fur.UseVisualStyleBackColor = true;
+            // 
+            // groupBox18
+            // 
+            this.groupBox18.Controls.Add(this.flowLayoutPanel7);
+            this.groupBox18.Location = new System.Drawing.Point(6, 6);
+            this.groupBox18.Name = "groupBox18";
+            this.groupBox18.Size = new System.Drawing.Size(272, 43);
+            this.groupBox18.TabIndex = 14;
+            this.groupBox18.TabStop = false;
+            this.groupBox18.Text = "Work Order Types";
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Furs);
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Leather);
+            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Meat);
+            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(266, 24);
+            this.flowLayoutPanel7.TabIndex = 0;
+            // 
+            // checkBox_Barn_Furs
+            // 
+            this.checkBox_Barn_Furs.AutoSize = true;
+            this.checkBox_Barn_Furs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Furs.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Barn_Furs.Name = "checkBox_Barn_Furs";
+            this.checkBox_Barn_Furs.Size = new System.Drawing.Size(50, 17);
+            this.checkBox_Barn_Furs.TabIndex = 1;
+            this.checkBox_Barn_Furs.Text = "Furs";
+            this.checkBox_Barn_Furs.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Leather
+            // 
+            this.checkBox_Barn_Leather.AutoSize = true;
+            this.checkBox_Barn_Leather.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Leather.Location = new System.Drawing.Point(59, 3);
+            this.checkBox_Barn_Leather.Name = "checkBox_Barn_Leather";
+            this.checkBox_Barn_Leather.Size = new System.Drawing.Size(69, 17);
+            this.checkBox_Barn_Leather.TabIndex = 2;
+            this.checkBox_Barn_Leather.Text = "Leather";
+            this.checkBox_Barn_Leather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Meat
+            // 
+            this.checkBox_Barn_Meat.AutoSize = true;
+            this.checkBox_Barn_Meat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Meat.Location = new System.Drawing.Point(134, 3);
+            this.checkBox_Barn_Meat.Name = "checkBox_Barn_Meat";
+            this.checkBox_Barn_Meat.Size = new System.Drawing.Size(54, 17);
+            this.checkBox_Barn_Meat.TabIndex = 3;
+            this.checkBox_Barn_Meat.Text = "Meat";
+            this.checkBox_Barn_Meat.UseVisualStyleBackColor = true;
+            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.tabControl_Professions);
@@ -628,7 +999,7 @@
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(737, 583);
+            this.tabPage3.Size = new System.Drawing.Size(737, 559);
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "Professions";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -647,7 +1018,7 @@
             this.tabControl_Professions.Location = new System.Drawing.Point(3, 47);
             this.tabControl_Professions.Name = "tabControl_Professions";
             this.tabControl_Professions.SelectedIndex = 0;
-            this.tabControl_Professions.Size = new System.Drawing.Size(731, 533);
+            this.tabControl_Professions.Size = new System.Drawing.Size(731, 509);
             this.tabControl_Professions.TabIndex = 23;
             // 
             // tabPage_Alchemy
@@ -655,7 +1026,7 @@
             this.tabPage_Alchemy.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Alchemy.Name = "tabPage_Alchemy";
             this.tabPage_Alchemy.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Alchemy.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Alchemy.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Alchemy.TabIndex = 0;
             this.tabPage_Alchemy.Text = "Alchemy";
             this.tabPage_Alchemy.UseVisualStyleBackColor = true;
@@ -665,7 +1036,7 @@
             this.tabPage_Blacksmithing.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Blacksmithing.Name = "tabPage_Blacksmithing";
             this.tabPage_Blacksmithing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Blacksmithing.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Blacksmithing.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Blacksmithing.TabIndex = 1;
             this.tabPage_Blacksmithing.Text = "Blacksmithing";
             this.tabPage_Blacksmithing.UseVisualStyleBackColor = true;
@@ -675,7 +1046,7 @@
             this.tabPage_Enchanting.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Enchanting.Name = "tabPage_Enchanting";
             this.tabPage_Enchanting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Enchanting.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Enchanting.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Enchanting.TabIndex = 2;
             this.tabPage_Enchanting.Text = "Enchanting";
             this.tabPage_Enchanting.UseVisualStyleBackColor = true;
@@ -685,7 +1056,7 @@
             this.tabPage_Engineering.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Engineering.Name = "tabPage_Engineering";
             this.tabPage_Engineering.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Engineering.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Engineering.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Engineering.TabIndex = 3;
             this.tabPage_Engineering.Text = "Engineering";
             this.tabPage_Engineering.UseVisualStyleBackColor = true;
@@ -693,10 +1064,11 @@
             // tabPage_Inscription
             // 
             this.tabPage_Inscription.Controls.Add(this.flowLayoutPanel_Milling);
+            this.tabPage_Inscription.Controls.Add(this.panel_Professions_Inscripition);
             this.tabPage_Inscription.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Inscription.Name = "tabPage_Inscription";
             this.tabPage_Inscription.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Inscription.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Inscription.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Inscription.TabIndex = 4;
             this.tabPage_Inscription.Text = "Inscription";
             this.tabPage_Inscription.UseVisualStyleBackColor = true;
@@ -707,7 +1079,7 @@
             this.flowLayoutPanel_Milling.Controls.Add(this.label6);
             this.flowLayoutPanel_Milling.Controls.Add(this.textBox_Milling_RequiredAmount);
             this.flowLayoutPanel_Milling.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel_Milling.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel_Milling.Location = new System.Drawing.Point(3, 103);
             this.flowLayoutPanel_Milling.Name = "flowLayoutPanel_Milling";
             this.flowLayoutPanel_Milling.Size = new System.Drawing.Size(717, 396);
             this.flowLayoutPanel_Milling.TabIndex = 0;
@@ -742,14 +1114,21 @@
             this.textBox_Milling_RequiredAmount.Size = new System.Drawing.Size(65, 26);
             this.textBox_Milling_RequiredAmount.TabIndex = 1;
             this.toolTip1.SetToolTip(this.textBox_Milling_RequiredAmount, "Minimum Pigments needed (below this number will start milling)");
-            this.textBox_Milling_RequiredAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
+            // 
+            // panel_Professions_Inscripition
+            // 
+            this.panel_Professions_Inscripition.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel_Professions_Inscripition.Location = new System.Drawing.Point(3, 3);
+            this.panel_Professions_Inscripition.Name = "panel_Professions_Inscripition";
+            this.panel_Professions_Inscripition.Size = new System.Drawing.Size(717, 100);
+            this.panel_Professions_Inscripition.TabIndex = 1;
             // 
             // tabPage_Jewelcrafting
             // 
             this.tabPage_Jewelcrafting.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Jewelcrafting.Name = "tabPage_Jewelcrafting";
             this.tabPage_Jewelcrafting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Jewelcrafting.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Jewelcrafting.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Jewelcrafting.TabIndex = 5;
             this.tabPage_Jewelcrafting.Text = "Jewelcrafting";
             this.tabPage_Jewelcrafting.UseVisualStyleBackColor = true;
@@ -759,7 +1138,7 @@
             this.tabPage_Leatherworking.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Leatherworking.Name = "tabPage_Leatherworking";
             this.tabPage_Leatherworking.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Leatherworking.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Leatherworking.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Leatherworking.TabIndex = 6;
             this.tabPage_Leatherworking.Text = "Leatherworking";
             this.tabPage_Leatherworking.UseVisualStyleBackColor = true;
@@ -769,7 +1148,7 @@
             this.tabPage_Tailoring.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Tailoring.Name = "tabPage_Tailoring";
             this.tabPage_Tailoring.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Tailoring.Size = new System.Drawing.Size(723, 507);
+            this.tabPage_Tailoring.Size = new System.Drawing.Size(723, 483);
             this.tabPage_Tailoring.TabIndex = 7;
             this.tabPage_Tailoring.Text = "Tailoring";
             this.tabPage_Tailoring.UseVisualStyleBackColor = true;
@@ -794,7 +1173,7 @@
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(737, 583);
+            this.tabPage5.Size = new System.Drawing.Size(737, 559);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Misc";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -811,17 +1190,16 @@
             this.tabControl3.Location = new System.Drawing.Point(3, 3);
             this.tabControl3.Name = "tabControl3";
             this.tabControl3.SelectedIndex = 0;
-            this.tabControl3.Size = new System.Drawing.Size(731, 577);
+            this.tabControl3.Size = new System.Drawing.Size(731, 553);
             this.tabControl3.TabIndex = 26;
             // 
             // tabPage7
             // 
-            this.tabPage7.Controls.Add(this.checkBox_DisableAddon);
             this.tabPage7.Controls.Add(this.groupBox9);
             this.tabPage7.Location = new System.Drawing.Point(4, 22);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(723, 551);
+            this.tabPage7.Size = new System.Drawing.Size(723, 527);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "Misc Behaviors";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -829,7 +1207,7 @@
             // groupBox9
             // 
             this.groupBox9.Controls.Add(this.flowLayoutPanel_MiscBehaviors);
-            this.groupBox9.Location = new System.Drawing.Point(6, 50);
+            this.groupBox9.Location = new System.Drawing.Point(3, 6);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(361, 192);
             this.groupBox9.TabIndex = 23;
@@ -839,8 +1217,6 @@
             // flowLayoutPanel_MiscBehaviors
             // 
             this.flowLayoutPanel_MiscBehaviors.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_RepairSell);
-            this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_Disenchant);
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_Salvaging);
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_MineGather);
             this.flowLayoutPanel_MiscBehaviors.Controls.Add(this.checkBox_Behavior_HerbGather);
@@ -853,36 +1229,12 @@
             this.flowLayoutPanel_MiscBehaviors.Size = new System.Drawing.Size(355, 173);
             this.flowLayoutPanel_MiscBehaviors.TabIndex = 0;
             // 
-            // checkBox_Behavior_RepairSell
-            // 
-            this.checkBox_Behavior_RepairSell.AutoSize = true;
-            this.checkBox_Behavior_RepairSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_RepairSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_RepairSell.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_RepairSell.Name = "checkBox_Behavior_RepairSell";
-            this.checkBox_Behavior_RepairSell.Size = new System.Drawing.Size(148, 24);
-            this.checkBox_Behavior_RepairSell.TabIndex = 16;
-            this.checkBox_Behavior_RepairSell.Text = "Repair and Sell";
-            this.checkBox_Behavior_RepairSell.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_Disenchant
-            // 
-            this.checkBox_Behavior_Disenchant.AutoSize = true;
-            this.checkBox_Behavior_Disenchant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_Disenchant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Disenchant.Location = new System.Drawing.Point(3, 33);
-            this.checkBox_Behavior_Disenchant.Name = "checkBox_Behavior_Disenchant";
-            this.checkBox_Behavior_Disenchant.Size = new System.Drawing.Size(140, 24);
-            this.checkBox_Behavior_Disenchant.TabIndex = 17;
-            this.checkBox_Behavior_Disenchant.Text = "Disenchanting";
-            this.checkBox_Behavior_Disenchant.UseVisualStyleBackColor = true;
-            // 
             // checkBox_Behavior_Salvaging
             // 
             this.checkBox_Behavior_Salvaging.AutoSize = true;
             this.checkBox_Behavior_Salvaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_Behavior_Salvaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Salvaging.Location = new System.Drawing.Point(3, 63);
+            this.checkBox_Behavior_Salvaging.Location = new System.Drawing.Point(3, 3);
             this.checkBox_Behavior_Salvaging.Name = "checkBox_Behavior_Salvaging";
             this.checkBox_Behavior_Salvaging.Size = new System.Drawing.Size(103, 24);
             this.checkBox_Behavior_Salvaging.TabIndex = 19;
@@ -894,7 +1246,7 @@
             this.checkBox_Behavior_MineGather.AutoSize = true;
             this.checkBox_Behavior_MineGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_Behavior_MineGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_MineGather.Location = new System.Drawing.Point(3, 93);
+            this.checkBox_Behavior_MineGather.Location = new System.Drawing.Point(3, 33);
             this.checkBox_Behavior_MineGather.Name = "checkBox_Behavior_MineGather";
             this.checkBox_Behavior_MineGather.Size = new System.Drawing.Size(115, 24);
             this.checkBox_Behavior_MineGather.TabIndex = 22;
@@ -906,7 +1258,7 @@
             this.checkBox_Behavior_HerbGather.AutoSize = true;
             this.checkBox_Behavior_HerbGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_Behavior_HerbGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_HerbGather.Location = new System.Drawing.Point(3, 123);
+            this.checkBox_Behavior_HerbGather.Location = new System.Drawing.Point(3, 63);
             this.checkBox_Behavior_HerbGather.Name = "checkBox_Behavior_HerbGather";
             this.checkBox_Behavior_HerbGather.Size = new System.Drawing.Size(134, 24);
             this.checkBox_Behavior_HerbGather.TabIndex = 21;
@@ -918,7 +1270,7 @@
             this.checkBox_Behavior_LootCache.AutoSize = true;
             this.checkBox_Behavior_LootCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_Behavior_LootCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(157, 3);
+            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(3, 93);
             this.checkBox_Behavior_LootCache.Name = "checkBox_Behavior_LootCache";
             this.checkBox_Behavior_LootCache.Size = new System.Drawing.Size(191, 24);
             this.checkBox_Behavior_LootCache.TabIndex = 23;
@@ -931,7 +1283,7 @@
             this.checkBox_LootAnything.Enabled = false;
             this.checkBox_LootAnything.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkBox_LootAnything.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_LootAnything.Location = new System.Drawing.Point(157, 33);
+            this.checkBox_LootAnything.Location = new System.Drawing.Point(3, 123);
             this.checkBox_LootAnything.Name = "checkBox_LootAnything";
             this.checkBox_LootAnything.Size = new System.Drawing.Size(144, 24);
             this.checkBox_LootAnything.TabIndex = 24;
@@ -945,28 +1297,41 @@
             this.tabPage8.Location = new System.Drawing.Point(4, 22);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(723, 551);
+            this.tabPage8.Size = new System.Drawing.Size(723, 527);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "Vendor & Disenchant";
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
             // groupBox12
             // 
+            this.groupBox12.Controls.Add(this.checkBox_Behavior_RepairSell);
             this.groupBox12.Controls.Add(this.label2);
             this.groupBox12.Controls.Add(this.textBox_MinimumBagSlotsFree);
             this.groupBox12.Controls.Add(this.trackBar_MinimumBagSlotsFree);
             this.groupBox12.Controls.Add(this.flowLayoutPanel4);
             this.groupBox12.Location = new System.Drawing.Point(373, 6);
             this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(193, 223);
+            this.groupBox12.Size = new System.Drawing.Size(279, 288);
             this.groupBox12.TabIndex = 26;
             this.groupBox12.TabStop = false;
             this.groupBox12.Text = "Vendoring";
             // 
+            // checkBox_Behavior_RepairSell
+            // 
+            this.checkBox_Behavior_RepairSell.AutoSize = true;
+            this.checkBox_Behavior_RepairSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_RepairSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_RepairSell.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Behavior_RepairSell.Name = "checkBox_Behavior_RepairSell";
+            this.checkBox_Behavior_RepairSell.Size = new System.Drawing.Size(148, 24);
+            this.checkBox_Behavior_RepairSell.TabIndex = 17;
+            this.checkBox_Behavior_RepairSell.Text = "Repair and Sell";
+            this.checkBox_Behavior_RepairSell.UseVisualStyleBackColor = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 159);
+            this.label2.Location = new System.Drawing.Point(9, 224);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(120, 13);
             this.label2.TabIndex = 3;
@@ -975,7 +1340,7 @@
             // textBox_MinimumBagSlotsFree
             // 
             this.textBox_MinimumBagSlotsFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(150, 175);
+            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(153, 240);
             this.textBox_MinimumBagSlotsFree.Name = "textBox_MinimumBagSlotsFree";
             this.textBox_MinimumBagSlotsFree.ReadOnly = true;
             this.textBox_MinimumBagSlotsFree.Size = new System.Drawing.Size(37, 26);
@@ -985,7 +1350,7 @@
             // trackBar_MinimumBagSlotsFree
             // 
             this.trackBar_MinimumBagSlotsFree.LargeChange = 2;
-            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(3, 175);
+            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(6, 240);
             this.trackBar_MinimumBagSlotsFree.Maximum = 60;
             this.trackBar_MinimumBagSlotsFree.Minimum = 1;
             this.trackBar_MinimumBagSlotsFree.Name = "trackBar_MinimumBagSlotsFree";
@@ -1001,7 +1366,7 @@
             this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
             this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
             this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(6, 81);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
             this.flowLayoutPanel4.TabIndex = 0;
@@ -1056,6 +1421,7 @@
             // 
             // groupBox11
             // 
+            this.groupBox11.Controls.Add(this.checkBox_Behavior_Disenchant);
             this.groupBox11.Controls.Add(this.label1);
             this.groupBox11.Controls.Add(this.checkBox_Disenchanting_EpicSoulbound);
             this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareSoulbound);
@@ -1068,16 +1434,28 @@
             this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
             this.groupBox11.Location = new System.Drawing.Point(6, 6);
             this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(361, 130);
+            this.groupBox11.Size = new System.Drawing.Size(361, 201);
             this.groupBox11.TabIndex = 24;
             this.groupBox11.TabStop = false;
             this.groupBox11.Text = "Disenchanting";
+            // 
+            // checkBox_Behavior_Disenchant
+            // 
+            this.checkBox_Behavior_Disenchant.AutoSize = true;
+            this.checkBox_Behavior_Disenchant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_Disenchant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_Disenchant.Location = new System.Drawing.Point(13, 19);
+            this.checkBox_Behavior_Disenchant.Name = "checkBox_Behavior_Disenchant";
+            this.checkBox_Behavior_Disenchant.Size = new System.Drawing.Size(140, 24);
+            this.checkBox_Behavior_Disenchant.TabIndex = 18;
+            this.checkBox_Behavior_Disenchant.Text = "Disenchanting";
+            this.checkBox_Behavior_Disenchant.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(109, 14);
+            this.label1.Location = new System.Drawing.Point(115, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 13);
             this.label1.TabIndex = 6;
@@ -1087,7 +1465,7 @@
             // 
             this.checkBox_Disenchanting_EpicSoulbound.AutoSize = true;
             this.checkBox_Disenchanting_EpicSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(184, 100);
+            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(190, 167);
             this.checkBox_Disenchanting_EpicSoulbound.Name = "checkBox_Disenchanting_EpicSoulbound";
             this.checkBox_Disenchanting_EpicSoulbound.Size = new System.Drawing.Size(145, 21);
             this.checkBox_Disenchanting_EpicSoulbound.TabIndex = 9;
@@ -1098,7 +1476,7 @@
             // 
             this.checkBox_Disenchanting_RareSoulbound.AutoSize = true;
             this.checkBox_Disenchanting_RareSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(184, 68);
+            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(190, 135);
             this.checkBox_Disenchanting_RareSoulbound.Name = "checkBox_Disenchanting_RareSoulbound";
             this.checkBox_Disenchanting_RareSoulbound.Size = new System.Drawing.Size(145, 21);
             this.checkBox_Disenchanting_RareSoulbound.TabIndex = 8;
@@ -1108,20 +1486,19 @@
             // textBox_Disenchanting_EpicLevel
             // 
             this.textBox_Disenchanting_EpicLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(119, 96);
+            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(125, 163);
             this.textBox_Disenchanting_EpicLevel.MaxLength = 3;
             this.textBox_Disenchanting_EpicLevel.Name = "textBox_Disenchanting_EpicLevel";
             this.textBox_Disenchanting_EpicLevel.Size = new System.Drawing.Size(59, 23);
             this.textBox_Disenchanting_EpicLevel.TabIndex = 5;
             this.textBox_Disenchanting_EpicLevel.WordWrap = false;
-            this.textBox_Disenchanting_EpicLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
             // 
             // checkBox_Disenchanting_Epic
             // 
             this.checkBox_Disenchanting_Epic.AutoSize = true;
             this.checkBox_Disenchanting_Epic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox_Disenchanting_Epic.ForeColor = System.Drawing.Color.Purple;
-            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(6, 98);
+            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(12, 165);
             this.checkBox_Disenchanting_Epic.Name = "checkBox_Disenchanting_Epic";
             this.checkBox_Disenchanting_Epic.Size = new System.Drawing.Size(58, 21);
             this.checkBox_Disenchanting_Epic.TabIndex = 4;
@@ -1131,20 +1508,19 @@
             // textBox_Disenchanting_RareLevel
             // 
             this.textBox_Disenchanting_RareLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(119, 64);
+            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(125, 131);
             this.textBox_Disenchanting_RareLevel.MaxLength = 3;
             this.textBox_Disenchanting_RareLevel.Name = "textBox_Disenchanting_RareLevel";
             this.textBox_Disenchanting_RareLevel.Size = new System.Drawing.Size(59, 23);
             this.textBox_Disenchanting_RareLevel.TabIndex = 3;
             this.textBox_Disenchanting_RareLevel.WordWrap = false;
-            this.textBox_Disenchanting_RareLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
             // 
             // checkBox_Disenchanting_RareItems
             // 
             this.checkBox_Disenchanting_RareItems.AutoSize = true;
             this.checkBox_Disenchanting_RareItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox_Disenchanting_RareItems.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(7, 66);
+            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(13, 133);
             this.checkBox_Disenchanting_RareItems.Name = "checkBox_Disenchanting_RareItems";
             this.checkBox_Disenchanting_RareItems.Size = new System.Drawing.Size(62, 21);
             this.checkBox_Disenchanting_RareItems.TabIndex = 2;
@@ -1156,7 +1532,7 @@
             this.checkBox_Disenchanting_UncommonItems.AutoSize = true;
             this.checkBox_Disenchanting_UncommonItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBox_Disenchanting_UncommonItems.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(7, 33);
+            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(13, 100);
             this.checkBox_Disenchanting_UncommonItems.Name = "checkBox_Disenchanting_UncommonItems";
             this.checkBox_Disenchanting_UncommonItems.Size = new System.Drawing.Size(106, 21);
             this.checkBox_Disenchanting_UncommonItems.TabIndex = 1;
@@ -1166,19 +1542,18 @@
             // textBox_Disenchanting_UncommonLevel
             // 
             this.textBox_Disenchanting_UncommonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(119, 31);
+            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(125, 98);
             this.textBox_Disenchanting_UncommonLevel.MaxLength = 3;
             this.textBox_Disenchanting_UncommonLevel.Name = "textBox_Disenchanting_UncommonLevel";
             this.textBox_Disenchanting_UncommonLevel.Size = new System.Drawing.Size(59, 23);
             this.textBox_Disenchanting_UncommonLevel.TabIndex = 0;
             this.textBox_Disenchanting_UncommonLevel.WordWrap = false;
-            this.textBox_Disenchanting_UncommonLevel.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_Numbers_KeyPress);
             // 
             // checkBox_Disenchanting_UncommonSoulbound
             // 
             this.checkBox_Disenchanting_UncommonSoulbound.AutoSize = true;
             this.checkBox_Disenchanting_UncommonSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(184, 35);
+            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(190, 102);
             this.checkBox_Disenchanting_UncommonSoulbound.Name = "checkBox_Disenchanting_UncommonSoulbound";
             this.checkBox_Disenchanting_UncommonSoulbound.Size = new System.Drawing.Size(145, 21);
             this.checkBox_Disenchanting_UncommonSoulbound.TabIndex = 7;
@@ -1191,7 +1566,7 @@
             this.tabPage9.Location = new System.Drawing.Point(4, 22);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage9.Size = new System.Drawing.Size(723, 551);
+            this.tabPage9.Size = new System.Drawing.Size(723, 527);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "Primal Trader";
             this.tabPage9.UseVisualStyleBackColor = true;
@@ -1231,7 +1606,7 @@
             this.tabPage10.Location = new System.Drawing.Point(4, 22);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(723, 551);
+            this.tabPage10.Size = new System.Drawing.Size(723, 527);
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Relog";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -1256,7 +1631,7 @@
             this.tabPage11.Location = new System.Drawing.Point(4, 22);
             this.tabPage11.Name = "tabPage11";
             this.tabPage11.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage11.Size = new System.Drawing.Size(723, 551);
+            this.tabPage11.Size = new System.Drawing.Size(723, 527);
             this.tabPage11.TabIndex = 4;
             this.tabPage11.Text = "Followers";
             this.tabPage11.UseVisualStyleBackColor = true;
@@ -1405,7 +1780,7 @@
             this.tabPage12.Location = new System.Drawing.Point(4, 22);
             this.tabPage12.Name = "tabPage12";
             this.tabPage12.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage12.Size = new System.Drawing.Size(723, 551);
+            this.tabPage12.Size = new System.Drawing.Size(723, 527);
             this.tabPage12.TabIndex = 5;
             this.tabPage12.Text = "Quests";
             this.tabPage12.UseVisualStyleBackColor = true;
@@ -1417,7 +1792,7 @@
             this.groupBox15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox15.Location = new System.Drawing.Point(3, 27);
             this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(717, 521);
+            this.groupBox15.Size = new System.Drawing.Size(717, 497);
             this.groupBox15.TabIndex = 22;
             this.groupBox15.TabStop = false;
             this.groupBox15.Text = "Daily Quests";
@@ -1517,7 +1892,7 @@
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(737, 583);
+            this.tabPage4.Size = new System.Drawing.Size(737, 559);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Mail";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -1535,7 +1910,7 @@
             this.listView_MailItems.GridLines = true;
             this.listView_MailItems.Location = new System.Drawing.Point(203, 297);
             this.listView_MailItems.Name = "listView_MailItems";
-            this.listView_MailItems.Size = new System.Drawing.Size(531, 283);
+            this.listView_MailItems.Size = new System.Drawing.Size(531, 259);
             this.listView_MailItems.TabIndex = 0;
             this.listView_MailItems.UseCompatibleStateImageBehavior = false;
             this.listView_MailItems.View = System.Windows.Forms.View.Details;
@@ -1733,7 +2108,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 577);
+            this.groupBox1.Size = new System.Drawing.Size(200, 553);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -1869,7 +2244,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(737, 583);
+            this.tabPage2.Size = new System.Drawing.Size(737, 559);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Debug";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -1882,108 +2257,190 @@
             this.LBDebug.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.LBDebug.Dock = System.Windows.Forms.DockStyle.Fill;
             this.LBDebug.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.LBDebug.Location = new System.Drawing.Point(3, 119);
+            this.LBDebug.Location = new System.Drawing.Point(3, 65);
             this.LBDebug.Name = "LBDebug";
-            this.LBDebug.Size = new System.Drawing.Size(731, 461);
+            this.LBDebug.Size = new System.Drawing.Size(731, 491);
             this.LBDebug.TabIndex = 10;
             this.LBDebug.WrapContents = false;
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Controls.Add(this.button4);
-            this.flowLayoutPanel1.Controls.Add(this.button5);
-            this.flowLayoutPanel1.Controls.Add(this.button6);
-            this.flowLayoutPanel1.Controls.Add(this.button7);
-            this.flowLayoutPanel1.Controls.Add(this.button8);
+            this.flowLayoutPanel1.Controls.Add(this.menuStrip2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 60);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 36);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(731, 59);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(731, 29);
             this.flowLayoutPanel1.TabIndex = 9;
             // 
-            // button1
+            // menuStrip2
             // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Dump Followers";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.garrisonToolStripMenuItem,
+            this.behaviorsToolStripMenuItem,
+            this.cacheToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(274, 24);
+            this.menuStrip2.TabIndex = 12;
+            this.menuStrip2.Text = "menuStrip2";
             // 
-            // button2
+            // garrisonToolStripMenuItem
             // 
-            this.button2.Location = new System.Drawing.Point(129, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Dump Buildings";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.garrisonToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpFollowersToolStripMenuItem,
+            this.dumpBuildingsToolStripMenuItem,
+            this.dumpMissionsToolStripMenuItem,
+            this.garrisonInfoToolStripMenuItem});
+            this.garrisonToolStripMenuItem.Name = "garrisonToolStripMenuItem";
+            this.garrisonToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.garrisonToolStripMenuItem.Text = "Garrison";
             // 
-            // button3
+            // dumpFollowersToolStripMenuItem
             // 
-            this.button3.Location = new System.Drawing.Point(255, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Dump Behaviors";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            this.dumpFollowersToolStripMenuItem.Name = "dumpFollowersToolStripMenuItem";
+            this.dumpFollowersToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.dumpFollowersToolStripMenuItem.Text = "Dump Followers";
+            this.dumpFollowersToolStripMenuItem.Click += new System.EventHandler(this.dumpFollowersToolStripMenuItem_Click);
             // 
-            // button4
+            // dumpBuildingsToolStripMenuItem
             // 
-            this.button4.Location = new System.Drawing.Point(381, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(103, 23);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "Dump Missions";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.dumpBuildingsToolStripMenuItem.Name = "dumpBuildingsToolStripMenuItem";
+            this.dumpBuildingsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.dumpBuildingsToolStripMenuItem.Text = "Dump Buildings";
+            this.dumpBuildingsToolStripMenuItem.Click += new System.EventHandler(this.dumpBuildingsToolStripMenuItem_Click);
             // 
-            // button5
+            // dumpMissionsToolStripMenuItem
             // 
-            this.button5.Location = new System.Drawing.Point(490, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(105, 23);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Dump Cache";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.dumpMissionsToolStripMenuItem.Name = "dumpMissionsToolStripMenuItem";
+            this.dumpMissionsToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.dumpMissionsToolStripMenuItem.Text = "Dump Missions";
+            this.dumpMissionsToolStripMenuItem.Click += new System.EventHandler(this.dumpMissionsToolStripMenuItem_Click);
             // 
-            // button6
+            // garrisonInfoToolStripMenuItem
             // 
-            this.button6.Location = new System.Drawing.Point(601, 3);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(120, 23);
-            this.button6.TabIndex = 9;
-            this.button6.Text = "Dump Items";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.garrisonInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpMissionsToolStripMenuItem1,
+            this.dumpBuildingsToolStripMenuItem1,
+            this.dumpFollowersToolStripMenuItem1});
+            this.garrisonInfoToolStripMenuItem.Name = "garrisonInfoToolStripMenuItem";
+            this.garrisonInfoToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.garrisonInfoToolStripMenuItem.Text = "GarrisonInfo";
             // 
-            // button7
+            // dumpMissionsToolStripMenuItem1
             // 
-            this.button7.Location = new System.Drawing.Point(3, 32);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(120, 23);
-            this.button7.TabIndex = 10;
-            this.button7.Text = "Dump Quest Log";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.dumpMissionsToolStripMenuItem1.Name = "dumpMissionsToolStripMenuItem1";
+            this.dumpMissionsToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpMissionsToolStripMenuItem1.Text = "Dump Missions";
+            this.dumpMissionsToolStripMenuItem1.Click += new System.EventHandler(this.dumpMissionsToolStripMenuItem1_Click);
             // 
-            // button8
+            // dumpBuildingsToolStripMenuItem1
             // 
-            this.button8.Location = new System.Drawing.Point(129, 32);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(120, 23);
-            this.button8.TabIndex = 11;
-            this.button8.Text = "Test";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.dumpBuildingsToolStripMenuItem1.Name = "dumpBuildingsToolStripMenuItem1";
+            this.dumpBuildingsToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpBuildingsToolStripMenuItem1.Text = "Dump Buildings";
+            this.dumpBuildingsToolStripMenuItem1.Click += new System.EventHandler(this.dumpBuildingsToolStripMenuItem1_Click);
+            // 
+            // dumpFollowersToolStripMenuItem1
+            // 
+            this.dumpFollowersToolStripMenuItem1.Name = "dumpFollowersToolStripMenuItem1";
+            this.dumpFollowersToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpFollowersToolStripMenuItem1.Text = "Dump Followers";
+            this.dumpFollowersToolStripMenuItem1.Click += new System.EventHandler(this.dumpFollowersToolStripMenuItem1_Click);
+            // 
+            // behaviorsToolStripMenuItem
+            // 
+            this.behaviorsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpCurrentBehaviorsToolStripMenuItem});
+            this.behaviorsToolStripMenuItem.Name = "behaviorsToolStripMenuItem";
+            this.behaviorsToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.behaviorsToolStripMenuItem.Text = "Behaviors";
+            // 
+            // dumpCurrentBehaviorsToolStripMenuItem
+            // 
+            this.dumpCurrentBehaviorsToolStripMenuItem.Name = "dumpCurrentBehaviorsToolStripMenuItem";
+            this.dumpCurrentBehaviorsToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
+            this.dumpCurrentBehaviorsToolStripMenuItem.Text = "Dump Current Behaviors";
+            this.dumpCurrentBehaviorsToolStripMenuItem.Click += new System.EventHandler(this.dumpCurrentBehaviorsToolStripMenuItem_Click);
+            // 
+            // cacheToolStripMenuItem
+            // 
+            this.cacheToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpObjectsToolStripMenuItem,
+            this.itemsToolStripMenuItem,
+            this.dumpQuestLogToolStripMenuItem,
+            this.dumpFlightPathsToolStripMenuItem});
+            this.cacheToolStripMenuItem.Name = "cacheToolStripMenuItem";
+            this.cacheToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.cacheToolStripMenuItem.Text = "Cache";
+            // 
+            // dumpObjectsToolStripMenuItem
+            // 
+            this.dumpObjectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpObjectsToolStripMenuItem1,
+            this.dumpEntriesToolStripMenuItem});
+            this.dumpObjectsToolStripMenuItem.Name = "dumpObjectsToolStripMenuItem";
+            this.dumpObjectsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.dumpObjectsToolStripMenuItem.Text = "Objects";
+            // 
+            // dumpObjectsToolStripMenuItem1
+            // 
+            this.dumpObjectsToolStripMenuItem1.Name = "dumpObjectsToolStripMenuItem1";
+            this.dumpObjectsToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.dumpObjectsToolStripMenuItem1.Text = "Dump Objects";
+            this.dumpObjectsToolStripMenuItem1.Click += new System.EventHandler(this.dumpObjectsToolStripMenuItem1_Click);
+            // 
+            // dumpEntriesToolStripMenuItem
+            // 
+            this.dumpEntriesToolStripMenuItem.Name = "dumpEntriesToolStripMenuItem";
+            this.dumpEntriesToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.dumpEntriesToolStripMenuItem.Text = "Dump Entries";
+            this.dumpEntriesToolStripMenuItem.Click += new System.EventHandler(this.dumpEntriesToolStripMenuItem_Click);
+            // 
+            // itemsToolStripMenuItem
+            // 
+            this.itemsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dumpBagsToolStripMenuItem,
+            this.dumpBankToolStripMenuItem,
+            this.dumpReagentBankToolStripMenuItem});
+            this.itemsToolStripMenuItem.Name = "itemsToolStripMenuItem";
+            this.itemsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.itemsToolStripMenuItem.Text = "Items";
+            // 
+            // dumpBagsToolStripMenuItem
+            // 
+            this.dumpBagsToolStripMenuItem.Name = "dumpBagsToolStripMenuItem";
+            this.dumpBagsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dumpBagsToolStripMenuItem.Text = "Dump Bags";
+            this.dumpBagsToolStripMenuItem.Click += new System.EventHandler(this.dumpBagsToolStripMenuItem_Click);
+            // 
+            // dumpBankToolStripMenuItem
+            // 
+            this.dumpBankToolStripMenuItem.Name = "dumpBankToolStripMenuItem";
+            this.dumpBankToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dumpBankToolStripMenuItem.Text = "Dump Bank";
+            this.dumpBankToolStripMenuItem.Click += new System.EventHandler(this.dumpBankToolStripMenuItem_Click);
+            // 
+            // dumpReagentBankToolStripMenuItem
+            // 
+            this.dumpReagentBankToolStripMenuItem.Name = "dumpReagentBankToolStripMenuItem";
+            this.dumpReagentBankToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dumpReagentBankToolStripMenuItem.Text = "Dump Reagent Bank";
+            this.dumpReagentBankToolStripMenuItem.Click += new System.EventHandler(this.dumpReagentBankToolStripMenuItem_Click);
+            // 
+            // dumpQuestLogToolStripMenuItem
+            // 
+            this.dumpQuestLogToolStripMenuItem.Name = "dumpQuestLogToolStripMenuItem";
+            this.dumpQuestLogToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.dumpQuestLogToolStripMenuItem.Text = "Dump Quest Log";
+            this.dumpQuestLogToolStripMenuItem.Click += new System.EventHandler(this.dumpQuestLogToolStripMenuItem_Click);
+            // 
+            // dumpFlightPathsToolStripMenuItem
+            // 
+            this.dumpFlightPathsToolStripMenuItem.Name = "dumpFlightPathsToolStripMenuItem";
+            this.dumpFlightPathsToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.dumpFlightPathsToolStripMenuItem.Text = "Dump Flight Paths";
+            this.dumpFlightPathsToolStripMenuItem.Click += new System.EventHandler(this.dumpFlightPathsToolStripMenuItem_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -1994,7 +2451,7 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(731, 57);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(731, 33);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
             // checkBox_Debug_FakeStartWorkOrder
@@ -2045,83 +2502,30 @@
             this.checkBox_Debug_FakePickupWorkOrder.Text = "Fake Pickup Order";
             this.checkBox_Debug_FakePickupWorkOrder.UseVisualStyleBackColor = true;
             // 
-            // checkBox_Behavior_CompleteMissions
+            // menuStrip1
             // 
-            this.checkBox_Behavior_CompleteMissions.AutoSize = true;
-            this.checkBox_Behavior_CompleteMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_CompleteMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_CompleteMissions.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_CompleteMissions.Name = "checkBox_Behavior_CompleteMissions";
-            this.checkBox_Behavior_CompleteMissions.Size = new System.Drawing.Size(175, 24);
-            this.checkBox_Behavior_CompleteMissions.TabIndex = 16;
-            this.checkBox_Behavior_CompleteMissions.Text = "Complete Missions";
-            this.checkBox_Behavior_CompleteMissions.UseVisualStyleBackColor = true;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(745, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // checkBox_DisableAddon
+            // settingsToolStripMenuItem
             // 
-            this.checkBox_DisableAddon.AutoSize = true;
-            this.checkBox_DisableAddon.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_DisableAddon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_DisableAddon.Location = new System.Drawing.Point(9, 6);
-            this.checkBox_DisableAddon.Name = "checkBox_DisableAddon";
-            this.checkBox_DisableAddon.Size = new System.Drawing.Size(242, 24);
-            this.checkBox_DisableAddon.TabIndex = 24;
-            this.checkBox_DisableAddon.Text = "Disable Master Plan Addon";
-            this.checkBox_DisableAddon.UseVisualStyleBackColor = true;
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultSettingsToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
             // 
-            // groupBox18
+            // defaultSettingsToolStripMenuItem
             // 
-            this.groupBox18.Controls.Add(this.flowLayoutPanel7);
-            this.groupBox18.Location = new System.Drawing.Point(457, 235);
-            this.groupBox18.Name = "groupBox18";
-            this.groupBox18.Size = new System.Drawing.Size(272, 259);
-            this.groupBox18.TabIndex = 10;
-            this.groupBox18.TabStop = false;
-            this.groupBox18.Text = "Barn";
-            // 
-            // checkBox_Barn_Furs
-            // 
-            this.checkBox_Barn_Furs.AutoSize = true;
-            this.checkBox_Barn_Furs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Furs.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Barn_Furs.Name = "checkBox_Barn_Furs";
-            this.checkBox_Barn_Furs.Size = new System.Drawing.Size(50, 17);
-            this.checkBox_Barn_Furs.TabIndex = 1;
-            this.checkBox_Barn_Furs.Text = "Furs";
-            this.checkBox_Barn_Furs.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Furs);
-            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Leather);
-            this.flowLayoutPanel7.Controls.Add(this.checkBox_Barn_Meat);
-            this.flowLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(266, 240);
-            this.flowLayoutPanel7.TabIndex = 0;
-            // 
-            // checkBox_Barn_Leather
-            // 
-            this.checkBox_Barn_Leather.AutoSize = true;
-            this.checkBox_Barn_Leather.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Leather.Location = new System.Drawing.Point(59, 3);
-            this.checkBox_Barn_Leather.Name = "checkBox_Barn_Leather";
-            this.checkBox_Barn_Leather.Size = new System.Drawing.Size(69, 17);
-            this.checkBox_Barn_Leather.TabIndex = 2;
-            this.checkBox_Barn_Leather.Text = "Leather";
-            this.checkBox_Barn_Leather.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Barn_Meat
-            // 
-            this.checkBox_Barn_Meat.AutoSize = true;
-            this.checkBox_Barn_Meat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Meat.Location = new System.Drawing.Point(134, 3);
-            this.checkBox_Barn_Meat.Name = "checkBox_Barn_Meat";
-            this.checkBox_Barn_Meat.Size = new System.Drawing.Size(54, 17);
-            this.checkBox_Barn_Meat.TabIndex = 3;
-            this.checkBox_Barn_Meat.Text = "Meat";
-            this.checkBox_Barn_Meat.UseVisualStyleBackColor = true;
+            this.defaultSettingsToolStripMenuItem.Name = "defaultSettingsToolStripMenuItem";
+            this.defaultSettingsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.defaultSettingsToolStripMenuItem.Text = "Default Settings";
+            this.defaultSettingsToolStripMenuItem.Click += new System.EventHandler(this.defaultSettingsToolStripMenuItem_Click);
             // 
             // Config
             // 
@@ -2129,7 +2533,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 609);
             this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Config";
             this.Text = "Config Window";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Config_FormClosing);
@@ -2150,10 +2556,24 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).EndInit();
             this.tabPage6.ResumeLayout(false);
+            this.tabControl4.ResumeLayout(false);
+            this.tabPage13.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.groupBox8.ResumeLayout(false);
+            this.tabPage14.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
+            this.tabPage15.ResumeLayout(false);
+            this.groupBox19.ResumeLayout(false);
+            this.groupBox22.ResumeLayout(false);
+            this.groupBox22.PerformLayout();
+            this.groupBox21.ResumeLayout(false);
+            this.groupBox21.PerformLayout();
+            this.groupBox20.ResumeLayout(false);
+            this.groupBox20.PerformLayout();
+            this.groupBox18.ResumeLayout(false);
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             this.tabControl_Professions.ResumeLayout(false);
@@ -2163,7 +2583,6 @@
             this.tabPage5.ResumeLayout(false);
             this.tabControl3.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
             this.groupBox9.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.PerformLayout();
@@ -2205,12 +2624,15 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
-            this.groupBox18.ResumeLayout(false);
-            this.flowLayoutPanel7.ResumeLayout(false);
-            this.flowLayoutPanel7.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -2219,16 +2641,10 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.FlowLayoutPanel LBDebug;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TrackBar trackBar_ReservedGarrisonResources;
+        private UserControl_Trackbar trackBar_ReservedGarrisonResources;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.ListView listView_MailItems;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -2236,79 +2652,68 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox textBox_MailEnchanting;
-        private System.Windows.Forms.CheckBox checkBox_MailEnchanting;
-        private System.Windows.Forms.TextBox textBox_MailOre;
-        private System.Windows.Forms.CheckBox checkBox_MailOre;
-        private System.Windows.Forms.TextBox textBox_MailHerbs;
-        private System.Windows.Forms.CheckBox checkBox_MailHerbs;
+        private UserControl_Textbox textBox_MailEnchanting;
+        private UserControl_CheckBox checkBox_MailEnchanting;
+        private UserControl_Textbox textBox_MailOre;
+        private UserControl_CheckBox checkBox_MailOre;
+        private UserControl_Textbox textBox_MailHerbs;
+        private UserControl_CheckBox checkBox_MailHerbs;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox_MailEpic;
-        private System.Windows.Forms.TextBox textBox_MailRare;
-        private System.Windows.Forms.TextBox textBox_MailUncommon;
-        private System.Windows.Forms.CheckBox checkBox_MailEpic;
-        private System.Windows.Forms.CheckBox checkBox_MailRare;
-        private System.Windows.Forms.CheckBox checkBox_MailUncommon;
+        private UserControl_Textbox textBox_MailEpic;
+        private UserControl_Textbox textBox_MailRare;
+        private UserControl_Textbox textBox_MailUncommon;
+        private UserControl_CheckBox checkBox_MailEpic;
+        private UserControl_CheckBox checkBox_MailRare;
+        private UserControl_CheckBox checkBox_MailUncommon;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button_MailItem_Add;
-        private System.Windows.Forms.TextBox textBox_MailItem_Count;
+        private UserControl_Textbox textBox_MailItem_Count;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox_MailItem_Recipient;
+        private UserControl_Textbox textBox_MailItem_Recipient;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox_MailItem_EntryId;
+        private UserControl_Textbox textBox_MailItem_EntryId;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private System.Windows.Forms.CheckBox checkBox_MailAutoSend;
-        private System.Windows.Forms.CheckBox checkBox_MailAutoGet;
+        private UserControl_CheckBox checkBox_MailAutoSend;
+        private UserControl_CheckBox checkBox_MailAutoGet;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_MailItems;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.Button button_MailItem_AddFromBags;
-        private System.Windows.Forms.TextBox textBox_MailItem_Name;
+        private UserControl_Textbox textBox_MailItem_Name;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_MissionRewards;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.CheckBox checkBox_ExchangePrimalSpirits;
-        private System.Windows.Forms.ComboBox comboBox_PrimalSpiritItems;
+        private UserControl_CheckBox checkBox_ExchangePrimalSpirits;
+        private UserControl_Combobox comboBox_PrimalSpiritItems;
         private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_WorkOrderPickup;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_WorkOrderStart;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_Salvaging;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_Disenchant;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_RepairSell;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_TradePostReagents;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_WorkOrderTypes;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_HerbGather;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_MineGather;
+        private UserControl_CheckBox checkBox_Behavior_Salvaging;
+        private UserControl_CheckBox checkBox_Behavior_HerbGather;
+        private UserControl_CheckBox checkBox_Behavior_MineGather;
         private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.GroupBox groupBox8;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_MiscBehaviors;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_LootCache;
+        private UserControl_CheckBox checkBox_Behavior_LootCache;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.CheckBox checkBox_Debug_FakeStartWorkOrder;
+        private UserControl_CheckBox checkBox_Debug_FakeStartWorkOrder;
         private System.Windows.Forms.GroupBox groupBox11;
-        private System.Windows.Forms.TextBox textBox_Disenchanting_UncommonLevel;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_RareItems;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_UncommonItems;
-        private System.Windows.Forms.TextBox textBox_Disenchanting_EpicLevel;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_Epic;
-        private System.Windows.Forms.TextBox textBox_Disenchanting_RareLevel;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_EpicSoulbound;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_RareSoulbound;
-        private System.Windows.Forms.CheckBox checkBox_Disenchanting_UncommonSoulbound;
+        private UserControl_Textbox textBox_Disenchanting_UncommonLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_RareItems;
+        private UserControl_CheckBox checkBox_Disenchanting_UncommonItems;
+        private UserControl_Textbox textBox_Disenchanting_EpicLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_Epic;
+        private UserControl_Textbox textBox_Disenchanting_RareLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_EpicSoulbound;
+        private UserControl_CheckBox checkBox_Disenchanting_RareSoulbound;
+        private UserControl_CheckBox checkBox_Disenchanting_UncommonSoulbound;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox_Debug_FakeFinishQuest;
+        private UserControl_CheckBox checkBox_Debug_FakeFinishQuest;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_Professions;
-        private System.Windows.Forms.CheckBox checkBox_Debug_IgnoreHearthStone;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.CheckBox checkBox_Debug_FakePickupWorkOrder;
+        private UserControl_CheckBox checkBox_Behavior_Professions;
+        private UserControl_CheckBox checkBox_Debug_IgnoreHearthStone;
+        private UserControl_CheckBox checkBox_Debug_FakePickupWorkOrder;
         private System.Windows.Forms.TabControl tabControl_Professions;
         private System.Windows.Forms.TabPage tabPage_Alchemy;
         private System.Windows.Forms.TabPage tabPage_Blacksmithing;
@@ -2319,73 +2724,132 @@
         private System.Windows.Forms.TabPage tabPage_Leatherworking;
         private System.Windows.Forms.TabPage tabPage_Tailoring;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_Milling;
-        private System.Windows.Forms.CheckBox checkBox_Milling_Enabled;
-        private System.Windows.Forms.TextBox textBox_Milling_RequiredAmount;
+        private UserControl_CheckBox checkBox_Milling_Enabled;
+        private UserControl_Textbox textBox_Milling_RequiredAmount;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage_Mission_Priorities;
         private System.Windows.Forms.TabPage tabPage_Mission_Items;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_StartMissions;
+        private UserControl_CheckBox checkBox_Behavior_StartMissions;
         private System.Windows.Forms.GroupBox groupBox13;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet615;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet615;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet630;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet630;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet645;
-        private System.Windows.Forms.CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet645;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet615;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet615;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet630;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet630;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_ArmorSet645;
+        private UserControl_CheckBox checkBox_MissionRewards_FollowerToken_WeaponSet645;
         private System.Windows.Forms.GroupBox groupBox14;
-        private System.Windows.Forms.TrackBar trackBar_ItemReward_CharacterTokenLevel;
+        private UserControl_Trackbar trackBar_ItemReward_CharacterTokenLevel;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label_ItemReward_CharacterTokenLevel;
-        private System.Windows.Forms.TextBox textBox_ReservedGarrisonResources;
+        private UserControl_Textbox textBox_ReservedGarrisonResources;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
         private System.Windows.Forms.TabPage tabPage8;
         private System.Windows.Forms.GroupBox groupBox12;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_MinimumBagSlotsFree;
-        private System.Windows.Forms.TrackBar trackBar_MinimumBagSlotsFree;
+        private UserControl_Textbox textBox_MinimumBagSlotsFree;
+        private UserControl_Trackbar trackBar_MinimumBagSlotsFree;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Junk;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Common;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Uncommon;
-        private System.Windows.Forms.CheckBox checkBox_Vendor_Rare;
+        private UserControl_CheckBox checkBox_Vendor_Junk;
+        private UserControl_CheckBox checkBox_Vendor_Common;
+        private UserControl_CheckBox checkBox_Vendor_Uncommon;
+        private UserControl_CheckBox checkBox_Vendor_Rare;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.TabPage tabPage10;
-        private System.Windows.Forms.CheckBox checkBox_HBRelogSkipTask;
+        private UserControl_CheckBox checkBox_HBRelogSkipTask;
         private System.Windows.Forms.TabPage tabPage11;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
-        private System.Windows.Forms.CheckBox checkBox_Follower_193;
-        private System.Windows.Forms.CheckBox checkBox_Follower_189;
-        private System.Windows.Forms.CheckBox checkBox_Follower_207;
-        private System.Windows.Forms.CheckBox checkBox_Follower_467;
-        private System.Windows.Forms.CheckBox checkBox_Follower_190;
+        private UserControl_CheckBox checkBox_Follower_193;
+        private UserControl_CheckBox checkBox_Follower_189;
+        private UserControl_CheckBox checkBox_Follower_207;
+        private UserControl_CheckBox checkBox_Follower_467;
+        private UserControl_CheckBox checkBox_Follower_190;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBox_Follower_170;
+        private UserControl_CheckBox checkBox_Follower_170;
         private System.Windows.Forms.TabPage tabPage12;
         private System.Windows.Forms.GroupBox groupBox15;
         private System.Windows.Forms.GroupBox groupBox16;
-        private System.Windows.Forms.ComboBox comboBox_DailyQuest_WarMill_Rewards;
-        private System.Windows.Forms.CheckBox checkBox_DailyQuest_Warmill;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_Quests;
+        private UserControl_Combobox comboBox_DailyQuest_WarMill_Rewards;
+        private UserControl_CheckBox checkBox_DailyQuest_Warmill;
+        private UserControl_CheckBox checkBox_Behavior_Quests;
         private System.Windows.Forms.GroupBox groupBox17;
-        private System.Windows.Forms.ComboBox comboBox_DailyQuest_Alchemy_Rewards;
-        private System.Windows.Forms.CheckBox checkBox_DailyQuest_AlchemyLab;
-        private System.Windows.Forms.CheckBox checkBox_Follower_209;
-        private System.Windows.Forms.CheckBox checkBox_Follower_32;
-        private System.Windows.Forms.CheckBox checkBox_LootAnything;
-        private System.Windows.Forms.CheckBox checkBox_Behavior_CompleteMissions;
-        private System.Windows.Forms.CheckBox checkBox_DisableAddon;
+        private UserControl_Combobox comboBox_DailyQuest_Alchemy_Rewards;
+        private UserControl_CheckBox checkBox_DailyQuest_AlchemyLab;
+        private UserControl_CheckBox checkBox_Follower_209;
+        private UserControl_CheckBox checkBox_Follower_32;
+        private UserControl_CheckBox checkBox_LootAnything;
+        private UserControl_CheckBox checkBox_Behavior_CompleteMissions;
+        private System.Windows.Forms.TabControl tabControl4;
+        private System.Windows.Forms.TabPage tabPage13;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_WorkOrderTypes;
+        private UserControl_CheckBox checkBox_Behavior_WorkOrderPickup;
+        private UserControl_CheckBox checkBox_Behavior_WorkOrderStart;
+        private System.Windows.Forms.TabPage tabPage14;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_TradePostReagents;
+        private System.Windows.Forms.TabPage tabPage15;
+        private System.Windows.Forms.GroupBox groupBox19;
+        private System.Windows.Forms.GroupBox groupBox20;
+        private System.Windows.Forms.Label label8;
+        private UserControl_Textbox textBox_Trapping_NonElite_Fur;
+        private UserControl_CheckBox checkBox_Trapping_NonElite_Fur;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
-        private System.Windows.Forms.CheckBox checkBox_Barn_Furs;
-        private System.Windows.Forms.CheckBox checkBox_Barn_Leather;
-        private System.Windows.Forms.CheckBox checkBox_Barn_Meat;
+        private UserControl_CheckBox checkBox_Barn_Furs;
+        private UserControl_CheckBox checkBox_Barn_Leather;
+        private UserControl_CheckBox checkBox_Barn_Meat;
+        private UserControl_CheckBox checkBox_Trapping_Elite_Fur;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private System.Windows.Forms.Label label17;
+        private UserControl_Textbox textBox_Trapping_Elite_Meat;
+        private UserControl_CheckBox checkBox_Trapping_Elite_Meat;
+        private System.Windows.Forms.Label label18;
+        private UserControl_Textbox textBox_Trapping_NonElite_Meat;
+        private UserControl_CheckBox checkBox_Trapping_NonElite_Meat;
+        private System.Windows.Forms.GroupBox groupBox21;
+        private System.Windows.Forms.Label label10;
+        private UserControl_Textbox textBox_Trapping_Elite_Leather;
+        private UserControl_CheckBox checkBox_Trapping_Elite_Leather;
+        private System.Windows.Forms.Label label15;
+        private UserControl_Textbox textBox_Trapping_NonElite_Leather;
+        private UserControl_CheckBox checkBox_Trapping_NonElite_Leather;
+        private System.Windows.Forms.Label label9;
+        private UserControl_Textbox textBox_Trapping_Elite_Fur;
+        private UserControl_CheckBox checkBox_Behavior_RepairSell;
+        private UserControl_CheckBox checkBox_Behavior_Disenchant;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem defaultSettingsToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem garrisonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem behaviorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cacheToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpObjectsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpObjectsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem dumpEntriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem itemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpBagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpBankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpReagentBankToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpCurrentBehaviorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpFollowersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpBuildingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpMissionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpQuestLogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpFlightPathsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem garrisonInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpMissionsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem dumpBuildingsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem dumpFollowersToolStripMenuItem1;
+        private System.Windows.Forms.Panel panel_Professions_Inscripition;
 
     }
 }

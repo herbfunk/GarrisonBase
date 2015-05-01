@@ -24,7 +24,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public C_WoWObject Mailbox
         {
-            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.Mailbox).FirstOrDefault(); }
+            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.Mailbox).OrderBy(m => m.Distance).FirstOrDefault(); }
         }
 
         public override async Task<bool> BehaviorRoutine()
@@ -32,7 +32,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
 
-            if (await StartMovement.MoveTo()) return true;
+            
 
             if (await Movement()) return true;
 
@@ -50,6 +50,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (Mailbox == null)
             {
+                if (await StartMovement.MoveTo()) return true;
+
                 //No object found..
                 IsDone = true;
                 GarrisonBase.Err("Could not find mail box object!");

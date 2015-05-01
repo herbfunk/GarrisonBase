@@ -20,7 +20,7 @@ namespace Herbfunk.GarrisonBase
     public class GarrisonBase : BotBase
     {
         public static HBRelogApi HbRelogApi;
-        internal static readonly Version Version = new Version(1,3,0,1);
+        internal static readonly Version Version = new Version(1,4,0,0);
         public static GarrisonBase Instance { get; private set; }
         public GarrisonBase()
         {
@@ -49,6 +49,7 @@ namespace Herbfunk.GarrisonBase
             HbRelogApi = new HBRelogApi();
             CacheStaticLookUp.InitalizedCache = false;
             BehaviorManager.Reset();
+            Common.ResetCommonBehaviors();
             ObjectCacheManager.ResetCache(true);
             TargetManager.Reset();
             GarrisonManager.Reset();

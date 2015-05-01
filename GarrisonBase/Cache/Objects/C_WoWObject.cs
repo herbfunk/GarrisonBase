@@ -5,23 +5,21 @@ using Herbfunk.GarrisonBase.Character;
 using Styx;
 using Styx.Common.Helpers;
 using Styx.Helpers;
+using Styx.Pathing;
 using Styx.WoWInternals;
 using Styx.WoWInternals.World;
 using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Cache.Objects
 {
-    public abstract class C_WoWObject
+    public class C_WoWObject : EntryBase
     {
-        protected C_WoWObject(WoWObject obj)
+        protected C_WoWObject(WoWObject obj):base(obj)
         {
             RefWoWObject = obj;
             Location = obj.Location;
             Rotation = obj.Rotation;
             Guid = obj.Guid;
-            Entry = obj.Entry;
-            Name = obj.Name;
-            Type = obj.Type;
             BlacklistType = BlacklistType.None;
             LineOfSight = new CachedValue<bool>(() => TestLineOfSight(this));
             Collision = new CachedValue<bool>(() => TestCollision(this));
@@ -42,9 +40,6 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public WoWPoint Location { get; set; }
         public float Rotation { get; set; }
         public WoWGuid Guid { get; set; }
-        public uint Entry { get; set; }
-        public string Name { get; set; }
-        public WoWObjectType Type { get; set; }
         public BlacklistType BlacklistType { get; set; }
         public bool ShouldLoot
         {
@@ -84,13 +79,6 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         }
         private float _interactRange=4f;
 
-        public WoWObjectTypes SubType
-        {
-            get { return _subType; }
-            set { _subType = value; }
-        }
-        private WoWObjectTypes _subType= WoWObjectTypes.Unknown;
-
         //
         public double Distance
         {
@@ -116,18 +104,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
         }
 
-        public bool IsBehindPlayer
-        {
-            get
-            {
-                return WoWMathHelper.IsBehind(Location, Player.Location, Player.Rotation, 3.141593f);
-            }
-        }
 
-        public bool IsBehindObject(C_WoWObject obj)
-        {
-            return WoWMathHelper.IsBehind(Location, obj.Location, obj.Rotation, 3.141593f);
-        }
         
         ///<summary>
         ///Flag that determines if the object should be removed from the collection.
@@ -277,7 +254,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
         public bool CheckDistance(float distance)
         {
             float num = distance - 0.1f;
-            return DistanceSqr < num * num;
+            return DistanceSqr <= num * num;
         }
 
 
@@ -288,21 +265,39 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             RefWoWObject.Interact();
             InteractionAttempts++;
         }
+        public bool IsBehindPlayer
+        {
+            get
+            {
+                return WoWMathHelper.IsBehind(Location, Player.Location, Player.Rotation, 3.141593f);
+            }
+        }
+        public bool IsBehindObject(C_WoWObject obj)
+        {
+            return WoWMathHelper.IsBehind(Location, obj.Location, obj.Rotation, 3.141593f);
+        }
 
         public WoWPoint GetBehindPoint(float distance=5f)
         {
             float facing = RefWoWObject.Rotation;
-            facing += WoWMathHelper.DegreesToRadians(180); // was 150 ?
+            facing += WoWMathHelper.DegreesToRadians(180);
             facing = WoWMathHelper.NormalizeRadian(facing);
             return Location.RayCast(facing, distance);
         }
-
         public WoWPoint GetFrontPoint(float distance = 5f)
         {
             float facing = RefWoWObject.Rotation;
             facing = WoWMathHelper.NormalizeRadian(facing);
             return Location.RayCast(facing, distance);
         }
+        public WoWPoint GetSidePoint(float degrees, float distance = 5f)
+        {
+
+            float facing = WoWMathHelper.DegreesToRadians(degrees);
+            facing = WoWMathHelper.NormalizeRadian(facing);
+            return Location.RayCast(facing, distance);
+        }
+
         public CachedValue<bool> LineOfSight, Collision;
         internal bool LineofsightResult = false;
         internal bool CollisionResult = false;
@@ -423,15 +418,15 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
 
         public override string ToString()
         {
-            return String.Format("{0}, //{1}\r\n" +
-                                 "[{2}] {3} [{4}]\r\n" +
-                                 "{5} ({6})\r\n" +
-                                 "LOS {7} ( {8} ) Tested {9}ms\r\n" +
-                                 "Collision {12} Tested {13}ms\r\n" +
-                                 "Valid {10}\r\n" +
-                                 "Update {11}\r\n" +
-                                 "IgnoreTime {14}",
-                                 Entry,Name,Guid, Type, SubType,
+            return String.Format("{0}" +
+                                 "Guid {1}\r\n" +
+                                 "{2} ({3})\r\n" +
+                                 "LOS {4} ( {5} ) Tested {6}ms\r\n" +
+                                 "Collision {9} Tested {10}ms\r\n" +
+                                 "Valid {7}\r\n" +
+                                 "Update {8}\r\n" +
+                                 "IgnoreTime {11}",
+                                 base.ToString(),Guid,
                                  Location, Distance, 
                                  LineofsightResult, _lineofsightPoint.ToString(), LineofSightWaitTimer.TimeLeft.TotalMilliseconds,
                                  ObjectValidCheck,

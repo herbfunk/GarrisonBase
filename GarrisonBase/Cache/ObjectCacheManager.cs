@@ -4,7 +4,6 @@ using System.Linq;
 using Herbfunk.GarrisonBase.Cache.Enums;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Styx;
-using Styx.CommonBot;
 using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Cache
@@ -31,12 +30,18 @@ namespace Herbfunk.GarrisonBase.Cache
 
             QuestNpcIds.OnItemAdded += OnQuestNpcIdAdded;
             QuestNpcIds.OnItemRemoved += OnQuestNpcIdRemoved;
+
+            LuaEvents.OnZoneChangedNewArea += OnZoneChangedNewArea;
         }
 
 
         internal static bool FoundOreObject { get; set; }
         internal static bool FoundHerbObject { get; set; }
 
+        ///<summary>
+        ///Cached Sno Data.
+        ///</summary>
+        public static EntryCollection EntryCache = new EntryCollection();
 
 
         internal static CacheCollection ObjectCollection = new CacheCollection();
@@ -105,6 +110,11 @@ namespace Herbfunk.GarrisonBase.Cache
             }
         }
 
+        private static void OnZoneChangedNewArea()
+        {
+            ResetCache();
+        }
+
 
         public static void ResetCache(bool detatchHandlers = false)
         {
@@ -116,17 +126,6 @@ namespace Herbfunk.GarrisonBase.Cache
             FoundOreObject = false;
             FoundHerbObject = false;
 
-
-            QuestNpcIds.Clear();
-            CombatIds.Clear();
-            LootIds.Clear();
-
-
-
-            IgnoreLineOfSightFailure = false;
-            IsQuesting = false;
-
-
             if (detatchHandlers)
             {
                 LootIds.OnItemAdded -= OnLootIdAdded;
@@ -135,6 +134,7 @@ namespace Herbfunk.GarrisonBase.Cache
                 CombatIds.OnItemRemoved -= OnCombatIdRemoved;
                 QuestNpcIds.OnItemAdded -= OnQuestNpcIdAdded;
                 QuestNpcIds.OnItemRemoved -= OnQuestNpcIdRemoved;
+                LuaEvents.OnZoneChangedNewArea -= OnZoneChangedNewArea;
             }
         }
 
@@ -211,13 +211,15 @@ namespace Herbfunk.GarrisonBase.Cache
                                 continue;
                         }
                     }
+                    else
+                        wowObj.LoopsUnseen = 0;
+
 
                     if (!wowObj.IsValid && wowObj.IgnoresRemoval)
                     {
                         wowObj.UpdateReference(obj);
                     }
 
-                    wowObj.LoopsUnseen = 0;
                     if (wowObj.RequiresUpdate) wowObj.Update();
                 }
             }
@@ -227,40 +229,22 @@ namespace Herbfunk.GarrisonBase.Cache
                 if (!guidsSeenThisLoop.Contains(obj.Guid))
                     obj.LoopsUnseen++;
 
-                if (CheckFlag(obj.SubType, WoWObjectTypes.Herb))
+                if (CheckFlag(obj.SubType, WoWObjectTypes.Herb) && obj.ShouldLoot)
                     FoundHerbObject = true;
-                if (CheckFlag(obj.SubType, WoWObjectTypes.OreVein))
+                if (CheckFlag(obj.SubType, WoWObjectTypes.OreVein) && obj.ShouldLoot)
                     FoundOreObject = true;
 
                 if (obj.LoopsUnseen >= 5 && !obj.IgnoresRemoval)
                     obj.NeedsRemoved = true;
             }
 
-            //Tally up unseen objects.
-            //var unseenObjects = ObjectCollection.Keys.Where(o => !guidsSeenThisLoop.Contains(o)).ToList();
-            //if (unseenObjects.Any())
-            //{
-            //    for (int i = 0; i < unseenObjects.Count(); i++)
-            //    {
-            //        ObjectCollection[unseenObjects[i]].LoopsUnseen++;
-            //    }
-            //}
-
             //Trim our collection every 5th refresh.
             _updateLoopCounter++;
             if (_updateLoopCounter > 4)
             {
                 _updateLoopCounter = 0;
-                //Now flag any objects not seen for 5 loops
-                //foreach (var item in ObjectCollection.Values.Where(CO => CO.LoopsUnseen >= 5 && !CO.IgnoresRemoval))
-                //{
-                //    item.NeedsRemoved = true;
-                //}
                 CheckForCacheRemoval();
             }
-
-            //if (_shouldLoot) UpdateLootableTarget();
-            //if (_shouldKill) UpdateCombatTarget();
 
             _lastUpdatedCacheCollection = DateTime.Now;
         }
