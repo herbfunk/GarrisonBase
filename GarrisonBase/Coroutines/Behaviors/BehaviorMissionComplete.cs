@@ -25,7 +25,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (Character.Player.MinimapZoneText != "Town Hall" || CommandTable == null)
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
 
-            Criteria += () => BaseSettings.CurrentSettings.BehaviorMissionComplete && GarrisonManager.CompletedMissionIds.Count > 0;
+            Criteria += () => BaseSettings.CurrentSettings.BehaviorMissionComplete && GarrisonManager.CompletedMissions.Count > 0;
         }
 
         public override void Initalize()
@@ -36,7 +36,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public C_WoWObject CommandTable
         {
-            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(obj => obj.IsValid); }
+            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(); }
         }
 
         public override async Task<bool> BehaviorRoutine()
@@ -67,7 +67,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
             if (CommandTable.Distance < 4.56 && CommandTable.LineOfSight)
             {
-                if (LuaUI.MissionFrame.IsOpen)
+                if (GarrisonMissionFrame.Instance.IsVisible)
                 {
                     _interactattempts = 0;
                     return false;

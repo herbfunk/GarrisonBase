@@ -61,8 +61,8 @@ namespace Herbfunk.GarrisonBase.Cache.Static
             #endregion
 
             #region GARRISON Work Order Npc
-            {79857, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
-            {77378, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
+            {79857, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc | WoWObjectTypes.Vendor)},
+            {77378, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc | WoWObjectTypes.Vendor)},
             {79820, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
             {77781, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
             {79817, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},

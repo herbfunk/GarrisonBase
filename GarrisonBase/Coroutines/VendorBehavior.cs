@@ -430,7 +430,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
         }
         private static async Task<bool> DisenchantInteraction(C_WoWGameObject disenchantobject, List<C_WoWItem> items )
         {
-            if (disenchantobject.GetCursor == WoWCursorType.InteractCursor)
+            if (disenchantobject.GetCursor != WoWCursorType.InteractCursor)
             {
                 GarrisonBase.Debug("Disenchant Interaction failed -- Cursor was not InteractCursor!");
                 return false;

@@ -35,9 +35,11 @@ namespace Herbfunk.GarrisonBase.Coroutines
 
             if (await CombatBehavior.ExecuteBehavior()) return true;
 
+            if (await VendorBehavior.ExecuteBehavior()) return true;
+
             if (await LootBehavior.ExecuteBehavior()) return true;
 
-            if (await VendorBehavior.ExecuteBehavior()) return true;
+            
 
 
             return false;

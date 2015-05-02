@@ -9,6 +9,8 @@ using Herbfunk.GarrisonBase.Garrison;
 using Herbfunk.GarrisonBase.Garrison.Objects;
 using Styx.Common.Helpers;
 using Styx.CommonBot.Coroutines;
+using Styx.CommonBot.Frames;
+using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 {
@@ -23,7 +25,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                 MovementPoints.Insert(0, MovementCache.GarrisonEntrance);
 
             Criteria += () => 
-                BaseSettings.CurrentSettings.BehaviorMissionStart && BaseSettings.CurrentSettings.BehaviorMissionComplete &&
+                BaseSettings.CurrentSettings.BehaviorMissionStart && 
+                BaseSettings.CurrentSettings.BehaviorMissionComplete &&
                 GarrisonManager.AvailableMissionIds.Count > 0 &&
                 GarrisonManager.CurrentActiveFollowers <= GarrisonManager.MaxActiveFollowers;
         }
@@ -35,7 +38,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         public C_WoWObject CommandTable
         {
-            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(obj => obj.IsValid); }
+            get { return ObjectCacheManager.GetWoWObjects(WoWObjectTypes.GarrisonCommandTable).FirstOrDefault(); }
         }
 
         public override async Task<bool> BehaviorRoutine()
@@ -69,7 +72,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private async Task<bool> Movement()
         {
-            if (LuaUI.MissionFrame.IsOpen)
+            if (GarrisonMissionFrame.Instance.IsVisible)
                 return false;
 
             if (CommandTable == null)

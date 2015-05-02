@@ -79,6 +79,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         hearthstone.Use();
                         await CommonCoroutines.SleepForRandomUiInteractionTime();
                         await Coroutine.Wait(10000, () => StyxWoW.Me.IsCasting);
+                        await Coroutine.Yield();
                         if (!await Coroutine.Wait(25000, () => Player.InsideGarrison))
                         {
                             GarrisonBase.Err("Used garrison hearthstone but not in garrison yet.");

@@ -1,5 +1,12 @@
-﻿v1.4.0.0
+﻿v1.4.0.1
 
+Mission Behavior will now use GarrisonMissionFrame to check visibility.
+Vendor Behavior will be checked before loot behavior now.
+Fixed vendor disenchanting failing after moving to object.
+Salvage Npcs are now considered vendors once again.
+
+
+v1.4.0.0
 Behaviors
 	Completing missions no longer requires the UI to interact with and now works with Master Plan enabled.
 	Salvaging no longer uses CTM movement.
