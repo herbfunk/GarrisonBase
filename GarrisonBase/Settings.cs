@@ -260,7 +260,7 @@ namespace Herbfunk.GarrisonBase
         public bool DisenchantingEpic{ get; set; }
         public bool DisenchantingEpicSoulbounded { get; set; }
         public int DisenchantingEpicItemLevel { get; set; }
-
+        public bool DisenchantingProfessionSkill { get; set; }
 
         public bool VendorJunkItems { get; set; }
         public bool VendorCommonItems { get; set; }
@@ -279,6 +279,8 @@ namespace Herbfunk.GarrisonBase
         public InscriptionMillingSetting MillingStarflower { get; set; }
 
         public int MinimumBagSlotsFree { get; set; }
+        public bool IgnoreBankItems { get; set; }
+        public bool IgnoreReagentBankItems { get; set; }
 
         public List<int> FollowerOptionalList = new List<int>();
 
@@ -380,6 +382,7 @@ namespace Herbfunk.GarrisonBase
             DisenchantingEpic = false;
             DisenchantingEpicSoulbounded = false;
             DisenchantingEpicItemLevel = 600;
+            DisenchantingProfessionSkill = true;
 
             VendorJunkItems = true;
             VendorCommonItems = true;
@@ -390,6 +393,8 @@ namespace Herbfunk.GarrisonBase
             //PlayerProfessions.ProfessionDailyCooldownSpellIds.Values.ForEach(professionSpellIds.AddRange);
             ProfessionSpellIds = new List<int>();
             MinimumBagSlotsFree = 4;
+            IgnoreBankItems = false;
+            IgnoreReagentBankItems = false;
 
             MillingEnabled = false;
             MillingMinimum = 50;

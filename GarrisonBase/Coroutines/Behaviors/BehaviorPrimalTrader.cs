@@ -118,7 +118,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             {
                 var count = 0;
 
-                foreach (var cWoWItem in Character.Player.Inventory.GetCraftingReagentsById(PlayerInventory.PrimalSpiritEntryId))
+                foreach (var cWoWItem in Character.Player.Inventory.GetCraftingReagentsById(PlayerInventory.PrimalSpiritEntryId, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems))
                 {
                     count += (int)cWoWItem.StackCount;
                 }

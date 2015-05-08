@@ -80,10 +80,16 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                         await CommonCoroutines.SleepForRandomUiInteractionTime();
                         await Coroutine.Wait(10000, () => StyxWoW.Me.IsCasting);
                         await Coroutine.Yield();
-                        if (!await Coroutine.Wait(25000, () => Player.InsideGarrison))
+                        if (!await Coroutine.Wait(25000, () => StyxWoW.Me.CurrentMap.IsGarrison))
                         {
                             GarrisonBase.Err("Used garrison hearthstone but not in garrison yet.");
                             return false;
+                        }
+
+                        //If we are using taxi.. finish it!
+                        if (BehaviorManager.CurrentBehavior.Type == BehaviorType.Taxi)
+                        {
+                            BehaviorManager.CurrentBehavior.IsDone = true;
                         }
                     }
                     else

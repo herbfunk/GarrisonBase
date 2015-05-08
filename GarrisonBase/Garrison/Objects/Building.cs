@@ -6,6 +6,7 @@ using Herbfunk.GarrisonBase.Character;
 using Herbfunk.GarrisonBase.Garrison.Enums;
 using Styx;
 using Styx.Helpers;
+using Styx.WoWInternals.DB;
 using Styx.WoWInternals.WoWObjects;
 
 namespace Herbfunk.GarrisonBase.Garrison.Objects
@@ -523,6 +524,67 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             }
 
             return -1;
+        }
+
+        public static GarrisonBuildingType GetGarrisonBuildingType(BuildingType type, bool ally)
+        {
+            switch (type)
+            {
+                case BuildingType.WarMillDwarvenBunker:
+                    return ally?GarrisonBuildingType.Barracks:GarrisonBuildingType.WarMill;
+                case BuildingType.Barracks:
+                    return GarrisonBuildingType.Barracks;
+                case BuildingType.GoblinWorkshop:
+                    return GarrisonBuildingType.Workshop;
+                case BuildingType.GnomishGearworks:
+                    return GarrisonBuildingType.Workshop;
+                case BuildingType.SpiritLodge:
+                    return GarrisonBuildingType.SpiritLodge;
+                case BuildingType.MageTower:
+                    return GarrisonBuildingType.SpiritLodge;
+                case BuildingType.Stables:
+                    return GarrisonBuildingType.Stables;
+                case BuildingType.Lumbermill:
+                    return GarrisonBuildingType.LumberMill;
+                case BuildingType.Barn:
+                    return GarrisonBuildingType.Barn;
+                case BuildingType.FrostwallTavern:
+                    return GarrisonBuildingType.Inn;
+                case BuildingType.GladiatorsSanctum:
+                    return GarrisonBuildingType.GladiatorsSanctum;
+                case BuildingType.TradingPost:
+                    return GarrisonBuildingType.TradingPost;
+                case BuildingType.TailoringEmporium:
+                    return GarrisonBuildingType.Tailoring;
+                case BuildingType.ScribesQuarters:
+                    return GarrisonBuildingType.Inscription;
+                case BuildingType.TheTannery:
+                    return GarrisonBuildingType.Leatherworking;
+                case BuildingType.TheForge:
+                    return GarrisonBuildingType.Blacksmithing;
+                case BuildingType.EnchantersStudy:
+                    return GarrisonBuildingType.Enchanting;
+                case BuildingType.EngineeringWorks:
+                    return GarrisonBuildingType.Engineering;
+                case BuildingType.GemBoutique:
+                    return GarrisonBuildingType.Jewelcrafting;
+                case BuildingType.AlchemyLab:
+                    return GarrisonBuildingType.Alchemy;
+                case BuildingType.Storehouse:
+                    return GarrisonBuildingType.Storehouse;
+                case BuildingType.SalvageYard:
+                    return GarrisonBuildingType.SalvageYard;
+                case BuildingType.FishingShack:
+                    return GarrisonBuildingType.Fishing;
+                case BuildingType.HerbGarden:
+                    return GarrisonBuildingType.HerbGarden;
+                case BuildingType.Mines:
+                    return GarrisonBuildingType.Mines;
+                case BuildingType.PetMenagerie:
+                    return GarrisonBuildingType.Menagerie;
+            }
+
+            return GarrisonBuildingType.Unknown;
         }
         
         #endregion

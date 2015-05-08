@@ -504,7 +504,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
             long buyableCount = 0;
             foreach (var c in currency)
             {
-                List<C_WoWItem> items = Character.Player.Inventory.GetCraftingReagentsById((int)c.Item1);
+                List<C_WoWItem> items = Character.Player.Inventory.GetCraftingReagentsById((int)c.Item1, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems);
                 if (items.Count == 0)
                 {
                     return 0;

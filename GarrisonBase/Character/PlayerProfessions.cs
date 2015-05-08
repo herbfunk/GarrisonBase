@@ -4,28 +4,39 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using Herbfunk.GarrisonBase.Cache.Objects;
 using Styx;
+using Styx.Common;
+using Styx.CommonBot;
+using Styx.WoWInternals;
 
 namespace Herbfunk.GarrisonBase.Character
 {
     public class PlayerProfessions
     {
-        public List<SkillLine> ProfessionSkills = new List<SkillLine>();
-        public List<int> ProfessionDailySkillIds = new List<int>();
+        public Dictionary<SkillLine, ProfessionSkill> ProfessionSkills = new Dictionary<SkillLine, ProfessionSkill>(); 
         public bool Skinning = false;
         public PlayerProfessions()
         {
-            ProfessionSkills = SkillsLearnt.ToList();
-            ProfessionDailySkillIds.Clear();
-            foreach (var skill in ProfessionSkills)
-            {
-                if (ProfessionDailyCooldownSpellIds.ContainsKey(skill))
-                    ProfessionDailySkillIds.AddRange(ProfessionDailyCooldownSpellIds[skill]);
-            }
-            GarrisonBase.Log("Profession Daily Skills #{0}", ProfessionDailySkillIds.Count);
+            RefreshProfessionSkills();
+            Skinning = ProfessionSkills.ContainsKey(SkillLine.Skinning);
+            GarrisonBase.Debug("Found a total of {0} professions!", ProfessionSkills.Count);
 
-            Skinning = StyxWoW.Me.GetSkill(SkillLine.Skinning).CurrentValue > 0;
+
         }
+
         
+        private void RefreshProfessionSkills()
+        {
+            ProfessionSkills.Clear();
+
+            foreach (var skillLine in SkillsList)
+            {
+                var spell = StyxWoW.Me.GetSkill(skillLine);
+                if (spell.MaxValue > 1)
+                {
+                    ProfessionSkills.Add(skillLine, new ProfessionSkill(skillLine, spell));
+                }
+            }
+        }
         /// <summary> 
         /// List of all the professions in World of Warcraft. 
         /// </summary> 
@@ -38,17 +49,17 @@ namespace Herbfunk.GarrisonBase.Character
                                SkillLine.Alchemy, 
                                //SkillLine.Archaeology, 
                                SkillLine.Blacksmithing, 
-                               //SkillLine.Cooking, 
+                               SkillLine.Cooking, 
                                SkillLine.Enchanting, 
                                SkillLine.Engineering, 
                                //SkillLine.FirstAid, 
-                               //SkillLine.Fishing, 
-                               //SkillLine.Herbalism, 
+                               SkillLine.Fishing, 
+                               SkillLine.Herbalism, 
                                SkillLine.Inscription, 
                                SkillLine.Jewelcrafting, 
                                SkillLine.Leatherworking, 
-                               //SkillLine.Mining, 
-                               //SkillLine.Skinning, 
+                               SkillLine.Mining, 
+                               SkillLine.Skinning, 
                                SkillLine.Tailoring 
                            }.AsReadOnly();
             }
@@ -76,6 +87,7 @@ namespace Herbfunk.GarrisonBase.Character
             {SkillLine.Engineering, 158739},
             {SkillLine.Inscription, 158748},
             {SkillLine.Enchanting, 158716},
+            {SkillLine.Cooking, 158765},
         };
 
         internal static Tuple<CraftingReagents, int>[] GetWorkOrderItemAndQuanityRequired(int spellId)
@@ -169,16 +181,7 @@ namespace Herbfunk.GarrisonBase.Character
 
             return "Unknown";
         }
-        /// <summary> 
-        /// List of the professions known by the player. 
-        /// </summary> 
-        internal ReadOnlyCollection<SkillLine> SkillsLearnt
-        {
-            get
-            {
-                return SkillsList.Where(skill => StyxWoW.Me.GetSkill(skill).MaxValue >= 700).ToList().AsReadOnly();
-            }
-        }
+
 
         public static bool HasRequiredCurrency(Tuple<CraftingReagents, int>[] Currency)
         {
@@ -204,6 +207,87 @@ namespace Herbfunk.GarrisonBase.Character
             return (buyableCount / Currency.Length)>=1;
         }
 
+        public static int DisenchantRequiredEnchantingSkill(C_WoWItem item)
+        {
+            var ilevel = item.Level;
+            if (ilevel < 61)
+            {
+                if (ilevel < 21) return 1;
+                if (ilevel < 26) return 25;
+                if (ilevel < 31) return 50;
+                if (ilevel < 36) return 75;
+                if (ilevel < 41) return 100;
+                if (ilevel < 46) return 125;
+                if (ilevel < 51) return 150;
+                if (ilevel < 56) return 175;
+                return 200;
+            }
 
+            var quality = item.Quality;
+            if (quality == WoWItemQuality.Uncommon)
+            {
+                if (ilevel < 100) return 225;
+                if (ilevel < 121) return 275;
+                if (ilevel < 151) return 325;
+                if (ilevel < 183) return 350;
+                if (ilevel < 334) return 425;
+                if (ilevel < 438) return 475;
+            }
+            else if (quality == WoWItemQuality.Rare)
+            {
+                if (ilevel < 100) return 225;
+                if (ilevel < 121) return 275;
+                if (ilevel < 201) return 325;
+                if (ilevel < 378) return 450;
+                if (ilevel < 477) return 550;
+            }
+            else if (quality == WoWItemQuality.Epic)
+            {
+                if (ilevel < 90) return 225;
+                if (ilevel < 152) return 300;
+                if (ilevel < 278) return 375;
+                if (ilevel < 417) return 475;
+                if (ilevel < 529) return 575;
+            }
+
+            return 1;
+        }
+
+
+        public class ProfessionSkill
+        {
+            public SkillLine Skill { get; set; }
+            public int MaxValue { get; set; }
+            public int CurrentValue { get; set; }
+
+            public int SpellbookId { get; set; }
+            public int[] DailyCooldownSpellIds { get; set; }
+
+            public ProfessionSkill(SkillLine skill,WoWSkill spell)
+            {
+                Skill = skill;
+                MaxValue = spell.MaxValue;
+                CurrentValue = spell.CurrentValue;
+                DailyCooldownSpellIds = null;
+
+                if (MaxValue >= 700 && ProfessionDailyCooldownSpellIds.ContainsKey(Skill))
+                    DailyCooldownSpellIds = ProfessionDailyCooldownSpellIds[Skill];
+
+                if (DraenorProfessionSpellIds.ContainsKey(Skill))
+                    SpellbookId = DraenorProfessionSpellIds[Skill];
+            }
+
+            public override string ToString()
+            {
+                var dailycooldownStr = "Daily Cooldown Spells: ";
+                if (DailyCooldownSpellIds != null)
+                {
+                    dailycooldownStr = DailyCooldownSpellIds.Aggregate(dailycooldownStr, (current, id) => current + "Id: " + id);
+                }
+
+                return String.Format("{0} {1} / {2} -- SpellBookId {3} {4}",
+                    Skill.ToString(), CurrentValue, MaxValue, SpellbookId, dailycooldownStr);
+            }
+        }
     }
 }

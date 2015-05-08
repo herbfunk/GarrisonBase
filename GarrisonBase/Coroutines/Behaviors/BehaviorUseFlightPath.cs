@@ -39,10 +39,14 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             _taxiMovement = null;
             _taxiNpc = null;
             _nonVisiblityCount = 0;
+           
+            GarrisonBase.Debug("UseFlightPath Destination {0}", _destination.ToString());
 
             _destinationFlightPathInfo = TaxiFlightHelper.NearestFlightPathFromLocation(_destination);
             if (_destinationFlightPathInfo != null)
             {
+                GarrisonBase.Debug("Destination FlightPathInfo {0}", _destinationFlightPathInfo.ToString());
+
                 if (_destinationFlightPathInfo.MasterId == TaxiFlightHelper.FlightPathInfo.FrostwallMasterEntry ||
                     _destinationFlightPathInfo.MasterId == TaxiFlightHelper.FlightPathInfo.LunarfallMasterEntry)
                 {
@@ -50,9 +54,10 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
                     Common.PreChecks.IgnoreHearthing = false;
                 }
             }
-
+            
             _currentMapId = TaxiFlightHelper.GetMapId(Player.Location);
             _destinationMapId = TaxiFlightHelper.GetMapId(_destination);
+            GarrisonBase.Debug("Current Map Id {0} -- Destination Map Id {1}", _currentMapId, _destinationMapId);
             if (_currentMapId != _destinationMapId) 
                 _shouldCheckMapId = true;
 
@@ -71,7 +76,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
         {
             if (await base.BehaviorRoutine()) return true;
             if (IsDone) return false;
-
+            
             if (_shouldCheckMapId && Player.MapId == _destinationMapId)
             {
                 GarrisonBase.Debug("UseFlightPath is finished due to matching map ids");
@@ -88,7 +93,6 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if (TaxiFlightHelper.TaxiNodes.Count > 0 && _selectedTaxiNode == null && await CheckFlightNodes()) return true;
 
             if (await VerifyFlightNpc()) return true;
-
 
             if (await UseFlightPath()) return true;
 

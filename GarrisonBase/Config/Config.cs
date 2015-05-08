@@ -852,6 +852,17 @@ namespace Herbfunk.GarrisonBase.Config
                 (sender, args) =>
                     BaseSettings.CurrentSettings.BehaviorSalvaging = !BaseSettings.CurrentSettings.BehaviorSalvaging;
 
+            checkBox_IgnoreBankItems.ClearHandlers();
+            checkBox_IgnoreBankItems.Checked = BaseSettings.CurrentSettings.IgnoreBankItems;
+            checkBox_IgnoreBankItems.CCheckedChanged +=
+               (sender, args) =>
+                   BaseSettings.CurrentSettings.IgnoreBankItems = !BaseSettings.CurrentSettings.IgnoreBankItems;
+
+            checkBox_IgnoreReagentBankItems.ClearHandlers();
+            checkBox_IgnoreReagentBankItems.Checked = BaseSettings.CurrentSettings.IgnoreReagentBankItems;
+            checkBox_IgnoreReagentBankItems.CCheckedChanged +=
+               (sender, args) =>
+                   BaseSettings.CurrentSettings.IgnoreReagentBankItems = !BaseSettings.CurrentSettings.IgnoreReagentBankItems;
 
             #endregion
 
@@ -907,6 +918,13 @@ namespace Herbfunk.GarrisonBase.Config
                 (sender, args) =>
                     BaseSettings.CurrentSettings.BehaviorDisenchanting =
                         !BaseSettings.CurrentSettings.BehaviorDisenchanting;
+
+            checkBox_Disenchanting_ProfessionSkillDisenchanting.ClearHandlers();
+            checkBox_Disenchanting_ProfessionSkillDisenchanting.Checked = BaseSettings.CurrentSettings.DisenchantingProfessionSkill;
+            checkBox_Disenchanting_ProfessionSkillDisenchanting.CCheckedChanged +=
+                (sender, args) =>
+                    BaseSettings.CurrentSettings.DisenchantingProfessionSkill =
+                        !BaseSettings.CurrentSettings.DisenchantingProfessionSkill;
 
             checkBox_Disenchanting_UncommonItems.ClearHandlers();
             checkBox_Disenchanting_UncommonItems.Checked = BaseSettings.CurrentSettings.DisenchantingUncommon;
@@ -1664,12 +1682,7 @@ namespace Herbfunk.GarrisonBase.Config
                 LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
             }
 
-            LBDebug.Controls.Add(new UserControlDebugEntry("Followers Not Collected", Color.WhiteSmoke, Color.DarkGray));
-            foreach (var b in GarrisonManager.FollowerIdsNotCollected)
-            {
-                LBDebug.Controls.Add(new UserControlDebugEntry(b.ToString()));
-            }
-
+            
             LBDebug.Focus();
         }
 
@@ -1775,7 +1788,8 @@ namespace Herbfunk.GarrisonBase.Config
             {
                 foreach (var n in GarrisonInfo.OwnedBuildings)
                 {
-                    LBDebug.Controls.Add(new UserControlDebugEntry(n.ToString()));
+                    var s = String.Format("GarrBuildingId:{0} ID:{1} {2}", n.GarrBuildingId, n.Id, n.ToString());
+                    LBDebug.Controls.Add(new UserControlDebugEntry(s));
                 }
             }
             catch (Exception ex)
@@ -1804,35 +1818,44 @@ namespace Herbfunk.GarrisonBase.Config
             LBDebug.Focus();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void dumpShipmentInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var completedMissions = new List<GarrisonMission>();
-            foreach (var mission in GarrisonInfo.Missions)
+            LBDebug.Controls.Clear();
+            try
             {
-                if (mission.State == MissionState.Complete ||
-                    (mission.State == MissionState.InProgress && mission.MissionTimeLeft.TotalSeconds == 0))
+                foreach (var n in GarrisonInfo.LandingPageShipmentInfos)
                 {
-                    completedMissions.Add(mission);
+                    LBDebug.Controls.Add(new UserControlDebugEntry(n.ToString()));
                 }
             }
-
-            for (int i = 0; i < completedMissions.Count; i++)
+            catch (Exception ex)
             {
-                var curMission = completedMissions[i];
-                if (curMission.State == MissionState.InProgress)
-                {
-                    LuaCommands.MissionCompleteMarkComplete(curMission.Id);
-                    Thread.Sleep(1000);
-                }
-                if (curMission.State == MissionState.Complete)
-                {
-                    LuaCommands.MissionCompleteRollChest(curMission.Id);
-                    Thread.Sleep(1000);
-                }
-
-                break;
+                LBDebug.Controls.Add(new UserControlDebugEntry("End of Output due to Modification Exception"));
             }
+
+            LBDebug.Focus();
         }
+
+
+        private void professionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LBDebug.Controls.Clear();
+            try
+            {
+                foreach (var n in Player.Professions.ProfessionSkills.Values)
+                {
+                    LBDebug.Controls.Add(new UserControlDebugEntry(n.ToString()));
+                }
+            }
+            catch (Exception ex)
+            {
+                LBDebug.Controls.Add(new UserControlDebugEntry("End of Output due to Modification Exception"));
+            }
+
+            LBDebug.Focus();
+        }
+
+
 
 
     }

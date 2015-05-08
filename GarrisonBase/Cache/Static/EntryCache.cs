@@ -87,6 +87,8 @@ namespace Herbfunk.GarrisonBase.Cache.Static
             {78207, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
             {89066, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)}, 
             {89065, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
+            {85048, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
+            {84524, new ObjectEntryInfo( WoWObjectType.Unit, WoWObjectTypes.GarrisonWorkOrderNpc)},
 
 
             //Alliance Trade Post

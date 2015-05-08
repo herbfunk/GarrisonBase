@@ -39,29 +39,16 @@
             this.groupBox14 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label_ItemReward_CharacterTokenLevel = new System.Windows.Forms.Label();
-            this.trackBar_ItemReward_CharacterTokenLevel = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox_Behavior_CompleteMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.textBox_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Behavior_StartMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.trackBar_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.tabControl4 = new System.Windows.Forms.TabControl();
             this.tabPage13 = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_WorkOrderTypes = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Behavior_WorkOrderPickup = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Behavior_WorkOrderStart = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage14 = new System.Windows.Forms.TabPage();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_TradePostReagents = new System.Windows.Forms.FlowLayoutPanel();
@@ -69,30 +56,15 @@
             this.groupBox19 = new System.Windows.Forms.GroupBox();
             this.groupBox22 = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.textBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.checkBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Barn_Furs = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Barn_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Barn_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabControl_Professions = new System.Windows.Forms.TabControl();
             this.tabPage_Alchemy = new System.Windows.Forms.TabPage();
@@ -101,36 +73,132 @@
             this.tabPage_Engineering = new System.Windows.Forms.TabPage();
             this.tabPage_Inscription = new System.Windows.Forms.TabPage();
             this.flowLayoutPanel_Milling = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Milling_Enabled = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox_Milling_RequiredAmount = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.panel_Professions_Inscripition = new System.Windows.Forms.Panel();
             this.tabPage_Jewelcrafting = new System.Windows.Forms.TabPage();
             this.tabPage_Leatherworking = new System.Windows.Forms.TabPage();
             this.tabPage_Tailoring = new System.Windows.Forms.TabPage();
-            this.checkBox_Behavior_Professions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabControl3 = new System.Windows.Forms.TabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel_MiscBehaviors = new System.Windows.Forms.FlowLayoutPanel();
+            this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tabPage12 = new System.Windows.Forms.TabPage();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.groupBox16 = new System.Windows.Forms.GroupBox();
+            this.contextMenuStrip_MailItems = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.LBDebug = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.garrisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFollowersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBuildingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpMissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.garrisonInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpMissionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBuildingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFollowersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpShipmentInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.behaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpCurrentBehaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpObjectsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpReagentBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpQuestLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpFlightPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.defaultSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.playerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.professionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trackBar_ItemReward_CharacterTokenLevel = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_CompleteMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Behavior_StartMissions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.trackBar_ReservedGarrisonResources = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
+            this.checkBox_Behavior_WorkOrderPickup = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_WorkOrderStart = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_Elite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Trapping_NonElite_Fur = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Barn_Furs = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Barn_Leather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Barn_Meat = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Milling_Enabled = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.textBox_Milling_RequiredAmount = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_Behavior_Professions = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Behavior_Salvaging = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Behavior_MineGather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Behavior_HerbGather = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Behavior_LootCache = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_LootAnything = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.checkBox_ExchangePrimalSpirits = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.comboBox_PrimalSpiritItems = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
+            this.checkBox_HBRelogSkipTask = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_193 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_189 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_207 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_467 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_190 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_170 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_209 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Follower_32 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.comboBox_DailyQuest_Alchemy_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
+            this.checkBox_DailyQuest_AlchemyLab = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.comboBox_DailyQuest_WarMill_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
+            this.checkBox_DailyQuest_Warmill = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Behavior_Quests = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_FakeStartWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_FakeFinishQuest = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_IgnoreHearthStone = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_Debug_FakePickupWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.tabControl5 = new System.Windows.Forms.TabControl();
+            this.tabPage17 = new System.Windows.Forms.TabPage();
+            this.tabPage18 = new System.Windows.Forms.TabPage();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.checkBox_Behavior_RepairSell = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
-            this.trackBar_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox_Vendor_Junk = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Vendor_Common = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Vendor_Uncommon = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Vendor_Rare = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_Behavior_Disenchant = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox_Disenchanting_EpicSoulbound = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
@@ -142,43 +210,11 @@
             this.checkBox_Disenchanting_UncommonItems = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.textBox_Disenchanting_UncommonLevel = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
             this.checkBox_Disenchanting_UncommonSoulbound = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.checkBox_ExchangePrimalSpirits = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.comboBox_PrimalSpiritItems = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
-            this.tabPage10 = new System.Windows.Forms.TabPage();
-            this.checkBox_HBRelogSkipTask = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.tabPage11 = new System.Windows.Forms.TabPage();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Follower_193 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_189 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_207 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_467 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_190 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_170 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_209 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Follower_32 = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tabPage12 = new System.Windows.Forms.TabPage();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
-            this.groupBox17 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DailyQuest_Alchemy_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
-            this.checkBox_DailyQuest_AlchemyLab = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.groupBox16 = new System.Windows.Forms.GroupBox();
-            this.comboBox_DailyQuest_WarMill_Rewards = new Herbfunk.GarrisonBase.Config.UserControl_Combobox();
-            this.checkBox_DailyQuest_Warmill = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Behavior_Quests = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.listView_MailItems = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip_MailItems = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button_MailItem_AddFromBags = new System.Windows.Forms.Button();
             this.textBox_MailEnchanting = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
@@ -208,39 +244,12 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox_MailAutoSend = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.checkBox_MailAutoGet = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.LBDebug = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
-            this.garrisonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpFollowersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpBuildingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpMissionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.garrisonInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpMissionsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpBuildingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpFollowersToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.behaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpCurrentBehaviorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cacheToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpObjectsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpEntriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.itemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpBagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpReagentBankToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpQuestLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.dumpFlightPathsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.checkBox_Debug_FakeStartWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Debug_FakeFinishQuest = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Debug_IgnoreHearthStone = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.checkBox_Debug_FakePickupWorkOrder = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.defaultSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.trackBar_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Trackbar();
+            this.textBox_MinimumBagSlotsFree = new Herbfunk.GarrisonBase.Config.UserControl_Textbox();
+            this.checkBox_IgnoreBankItems = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
+            this.checkBox_IgnoreReagentBankItems = new Herbfunk.GarrisonBase.Config.UserControl_CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -248,11 +257,9 @@
             this.groupBox10.SuspendLayout();
             this.tabPage_Mission_Items.SuspendLayout();
             this.groupBox14.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).BeginInit();
             this.groupBox13.SuspendLayout();
             this.flowLayoutPanel6.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).BeginInit();
             this.tabPage6.SuspendLayout();
             this.tabControl4.SuspendLayout();
             this.tabPage13.SuspendLayout();
@@ -276,11 +283,6 @@
             this.tabPage7.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.flowLayoutPanel_MiscBehaviors.SuspendLayout();
-            this.tabPage8.SuspendLayout();
-            this.groupBox12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).BeginInit();
-            this.flowLayoutPanel4.SuspendLayout();
-            this.groupBox11.SuspendLayout();
             this.tabPage9.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage10.SuspendLayout();
@@ -290,18 +292,29 @@
             this.groupBox15.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.groupBox16.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.contextMenuStrip_MailItems.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.flowLayoutPanel3.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.menuStrip2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).BeginInit();
+            this.tabPage16.SuspendLayout();
+            this.tabControl5.SuspendLayout();
+            this.tabPage17.SuspendLayout();
+            this.tabPage18.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -309,8 +322,8 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage6);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage16);
             this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 24);
@@ -417,18 +430,6 @@
             this.label_ItemReward_CharacterTokenLevel.TabIndex = 11;
             this.label_ItemReward_CharacterTokenLevel.Text = "519";
             // 
-            // trackBar_ItemReward_CharacterTokenLevel
-            // 
-            this.trackBar_ItemReward_CharacterTokenLevel.LargeChange = 25;
-            this.trackBar_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(2, 36);
-            this.trackBar_ItemReward_CharacterTokenLevel.Maximum = 670;
-            this.trackBar_ItemReward_CharacterTokenLevel.Minimum = 519;
-            this.trackBar_ItemReward_CharacterTokenLevel.Name = "trackBar_ItemReward_CharacterTokenLevel";
-            this.trackBar_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(231, 42);
-            this.trackBar_ItemReward_CharacterTokenLevel.TabIndex = 10;
-            this.trackBar_ItemReward_CharacterTokenLevel.TickFrequency = 10;
-            this.trackBar_ItemReward_CharacterTokenLevel.Value = 519;
-            // 
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.flowLayoutPanel6);
@@ -454,78 +455,6 @@
             this.flowLayoutPanel6.Size = new System.Drawing.Size(165, 142);
             this.flowLayoutPanel6.TabIndex = 0;
             // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet615
-            // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet615";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.TabIndex = 0;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Text = "Armor Set Level 615";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet615
-            // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Location = new System.Drawing.Point(3, 26);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet615";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.TabIndex = 1;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Text = "Weapon Set Level 615";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet630
-            // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Location = new System.Drawing.Point(3, 49);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet630";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.TabIndex = 3;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Text = "Armor Set Level 630";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet630
-            // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Location = new System.Drawing.Point(3, 72);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet630";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.TabIndex = 2;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Text = "Weapon Set Level 630";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MissionRewards_FollowerToken_ArmorSet645
-            // 
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.ForeColor = System.Drawing.Color.DarkViolet;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Location = new System.Drawing.Point(3, 95);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet645";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Size = new System.Drawing.Size(141, 17);
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.TabIndex = 4;
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Text = "Armor Set Level 645";
-            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MissionRewards_FollowerToken_WeaponSet645
-            // 
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.AutoSize = true;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.ForeColor = System.Drawing.Color.DarkViolet;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Location = new System.Drawing.Point(3, 118);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet645";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Size = new System.Drawing.Size(156, 17);
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.TabIndex = 5;
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Text = "Weapon Set Level 645";
-            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.UseVisualStyleBackColor = true;
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.checkBox_Behavior_CompleteMissions);
@@ -539,39 +468,6 @@
             this.panel1.Size = new System.Drawing.Size(731, 63);
             this.panel1.TabIndex = 16;
             // 
-            // checkBox_Behavior_CompleteMissions
-            // 
-            this.checkBox_Behavior_CompleteMissions.AutoSize = true;
-            this.checkBox_Behavior_CompleteMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_CompleteMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_CompleteMissions.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_CompleteMissions.Name = "checkBox_Behavior_CompleteMissions";
-            this.checkBox_Behavior_CompleteMissions.Size = new System.Drawing.Size(175, 24);
-            this.checkBox_Behavior_CompleteMissions.TabIndex = 16;
-            this.checkBox_Behavior_CompleteMissions.Text = "Complete Missions";
-            this.checkBox_Behavior_CompleteMissions.UseVisualStyleBackColor = true;
-            // 
-            // textBox_ReservedGarrisonResources
-            // 
-            this.textBox_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_ReservedGarrisonResources.Location = new System.Drawing.Point(653, 20);
-            this.textBox_ReservedGarrisonResources.Name = "textBox_ReservedGarrisonResources";
-            this.textBox_ReservedGarrisonResources.Size = new System.Drawing.Size(61, 29);
-            this.textBox_ReservedGarrisonResources.TabIndex = 15;
-            this.textBox_ReservedGarrisonResources.Text = "10000";
-            // 
-            // checkBox_Behavior_StartMissions
-            // 
-            this.checkBox_Behavior_StartMissions.AutoSize = true;
-            this.checkBox_Behavior_StartMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_StartMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(3, 33);
-            this.checkBox_Behavior_StartMissions.Name = "checkBox_Behavior_StartMissions";
-            this.checkBox_Behavior_StartMissions.Size = new System.Drawing.Size(139, 24);
-            this.checkBox_Behavior_StartMissions.TabIndex = 14;
-            this.checkBox_Behavior_StartMissions.Text = "Start Missions";
-            this.checkBox_Behavior_StartMissions.UseVisualStyleBackColor = true;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -581,18 +477,6 @@
             this.label12.Size = new System.Drawing.Size(227, 17);
             this.label12.TabIndex = 11;
             this.label12.Text = "Reserved Garrison Resources";
-            // 
-            // trackBar_ReservedGarrisonResources
-            // 
-            this.trackBar_ReservedGarrisonResources.LargeChange = 100;
-            this.trackBar_ReservedGarrisonResources.Location = new System.Drawing.Point(416, 20);
-            this.trackBar_ReservedGarrisonResources.Maximum = 10000;
-            this.trackBar_ReservedGarrisonResources.Name = "trackBar_ReservedGarrisonResources";
-            this.trackBar_ReservedGarrisonResources.Size = new System.Drawing.Size(231, 42);
-            this.trackBar_ReservedGarrisonResources.SmallChange = 5;
-            this.trackBar_ReservedGarrisonResources.TabIndex = 9;
-            this.trackBar_ReservedGarrisonResources.TickFrequency = 500;
-            this.trackBar_ReservedGarrisonResources.Value = 1;
             // 
             // tabPage6
             // 
@@ -659,30 +543,6 @@
             this.flowLayoutPanel_WorkOrderTypes.Name = "flowLayoutPanel_WorkOrderTypes";
             this.flowLayoutPanel_WorkOrderTypes.Size = new System.Drawing.Size(703, 143);
             this.flowLayoutPanel_WorkOrderTypes.TabIndex = 7;
-            // 
-            // checkBox_Behavior_WorkOrderPickup
-            // 
-            this.checkBox_Behavior_WorkOrderPickup.AutoSize = true;
-            this.checkBox_Behavior_WorkOrderPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_WorkOrderPickup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_WorkOrderPickup.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_Behavior_WorkOrderPickup.Name = "checkBox_Behavior_WorkOrderPickup";
-            this.checkBox_Behavior_WorkOrderPickup.Size = new System.Drawing.Size(174, 24);
-            this.checkBox_Behavior_WorkOrderPickup.TabIndex = 5;
-            this.checkBox_Behavior_WorkOrderPickup.Text = "Work Order Pickup";
-            this.checkBox_Behavior_WorkOrderPickup.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_WorkOrderStart
-            // 
-            this.checkBox_Behavior_WorkOrderStart.AutoSize = true;
-            this.checkBox_Behavior_WorkOrderStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_WorkOrderStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_WorkOrderStart.Location = new System.Drawing.Point(186, 19);
-            this.checkBox_Behavior_WorkOrderStart.Name = "checkBox_Behavior_WorkOrderStart";
-            this.checkBox_Behavior_WorkOrderStart.Size = new System.Drawing.Size(161, 24);
-            this.checkBox_Behavior_WorkOrderStart.TabIndex = 6;
-            this.checkBox_Behavior_WorkOrderStart.Text = "Work Order Start";
-            this.checkBox_Behavior_WorkOrderStart.UseVisualStyleBackColor = true;
             // 
             // tabPage14
             // 
@@ -761,23 +621,6 @@
             this.label17.TabIndex = 5;
             this.label17.Text = "Max Item Count";
             // 
-            // textBox_Trapping_Elite_Meat
-            // 
-            this.textBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(242, 42);
-            this.textBox_Trapping_Elite_Meat.Name = "textBox_Trapping_Elite_Meat";
-            this.textBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_Elite_Meat.TabIndex = 4;
-            // 
-            // checkBox_Trapping_Elite_Meat
-            // 
-            this.checkBox_Trapping_Elite_Meat.AutoSize = true;
-            this.checkBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(6, 45);
-            this.checkBox_Trapping_Elite_Meat.Name = "checkBox_Trapping_Elite_Meat";
-            this.checkBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(148, 17);
-            this.checkBox_Trapping_Elite_Meat.TabIndex = 3;
-            this.checkBox_Trapping_Elite_Meat.Text = "Caged Mighty Riverbeast ";
-            this.checkBox_Trapping_Elite_Meat.UseVisualStyleBackColor = true;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -786,23 +629,6 @@
             this.label18.Size = new System.Drawing.Size(81, 13);
             this.label18.TabIndex = 2;
             this.label18.Text = "Max Item Count";
-            // 
-            // textBox_Trapping_NonElite_Meat
-            // 
-            this.textBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(242, 16);
-            this.textBox_Trapping_NonElite_Meat.Name = "textBox_Trapping_NonElite_Meat";
-            this.textBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_NonElite_Meat.TabIndex = 1;
-            // 
-            // checkBox_Trapping_NonElite_Meat
-            // 
-            this.checkBox_Trapping_NonElite_Meat.AutoSize = true;
-            this.checkBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_Trapping_NonElite_Meat.Name = "checkBox_Trapping_NonElite_Meat";
-            this.checkBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(122, 17);
-            this.checkBox_Trapping_NonElite_Meat.TabIndex = 0;
-            this.checkBox_Trapping_NonElite_Meat.Text = "Meaty Caged Beast ";
-            this.checkBox_Trapping_NonElite_Meat.UseVisualStyleBackColor = true;
             // 
             // groupBox21
             // 
@@ -828,23 +654,6 @@
             this.label10.TabIndex = 5;
             this.label10.Text = "Max Item Count";
             // 
-            // textBox_Trapping_Elite_Leather
-            // 
-            this.textBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(242, 42);
-            this.textBox_Trapping_Elite_Leather.Name = "textBox_Trapping_Elite_Leather";
-            this.textBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_Elite_Leather.TabIndex = 4;
-            // 
-            // checkBox_Trapping_Elite_Leather
-            // 
-            this.checkBox_Trapping_Elite_Leather.AutoSize = true;
-            this.checkBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(6, 45);
-            this.checkBox_Trapping_Elite_Leather.Name = "checkBox_Trapping_Elite_Leather";
-            this.checkBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(139, 17);
-            this.checkBox_Trapping_Elite_Leather.TabIndex = 3;
-            this.checkBox_Trapping_Elite_Leather.Text = "Caged Mighty Clefthoof ";
-            this.checkBox_Trapping_Elite_Leather.UseVisualStyleBackColor = true;
-            // 
             // label15
             // 
             this.label15.AutoSize = true;
@@ -853,23 +662,6 @@
             this.label15.Size = new System.Drawing.Size(81, 13);
             this.label15.TabIndex = 2;
             this.label15.Text = "Max Item Count";
-            // 
-            // textBox_Trapping_NonElite_Leather
-            // 
-            this.textBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(242, 16);
-            this.textBox_Trapping_NonElite_Leather.Name = "textBox_Trapping_NonElite_Leather";
-            this.textBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_NonElite_Leather.TabIndex = 1;
-            // 
-            // checkBox_Trapping_NonElite_Leather
-            // 
-            this.checkBox_Trapping_NonElite_Leather.AutoSize = true;
-            this.checkBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_Trapping_NonElite_Leather.Name = "checkBox_Trapping_NonElite_Leather";
-            this.checkBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(131, 17);
-            this.checkBox_Trapping_NonElite_Leather.TabIndex = 0;
-            this.checkBox_Trapping_NonElite_Leather.Text = "Leathery Caged Beast";
-            this.checkBox_Trapping_NonElite_Leather.UseVisualStyleBackColor = true;
             // 
             // groupBox20
             // 
@@ -895,23 +687,6 @@
             this.label9.TabIndex = 5;
             this.label9.Text = "Max Item Count";
             // 
-            // textBox_Trapping_Elite_Fur
-            // 
-            this.textBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(242, 42);
-            this.textBox_Trapping_Elite_Fur.Name = "textBox_Trapping_Elite_Fur";
-            this.textBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_Elite_Fur.TabIndex = 4;
-            // 
-            // checkBox_Trapping_Elite_Fur
-            // 
-            this.checkBox_Trapping_Elite_Fur.AutoSize = true;
-            this.checkBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(6, 45);
-            this.checkBox_Trapping_Elite_Fur.Name = "checkBox_Trapping_Elite_Fur";
-            this.checkBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(116, 17);
-            this.checkBox_Trapping_Elite_Fur.TabIndex = 3;
-            this.checkBox_Trapping_Elite_Fur.Text = "Caged Mighty Wolf";
-            this.checkBox_Trapping_Elite_Fur.UseVisualStyleBackColor = true;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -920,23 +695,6 @@
             this.label8.Size = new System.Drawing.Size(81, 13);
             this.label8.TabIndex = 2;
             this.label8.Text = "Max Item Count";
-            // 
-            // textBox_Trapping_NonElite_Fur
-            // 
-            this.textBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(242, 16);
-            this.textBox_Trapping_NonElite_Fur.Name = "textBox_Trapping_NonElite_Fur";
-            this.textBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(100, 20);
-            this.textBox_Trapping_NonElite_Fur.TabIndex = 1;
-            // 
-            // checkBox_Trapping_NonElite_Fur
-            // 
-            this.checkBox_Trapping_NonElite_Fur.AutoSize = true;
-            this.checkBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_Trapping_NonElite_Fur.Name = "checkBox_Trapping_NonElite_Fur";
-            this.checkBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(113, 17);
-            this.checkBox_Trapping_NonElite_Fur.TabIndex = 0;
-            this.checkBox_Trapping_NonElite_Fur.Text = "Furry Caged Beast";
-            this.checkBox_Trapping_NonElite_Fur.UseVisualStyleBackColor = true;
             // 
             // groupBox18
             // 
@@ -958,39 +716,6 @@
             this.flowLayoutPanel7.Name = "flowLayoutPanel7";
             this.flowLayoutPanel7.Size = new System.Drawing.Size(266, 24);
             this.flowLayoutPanel7.TabIndex = 0;
-            // 
-            // checkBox_Barn_Furs
-            // 
-            this.checkBox_Barn_Furs.AutoSize = true;
-            this.checkBox_Barn_Furs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Furs.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Barn_Furs.Name = "checkBox_Barn_Furs";
-            this.checkBox_Barn_Furs.Size = new System.Drawing.Size(50, 17);
-            this.checkBox_Barn_Furs.TabIndex = 1;
-            this.checkBox_Barn_Furs.Text = "Furs";
-            this.checkBox_Barn_Furs.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Barn_Leather
-            // 
-            this.checkBox_Barn_Leather.AutoSize = true;
-            this.checkBox_Barn_Leather.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Leather.Location = new System.Drawing.Point(59, 3);
-            this.checkBox_Barn_Leather.Name = "checkBox_Barn_Leather";
-            this.checkBox_Barn_Leather.Size = new System.Drawing.Size(69, 17);
-            this.checkBox_Barn_Leather.TabIndex = 2;
-            this.checkBox_Barn_Leather.Text = "Leather";
-            this.checkBox_Barn_Leather.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Barn_Meat
-            // 
-            this.checkBox_Barn_Meat.AutoSize = true;
-            this.checkBox_Barn_Meat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Barn_Meat.Location = new System.Drawing.Point(134, 3);
-            this.checkBox_Barn_Meat.Name = "checkBox_Barn_Meat";
-            this.checkBox_Barn_Meat.Size = new System.Drawing.Size(54, 17);
-            this.checkBox_Barn_Meat.TabIndex = 3;
-            this.checkBox_Barn_Meat.Text = "Meat";
-            this.checkBox_Barn_Meat.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -1084,17 +809,6 @@
             this.flowLayoutPanel_Milling.Size = new System.Drawing.Size(717, 396);
             this.flowLayoutPanel_Milling.TabIndex = 0;
             // 
-            // checkBox_Milling_Enabled
-            // 
-            this.checkBox_Milling_Enabled.AutoSize = true;
-            this.checkBox_Milling_Enabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Milling_Enabled.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Milling_Enabled.Name = "checkBox_Milling_Enabled";
-            this.checkBox_Milling_Enabled.Size = new System.Drawing.Size(125, 24);
-            this.checkBox_Milling_Enabled.TabIndex = 0;
-            this.checkBox_Milling_Enabled.Text = "Allow Milling";
-            this.checkBox_Milling_Enabled.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1104,16 +818,6 @@
             this.label6.TabIndex = 2;
             this.label6.Text = "Minimum Pigments";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // textBox_Milling_RequiredAmount
-            // 
-            this.flowLayoutPanel_Milling.SetFlowBreak(this.textBox_Milling_RequiredAmount, true);
-            this.textBox_Milling_RequiredAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Milling_RequiredAmount.Location = new System.Drawing.Point(211, 3);
-            this.textBox_Milling_RequiredAmount.Name = "textBox_Milling_RequiredAmount";
-            this.textBox_Milling_RequiredAmount.Size = new System.Drawing.Size(65, 26);
-            this.textBox_Milling_RequiredAmount.TabIndex = 1;
-            this.toolTip1.SetToolTip(this.textBox_Milling_RequiredAmount, "Minimum Pigments needed (below this number will start milling)");
             // 
             // panel_Professions_Inscripition
             // 
@@ -1153,20 +857,6 @@
             this.tabPage_Tailoring.Text = "Tailoring";
             this.tabPage_Tailoring.UseVisualStyleBackColor = true;
             // 
-            // checkBox_Behavior_Professions
-            // 
-            this.checkBox_Behavior_Professions.AutoSize = true;
-            this.checkBox_Behavior_Professions.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBox_Behavior_Professions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_Professions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Professions.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_Professions.Name = "checkBox_Behavior_Professions";
-            this.checkBox_Behavior_Professions.Padding = new System.Windows.Forms.Padding(10);
-            this.checkBox_Behavior_Professions.Size = new System.Drawing.Size(731, 44);
-            this.checkBox_Behavior_Professions.TabIndex = 19;
-            this.checkBox_Behavior_Professions.Text = "Enable Professions Behavior";
-            this.checkBox_Behavior_Professions.UseVisualStyleBackColor = true;
-            // 
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.tabControl3);
@@ -1181,7 +871,6 @@
             // tabControl3
             // 
             this.tabControl3.Controls.Add(this.tabPage7);
-            this.tabControl3.Controls.Add(this.tabPage8);
             this.tabControl3.Controls.Add(this.tabPage9);
             this.tabControl3.Controls.Add(this.tabPage10);
             this.tabControl3.Controls.Add(this.tabPage11);
@@ -1229,337 +918,6 @@
             this.flowLayoutPanel_MiscBehaviors.Size = new System.Drawing.Size(355, 173);
             this.flowLayoutPanel_MiscBehaviors.TabIndex = 0;
             // 
-            // checkBox_Behavior_Salvaging
-            // 
-            this.checkBox_Behavior_Salvaging.AutoSize = true;
-            this.checkBox_Behavior_Salvaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_Salvaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Salvaging.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_Salvaging.Name = "checkBox_Behavior_Salvaging";
-            this.checkBox_Behavior_Salvaging.Size = new System.Drawing.Size(103, 24);
-            this.checkBox_Behavior_Salvaging.TabIndex = 19;
-            this.checkBox_Behavior_Salvaging.Text = "Salvaging";
-            this.checkBox_Behavior_Salvaging.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_MineGather
-            // 
-            this.checkBox_Behavior_MineGather.AutoSize = true;
-            this.checkBox_Behavior_MineGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_MineGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_MineGather.Location = new System.Drawing.Point(3, 33);
-            this.checkBox_Behavior_MineGather.Name = "checkBox_Behavior_MineGather";
-            this.checkBox_Behavior_MineGather.Size = new System.Drawing.Size(115, 24);
-            this.checkBox_Behavior_MineGather.TabIndex = 22;
-            this.checkBox_Behavior_MineGather.Text = "Gather Ore";
-            this.checkBox_Behavior_MineGather.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_HerbGather
-            // 
-            this.checkBox_Behavior_HerbGather.AutoSize = true;
-            this.checkBox_Behavior_HerbGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_HerbGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_HerbGather.Location = new System.Drawing.Point(3, 63);
-            this.checkBox_Behavior_HerbGather.Name = "checkBox_Behavior_HerbGather";
-            this.checkBox_Behavior_HerbGather.Size = new System.Drawing.Size(134, 24);
-            this.checkBox_Behavior_HerbGather.TabIndex = 21;
-            this.checkBox_Behavior_HerbGather.Text = "Gather Herbs";
-            this.checkBox_Behavior_HerbGather.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_LootCache
-            // 
-            this.checkBox_Behavior_LootCache.AutoSize = true;
-            this.checkBox_Behavior_LootCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_LootCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(3, 93);
-            this.checkBox_Behavior_LootCache.Name = "checkBox_Behavior_LootCache";
-            this.checkBox_Behavior_LootCache.Size = new System.Drawing.Size(191, 24);
-            this.checkBox_Behavior_LootCache.TabIndex = 23;
-            this.checkBox_Behavior_LootCache.Text = "Loot Garrison Cache";
-            this.checkBox_Behavior_LootCache.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_LootAnything
-            // 
-            this.checkBox_LootAnything.AutoSize = true;
-            this.checkBox_LootAnything.Enabled = false;
-            this.checkBox_LootAnything.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_LootAnything.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_LootAnything.Location = new System.Drawing.Point(3, 123);
-            this.checkBox_LootAnything.Name = "checkBox_LootAnything";
-            this.checkBox_LootAnything.Size = new System.Drawing.Size(144, 24);
-            this.checkBox_LootAnything.TabIndex = 24;
-            this.checkBox_LootAnything.Text = "Loot Any Mobs";
-            this.checkBox_LootAnything.UseVisualStyleBackColor = true;
-            // 
-            // tabPage8
-            // 
-            this.tabPage8.Controls.Add(this.groupBox12);
-            this.tabPage8.Controls.Add(this.groupBox11);
-            this.tabPage8.Location = new System.Drawing.Point(4, 22);
-            this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(723, 527);
-            this.tabPage8.TabIndex = 1;
-            this.tabPage8.Text = "Vendor & Disenchant";
-            this.tabPage8.UseVisualStyleBackColor = true;
-            // 
-            // groupBox12
-            // 
-            this.groupBox12.Controls.Add(this.checkBox_Behavior_RepairSell);
-            this.groupBox12.Controls.Add(this.label2);
-            this.groupBox12.Controls.Add(this.textBox_MinimumBagSlotsFree);
-            this.groupBox12.Controls.Add(this.trackBar_MinimumBagSlotsFree);
-            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
-            this.groupBox12.Location = new System.Drawing.Point(373, 6);
-            this.groupBox12.Name = "groupBox12";
-            this.groupBox12.Size = new System.Drawing.Size(279, 288);
-            this.groupBox12.TabIndex = 26;
-            this.groupBox12.TabStop = false;
-            this.groupBox12.Text = "Vendoring";
-            // 
-            // checkBox_Behavior_RepairSell
-            // 
-            this.checkBox_Behavior_RepairSell.AutoSize = true;
-            this.checkBox_Behavior_RepairSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_RepairSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_RepairSell.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_Behavior_RepairSell.Name = "checkBox_Behavior_RepairSell";
-            this.checkBox_Behavior_RepairSell.Size = new System.Drawing.Size(148, 24);
-            this.checkBox_Behavior_RepairSell.TabIndex = 17;
-            this.checkBox_Behavior_RepairSell.Text = "Repair and Sell";
-            this.checkBox_Behavior_RepairSell.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 224);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(120, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Minimum Bag Slots Free";
-            // 
-            // textBox_MinimumBagSlotsFree
-            // 
-            this.textBox_MinimumBagSlotsFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(153, 240);
-            this.textBox_MinimumBagSlotsFree.Name = "textBox_MinimumBagSlotsFree";
-            this.textBox_MinimumBagSlotsFree.ReadOnly = true;
-            this.textBox_MinimumBagSlotsFree.Size = new System.Drawing.Size(37, 26);
-            this.textBox_MinimumBagSlotsFree.TabIndex = 2;
-            this.textBox_MinimumBagSlotsFree.Text = "16";
-            // 
-            // trackBar_MinimumBagSlotsFree
-            // 
-            this.trackBar_MinimumBagSlotsFree.LargeChange = 2;
-            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(6, 240);
-            this.trackBar_MinimumBagSlotsFree.Maximum = 60;
-            this.trackBar_MinimumBagSlotsFree.Minimum = 1;
-            this.trackBar_MinimumBagSlotsFree.Name = "trackBar_MinimumBagSlotsFree";
-            this.trackBar_MinimumBagSlotsFree.Size = new System.Drawing.Size(141, 42);
-            this.trackBar_MinimumBagSlotsFree.TabIndex = 1;
-            this.trackBar_MinimumBagSlotsFree.TickFrequency = 5;
-            this.trackBar_MinimumBagSlotsFree.Value = 1;
-            // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
-            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
-            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(6, 81);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
-            this.flowLayoutPanel4.TabIndex = 0;
-            // 
-            // checkBox_Vendor_Junk
-            // 
-            this.checkBox_Vendor_Junk.AutoSize = true;
-            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
-            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
-            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
-            this.checkBox_Vendor_Junk.TabIndex = 2;
-            this.checkBox_Vendor_Junk.Text = "Junk";
-            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Common
-            // 
-            this.checkBox_Vendor_Common.AutoSize = true;
-            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
-            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
-            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
-            this.checkBox_Vendor_Common.TabIndex = 3;
-            this.checkBox_Vendor_Common.Text = "Common";
-            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Uncommon
-            // 
-            this.checkBox_Vendor_Uncommon.AutoSize = true;
-            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
-            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
-            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
-            this.checkBox_Vendor_Uncommon.TabIndex = 4;
-            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
-            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Vendor_Rare
-            // 
-            this.checkBox_Vendor_Rare.AutoSize = true;
-            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
-            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
-            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
-            this.checkBox_Vendor_Rare.TabIndex = 5;
-            this.checkBox_Vendor_Rare.Text = "Rare";
-            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
-            // 
-            // groupBox11
-            // 
-            this.groupBox11.Controls.Add(this.checkBox_Behavior_Disenchant);
-            this.groupBox11.Controls.Add(this.label1);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_EpicSoulbound);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareSoulbound);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_EpicLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_Epic);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_RareLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareItems);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonItems);
-            this.groupBox11.Controls.Add(this.textBox_Disenchanting_UncommonLevel);
-            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
-            this.groupBox11.Location = new System.Drawing.Point(6, 6);
-            this.groupBox11.Name = "groupBox11";
-            this.groupBox11.Size = new System.Drawing.Size(361, 201);
-            this.groupBox11.TabIndex = 24;
-            this.groupBox11.TabStop = false;
-            this.groupBox11.Text = "Disenchanting";
-            // 
-            // checkBox_Behavior_Disenchant
-            // 
-            this.checkBox_Behavior_Disenchant.AutoSize = true;
-            this.checkBox_Behavior_Disenchant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_Disenchant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Disenchant.Location = new System.Drawing.Point(13, 19);
-            this.checkBox_Behavior_Disenchant.Name = "checkBox_Behavior_Disenchant";
-            this.checkBox_Behavior_Disenchant.Size = new System.Drawing.Size(140, 24);
-            this.checkBox_Behavior_Disenchant.TabIndex = 18;
-            this.checkBox_Behavior_Disenchant.Text = "Disenchanting";
-            this.checkBox_Behavior_Disenchant.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Location = new System.Drawing.Point(115, 81);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Max Item Level";
-            // 
-            // checkBox_Disenchanting_EpicSoulbound
-            // 
-            this.checkBox_Disenchanting_EpicSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_EpicSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(190, 167);
-            this.checkBox_Disenchanting_EpicSoulbound.Name = "checkBox_Disenchanting_EpicSoulbound";
-            this.checkBox_Disenchanting_EpicSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_EpicSoulbound.TabIndex = 9;
-            this.checkBox_Disenchanting_EpicSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_EpicSoulbound.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Disenchanting_RareSoulbound
-            // 
-            this.checkBox_Disenchanting_RareSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_RareSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(190, 135);
-            this.checkBox_Disenchanting_RareSoulbound.Name = "checkBox_Disenchanting_RareSoulbound";
-            this.checkBox_Disenchanting_RareSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_RareSoulbound.TabIndex = 8;
-            this.checkBox_Disenchanting_RareSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_RareSoulbound.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Disenchanting_EpicLevel
-            // 
-            this.textBox_Disenchanting_EpicLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(125, 163);
-            this.textBox_Disenchanting_EpicLevel.MaxLength = 3;
-            this.textBox_Disenchanting_EpicLevel.Name = "textBox_Disenchanting_EpicLevel";
-            this.textBox_Disenchanting_EpicLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_EpicLevel.TabIndex = 5;
-            this.textBox_Disenchanting_EpicLevel.WordWrap = false;
-            // 
-            // checkBox_Disenchanting_Epic
-            // 
-            this.checkBox_Disenchanting_Epic.AutoSize = true;
-            this.checkBox_Disenchanting_Epic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_Epic.ForeColor = System.Drawing.Color.Purple;
-            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(12, 165);
-            this.checkBox_Disenchanting_Epic.Name = "checkBox_Disenchanting_Epic";
-            this.checkBox_Disenchanting_Epic.Size = new System.Drawing.Size(58, 21);
-            this.checkBox_Disenchanting_Epic.TabIndex = 4;
-            this.checkBox_Disenchanting_Epic.Text = "Epic";
-            this.checkBox_Disenchanting_Epic.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Disenchanting_RareLevel
-            // 
-            this.textBox_Disenchanting_RareLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(125, 131);
-            this.textBox_Disenchanting_RareLevel.MaxLength = 3;
-            this.textBox_Disenchanting_RareLevel.Name = "textBox_Disenchanting_RareLevel";
-            this.textBox_Disenchanting_RareLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_RareLevel.TabIndex = 3;
-            this.textBox_Disenchanting_RareLevel.WordWrap = false;
-            // 
-            // checkBox_Disenchanting_RareItems
-            // 
-            this.checkBox_Disenchanting_RareItems.AutoSize = true;
-            this.checkBox_Disenchanting_RareItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_RareItems.ForeColor = System.Drawing.Color.Blue;
-            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(13, 133);
-            this.checkBox_Disenchanting_RareItems.Name = "checkBox_Disenchanting_RareItems";
-            this.checkBox_Disenchanting_RareItems.Size = new System.Drawing.Size(62, 21);
-            this.checkBox_Disenchanting_RareItems.TabIndex = 2;
-            this.checkBox_Disenchanting_RareItems.Text = "Rare";
-            this.checkBox_Disenchanting_RareItems.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Disenchanting_UncommonItems
-            // 
-            this.checkBox_Disenchanting_UncommonItems.AutoSize = true;
-            this.checkBox_Disenchanting_UncommonItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_UncommonItems.ForeColor = System.Drawing.Color.DarkGreen;
-            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(13, 100);
-            this.checkBox_Disenchanting_UncommonItems.Name = "checkBox_Disenchanting_UncommonItems";
-            this.checkBox_Disenchanting_UncommonItems.Size = new System.Drawing.Size(106, 21);
-            this.checkBox_Disenchanting_UncommonItems.TabIndex = 1;
-            this.checkBox_Disenchanting_UncommonItems.Text = "Uncommon";
-            this.checkBox_Disenchanting_UncommonItems.UseVisualStyleBackColor = true;
-            // 
-            // textBox_Disenchanting_UncommonLevel
-            // 
-            this.textBox_Disenchanting_UncommonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(125, 98);
-            this.textBox_Disenchanting_UncommonLevel.MaxLength = 3;
-            this.textBox_Disenchanting_UncommonLevel.Name = "textBox_Disenchanting_UncommonLevel";
-            this.textBox_Disenchanting_UncommonLevel.Size = new System.Drawing.Size(59, 23);
-            this.textBox_Disenchanting_UncommonLevel.TabIndex = 0;
-            this.textBox_Disenchanting_UncommonLevel.WordWrap = false;
-            // 
-            // checkBox_Disenchanting_UncommonSoulbound
-            // 
-            this.checkBox_Disenchanting_UncommonSoulbound.AutoSize = true;
-            this.checkBox_Disenchanting_UncommonSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(190, 102);
-            this.checkBox_Disenchanting_UncommonSoulbound.Name = "checkBox_Disenchanting_UncommonSoulbound";
-            this.checkBox_Disenchanting_UncommonSoulbound.Size = new System.Drawing.Size(145, 21);
-            this.checkBox_Disenchanting_UncommonSoulbound.TabIndex = 7;
-            this.checkBox_Disenchanting_UncommonSoulbound.Text = "Only SoulBounded";
-            this.checkBox_Disenchanting_UncommonSoulbound.UseVisualStyleBackColor = true;
-            // 
             // tabPage9
             // 
             this.tabPage9.Controls.Add(this.groupBox2);
@@ -1582,24 +940,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Primal Trader";
             // 
-            // checkBox_ExchangePrimalSpirits
-            // 
-            this.checkBox_ExchangePrimalSpirits.AutoSize = true;
-            this.checkBox_ExchangePrimalSpirits.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_ExchangePrimalSpirits.Name = "checkBox_ExchangePrimalSpirits";
-            this.checkBox_ExchangePrimalSpirits.Size = new System.Drawing.Size(136, 17);
-            this.checkBox_ExchangePrimalSpirits.TabIndex = 1;
-            this.checkBox_ExchangePrimalSpirits.Text = "Exchange Primal Spirits";
-            this.checkBox_ExchangePrimalSpirits.UseVisualStyleBackColor = true;
-            // 
-            // comboBox_PrimalSpiritItems
-            // 
-            this.comboBox_PrimalSpiritItems.FormattingEnabled = true;
-            this.comboBox_PrimalSpiritItems.Location = new System.Drawing.Point(6, 52);
-            this.comboBox_PrimalSpiritItems.Name = "comboBox_PrimalSpiritItems";
-            this.comboBox_PrimalSpiritItems.Size = new System.Drawing.Size(233, 21);
-            this.comboBox_PrimalSpiritItems.TabIndex = 0;
-            // 
             // tabPage10
             // 
             this.tabPage10.Controls.Add(this.checkBox_HBRelogSkipTask);
@@ -1610,17 +950,6 @@
             this.tabPage10.TabIndex = 3;
             this.tabPage10.Text = "Relog";
             this.tabPage10.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_HBRelogSkipTask
-            // 
-            this.checkBox_HBRelogSkipTask.AutoSize = true;
-            this.checkBox_HBRelogSkipTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_HBRelogSkipTask.Location = new System.Drawing.Point(6, 6);
-            this.checkBox_HBRelogSkipTask.Name = "checkBox_HBRelogSkipTask";
-            this.checkBox_HBRelogSkipTask.Size = new System.Drawing.Size(245, 24);
-            this.checkBox_HBRelogSkipTask.TabIndex = 15;
-            this.checkBox_HBRelogSkipTask.Text = "HBRelog Skip to Next Task";
-            this.checkBox_HBRelogSkipTask.UseVisualStyleBackColor = true;
             // 
             // tabPage11
             // 
@@ -1674,94 +1003,6 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(333, 262);
             this.flowLayoutPanel5.TabIndex = 0;
             // 
-            // checkBox_Follower_193
-            // 
-            this.checkBox_Follower_193.AutoSize = true;
-            this.checkBox_Follower_193.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_193.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Follower_193.Name = "checkBox_Follower_193";
-            this.checkBox_Follower_193.Size = new System.Drawing.Size(137, 21);
-            this.checkBox_Follower_193.TabIndex = 0;
-            this.checkBox_Follower_193.Text = "Tormmok (193)";
-            this.checkBox_Follower_193.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_189
-            // 
-            this.checkBox_Follower_189.AutoSize = true;
-            this.checkBox_Follower_189.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_189.Location = new System.Drawing.Point(3, 30);
-            this.checkBox_Follower_189.Name = "checkBox_Follower_189";
-            this.checkBox_Follower_189.Size = new System.Drawing.Size(111, 21);
-            this.checkBox_Follower_189.TabIndex = 1;
-            this.checkBox_Follower_189.Text = "Blook (189)";
-            this.checkBox_Follower_189.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_207
-            // 
-            this.checkBox_Follower_207.AutoSize = true;
-            this.checkBox_Follower_207.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_207.Location = new System.Drawing.Point(3, 57);
-            this.checkBox_Follower_207.Name = "checkBox_Follower_207";
-            this.checkBox_Follower_207.Size = new System.Drawing.Size(319, 21);
-            this.checkBox_Follower_207.TabIndex = 2;
-            this.checkBox_Follower_207.Text = "Defender Illona / Aeda Brightdawn (207)";
-            this.checkBox_Follower_207.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_467
-            // 
-            this.checkBox_Follower_467.AutoSize = true;
-            this.checkBox_Follower_467.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_467.Location = new System.Drawing.Point(3, 84);
-            this.checkBox_Follower_467.Name = "checkBox_Follower_467";
-            this.checkBox_Follower_467.Size = new System.Drawing.Size(131, 21);
-            this.checkBox_Follower_467.TabIndex = 3;
-            this.checkBox_Follower_467.Text = "Fen Tao (467)";
-            this.checkBox_Follower_467.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_190
-            // 
-            this.checkBox_Follower_190.AutoSize = true;
-            this.checkBox_Follower_190.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_190.Location = new System.Drawing.Point(3, 111);
-            this.checkBox_Follower_190.Name = "checkBox_Follower_190";
-            this.checkBox_Follower_190.Size = new System.Drawing.Size(272, 21);
-            this.checkBox_Follower_190.TabIndex = 4;
-            this.checkBox_Follower_190.Text = "Image of Archmage Vargoth (190)";
-            this.checkBox_Follower_190.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_170
-            // 
-            this.checkBox_Follower_170.AutoSize = true;
-            this.checkBox_Follower_170.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_170.Location = new System.Drawing.Point(3, 138);
-            this.checkBox_Follower_170.Name = "checkBox_Follower_170";
-            this.checkBox_Follower_170.Size = new System.Drawing.Size(241, 21);
-            this.checkBox_Follower_170.TabIndex = 5;
-            this.checkBox_Follower_170.Text = "Goldmaneg the Skinner (170)";
-            this.checkBox_Follower_170.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_209
-            // 
-            this.checkBox_Follower_209.AutoSize = true;
-            this.checkBox_Follower_209.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_209.Location = new System.Drawing.Point(3, 165);
-            this.checkBox_Follower_209.Name = "checkBox_Follower_209";
-            this.checkBox_Follower_209.Size = new System.Drawing.Size(127, 21);
-            this.checkBox_Follower_209.TabIndex = 6;
-            this.checkBox_Follower_209.Text = "Abu\'gar (209)";
-            this.checkBox_Follower_209.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Follower_32
-            // 
-            this.checkBox_Follower_32.AutoSize = true;
-            this.checkBox_Follower_32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Follower_32.Location = new System.Drawing.Point(3, 192);
-            this.checkBox_Follower_32.Name = "checkBox_Follower_32";
-            this.checkBox_Follower_32.Size = new System.Drawing.Size(100, 21);
-            this.checkBox_Follower_32.TabIndex = 7;
-            this.checkBox_Follower_32.Text = "Dagg (32)";
-            this.checkBox_Follower_32.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -1808,33 +1049,6 @@
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "Alchemy Lab";
             // 
-            // comboBox_DailyQuest_Alchemy_Rewards
-            // 
-            this.comboBox_DailyQuest_Alchemy_Rewards.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_DailyQuest_Alchemy_Rewards.FormattingEnabled = true;
-            this.comboBox_DailyQuest_Alchemy_Rewards.Items.AddRange(new object[] {
-            "Agility",
-            "Invisibility",
-            "Intellect",
-            "Swiftness",
-            "Strength",
-            "Armor"});
-            this.comboBox_DailyQuest_Alchemy_Rewards.Location = new System.Drawing.Point(6, 42);
-            this.comboBox_DailyQuest_Alchemy_Rewards.Name = "comboBox_DailyQuest_Alchemy_Rewards";
-            this.comboBox_DailyQuest_Alchemy_Rewards.Size = new System.Drawing.Size(166, 23);
-            this.comboBox_DailyQuest_Alchemy_Rewards.TabIndex = 1;
-            // 
-            // checkBox_DailyQuest_AlchemyLab
-            // 
-            this.checkBox_DailyQuest_AlchemyLab.AutoSize = true;
-            this.checkBox_DailyQuest_AlchemyLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_DailyQuest_AlchemyLab.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_DailyQuest_AlchemyLab.Name = "checkBox_DailyQuest_AlchemyLab";
-            this.checkBox_DailyQuest_AlchemyLab.Size = new System.Drawing.Size(227, 17);
-            this.checkBox_DailyQuest_AlchemyLab.TabIndex = 0;
-            this.checkBox_DailyQuest_AlchemyLab.Text = "Complete Daily Alchemy Experiment";
-            this.checkBox_DailyQuest_AlchemyLab.UseVisualStyleBackColor = true;
-            // 
             // groupBox16
             // 
             this.groupBox16.Controls.Add(this.comboBox_DailyQuest_WarMill_Rewards);
@@ -1845,94 +1059,6 @@
             this.groupBox16.TabIndex = 1;
             this.groupBox16.TabStop = false;
             this.groupBox16.Text = "Warmill / Dwarven Bunker";
-            // 
-            // comboBox_DailyQuest_WarMill_Rewards
-            // 
-            this.comboBox_DailyQuest_WarMill_Rewards.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox_DailyQuest_WarMill_Rewards.FormattingEnabled = true;
-            this.comboBox_DailyQuest_WarMill_Rewards.Items.AddRange(new object[] {
-            "Armor Token",
-            "Weapon Token"});
-            this.comboBox_DailyQuest_WarMill_Rewards.Location = new System.Drawing.Point(6, 42);
-            this.comboBox_DailyQuest_WarMill_Rewards.Name = "comboBox_DailyQuest_WarMill_Rewards";
-            this.comboBox_DailyQuest_WarMill_Rewards.Size = new System.Drawing.Size(166, 23);
-            this.comboBox_DailyQuest_WarMill_Rewards.TabIndex = 1;
-            // 
-            // checkBox_DailyQuest_Warmill
-            // 
-            this.checkBox_DailyQuest_Warmill.AutoSize = true;
-            this.checkBox_DailyQuest_Warmill.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_DailyQuest_Warmill.Location = new System.Drawing.Point(6, 19);
-            this.checkBox_DailyQuest_Warmill.Name = "checkBox_DailyQuest_Warmill";
-            this.checkBox_DailyQuest_Warmill.Size = new System.Drawing.Size(211, 17);
-            this.checkBox_DailyQuest_Warmill.TabIndex = 0;
-            this.checkBox_DailyQuest_Warmill.Text = "Complete Daily Scrap Melt Down";
-            this.checkBox_DailyQuest_Warmill.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_Behavior_Quests
-            // 
-            this.checkBox_Behavior_Quests.AutoSize = true;
-            this.checkBox_Behavior_Quests.Dock = System.Windows.Forms.DockStyle.Top;
-            this.checkBox_Behavior_Quests.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkBox_Behavior_Quests.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBox_Behavior_Quests.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_Behavior_Quests.Name = "checkBox_Behavior_Quests";
-            this.checkBox_Behavior_Quests.Size = new System.Drawing.Size(717, 24);
-            this.checkBox_Behavior_Quests.TabIndex = 21;
-            this.checkBox_Behavior_Quests.Text = "Quests";
-            this.toolTip1.SetToolTip(this.checkBox_Behavior_Quests, "Enables completion of first building quests and daily quests.");
-            this.checkBox_Behavior_Quests.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.listView_MailItems);
-            this.tabPage4.Controls.Add(this.groupBox4);
-            this.tabPage4.Controls.Add(this.groupBox3);
-            this.tabPage4.Controls.Add(this.groupBox1);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(737, 559);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Mail";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // listView_MailItems
-            // 
-            this.listView_MailItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4});
-            this.listView_MailItems.ContextMenuStrip = this.contextMenuStrip_MailItems;
-            this.listView_MailItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView_MailItems.FullRowSelect = true;
-            this.listView_MailItems.GridLines = true;
-            this.listView_MailItems.Location = new System.Drawing.Point(203, 297);
-            this.listView_MailItems.Name = "listView_MailItems";
-            this.listView_MailItems.Size = new System.Drawing.Size(531, 259);
-            this.listView_MailItems.TabIndex = 0;
-            this.listView_MailItems.UseCompatibleStateImageBehavior = false;
-            this.listView_MailItems.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Item ID";
-            this.columnHeader1.Width = 90;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.Width = 191;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Recipient";
-            this.columnHeader3.Width = 183;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "On Count";
             // 
             // contextMenuStrip_MailItems
             // 
@@ -1955,286 +1081,6 @@
             this.deleteToolStripMenuItem.Size = new System.Drawing.Size(105, 22);
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.button_MailItem_AddFromBags);
-            this.groupBox4.Controls.Add(this.textBox_MailEnchanting);
-            this.groupBox4.Controls.Add(this.checkBox_MailEnchanting);
-            this.groupBox4.Controls.Add(this.textBox_MailOre);
-            this.groupBox4.Controls.Add(this.checkBox_MailOre);
-            this.groupBox4.Controls.Add(this.textBox_MailHerbs);
-            this.groupBox4.Controls.Add(this.checkBox_MailHerbs);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(203, 124);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(531, 173);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Crafting";
-            // 
-            // button_MailItem_AddFromBags
-            // 
-            this.button_MailItem_AddFromBags.Location = new System.Drawing.Point(407, 142);
-            this.button_MailItem_AddFromBags.Name = "button_MailItem_AddFromBags";
-            this.button_MailItem_AddFromBags.Size = new System.Drawing.Size(118, 25);
-            this.button_MailItem_AddFromBags.TabIndex = 10;
-            this.button_MailItem_AddFromBags.Text = "Add From Bags";
-            this.button_MailItem_AddFromBags.UseVisualStyleBackColor = true;
-            this.button_MailItem_AddFromBags.Click += new System.EventHandler(this.button_MailItem_AddFromBags_Click);
-            // 
-            // textBox_MailEnchanting
-            // 
-            this.textBox_MailEnchanting.Location = new System.Drawing.Point(130, 71);
-            this.textBox_MailEnchanting.Name = "textBox_MailEnchanting";
-            this.textBox_MailEnchanting.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailEnchanting.TabIndex = 9;
-            // 
-            // checkBox_MailEnchanting
-            // 
-            this.checkBox_MailEnchanting.AutoSize = true;
-            this.checkBox_MailEnchanting.Location = new System.Drawing.Point(6, 74);
-            this.checkBox_MailEnchanting.Name = "checkBox_MailEnchanting";
-            this.checkBox_MailEnchanting.Size = new System.Drawing.Size(80, 17);
-            this.checkBox_MailEnchanting.TabIndex = 8;
-            this.checkBox_MailEnchanting.Text = "Enchanting";
-            this.checkBox_MailEnchanting.UseVisualStyleBackColor = true;
-            // 
-            // textBox_MailOre
-            // 
-            this.textBox_MailOre.Location = new System.Drawing.Point(130, 45);
-            this.textBox_MailOre.Name = "textBox_MailOre";
-            this.textBox_MailOre.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailOre.TabIndex = 7;
-            // 
-            // checkBox_MailOre
-            // 
-            this.checkBox_MailOre.AutoSize = true;
-            this.checkBox_MailOre.Location = new System.Drawing.Point(6, 48);
-            this.checkBox_MailOre.Name = "checkBox_MailOre";
-            this.checkBox_MailOre.Size = new System.Drawing.Size(43, 17);
-            this.checkBox_MailOre.TabIndex = 6;
-            this.checkBox_MailOre.Text = "Ore";
-            this.checkBox_MailOre.UseVisualStyleBackColor = true;
-            // 
-            // textBox_MailHerbs
-            // 
-            this.textBox_MailHerbs.Location = new System.Drawing.Point(130, 19);
-            this.textBox_MailHerbs.Name = "textBox_MailHerbs";
-            this.textBox_MailHerbs.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailHerbs.TabIndex = 5;
-            // 
-            // checkBox_MailHerbs
-            // 
-            this.checkBox_MailHerbs.AutoSize = true;
-            this.checkBox_MailHerbs.Location = new System.Drawing.Point(6, 22);
-            this.checkBox_MailHerbs.Name = "checkBox_MailHerbs";
-            this.checkBox_MailHerbs.Size = new System.Drawing.Size(54, 17);
-            this.checkBox_MailHerbs.TabIndex = 4;
-            this.checkBox_MailHerbs.Text = "Herbs";
-            this.checkBox_MailHerbs.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.textBox_MailEpic);
-            this.groupBox3.Controls.Add(this.textBox_MailRare);
-            this.groupBox3.Controls.Add(this.textBox_MailUncommon);
-            this.groupBox3.Controls.Add(this.checkBox_MailEpic);
-            this.groupBox3.Controls.Add(this.checkBox_MailRare);
-            this.groupBox3.Controls.Add(this.checkBox_MailUncommon);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(203, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(531, 121);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "BOE";
-            // 
-            // textBox_MailEpic
-            // 
-            this.textBox_MailEpic.Location = new System.Drawing.Point(130, 71);
-            this.textBox_MailEpic.Name = "textBox_MailEpic";
-            this.textBox_MailEpic.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailEpic.TabIndex = 5;
-            // 
-            // textBox_MailRare
-            // 
-            this.textBox_MailRare.Location = new System.Drawing.Point(130, 45);
-            this.textBox_MailRare.Name = "textBox_MailRare";
-            this.textBox_MailRare.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailRare.TabIndex = 4;
-            // 
-            // textBox_MailUncommon
-            // 
-            this.textBox_MailUncommon.Location = new System.Drawing.Point(130, 19);
-            this.textBox_MailUncommon.Name = "textBox_MailUncommon";
-            this.textBox_MailUncommon.Size = new System.Drawing.Size(116, 20);
-            this.textBox_MailUncommon.TabIndex = 3;
-            // 
-            // checkBox_MailEpic
-            // 
-            this.checkBox_MailEpic.AutoSize = true;
-            this.checkBox_MailEpic.Location = new System.Drawing.Point(6, 74);
-            this.checkBox_MailEpic.Name = "checkBox_MailEpic";
-            this.checkBox_MailEpic.Size = new System.Drawing.Size(86, 17);
-            this.checkBox_MailEpic.TabIndex = 2;
-            this.checkBox_MailEpic.Text = "Epic [Purple]";
-            this.checkBox_MailEpic.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MailRare
-            // 
-            this.checkBox_MailRare.AutoSize = true;
-            this.checkBox_MailRare.Location = new System.Drawing.Point(6, 48);
-            this.checkBox_MailRare.Name = "checkBox_MailRare";
-            this.checkBox_MailRare.Size = new System.Drawing.Size(79, 17);
-            this.checkBox_MailRare.TabIndex = 1;
-            this.checkBox_MailRare.Text = "Rare [Blue]";
-            this.checkBox_MailRare.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MailUncommon
-            // 
-            this.checkBox_MailUncommon.AutoSize = true;
-            this.checkBox_MailUncommon.Location = new System.Drawing.Point(6, 22);
-            this.checkBox_MailUncommon.Name = "checkBox_MailUncommon";
-            this.checkBox_MailUncommon.Size = new System.Drawing.Size(118, 17);
-            this.checkBox_MailUncommon.TabIndex = 0;
-            this.checkBox_MailUncommon.Text = "Uncommon [Green]";
-            this.checkBox_MailUncommon.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.groupBox5);
-            this.groupBox1.Controls.Add(this.flowLayoutPanel3);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 553);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.textBox_MailItem_Name);
-            this.groupBox5.Controls.Add(this.label16);
-            this.groupBox5.Controls.Add(this.button_MailItem_Add);
-            this.groupBox5.Controls.Add(this.textBox_MailItem_Count);
-            this.groupBox5.Controls.Add(this.label14);
-            this.groupBox5.Controls.Add(this.textBox_MailItem_Recipient);
-            this.groupBox5.Controls.Add(this.label13);
-            this.groupBox5.Controls.Add(this.textBox_MailItem_EntryId);
-            this.groupBox5.Controls.Add(this.label11);
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(3, 71);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(194, 169);
-            this.groupBox5.TabIndex = 1;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Custom ID";
-            // 
-            // textBox_MailItem_Name
-            // 
-            this.textBox_MailItem_Name.Location = new System.Drawing.Point(57, 76);
-            this.textBox_MailItem_Name.Name = "textBox_MailItem_Name";
-            this.textBox_MailItem_Name.Size = new System.Drawing.Size(131, 20);
-            this.textBox_MailItem_Name.TabIndex = 8;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 79);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(35, 13);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "Name";
-            // 
-            // button_MailItem_Add
-            // 
-            this.button_MailItem_Add.Location = new System.Drawing.Point(57, 140);
-            this.button_MailItem_Add.Name = "button_MailItem_Add";
-            this.button_MailItem_Add.Size = new System.Drawing.Size(95, 23);
-            this.button_MailItem_Add.TabIndex = 6;
-            this.button_MailItem_Add.Text = "Add new item";
-            this.button_MailItem_Add.UseVisualStyleBackColor = true;
-            this.button_MailItem_Add.Click += new System.EventHandler(this.button_MailItem_Add_Click);
-            // 
-            // textBox_MailItem_Count
-            // 
-            this.textBox_MailItem_Count.Location = new System.Drawing.Point(136, 102);
-            this.textBox_MailItem_Count.Name = "textBox_MailItem_Count";
-            this.textBox_MailItem_Count.Size = new System.Drawing.Size(52, 20);
-            this.textBox_MailItem_Count.TabIndex = 5;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(6, 105);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(94, 13);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Min Count In Bags";
-            // 
-            // textBox_MailItem_Recipient
-            // 
-            this.textBox_MailItem_Recipient.Location = new System.Drawing.Point(57, 50);
-            this.textBox_MailItem_Recipient.Name = "textBox_MailItem_Recipient";
-            this.textBox_MailItem_Recipient.Size = new System.Drawing.Size(131, 20);
-            this.textBox_MailItem_Recipient.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(6, 53);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(52, 13);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Recipient";
-            // 
-            // textBox_MailItem_EntryId
-            // 
-            this.textBox_MailItem_EntryId.Location = new System.Drawing.Point(57, 24);
-            this.textBox_MailItem_EntryId.Name = "textBox_MailItem_EntryId";
-            this.textBox_MailItem_EntryId.Size = new System.Drawing.Size(131, 20);
-            this.textBox_MailItem_EntryId.TabIndex = 1;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 27);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(45, 13);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Entry ID";
-            // 
-            // flowLayoutPanel3
-            // 
-            this.flowLayoutPanel3.Controls.Add(this.checkBox_MailAutoSend);
-            this.flowLayoutPanel3.Controls.Add(this.checkBox_MailAutoGet);
-            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
-            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(194, 55);
-            this.flowLayoutPanel3.TabIndex = 0;
-            // 
-            // checkBox_MailAutoSend
-            // 
-            this.checkBox_MailAutoSend.AutoSize = true;
-            this.checkBox_MailAutoSend.Location = new System.Drawing.Point(3, 3);
-            this.checkBox_MailAutoSend.Name = "checkBox_MailAutoSend";
-            this.checkBox_MailAutoSend.Size = new System.Drawing.Size(98, 17);
-            this.checkBox_MailAutoSend.TabIndex = 0;
-            this.checkBox_MailAutoSend.Text = "Auto Send Mail";
-            this.checkBox_MailAutoSend.UseVisualStyleBackColor = true;
-            // 
-            // checkBox_MailAutoGet
-            // 
-            this.checkBox_MailAutoGet.AutoSize = true;
-            this.checkBox_MailAutoGet.Location = new System.Drawing.Point(3, 26);
-            this.checkBox_MailAutoGet.Name = "checkBox_MailAutoGet";
-            this.checkBox_MailAutoGet.Size = new System.Drawing.Size(90, 17);
-            this.checkBox_MailAutoGet.TabIndex = 1;
-            this.checkBox_MailAutoGet.Text = "Auto Get Mail";
-            this.checkBox_MailAutoGet.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
@@ -2278,10 +1124,11 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.garrisonToolStripMenuItem,
             this.behaviorsToolStripMenuItem,
-            this.cacheToolStripMenuItem});
+            this.cacheToolStripMenuItem,
+            this.playerToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Size = new System.Drawing.Size(274, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(231, 24);
             this.menuStrip2.TabIndex = 12;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -2322,7 +1169,8 @@
             this.garrisonInfoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.dumpMissionsToolStripMenuItem1,
             this.dumpBuildingsToolStripMenuItem1,
-            this.dumpFollowersToolStripMenuItem1});
+            this.dumpFollowersToolStripMenuItem1,
+            this.dumpShipmentInfoToolStripMenuItem});
             this.garrisonInfoToolStripMenuItem.Name = "garrisonInfoToolStripMenuItem";
             this.garrisonInfoToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.garrisonInfoToolStripMenuItem.Text = "GarrisonInfo";
@@ -2330,23 +1178,30 @@
             // dumpMissionsToolStripMenuItem1
             // 
             this.dumpMissionsToolStripMenuItem1.Name = "dumpMissionsToolStripMenuItem1";
-            this.dumpMissionsToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpMissionsToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.dumpMissionsToolStripMenuItem1.Text = "Dump Missions";
             this.dumpMissionsToolStripMenuItem1.Click += new System.EventHandler(this.dumpMissionsToolStripMenuItem1_Click);
             // 
             // dumpBuildingsToolStripMenuItem1
             // 
             this.dumpBuildingsToolStripMenuItem1.Name = "dumpBuildingsToolStripMenuItem1";
-            this.dumpBuildingsToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpBuildingsToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.dumpBuildingsToolStripMenuItem1.Text = "Dump Buildings";
             this.dumpBuildingsToolStripMenuItem1.Click += new System.EventHandler(this.dumpBuildingsToolStripMenuItem1_Click);
             // 
             // dumpFollowersToolStripMenuItem1
             // 
             this.dumpFollowersToolStripMenuItem1.Name = "dumpFollowersToolStripMenuItem1";
-            this.dumpFollowersToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.dumpFollowersToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.dumpFollowersToolStripMenuItem1.Text = "Dump Followers";
             this.dumpFollowersToolStripMenuItem1.Click += new System.EventHandler(this.dumpFollowersToolStripMenuItem1_Click);
+            // 
+            // dumpShipmentInfoToolStripMenuItem
+            // 
+            this.dumpShipmentInfoToolStripMenuItem.Name = "dumpShipmentInfoToolStripMenuItem";
+            this.dumpShipmentInfoToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.dumpShipmentInfoToolStripMenuItem.Text = "Dump Shipment Info";
+            this.dumpShipmentInfoToolStripMenuItem.Click += new System.EventHandler(this.dumpShipmentInfoToolStripMenuItem_Click);
             // 
             // behaviorsToolStripMenuItem
             // 
@@ -2454,6 +1309,611 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(731, 33);
             this.flowLayoutPanel2.TabIndex = 11;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(745, 24);
+            this.menuStrip1.TabIndex = 5;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.defaultSettingsToolStripMenuItem});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // defaultSettingsToolStripMenuItem
+            // 
+            this.defaultSettingsToolStripMenuItem.Name = "defaultSettingsToolStripMenuItem";
+            this.defaultSettingsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.defaultSettingsToolStripMenuItem.Text = "Default Settings";
+            this.defaultSettingsToolStripMenuItem.Click += new System.EventHandler(this.defaultSettingsToolStripMenuItem_Click);
+            // 
+            // playerToolStripMenuItem
+            // 
+            this.playerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.professionsToolStripMenuItem});
+            this.playerToolStripMenuItem.Name = "playerToolStripMenuItem";
+            this.playerToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.playerToolStripMenuItem.Text = "Player";
+            // 
+            // professionsToolStripMenuItem
+            // 
+            this.professionsToolStripMenuItem.Name = "professionsToolStripMenuItem";
+            this.professionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.professionsToolStripMenuItem.Text = "Professions";
+            this.professionsToolStripMenuItem.Click += new System.EventHandler(this.professionsToolStripMenuItem_Click);
+            // 
+            // trackBar_ItemReward_CharacterTokenLevel
+            // 
+            this.trackBar_ItemReward_CharacterTokenLevel.LargeChange = 25;
+            this.trackBar_ItemReward_CharacterTokenLevel.Location = new System.Drawing.Point(2, 36);
+            this.trackBar_ItemReward_CharacterTokenLevel.Maximum = 670;
+            this.trackBar_ItemReward_CharacterTokenLevel.Minimum = 519;
+            this.trackBar_ItemReward_CharacterTokenLevel.Name = "trackBar_ItemReward_CharacterTokenLevel";
+            this.trackBar_ItemReward_CharacterTokenLevel.Size = new System.Drawing.Size(231, 42);
+            this.trackBar_ItemReward_CharacterTokenLevel.TabIndex = 10;
+            this.trackBar_ItemReward_CharacterTokenLevel.TickFrequency = 10;
+            this.trackBar_ItemReward_CharacterTokenLevel.Value = 519;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet615
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet615";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.TabIndex = 0;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.Text = "Armor Set Level 615";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet615.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet615
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Location = new System.Drawing.Point(3, 26);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet615";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.TabIndex = 1;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.Text = "Weapon Set Level 615";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet615.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet630
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Location = new System.Drawing.Point(3, 49);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet630";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.TabIndex = 3;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.Text = "Armor Set Level 630";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet630.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet630
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Location = new System.Drawing.Point(3, 72);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet630";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.TabIndex = 2;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.Text = "Weapon Set Level 630";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet630.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_ArmorSet645
+            // 
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.ForeColor = System.Drawing.Color.DarkViolet;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Location = new System.Drawing.Point(3, 95);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Name = "checkBox_MissionRewards_FollowerToken_ArmorSet645";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Size = new System.Drawing.Size(141, 17);
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.TabIndex = 4;
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.Text = "Armor Set Level 645";
+            this.checkBox_MissionRewards_FollowerToken_ArmorSet645.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MissionRewards_FollowerToken_WeaponSet645
+            // 
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.AutoSize = true;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.ForeColor = System.Drawing.Color.DarkViolet;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Location = new System.Drawing.Point(3, 118);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Name = "checkBox_MissionRewards_FollowerToken_WeaponSet645";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Size = new System.Drawing.Size(156, 17);
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.TabIndex = 5;
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.Text = "Weapon Set Level 645";
+            this.checkBox_MissionRewards_FollowerToken_WeaponSet645.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_CompleteMissions
+            // 
+            this.checkBox_Behavior_CompleteMissions.AutoSize = true;
+            this.checkBox_Behavior_CompleteMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_CompleteMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_CompleteMissions.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_CompleteMissions.Name = "checkBox_Behavior_CompleteMissions";
+            this.checkBox_Behavior_CompleteMissions.Size = new System.Drawing.Size(175, 24);
+            this.checkBox_Behavior_CompleteMissions.TabIndex = 16;
+            this.checkBox_Behavior_CompleteMissions.Text = "Complete Missions";
+            this.checkBox_Behavior_CompleteMissions.UseVisualStyleBackColor = true;
+            // 
+            // textBox_ReservedGarrisonResources
+            // 
+            this.textBox_ReservedGarrisonResources.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_ReservedGarrisonResources.Location = new System.Drawing.Point(653, 20);
+            this.textBox_ReservedGarrisonResources.Name = "textBox_ReservedGarrisonResources";
+            this.textBox_ReservedGarrisonResources.Size = new System.Drawing.Size(61, 29);
+            this.textBox_ReservedGarrisonResources.TabIndex = 15;
+            this.textBox_ReservedGarrisonResources.Text = "10000";
+            // 
+            // checkBox_Behavior_StartMissions
+            // 
+            this.checkBox_Behavior_StartMissions.AutoSize = true;
+            this.checkBox_Behavior_StartMissions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_StartMissions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_StartMissions.Location = new System.Drawing.Point(3, 33);
+            this.checkBox_Behavior_StartMissions.Name = "checkBox_Behavior_StartMissions";
+            this.checkBox_Behavior_StartMissions.Size = new System.Drawing.Size(139, 24);
+            this.checkBox_Behavior_StartMissions.TabIndex = 14;
+            this.checkBox_Behavior_StartMissions.Text = "Start Missions";
+            this.checkBox_Behavior_StartMissions.UseVisualStyleBackColor = true;
+            // 
+            // trackBar_ReservedGarrisonResources
+            // 
+            this.trackBar_ReservedGarrisonResources.LargeChange = 100;
+            this.trackBar_ReservedGarrisonResources.Location = new System.Drawing.Point(416, 20);
+            this.trackBar_ReservedGarrisonResources.Maximum = 10000;
+            this.trackBar_ReservedGarrisonResources.Name = "trackBar_ReservedGarrisonResources";
+            this.trackBar_ReservedGarrisonResources.Size = new System.Drawing.Size(231, 42);
+            this.trackBar_ReservedGarrisonResources.SmallChange = 5;
+            this.trackBar_ReservedGarrisonResources.TabIndex = 9;
+            this.trackBar_ReservedGarrisonResources.TickFrequency = 500;
+            this.trackBar_ReservedGarrisonResources.Value = 1;
+            // 
+            // checkBox_Behavior_WorkOrderPickup
+            // 
+            this.checkBox_Behavior_WorkOrderPickup.AutoSize = true;
+            this.checkBox_Behavior_WorkOrderPickup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_WorkOrderPickup.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_WorkOrderPickup.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Behavior_WorkOrderPickup.Name = "checkBox_Behavior_WorkOrderPickup";
+            this.checkBox_Behavior_WorkOrderPickup.Size = new System.Drawing.Size(174, 24);
+            this.checkBox_Behavior_WorkOrderPickup.TabIndex = 5;
+            this.checkBox_Behavior_WorkOrderPickup.Text = "Work Order Pickup";
+            this.checkBox_Behavior_WorkOrderPickup.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_WorkOrderStart
+            // 
+            this.checkBox_Behavior_WorkOrderStart.AutoSize = true;
+            this.checkBox_Behavior_WorkOrderStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_WorkOrderStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_WorkOrderStart.Location = new System.Drawing.Point(186, 19);
+            this.checkBox_Behavior_WorkOrderStart.Name = "checkBox_Behavior_WorkOrderStart";
+            this.checkBox_Behavior_WorkOrderStart.Size = new System.Drawing.Size(161, 24);
+            this.checkBox_Behavior_WorkOrderStart.TabIndex = 6;
+            this.checkBox_Behavior_WorkOrderStart.Text = "Work Order Start";
+            this.checkBox_Behavior_WorkOrderStart.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_Elite_Meat
+            // 
+            this.textBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Meat.Name = "textBox_Trapping_Elite_Meat";
+            this.textBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Meat.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Meat
+            // 
+            this.checkBox_Trapping_Elite_Meat.AutoSize = true;
+            this.checkBox_Trapping_Elite_Meat.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Meat.Name = "checkBox_Trapping_Elite_Meat";
+            this.checkBox_Trapping_Elite_Meat.Size = new System.Drawing.Size(148, 17);
+            this.checkBox_Trapping_Elite_Meat.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Meat.Text = "Caged Mighty Riverbeast ";
+            this.checkBox_Trapping_Elite_Meat.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_NonElite_Meat
+            // 
+            this.textBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Meat.Name = "textBox_Trapping_NonElite_Meat";
+            this.textBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Meat.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Meat
+            // 
+            this.checkBox_Trapping_NonElite_Meat.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Meat.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Meat.Name = "checkBox_Trapping_NonElite_Meat";
+            this.checkBox_Trapping_NonElite_Meat.Size = new System.Drawing.Size(122, 17);
+            this.checkBox_Trapping_NonElite_Meat.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Meat.Text = "Meaty Caged Beast ";
+            this.checkBox_Trapping_NonElite_Meat.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_Elite_Leather
+            // 
+            this.textBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Leather.Name = "textBox_Trapping_Elite_Leather";
+            this.textBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Leather.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Leather
+            // 
+            this.checkBox_Trapping_Elite_Leather.AutoSize = true;
+            this.checkBox_Trapping_Elite_Leather.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Leather.Name = "checkBox_Trapping_Elite_Leather";
+            this.checkBox_Trapping_Elite_Leather.Size = new System.Drawing.Size(139, 17);
+            this.checkBox_Trapping_Elite_Leather.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Leather.Text = "Caged Mighty Clefthoof ";
+            this.checkBox_Trapping_Elite_Leather.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_NonElite_Leather
+            // 
+            this.textBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Leather.Name = "textBox_Trapping_NonElite_Leather";
+            this.textBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Leather.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Leather
+            // 
+            this.checkBox_Trapping_NonElite_Leather.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Leather.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Leather.Name = "checkBox_Trapping_NonElite_Leather";
+            this.checkBox_Trapping_NonElite_Leather.Size = new System.Drawing.Size(131, 17);
+            this.checkBox_Trapping_NonElite_Leather.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Leather.Text = "Leathery Caged Beast";
+            this.checkBox_Trapping_NonElite_Leather.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_Elite_Fur
+            // 
+            this.textBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(242, 42);
+            this.textBox_Trapping_Elite_Fur.Name = "textBox_Trapping_Elite_Fur";
+            this.textBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_Elite_Fur.TabIndex = 4;
+            // 
+            // checkBox_Trapping_Elite_Fur
+            // 
+            this.checkBox_Trapping_Elite_Fur.AutoSize = true;
+            this.checkBox_Trapping_Elite_Fur.Location = new System.Drawing.Point(6, 45);
+            this.checkBox_Trapping_Elite_Fur.Name = "checkBox_Trapping_Elite_Fur";
+            this.checkBox_Trapping_Elite_Fur.Size = new System.Drawing.Size(116, 17);
+            this.checkBox_Trapping_Elite_Fur.TabIndex = 3;
+            this.checkBox_Trapping_Elite_Fur.Text = "Caged Mighty Wolf";
+            this.checkBox_Trapping_Elite_Fur.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Trapping_NonElite_Fur
+            // 
+            this.textBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(242, 16);
+            this.textBox_Trapping_NonElite_Fur.Name = "textBox_Trapping_NonElite_Fur";
+            this.textBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(100, 20);
+            this.textBox_Trapping_NonElite_Fur.TabIndex = 1;
+            // 
+            // checkBox_Trapping_NonElite_Fur
+            // 
+            this.checkBox_Trapping_NonElite_Fur.AutoSize = true;
+            this.checkBox_Trapping_NonElite_Fur.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Trapping_NonElite_Fur.Name = "checkBox_Trapping_NonElite_Fur";
+            this.checkBox_Trapping_NonElite_Fur.Size = new System.Drawing.Size(113, 17);
+            this.checkBox_Trapping_NonElite_Fur.TabIndex = 0;
+            this.checkBox_Trapping_NonElite_Fur.Text = "Furry Caged Beast";
+            this.checkBox_Trapping_NonElite_Fur.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Furs
+            // 
+            this.checkBox_Barn_Furs.AutoSize = true;
+            this.checkBox_Barn_Furs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Furs.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Barn_Furs.Name = "checkBox_Barn_Furs";
+            this.checkBox_Barn_Furs.Size = new System.Drawing.Size(50, 17);
+            this.checkBox_Barn_Furs.TabIndex = 1;
+            this.checkBox_Barn_Furs.Text = "Furs";
+            this.checkBox_Barn_Furs.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Leather
+            // 
+            this.checkBox_Barn_Leather.AutoSize = true;
+            this.checkBox_Barn_Leather.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Leather.Location = new System.Drawing.Point(59, 3);
+            this.checkBox_Barn_Leather.Name = "checkBox_Barn_Leather";
+            this.checkBox_Barn_Leather.Size = new System.Drawing.Size(69, 17);
+            this.checkBox_Barn_Leather.TabIndex = 2;
+            this.checkBox_Barn_Leather.Text = "Leather";
+            this.checkBox_Barn_Leather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Barn_Meat
+            // 
+            this.checkBox_Barn_Meat.AutoSize = true;
+            this.checkBox_Barn_Meat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Barn_Meat.Location = new System.Drawing.Point(134, 3);
+            this.checkBox_Barn_Meat.Name = "checkBox_Barn_Meat";
+            this.checkBox_Barn_Meat.Size = new System.Drawing.Size(54, 17);
+            this.checkBox_Barn_Meat.TabIndex = 3;
+            this.checkBox_Barn_Meat.Text = "Meat";
+            this.checkBox_Barn_Meat.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Milling_Enabled
+            // 
+            this.checkBox_Milling_Enabled.AutoSize = true;
+            this.checkBox_Milling_Enabled.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Milling_Enabled.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Milling_Enabled.Name = "checkBox_Milling_Enabled";
+            this.checkBox_Milling_Enabled.Size = new System.Drawing.Size(125, 24);
+            this.checkBox_Milling_Enabled.TabIndex = 0;
+            this.checkBox_Milling_Enabled.Text = "Allow Milling";
+            this.checkBox_Milling_Enabled.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Milling_RequiredAmount
+            // 
+            this.flowLayoutPanel_Milling.SetFlowBreak(this.textBox_Milling_RequiredAmount, true);
+            this.textBox_Milling_RequiredAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Milling_RequiredAmount.Location = new System.Drawing.Point(211, 3);
+            this.textBox_Milling_RequiredAmount.Name = "textBox_Milling_RequiredAmount";
+            this.textBox_Milling_RequiredAmount.Size = new System.Drawing.Size(65, 26);
+            this.textBox_Milling_RequiredAmount.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.textBox_Milling_RequiredAmount, "Minimum Pigments needed (below this number will start milling)");
+            // 
+            // checkBox_Behavior_Professions
+            // 
+            this.checkBox_Behavior_Professions.AutoSize = true;
+            this.checkBox_Behavior_Professions.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox_Behavior_Professions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_Professions.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_Professions.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_Professions.Name = "checkBox_Behavior_Professions";
+            this.checkBox_Behavior_Professions.Padding = new System.Windows.Forms.Padding(10);
+            this.checkBox_Behavior_Professions.Size = new System.Drawing.Size(731, 44);
+            this.checkBox_Behavior_Professions.TabIndex = 19;
+            this.checkBox_Behavior_Professions.Text = "Enable Professions Behavior";
+            this.checkBox_Behavior_Professions.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_Salvaging
+            // 
+            this.checkBox_Behavior_Salvaging.AutoSize = true;
+            this.checkBox_Behavior_Salvaging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_Salvaging.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_Salvaging.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_Salvaging.Name = "checkBox_Behavior_Salvaging";
+            this.checkBox_Behavior_Salvaging.Size = new System.Drawing.Size(103, 24);
+            this.checkBox_Behavior_Salvaging.TabIndex = 19;
+            this.checkBox_Behavior_Salvaging.Text = "Salvaging";
+            this.checkBox_Behavior_Salvaging.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_MineGather
+            // 
+            this.checkBox_Behavior_MineGather.AutoSize = true;
+            this.checkBox_Behavior_MineGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_MineGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_MineGather.Location = new System.Drawing.Point(3, 33);
+            this.checkBox_Behavior_MineGather.Name = "checkBox_Behavior_MineGather";
+            this.checkBox_Behavior_MineGather.Size = new System.Drawing.Size(115, 24);
+            this.checkBox_Behavior_MineGather.TabIndex = 22;
+            this.checkBox_Behavior_MineGather.Text = "Gather Ore";
+            this.checkBox_Behavior_MineGather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_HerbGather
+            // 
+            this.checkBox_Behavior_HerbGather.AutoSize = true;
+            this.checkBox_Behavior_HerbGather.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_HerbGather.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_HerbGather.Location = new System.Drawing.Point(3, 63);
+            this.checkBox_Behavior_HerbGather.Name = "checkBox_Behavior_HerbGather";
+            this.checkBox_Behavior_HerbGather.Size = new System.Drawing.Size(134, 24);
+            this.checkBox_Behavior_HerbGather.TabIndex = 21;
+            this.checkBox_Behavior_HerbGather.Text = "Gather Herbs";
+            this.checkBox_Behavior_HerbGather.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_LootCache
+            // 
+            this.checkBox_Behavior_LootCache.AutoSize = true;
+            this.checkBox_Behavior_LootCache.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_LootCache.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_LootCache.Location = new System.Drawing.Point(3, 93);
+            this.checkBox_Behavior_LootCache.Name = "checkBox_Behavior_LootCache";
+            this.checkBox_Behavior_LootCache.Size = new System.Drawing.Size(191, 24);
+            this.checkBox_Behavior_LootCache.TabIndex = 23;
+            this.checkBox_Behavior_LootCache.Text = "Loot Garrison Cache";
+            this.checkBox_Behavior_LootCache.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_LootAnything
+            // 
+            this.checkBox_LootAnything.AutoSize = true;
+            this.checkBox_LootAnything.Enabled = false;
+            this.checkBox_LootAnything.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_LootAnything.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_LootAnything.Location = new System.Drawing.Point(3, 123);
+            this.checkBox_LootAnything.Name = "checkBox_LootAnything";
+            this.checkBox_LootAnything.Size = new System.Drawing.Size(144, 24);
+            this.checkBox_LootAnything.TabIndex = 24;
+            this.checkBox_LootAnything.Text = "Loot Any Mobs";
+            this.checkBox_LootAnything.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_ExchangePrimalSpirits
+            // 
+            this.checkBox_ExchangePrimalSpirits.AutoSize = true;
+            this.checkBox_ExchangePrimalSpirits.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_ExchangePrimalSpirits.Name = "checkBox_ExchangePrimalSpirits";
+            this.checkBox_ExchangePrimalSpirits.Size = new System.Drawing.Size(136, 17);
+            this.checkBox_ExchangePrimalSpirits.TabIndex = 1;
+            this.checkBox_ExchangePrimalSpirits.Text = "Exchange Primal Spirits";
+            this.checkBox_ExchangePrimalSpirits.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_PrimalSpiritItems
+            // 
+            this.comboBox_PrimalSpiritItems.FormattingEnabled = true;
+            this.comboBox_PrimalSpiritItems.Location = new System.Drawing.Point(6, 52);
+            this.comboBox_PrimalSpiritItems.Name = "comboBox_PrimalSpiritItems";
+            this.comboBox_PrimalSpiritItems.Size = new System.Drawing.Size(233, 21);
+            this.comboBox_PrimalSpiritItems.TabIndex = 0;
+            // 
+            // checkBox_HBRelogSkipTask
+            // 
+            this.checkBox_HBRelogSkipTask.AutoSize = true;
+            this.checkBox_HBRelogSkipTask.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_HBRelogSkipTask.Location = new System.Drawing.Point(6, 6);
+            this.checkBox_HBRelogSkipTask.Name = "checkBox_HBRelogSkipTask";
+            this.checkBox_HBRelogSkipTask.Size = new System.Drawing.Size(245, 24);
+            this.checkBox_HBRelogSkipTask.TabIndex = 15;
+            this.checkBox_HBRelogSkipTask.Text = "HBRelog Skip to Next Task";
+            this.checkBox_HBRelogSkipTask.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_193
+            // 
+            this.checkBox_Follower_193.AutoSize = true;
+            this.checkBox_Follower_193.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_193.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Follower_193.Name = "checkBox_Follower_193";
+            this.checkBox_Follower_193.Size = new System.Drawing.Size(137, 21);
+            this.checkBox_Follower_193.TabIndex = 0;
+            this.checkBox_Follower_193.Text = "Tormmok (193)";
+            this.checkBox_Follower_193.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_189
+            // 
+            this.checkBox_Follower_189.AutoSize = true;
+            this.checkBox_Follower_189.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_189.Location = new System.Drawing.Point(3, 30);
+            this.checkBox_Follower_189.Name = "checkBox_Follower_189";
+            this.checkBox_Follower_189.Size = new System.Drawing.Size(111, 21);
+            this.checkBox_Follower_189.TabIndex = 1;
+            this.checkBox_Follower_189.Text = "Blook (189)";
+            this.checkBox_Follower_189.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_207
+            // 
+            this.checkBox_Follower_207.AutoSize = true;
+            this.checkBox_Follower_207.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_207.Location = new System.Drawing.Point(3, 57);
+            this.checkBox_Follower_207.Name = "checkBox_Follower_207";
+            this.checkBox_Follower_207.Size = new System.Drawing.Size(319, 21);
+            this.checkBox_Follower_207.TabIndex = 2;
+            this.checkBox_Follower_207.Text = "Defender Illona / Aeda Brightdawn (207)";
+            this.checkBox_Follower_207.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_467
+            // 
+            this.checkBox_Follower_467.AutoSize = true;
+            this.checkBox_Follower_467.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_467.Location = new System.Drawing.Point(3, 84);
+            this.checkBox_Follower_467.Name = "checkBox_Follower_467";
+            this.checkBox_Follower_467.Size = new System.Drawing.Size(131, 21);
+            this.checkBox_Follower_467.TabIndex = 3;
+            this.checkBox_Follower_467.Text = "Fen Tao (467)";
+            this.checkBox_Follower_467.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_190
+            // 
+            this.checkBox_Follower_190.AutoSize = true;
+            this.checkBox_Follower_190.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_190.Location = new System.Drawing.Point(3, 111);
+            this.checkBox_Follower_190.Name = "checkBox_Follower_190";
+            this.checkBox_Follower_190.Size = new System.Drawing.Size(272, 21);
+            this.checkBox_Follower_190.TabIndex = 4;
+            this.checkBox_Follower_190.Text = "Image of Archmage Vargoth (190)";
+            this.checkBox_Follower_190.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_170
+            // 
+            this.checkBox_Follower_170.AutoSize = true;
+            this.checkBox_Follower_170.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_170.Location = new System.Drawing.Point(3, 138);
+            this.checkBox_Follower_170.Name = "checkBox_Follower_170";
+            this.checkBox_Follower_170.Size = new System.Drawing.Size(241, 21);
+            this.checkBox_Follower_170.TabIndex = 5;
+            this.checkBox_Follower_170.Text = "Goldmaneg the Skinner (170)";
+            this.checkBox_Follower_170.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_209
+            // 
+            this.checkBox_Follower_209.AutoSize = true;
+            this.checkBox_Follower_209.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_209.Location = new System.Drawing.Point(3, 165);
+            this.checkBox_Follower_209.Name = "checkBox_Follower_209";
+            this.checkBox_Follower_209.Size = new System.Drawing.Size(127, 21);
+            this.checkBox_Follower_209.TabIndex = 6;
+            this.checkBox_Follower_209.Text = "Abu\'gar (209)";
+            this.checkBox_Follower_209.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Follower_32
+            // 
+            this.checkBox_Follower_32.AutoSize = true;
+            this.checkBox_Follower_32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Follower_32.Location = new System.Drawing.Point(3, 192);
+            this.checkBox_Follower_32.Name = "checkBox_Follower_32";
+            this.checkBox_Follower_32.Size = new System.Drawing.Size(100, 21);
+            this.checkBox_Follower_32.TabIndex = 7;
+            this.checkBox_Follower_32.Text = "Dagg (32)";
+            this.checkBox_Follower_32.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_DailyQuest_Alchemy_Rewards
+            // 
+            this.comboBox_DailyQuest_Alchemy_Rewards.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_DailyQuest_Alchemy_Rewards.FormattingEnabled = true;
+            this.comboBox_DailyQuest_Alchemy_Rewards.Items.AddRange(new object[] {
+            "Agility",
+            "Invisibility",
+            "Intellect",
+            "Swiftness",
+            "Strength",
+            "Armor"});
+            this.comboBox_DailyQuest_Alchemy_Rewards.Location = new System.Drawing.Point(6, 42);
+            this.comboBox_DailyQuest_Alchemy_Rewards.Name = "comboBox_DailyQuest_Alchemy_Rewards";
+            this.comboBox_DailyQuest_Alchemy_Rewards.Size = new System.Drawing.Size(166, 23);
+            this.comboBox_DailyQuest_Alchemy_Rewards.TabIndex = 1;
+            // 
+            // checkBox_DailyQuest_AlchemyLab
+            // 
+            this.checkBox_DailyQuest_AlchemyLab.AutoSize = true;
+            this.checkBox_DailyQuest_AlchemyLab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_DailyQuest_AlchemyLab.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_DailyQuest_AlchemyLab.Name = "checkBox_DailyQuest_AlchemyLab";
+            this.checkBox_DailyQuest_AlchemyLab.Size = new System.Drawing.Size(227, 17);
+            this.checkBox_DailyQuest_AlchemyLab.TabIndex = 0;
+            this.checkBox_DailyQuest_AlchemyLab.Text = "Complete Daily Alchemy Experiment";
+            this.checkBox_DailyQuest_AlchemyLab.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_DailyQuest_WarMill_Rewards
+            // 
+            this.comboBox_DailyQuest_WarMill_Rewards.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox_DailyQuest_WarMill_Rewards.FormattingEnabled = true;
+            this.comboBox_DailyQuest_WarMill_Rewards.Items.AddRange(new object[] {
+            "Armor Token",
+            "Weapon Token"});
+            this.comboBox_DailyQuest_WarMill_Rewards.Location = new System.Drawing.Point(6, 42);
+            this.comboBox_DailyQuest_WarMill_Rewards.Name = "comboBox_DailyQuest_WarMill_Rewards";
+            this.comboBox_DailyQuest_WarMill_Rewards.Size = new System.Drawing.Size(166, 23);
+            this.comboBox_DailyQuest_WarMill_Rewards.TabIndex = 1;
+            // 
+            // checkBox_DailyQuest_Warmill
+            // 
+            this.checkBox_DailyQuest_Warmill.AutoSize = true;
+            this.checkBox_DailyQuest_Warmill.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_DailyQuest_Warmill.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_DailyQuest_Warmill.Name = "checkBox_DailyQuest_Warmill";
+            this.checkBox_DailyQuest_Warmill.Size = new System.Drawing.Size(211, 17);
+            this.checkBox_DailyQuest_Warmill.TabIndex = 0;
+            this.checkBox_DailyQuest_Warmill.Text = "Complete Daily Scrap Melt Down";
+            this.checkBox_DailyQuest_Warmill.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_Quests
+            // 
+            this.checkBox_Behavior_Quests.AutoSize = true;
+            this.checkBox_Behavior_Quests.Dock = System.Windows.Forms.DockStyle.Top;
+            this.checkBox_Behavior_Quests.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_Quests.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_Quests.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Behavior_Quests.Name = "checkBox_Behavior_Quests";
+            this.checkBox_Behavior_Quests.Size = new System.Drawing.Size(717, 24);
+            this.checkBox_Behavior_Quests.TabIndex = 21;
+            this.checkBox_Behavior_Quests.Text = "Quests";
+            this.toolTip1.SetToolTip(this.checkBox_Behavior_Quests, "Enables completion of first building quests and daily quests.");
+            this.checkBox_Behavior_Quests.UseVisualStyleBackColor = true;
+            // 
             // checkBox_Debug_FakeStartWorkOrder
             // 
             this.checkBox_Debug_FakeStartWorkOrder.AutoSize = true;
@@ -2502,30 +1962,679 @@
             this.checkBox_Debug_FakePickupWorkOrder.Text = "Fake Pickup Order";
             this.checkBox_Debug_FakePickupWorkOrder.UseVisualStyleBackColor = true;
             // 
-            // menuStrip1
+            // tabPage16
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(745, 24);
-            this.menuStrip1.TabIndex = 5;
-            this.menuStrip1.Text = "menuStrip1";
+            this.tabPage16.Controls.Add(this.tabControl5);
+            this.tabPage16.Location = new System.Drawing.Point(4, 22);
+            this.tabPage16.Name = "tabPage16";
+            this.tabPage16.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage16.Size = new System.Drawing.Size(737, 559);
+            this.tabPage16.TabIndex = 7;
+            this.tabPage16.Text = "Bags & Items";
+            this.tabPage16.UseVisualStyleBackColor = true;
             // 
-            // settingsToolStripMenuItem
+            // tabControl5
             // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.defaultSettingsToolStripMenuItem});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
+            this.tabControl5.Controls.Add(this.tabPage4);
+            this.tabControl5.Controls.Add(this.tabPage17);
+            this.tabControl5.Controls.Add(this.tabPage18);
+            this.tabControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl5.Location = new System.Drawing.Point(3, 3);
+            this.tabControl5.Name = "tabControl5";
+            this.tabControl5.SelectedIndex = 0;
+            this.tabControl5.Size = new System.Drawing.Size(731, 553);
+            this.tabControl5.TabIndex = 0;
             // 
-            // defaultSettingsToolStripMenuItem
+            // tabPage17
             // 
-            this.defaultSettingsToolStripMenuItem.Name = "defaultSettingsToolStripMenuItem";
-            this.defaultSettingsToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.defaultSettingsToolStripMenuItem.Text = "Default Settings";
-            this.defaultSettingsToolStripMenuItem.Click += new System.EventHandler(this.defaultSettingsToolStripMenuItem_Click);
+            this.tabPage17.Controls.Add(this.groupBox12);
+            this.tabPage17.Controls.Add(this.groupBox11);
+            this.tabPage17.Location = new System.Drawing.Point(4, 22);
+            this.tabPage17.Name = "tabPage17";
+            this.tabPage17.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage17.Size = new System.Drawing.Size(723, 527);
+            this.tabPage17.TabIndex = 0;
+            this.tabPage17.Text = "Vendor/Disenchant";
+            this.tabPage17.UseVisualStyleBackColor = true;
+            // 
+            // tabPage18
+            // 
+            this.tabPage18.Controls.Add(this.listView_MailItems);
+            this.tabPage18.Controls.Add(this.groupBox4);
+            this.tabPage18.Controls.Add(this.groupBox3);
+            this.tabPage18.Controls.Add(this.groupBox1);
+            this.tabPage18.Location = new System.Drawing.Point(4, 22);
+            this.tabPage18.Name = "tabPage18";
+            this.tabPage18.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage18.Size = new System.Drawing.Size(723, 527);
+            this.tabPage18.TabIndex = 1;
+            this.tabPage18.Text = "Mail";
+            this.tabPage18.UseVisualStyleBackColor = true;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.checkBox_Behavior_RepairSell);
+            this.groupBox12.Controls.Add(this.flowLayoutPanel4);
+            this.groupBox12.Location = new System.Drawing.Point(370, 6);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(347, 288);
+            this.groupBox12.TabIndex = 29;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "Vendoring";
+            // 
+            // checkBox_Behavior_RepairSell
+            // 
+            this.checkBox_Behavior_RepairSell.AutoSize = true;
+            this.checkBox_Behavior_RepairSell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_RepairSell.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_RepairSell.Location = new System.Drawing.Point(6, 19);
+            this.checkBox_Behavior_RepairSell.Name = "checkBox_Behavior_RepairSell";
+            this.checkBox_Behavior_RepairSell.Size = new System.Drawing.Size(148, 24);
+            this.checkBox_Behavior_RepairSell.TabIndex = 17;
+            this.checkBox_Behavior_RepairSell.Text = "Repair and Sell";
+            this.checkBox_Behavior_RepairSell.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Junk);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Common);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Uncommon);
+            this.flowLayoutPanel4.Controls.Add(this.checkBox_Vendor_Rare);
+            this.flowLayoutPanel4.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(6, 81);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(183, 111);
+            this.flowLayoutPanel4.TabIndex = 0;
+            // 
+            // checkBox_Vendor_Junk
+            // 
+            this.checkBox_Vendor_Junk.AutoSize = true;
+            this.checkBox_Vendor_Junk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Junk.ForeColor = System.Drawing.Color.DimGray;
+            this.checkBox_Vendor_Junk.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_Vendor_Junk.Name = "checkBox_Vendor_Junk";
+            this.checkBox_Vendor_Junk.Size = new System.Drawing.Size(61, 21);
+            this.checkBox_Vendor_Junk.TabIndex = 2;
+            this.checkBox_Vendor_Junk.Text = "Junk";
+            this.checkBox_Vendor_Junk.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Common
+            // 
+            this.checkBox_Vendor_Common.AutoSize = true;
+            this.checkBox_Vendor_Common.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Common.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.checkBox_Vendor_Common.Location = new System.Drawing.Point(3, 30);
+            this.checkBox_Vendor_Common.Name = "checkBox_Vendor_Common";
+            this.checkBox_Vendor_Common.Size = new System.Drawing.Size(88, 21);
+            this.checkBox_Vendor_Common.TabIndex = 3;
+            this.checkBox_Vendor_Common.Text = "Common";
+            this.checkBox_Vendor_Common.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Uncommon
+            // 
+            this.checkBox_Vendor_Uncommon.AutoSize = true;
+            this.checkBox_Vendor_Uncommon.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Uncommon.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_Vendor_Uncommon.Location = new System.Drawing.Point(3, 57);
+            this.checkBox_Vendor_Uncommon.Name = "checkBox_Vendor_Uncommon";
+            this.checkBox_Vendor_Uncommon.Size = new System.Drawing.Size(106, 21);
+            this.checkBox_Vendor_Uncommon.TabIndex = 4;
+            this.checkBox_Vendor_Uncommon.Text = "Uncommon";
+            this.checkBox_Vendor_Uncommon.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Vendor_Rare
+            // 
+            this.checkBox_Vendor_Rare.AutoSize = true;
+            this.checkBox_Vendor_Rare.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Vendor_Rare.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_Vendor_Rare.Location = new System.Drawing.Point(3, 84);
+            this.checkBox_Vendor_Rare.Name = "checkBox_Vendor_Rare";
+            this.checkBox_Vendor_Rare.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_Vendor_Rare.TabIndex = 5;
+            this.checkBox_Vendor_Rare.Text = "Rare";
+            this.checkBox_Vendor_Rare.UseVisualStyleBackColor = true;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_ProfessionSkillDisenchanting);
+            this.groupBox11.Controls.Add(this.checkBox_Behavior_Disenchant);
+            this.groupBox11.Controls.Add(this.label1);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_EpicSoulbound);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareSoulbound);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_EpicLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_Epic);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_RareLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_RareItems);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonItems);
+            this.groupBox11.Controls.Add(this.textBox_Disenchanting_UncommonLevel);
+            this.groupBox11.Controls.Add(this.checkBox_Disenchanting_UncommonSoulbound);
+            this.groupBox11.Location = new System.Drawing.Point(3, 6);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(361, 288);
+            this.groupBox11.TabIndex = 28;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "Disenchanting";
+            // 
+            // checkBox_Disenchanting_ProfessionSkillDisenchanting
+            // 
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.AutoSize = true;
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.Location = new System.Drawing.Point(13, 49);
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.Name = "checkBox_Disenchanting_ProfessionSkillDisenchanting";
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.Size = new System.Drawing.Size(257, 19);
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.TabIndex = 19;
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.Text = "Allow Profession Skill Disenchanting";
+            this.checkBox_Disenchanting_ProfessionSkillDisenchanting.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Behavior_Disenchant
+            // 
+            this.checkBox_Behavior_Disenchant.AutoSize = true;
+            this.checkBox_Behavior_Disenchant.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_Behavior_Disenchant.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Behavior_Disenchant.Location = new System.Drawing.Point(13, 19);
+            this.checkBox_Behavior_Disenchant.Name = "checkBox_Behavior_Disenchant";
+            this.checkBox_Behavior_Disenchant.Size = new System.Drawing.Size(140, 24);
+            this.checkBox_Behavior_Disenchant.TabIndex = 18;
+            this.checkBox_Behavior_Disenchant.Text = "Disenchanting";
+            this.checkBox_Behavior_Disenchant.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label1.Location = new System.Drawing.Point(114, 133);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Max Item Level";
+            // 
+            // checkBox_Disenchanting_EpicSoulbound
+            // 
+            this.checkBox_Disenchanting_EpicSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_EpicSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_EpicSoulbound.Location = new System.Drawing.Point(189, 219);
+            this.checkBox_Disenchanting_EpicSoulbound.Name = "checkBox_Disenchanting_EpicSoulbound";
+            this.checkBox_Disenchanting_EpicSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_EpicSoulbound.TabIndex = 9;
+            this.checkBox_Disenchanting_EpicSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_EpicSoulbound.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Disenchanting_RareSoulbound
+            // 
+            this.checkBox_Disenchanting_RareSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_RareSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_RareSoulbound.Location = new System.Drawing.Point(189, 187);
+            this.checkBox_Disenchanting_RareSoulbound.Name = "checkBox_Disenchanting_RareSoulbound";
+            this.checkBox_Disenchanting_RareSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_RareSoulbound.TabIndex = 8;
+            this.checkBox_Disenchanting_RareSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_RareSoulbound.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_EpicLevel
+            // 
+            this.textBox_Disenchanting_EpicLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_EpicLevel.Location = new System.Drawing.Point(124, 215);
+            this.textBox_Disenchanting_EpicLevel.MaxLength = 3;
+            this.textBox_Disenchanting_EpicLevel.Name = "textBox_Disenchanting_EpicLevel";
+            this.textBox_Disenchanting_EpicLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_EpicLevel.TabIndex = 5;
+            this.textBox_Disenchanting_EpicLevel.WordWrap = false;
+            // 
+            // checkBox_Disenchanting_Epic
+            // 
+            this.checkBox_Disenchanting_Epic.AutoSize = true;
+            this.checkBox_Disenchanting_Epic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_Epic.ForeColor = System.Drawing.Color.Purple;
+            this.checkBox_Disenchanting_Epic.Location = new System.Drawing.Point(11, 217);
+            this.checkBox_Disenchanting_Epic.Name = "checkBox_Disenchanting_Epic";
+            this.checkBox_Disenchanting_Epic.Size = new System.Drawing.Size(58, 21);
+            this.checkBox_Disenchanting_Epic.TabIndex = 4;
+            this.checkBox_Disenchanting_Epic.Text = "Epic";
+            this.checkBox_Disenchanting_Epic.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_RareLevel
+            // 
+            this.textBox_Disenchanting_RareLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_RareLevel.Location = new System.Drawing.Point(124, 183);
+            this.textBox_Disenchanting_RareLevel.MaxLength = 3;
+            this.textBox_Disenchanting_RareLevel.Name = "textBox_Disenchanting_RareLevel";
+            this.textBox_Disenchanting_RareLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_RareLevel.TabIndex = 3;
+            this.textBox_Disenchanting_RareLevel.WordWrap = false;
+            // 
+            // checkBox_Disenchanting_RareItems
+            // 
+            this.checkBox_Disenchanting_RareItems.AutoSize = true;
+            this.checkBox_Disenchanting_RareItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_RareItems.ForeColor = System.Drawing.Color.Blue;
+            this.checkBox_Disenchanting_RareItems.Location = new System.Drawing.Point(12, 185);
+            this.checkBox_Disenchanting_RareItems.Name = "checkBox_Disenchanting_RareItems";
+            this.checkBox_Disenchanting_RareItems.Size = new System.Drawing.Size(62, 21);
+            this.checkBox_Disenchanting_RareItems.TabIndex = 2;
+            this.checkBox_Disenchanting_RareItems.Text = "Rare";
+            this.checkBox_Disenchanting_RareItems.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_Disenchanting_UncommonItems
+            // 
+            this.checkBox_Disenchanting_UncommonItems.AutoSize = true;
+            this.checkBox_Disenchanting_UncommonItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_UncommonItems.ForeColor = System.Drawing.Color.DarkGreen;
+            this.checkBox_Disenchanting_UncommonItems.Location = new System.Drawing.Point(12, 152);
+            this.checkBox_Disenchanting_UncommonItems.Name = "checkBox_Disenchanting_UncommonItems";
+            this.checkBox_Disenchanting_UncommonItems.Size = new System.Drawing.Size(106, 21);
+            this.checkBox_Disenchanting_UncommonItems.TabIndex = 1;
+            this.checkBox_Disenchanting_UncommonItems.Text = "Uncommon";
+            this.checkBox_Disenchanting_UncommonItems.UseVisualStyleBackColor = true;
+            // 
+            // textBox_Disenchanting_UncommonLevel
+            // 
+            this.textBox_Disenchanting_UncommonLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Disenchanting_UncommonLevel.Location = new System.Drawing.Point(124, 150);
+            this.textBox_Disenchanting_UncommonLevel.MaxLength = 3;
+            this.textBox_Disenchanting_UncommonLevel.Name = "textBox_Disenchanting_UncommonLevel";
+            this.textBox_Disenchanting_UncommonLevel.Size = new System.Drawing.Size(59, 23);
+            this.textBox_Disenchanting_UncommonLevel.TabIndex = 0;
+            this.textBox_Disenchanting_UncommonLevel.WordWrap = false;
+            // 
+            // checkBox_Disenchanting_UncommonSoulbound
+            // 
+            this.checkBox_Disenchanting_UncommonSoulbound.AutoSize = true;
+            this.checkBox_Disenchanting_UncommonSoulbound.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_Disenchanting_UncommonSoulbound.Location = new System.Drawing.Point(189, 154);
+            this.checkBox_Disenchanting_UncommonSoulbound.Name = "checkBox_Disenchanting_UncommonSoulbound";
+            this.checkBox_Disenchanting_UncommonSoulbound.Size = new System.Drawing.Size(145, 21);
+            this.checkBox_Disenchanting_UncommonSoulbound.TabIndex = 7;
+            this.checkBox_Disenchanting_UncommonSoulbound.Text = "Only SoulBounded";
+            this.checkBox_Disenchanting_UncommonSoulbound.UseVisualStyleBackColor = true;
+            // 
+            // listView_MailItems
+            // 
+            this.listView_MailItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.listView_MailItems.ContextMenuStrip = this.contextMenuStrip_MailItems;
+            this.listView_MailItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_MailItems.FullRowSelect = true;
+            this.listView_MailItems.GridLines = true;
+            this.listView_MailItems.Location = new System.Drawing.Point(203, 297);
+            this.listView_MailItems.Name = "listView_MailItems";
+            this.listView_MailItems.Size = new System.Drawing.Size(517, 227);
+            this.listView_MailItems.TabIndex = 4;
+            this.listView_MailItems.UseCompatibleStateImageBehavior = false;
+            this.listView_MailItems.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Item ID";
+            this.columnHeader1.Width = 85;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 154;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Recipient";
+            this.columnHeader3.Width = 209;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "On Count";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button_MailItem_AddFromBags);
+            this.groupBox4.Controls.Add(this.textBox_MailEnchanting);
+            this.groupBox4.Controls.Add(this.checkBox_MailEnchanting);
+            this.groupBox4.Controls.Add(this.textBox_MailOre);
+            this.groupBox4.Controls.Add(this.checkBox_MailOre);
+            this.groupBox4.Controls.Add(this.textBox_MailHerbs);
+            this.groupBox4.Controls.Add(this.checkBox_MailHerbs);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(203, 124);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(517, 173);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Crafting";
+            // 
+            // button_MailItem_AddFromBags
+            // 
+            this.button_MailItem_AddFromBags.Location = new System.Drawing.Point(393, 142);
+            this.button_MailItem_AddFromBags.Name = "button_MailItem_AddFromBags";
+            this.button_MailItem_AddFromBags.Size = new System.Drawing.Size(118, 25);
+            this.button_MailItem_AddFromBags.TabIndex = 10;
+            this.button_MailItem_AddFromBags.Text = "Add From Bags";
+            this.button_MailItem_AddFromBags.UseVisualStyleBackColor = true;
+            // 
+            // textBox_MailEnchanting
+            // 
+            this.textBox_MailEnchanting.Location = new System.Drawing.Point(130, 71);
+            this.textBox_MailEnchanting.Name = "textBox_MailEnchanting";
+            this.textBox_MailEnchanting.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailEnchanting.TabIndex = 9;
+            // 
+            // checkBox_MailEnchanting
+            // 
+            this.checkBox_MailEnchanting.AutoSize = true;
+            this.checkBox_MailEnchanting.Location = new System.Drawing.Point(6, 74);
+            this.checkBox_MailEnchanting.Name = "checkBox_MailEnchanting";
+            this.checkBox_MailEnchanting.Size = new System.Drawing.Size(80, 17);
+            this.checkBox_MailEnchanting.TabIndex = 8;
+            this.checkBox_MailEnchanting.Text = "Enchanting";
+            this.checkBox_MailEnchanting.UseVisualStyleBackColor = true;
+            // 
+            // textBox_MailOre
+            // 
+            this.textBox_MailOre.Location = new System.Drawing.Point(130, 45);
+            this.textBox_MailOre.Name = "textBox_MailOre";
+            this.textBox_MailOre.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailOre.TabIndex = 7;
+            // 
+            // checkBox_MailOre
+            // 
+            this.checkBox_MailOre.AutoSize = true;
+            this.checkBox_MailOre.Location = new System.Drawing.Point(6, 48);
+            this.checkBox_MailOre.Name = "checkBox_MailOre";
+            this.checkBox_MailOre.Size = new System.Drawing.Size(43, 17);
+            this.checkBox_MailOre.TabIndex = 6;
+            this.checkBox_MailOre.Text = "Ore";
+            this.checkBox_MailOre.UseVisualStyleBackColor = true;
+            // 
+            // textBox_MailHerbs
+            // 
+            this.textBox_MailHerbs.Location = new System.Drawing.Point(130, 19);
+            this.textBox_MailHerbs.Name = "textBox_MailHerbs";
+            this.textBox_MailHerbs.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailHerbs.TabIndex = 5;
+            // 
+            // checkBox_MailHerbs
+            // 
+            this.checkBox_MailHerbs.AutoSize = true;
+            this.checkBox_MailHerbs.Location = new System.Drawing.Point(6, 22);
+            this.checkBox_MailHerbs.Name = "checkBox_MailHerbs";
+            this.checkBox_MailHerbs.Size = new System.Drawing.Size(54, 17);
+            this.checkBox_MailHerbs.TabIndex = 4;
+            this.checkBox_MailHerbs.Text = "Herbs";
+            this.checkBox_MailHerbs.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.textBox_MailEpic);
+            this.groupBox3.Controls.Add(this.textBox_MailRare);
+            this.groupBox3.Controls.Add(this.textBox_MailUncommon);
+            this.groupBox3.Controls.Add(this.checkBox_MailEpic);
+            this.groupBox3.Controls.Add(this.checkBox_MailRare);
+            this.groupBox3.Controls.Add(this.checkBox_MailUncommon);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(203, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(517, 121);
+            this.groupBox3.TabIndex = 6;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "BOE";
+            // 
+            // textBox_MailEpic
+            // 
+            this.textBox_MailEpic.Location = new System.Drawing.Point(130, 71);
+            this.textBox_MailEpic.Name = "textBox_MailEpic";
+            this.textBox_MailEpic.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailEpic.TabIndex = 5;
+            // 
+            // textBox_MailRare
+            // 
+            this.textBox_MailRare.Location = new System.Drawing.Point(130, 45);
+            this.textBox_MailRare.Name = "textBox_MailRare";
+            this.textBox_MailRare.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailRare.TabIndex = 4;
+            // 
+            // textBox_MailUncommon
+            // 
+            this.textBox_MailUncommon.Location = new System.Drawing.Point(130, 19);
+            this.textBox_MailUncommon.Name = "textBox_MailUncommon";
+            this.textBox_MailUncommon.Size = new System.Drawing.Size(116, 20);
+            this.textBox_MailUncommon.TabIndex = 3;
+            // 
+            // checkBox_MailEpic
+            // 
+            this.checkBox_MailEpic.AutoSize = true;
+            this.checkBox_MailEpic.Location = new System.Drawing.Point(6, 74);
+            this.checkBox_MailEpic.Name = "checkBox_MailEpic";
+            this.checkBox_MailEpic.Size = new System.Drawing.Size(86, 17);
+            this.checkBox_MailEpic.TabIndex = 2;
+            this.checkBox_MailEpic.Text = "Epic [Purple]";
+            this.checkBox_MailEpic.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MailRare
+            // 
+            this.checkBox_MailRare.AutoSize = true;
+            this.checkBox_MailRare.Location = new System.Drawing.Point(6, 48);
+            this.checkBox_MailRare.Name = "checkBox_MailRare";
+            this.checkBox_MailRare.Size = new System.Drawing.Size(79, 17);
+            this.checkBox_MailRare.TabIndex = 1;
+            this.checkBox_MailRare.Text = "Rare [Blue]";
+            this.checkBox_MailRare.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MailUncommon
+            // 
+            this.checkBox_MailUncommon.AutoSize = true;
+            this.checkBox_MailUncommon.Location = new System.Drawing.Point(6, 22);
+            this.checkBox_MailUncommon.Name = "checkBox_MailUncommon";
+            this.checkBox_MailUncommon.Size = new System.Drawing.Size(118, 17);
+            this.checkBox_MailUncommon.TabIndex = 0;
+            this.checkBox_MailUncommon.Text = "Uncommon [Green]";
+            this.checkBox_MailUncommon.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.groupBox5);
+            this.groupBox1.Controls.Add(this.flowLayoutPanel3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 521);
+            this.groupBox1.TabIndex = 5;
+            this.groupBox1.TabStop = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.textBox_MailItem_Name);
+            this.groupBox5.Controls.Add(this.label16);
+            this.groupBox5.Controls.Add(this.button_MailItem_Add);
+            this.groupBox5.Controls.Add(this.textBox_MailItem_Count);
+            this.groupBox5.Controls.Add(this.label14);
+            this.groupBox5.Controls.Add(this.textBox_MailItem_Recipient);
+            this.groupBox5.Controls.Add(this.label13);
+            this.groupBox5.Controls.Add(this.textBox_MailItem_EntryId);
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox5.Location = new System.Drawing.Point(3, 71);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(194, 169);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Custom ID";
+            // 
+            // textBox_MailItem_Name
+            // 
+            this.textBox_MailItem_Name.Location = new System.Drawing.Point(57, 76);
+            this.textBox_MailItem_Name.Name = "textBox_MailItem_Name";
+            this.textBox_MailItem_Name.Size = new System.Drawing.Size(131, 20);
+            this.textBox_MailItem_Name.TabIndex = 8;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 79);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(35, 13);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Name";
+            // 
+            // button_MailItem_Add
+            // 
+            this.button_MailItem_Add.Location = new System.Drawing.Point(57, 140);
+            this.button_MailItem_Add.Name = "button_MailItem_Add";
+            this.button_MailItem_Add.Size = new System.Drawing.Size(95, 23);
+            this.button_MailItem_Add.TabIndex = 6;
+            this.button_MailItem_Add.Text = "Add new item";
+            this.button_MailItem_Add.UseVisualStyleBackColor = true;
+            // 
+            // textBox_MailItem_Count
+            // 
+            this.textBox_MailItem_Count.Location = new System.Drawing.Point(136, 102);
+            this.textBox_MailItem_Count.Name = "textBox_MailItem_Count";
+            this.textBox_MailItem_Count.Size = new System.Drawing.Size(52, 20);
+            this.textBox_MailItem_Count.TabIndex = 5;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 105);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(94, 13);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Min Count In Bags";
+            // 
+            // textBox_MailItem_Recipient
+            // 
+            this.textBox_MailItem_Recipient.Location = new System.Drawing.Point(57, 50);
+            this.textBox_MailItem_Recipient.Name = "textBox_MailItem_Recipient";
+            this.textBox_MailItem_Recipient.Size = new System.Drawing.Size(131, 20);
+            this.textBox_MailItem_Recipient.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 53);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(52, 13);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Recipient";
+            // 
+            // textBox_MailItem_EntryId
+            // 
+            this.textBox_MailItem_EntryId.Location = new System.Drawing.Point(57, 24);
+            this.textBox_MailItem_EntryId.Name = "textBox_MailItem_EntryId";
+            this.textBox_MailItem_EntryId.Size = new System.Drawing.Size(131, 20);
+            this.textBox_MailItem_EntryId.TabIndex = 1;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 27);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(45, 13);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Entry ID";
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.checkBox_MailAutoSend);
+            this.flowLayoutPanel3.Controls.Add(this.checkBox_MailAutoGet);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.flowLayoutPanel3.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 16);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(194, 55);
+            this.flowLayoutPanel3.TabIndex = 0;
+            // 
+            // checkBox_MailAutoSend
+            // 
+            this.checkBox_MailAutoSend.AutoSize = true;
+            this.checkBox_MailAutoSend.Location = new System.Drawing.Point(3, 3);
+            this.checkBox_MailAutoSend.Name = "checkBox_MailAutoSend";
+            this.checkBox_MailAutoSend.Size = new System.Drawing.Size(98, 17);
+            this.checkBox_MailAutoSend.TabIndex = 0;
+            this.checkBox_MailAutoSend.Text = "Auto Send Mail";
+            this.checkBox_MailAutoSend.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_MailAutoGet
+            // 
+            this.checkBox_MailAutoGet.AutoSize = true;
+            this.checkBox_MailAutoGet.Location = new System.Drawing.Point(3, 26);
+            this.checkBox_MailAutoGet.Name = "checkBox_MailAutoGet";
+            this.checkBox_MailAutoGet.Size = new System.Drawing.Size(90, 17);
+            this.checkBox_MailAutoGet.TabIndex = 1;
+            this.checkBox_MailAutoGet.Text = "Auto Get Mail";
+            this.checkBox_MailAutoGet.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.groupBox23);
+            this.tabPage4.Location = new System.Drawing.Point(4, 22);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(723, 527);
+            this.tabPage4.TabIndex = 2;
+            this.tabPage4.Text = "General";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // groupBox23
+            // 
+            this.groupBox23.Controls.Add(this.checkBox_IgnoreReagentBankItems);
+            this.groupBox23.Controls.Add(this.checkBox_IgnoreBankItems);
+            this.groupBox23.Controls.Add(this.trackBar_MinimumBagSlotsFree);
+            this.groupBox23.Controls.Add(this.textBox_MinimumBagSlotsFree);
+            this.groupBox23.Location = new System.Drawing.Point(6, 6);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Size = new System.Drawing.Size(275, 133);
+            this.groupBox23.TabIndex = 31;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "Minimum Bag Slots Free";
+            this.toolTip1.SetToolTip(this.groupBox23, "Minimum Free Bag Slots Before Preforming Vendor/Disenchant/Mail behaviors");
+            // 
+            // trackBar_MinimumBagSlotsFree
+            // 
+            this.trackBar_MinimumBagSlotsFree.LargeChange = 2;
+            this.trackBar_MinimumBagSlotsFree.Location = new System.Drawing.Point(6, 16);
+            this.trackBar_MinimumBagSlotsFree.Maximum = 60;
+            this.trackBar_MinimumBagSlotsFree.Minimum = 1;
+            this.trackBar_MinimumBagSlotsFree.Name = "trackBar_MinimumBagSlotsFree";
+            this.trackBar_MinimumBagSlotsFree.Size = new System.Drawing.Size(141, 42);
+            this.trackBar_MinimumBagSlotsFree.TabIndex = 1;
+            this.trackBar_MinimumBagSlotsFree.TickFrequency = 5;
+            this.toolTip1.SetToolTip(this.trackBar_MinimumBagSlotsFree, "Minimum Free Bag Slots Before Preforming Vendor/Disenchant/Mail behaviors");
+            this.trackBar_MinimumBagSlotsFree.Value = 1;
+            // 
+            // textBox_MinimumBagSlotsFree
+            // 
+            this.textBox_MinimumBagSlotsFree.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_MinimumBagSlotsFree.Location = new System.Drawing.Point(153, 19);
+            this.textBox_MinimumBagSlotsFree.Name = "textBox_MinimumBagSlotsFree";
+            this.textBox_MinimumBagSlotsFree.ReadOnly = true;
+            this.textBox_MinimumBagSlotsFree.Size = new System.Drawing.Size(37, 26);
+            this.textBox_MinimumBagSlotsFree.TabIndex = 2;
+            this.textBox_MinimumBagSlotsFree.Text = "16";
+            this.toolTip1.SetToolTip(this.textBox_MinimumBagSlotsFree, "Minimum Free Bag Slots Before Preforming Vendor/Disenchant/Mail behaviors");
+            // 
+            // checkBox_IgnoreBankItems
+            // 
+            this.checkBox_IgnoreBankItems.AutoSize = true;
+            this.checkBox_IgnoreBankItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_IgnoreBankItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_IgnoreBankItems.Location = new System.Drawing.Point(6, 74);
+            this.checkBox_IgnoreBankItems.Name = "checkBox_IgnoreBankItems";
+            this.checkBox_IgnoreBankItems.Size = new System.Drawing.Size(139, 19);
+            this.checkBox_IgnoreBankItems.TabIndex = 20;
+            this.checkBox_IgnoreBankItems.Text = "Ignore Bank Items";
+            this.checkBox_IgnoreBankItems.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_IgnoreReagentBankItems
+            // 
+            this.checkBox_IgnoreReagentBankItems.AutoSize = true;
+            this.checkBox_IgnoreReagentBankItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkBox_IgnoreReagentBankItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox_IgnoreReagentBankItems.Location = new System.Drawing.Point(6, 99);
+            this.checkBox_IgnoreReagentBankItems.Name = "checkBox_IgnoreReagentBankItems";
+            this.checkBox_IgnoreReagentBankItems.Size = new System.Drawing.Size(197, 19);
+            this.checkBox_IgnoreReagentBankItems.TabIndex = 21;
+            this.checkBox_IgnoreReagentBankItems.Text = "Ignore Reagant Bank Items";
+            this.checkBox_IgnoreReagentBankItems.UseVisualStyleBackColor = true;
             // 
             // Config
             // 
@@ -2548,13 +2657,11 @@
             this.tabPage_Mission_Items.ResumeLayout(false);
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).EndInit();
             this.groupBox13.ResumeLayout(false);
             this.flowLayoutPanel6.ResumeLayout(false);
             this.flowLayoutPanel6.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).EndInit();
             this.tabPage6.ResumeLayout(false);
             this.tabControl4.ResumeLayout(false);
             this.tabPage13.ResumeLayout(false);
@@ -2586,14 +2693,6 @@
             this.groupBox9.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.ResumeLayout(false);
             this.flowLayoutPanel_MiscBehaviors.PerformLayout();
-            this.tabPage8.ResumeLayout(false);
-            this.groupBox12.ResumeLayout(false);
-            this.groupBox12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).EndInit();
-            this.flowLayoutPanel4.ResumeLayout(false);
-            this.flowLayoutPanel4.PerformLayout();
-            this.groupBox11.ResumeLayout(false);
-            this.groupBox11.PerformLayout();
             this.tabPage9.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -2610,17 +2709,7 @@
             this.groupBox17.PerformLayout();
             this.groupBox16.ResumeLayout(false);
             this.groupBox16.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
             this.contextMenuStrip_MailItems.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.flowLayoutPanel3.ResumeLayout(false);
-            this.flowLayoutPanel3.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
@@ -2631,6 +2720,31 @@
             this.flowLayoutPanel2.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ItemReward_CharacterTokenLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_ReservedGarrisonResources)).EndInit();
+            this.tabPage16.ResumeLayout(false);
+            this.tabControl5.ResumeLayout(false);
+            this.tabPage17.ResumeLayout(false);
+            this.tabPage18.ResumeLayout(false);
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel4.PerformLayout();
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar_MinimumBagSlotsFree)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2645,44 +2759,9 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label label12;
         private UserControl_Trackbar trackBar_ReservedGarrisonResources;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.ListView listView_MailItems;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private UserControl_Textbox textBox_MailEnchanting;
-        private UserControl_CheckBox checkBox_MailEnchanting;
-        private UserControl_Textbox textBox_MailOre;
-        private UserControl_CheckBox checkBox_MailOre;
-        private UserControl_Textbox textBox_MailHerbs;
-        private UserControl_CheckBox checkBox_MailHerbs;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private UserControl_Textbox textBox_MailEpic;
-        private UserControl_Textbox textBox_MailRare;
-        private UserControl_Textbox textBox_MailUncommon;
-        private UserControl_CheckBox checkBox_MailEpic;
-        private UserControl_CheckBox checkBox_MailRare;
-        private UserControl_CheckBox checkBox_MailUncommon;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button button_MailItem_Add;
-        private UserControl_Textbox textBox_MailItem_Count;
-        private System.Windows.Forms.Label label14;
-        private UserControl_Textbox textBox_MailItem_Recipient;
-        private System.Windows.Forms.Label label13;
-        private UserControl_Textbox textBox_MailItem_EntryId;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
-        private UserControl_CheckBox checkBox_MailAutoSend;
-        private UserControl_CheckBox checkBox_MailAutoGet;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_MailItems;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.Button button_MailItem_AddFromBags;
-        private UserControl_Textbox textBox_MailItem_Name;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel_MissionRewards;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -2698,17 +2777,6 @@
         private UserControl_CheckBox checkBox_Behavior_LootCache;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private UserControl_CheckBox checkBox_Debug_FakeStartWorkOrder;
-        private System.Windows.Forms.GroupBox groupBox11;
-        private UserControl_Textbox textBox_Disenchanting_UncommonLevel;
-        private UserControl_CheckBox checkBox_Disenchanting_RareItems;
-        private UserControl_CheckBox checkBox_Disenchanting_UncommonItems;
-        private UserControl_Textbox textBox_Disenchanting_EpicLevel;
-        private UserControl_CheckBox checkBox_Disenchanting_Epic;
-        private UserControl_Textbox textBox_Disenchanting_RareLevel;
-        private UserControl_CheckBox checkBox_Disenchanting_EpicSoulbound;
-        private UserControl_CheckBox checkBox_Disenchanting_RareSoulbound;
-        private UserControl_CheckBox checkBox_Disenchanting_UncommonSoulbound;
-        private System.Windows.Forms.Label label1;
         private UserControl_CheckBox checkBox_Debug_FakeFinishQuest;
         private System.Windows.Forms.TabPage tabPage3;
         private UserControl_CheckBox checkBox_Behavior_Professions;
@@ -2748,16 +2816,6 @@
         private UserControl_Textbox textBox_ReservedGarrisonResources;
         private System.Windows.Forms.TabControl tabControl3;
         private System.Windows.Forms.TabPage tabPage7;
-        private System.Windows.Forms.TabPage tabPage8;
-        private System.Windows.Forms.GroupBox groupBox12;
-        private System.Windows.Forms.Label label2;
-        private UserControl_Textbox textBox_MinimumBagSlotsFree;
-        private UserControl_Trackbar trackBar_MinimumBagSlotsFree;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
-        private UserControl_CheckBox checkBox_Vendor_Junk;
-        private UserControl_CheckBox checkBox_Vendor_Common;
-        private UserControl_CheckBox checkBox_Vendor_Uncommon;
-        private UserControl_CheckBox checkBox_Vendor_Rare;
         private System.Windows.Forms.TabPage tabPage9;
         private System.Windows.Forms.TabPage tabPage10;
         private UserControl_CheckBox checkBox_HBRelogSkipTask;
@@ -2823,8 +2881,6 @@
         private UserControl_CheckBox checkBox_Trapping_NonElite_Leather;
         private System.Windows.Forms.Label label9;
         private UserControl_Textbox textBox_Trapping_Elite_Fur;
-        private UserControl_CheckBox checkBox_Behavior_RepairSell;
-        private UserControl_CheckBox checkBox_Behavior_Disenchant;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem defaultSettingsToolStripMenuItem;
@@ -2850,6 +2906,73 @@
         private System.Windows.Forms.ToolStripMenuItem dumpBuildingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem dumpFollowersToolStripMenuItem1;
         private System.Windows.Forms.Panel panel_Professions_Inscripition;
+        private System.Windows.Forms.ToolStripMenuItem dumpShipmentInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem playerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem professionsToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabPage16;
+        private System.Windows.Forms.TabControl tabControl5;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private UserControl_CheckBox checkBox_IgnoreBankItems;
+        private UserControl_Trackbar trackBar_MinimumBagSlotsFree;
+        private UserControl_Textbox textBox_MinimumBagSlotsFree;
+        private System.Windows.Forms.TabPage tabPage17;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private UserControl_CheckBox checkBox_Behavior_RepairSell;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private UserControl_CheckBox checkBox_Vendor_Junk;
+        private UserControl_CheckBox checkBox_Vendor_Common;
+        private UserControl_CheckBox checkBox_Vendor_Uncommon;
+        private UserControl_CheckBox checkBox_Vendor_Rare;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private UserControl_CheckBox checkBox_Disenchanting_ProfessionSkillDisenchanting;
+        private UserControl_CheckBox checkBox_Behavior_Disenchant;
+        private System.Windows.Forms.Label label1;
+        private UserControl_CheckBox checkBox_Disenchanting_EpicSoulbound;
+        private UserControl_CheckBox checkBox_Disenchanting_RareSoulbound;
+        private UserControl_Textbox textBox_Disenchanting_EpicLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_Epic;
+        private UserControl_Textbox textBox_Disenchanting_RareLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_RareItems;
+        private UserControl_CheckBox checkBox_Disenchanting_UncommonItems;
+        private UserControl_Textbox textBox_Disenchanting_UncommonLevel;
+        private UserControl_CheckBox checkBox_Disenchanting_UncommonSoulbound;
+        private System.Windows.Forms.TabPage tabPage18;
+        private System.Windows.Forms.ListView listView_MailItems;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button_MailItem_AddFromBags;
+        private UserControl_Textbox textBox_MailEnchanting;
+        private UserControl_CheckBox checkBox_MailEnchanting;
+        private UserControl_Textbox textBox_MailOre;
+        private UserControl_CheckBox checkBox_MailOre;
+        private UserControl_Textbox textBox_MailHerbs;
+        private UserControl_CheckBox checkBox_MailHerbs;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private UserControl_Textbox textBox_MailEpic;
+        private UserControl_Textbox textBox_MailRare;
+        private UserControl_Textbox textBox_MailUncommon;
+        private UserControl_CheckBox checkBox_MailEpic;
+        private UserControl_CheckBox checkBox_MailRare;
+        private UserControl_CheckBox checkBox_MailUncommon;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private UserControl_Textbox textBox_MailItem_Name;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button button_MailItem_Add;
+        private UserControl_Textbox textBox_MailItem_Count;
+        private System.Windows.Forms.Label label14;
+        private UserControl_Textbox textBox_MailItem_Recipient;
+        private System.Windows.Forms.Label label13;
+        private UserControl_Textbox textBox_MailItem_EntryId;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private UserControl_CheckBox checkBox_MailAutoSend;
+        private UserControl_CheckBox checkBox_MailAutoGet;
+        private UserControl_CheckBox checkBox_IgnoreReagentBankItems;
 
     }
 }

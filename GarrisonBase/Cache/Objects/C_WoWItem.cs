@@ -34,6 +34,20 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
             }
         }
 
+        public int RequiredDisenchantingLevel
+        {
+            get
+            {
+                if (_requiredDisenchantingLevel == -1)
+                {
+                   _requiredDisenchantingLevel=PlayerProfessions.DisenchantRequiredEnchantingSkill(this);
+                }
+
+                return _requiredDisenchantingLevel;
+            }
+        }
+        private int _requiredDisenchantingLevel = -1;
+
         public readonly WoWItem ref_WoWItem;
         public C_WoWItem(WoWItem item)
         {
@@ -233,7 +247,7 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 return false;
             }
         }
-        public bool ShouldDisenchant
+        public bool ShouldDisenchantWithForge
         {
             get
             {
@@ -272,7 +286,45 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                 return true;
             }
         }
+        public bool ShouldDisenchant
+        {
+            get
+            {
+                if (!IsValid) return false;
 
+                if (Quality != WoWItemQuality.Uncommon && Quality != WoWItemQuality.Rare &&
+                    Quality != WoWItemQuality.Epic) return false;
+
+
+                if ((PlayerInventory.ItemDisenchantingBlacklistedGuids.Contains(Guid) ||
+                     IsOpenable ||
+                     IsAccountBound ||
+                     ConsumableClass != WoWItemConsumableClass.None ||
+                     (ItemClass != WoWItemClass.Armor && ItemClass != WoWItemClass.Weapon) ||
+                     RequiredDisenchantingLevel > Player.Professions.ProfessionSkills[SkillLine.Enchanting].CurrentValue) ||
+
+                    (Quality == WoWItemQuality.Uncommon &&
+                     (!BaseSettings.CurrentSettings.DisenchantingUncommon ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingUncommonItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingUncommonSoulbounded))) ||
+
+                    (Quality == WoWItemQuality.Rare &&
+                     (!BaseSettings.CurrentSettings.DisenchantingRare ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingRareItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingRareSoulbounded))) ||
+
+                    (Quality == WoWItemQuality.Epic &&
+                     (!BaseSettings.CurrentSettings.DisenchantingEpic ||
+                      (Level > BaseSettings.CurrentSettings.DisenchantingEpicItemLevel) ||
+                      (IsSoulbound && !BaseSettings.CurrentSettings.DisenchantingEpicSoulbounded))))
+                {
+                    return false;
+                }
+
+
+                return true;
+            }
+        }
         public bool ShouldMail
         {
             get
@@ -301,12 +353,14 @@ namespace Herbfunk.GarrisonBase.Cache.Objects
                                  "Bag Index {3} / Bag Slot {4}\r\n" +
                                  "Quality {5} -- StackCount {6}\r\n" +
                                  "Level {7} Required Level {8}\r\n" +
-                                 "IsOpenable {9} Consumable Class {10} IsSoulbound {12}",
+                                 "IsOpenable {9} Consumable Class {10} IsSoulbound {12}\r\n" +
+                                 "RequiredDisenchantLevel {13}",
                 Name, Entry, Guid,
                 BagIndex, BagSlot,
                 Quality, StackCount,
                 Level, RequiredLevel,
-                IsOpenable, ConsumableClass, ItemClass, IsSoulbound);
+                IsOpenable, ConsumableClass, ItemClass, IsSoulbound,
+                RequiredDisenchantingLevel);
         }
     }
 }

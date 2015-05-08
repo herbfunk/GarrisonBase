@@ -10,6 +10,7 @@ using Herbfunk.GarrisonBase.Helpers;
 using Herbfunk.GarrisonBase.TargetHandling;
 using Styx;
 using Styx.Common.Helpers;
+using Styx.WoWInternals.DB;
 using Styx.WoWInternals.Garrison;
 
 namespace Herbfunk.GarrisonBase.Garrison
@@ -51,7 +52,6 @@ namespace Herbfunk.GarrisonBase.Garrison
         {
             GarrisonBase.Debug("Initalizing GarrisonManager..");
 
-            RefreshFollowerIds();
             RefreshFollowers();
 
             RefreshBuildings();
@@ -126,49 +126,46 @@ namespace Herbfunk.GarrisonBase.Garrison
         public static Dictionary<int, Follower> Followers = new Dictionary<int, Follower>();
         public static int MaxActiveFollowers = 20;
         public static int CurrentActiveFollowers = 0;
-        internal static List<int> FollowerIdsAll = new List<int>();
-        internal static List<int> FollowerIdsCollected = new List<int>();
-        internal static List<int> FollowerIdsNotCollected = new List<int>();
         internal static List<int> BuildingIdsWithFollowerWorking = new List<int>(); 
-        internal static void RefreshFollowerIds()
-        {
-            GarrisonBase.Debug("Refreshing Follower Ids..");
 
-            FollowerIdsCollected.Clear();
-            FollowerIdsNotCollected.Clear();
-            BuildingIdsWithFollowerWorking.Clear();
-            CurrentActiveFollowers = 0;
-            FollowerIdsAll = LuaCommands.GetAllFollowerIDs();
-            foreach (var id in FollowerIdsAll)
-            {
-                if (LuaCommands.IsFollowerCollected(id))
-                    FollowerIdsCollected.Add(id);
-                else
-                    FollowerIdsNotCollected.Add(id);
-            }
+        //internal static void RefreshFollowerIds()
+        //{
+        //    GarrisonBase.Debug("Refreshing Follower Ids..");
 
-            GarrisonBase.Log("Found a total of {0} collected followers!", FollowerIdsCollected.Count);
-        }
+        //    FollowerIdsCollected.Clear();
+        //    FollowerIdsNotCollected.Clear();
+        //    BuildingIdsWithFollowerWorking.Clear();
+        //    CurrentActiveFollowers = 0;
+        //    FollowerIdsAll = LuaCommands.GetAllFollowerIDs();
+        //    foreach (var id in FollowerIdsAll)
+        //    {
+        //        if (LuaCommands.IsFollowerCollected(id))
+        //            FollowerIdsCollected.Add(id);
+        //        else
+        //            FollowerIdsNotCollected.Add(id);
+        //    }
+
+        //    GarrisonBase.Log("Found a total of {0} collected followers!", FollowerIdsCollected.Count);
+        //}
+
         internal static void RefreshFollowers()
         {
             GarrisonBase.Debug("Refreshing Followers..");
 
-            foreach (var f in FollowerIdsCollected)
-            {
-                if (!Followers.ContainsKey(f))
-                {
-                    var gfollower = GarrisonInfo.Followers.First(follower => follower.GarrFollowerId == f);
-                    if (gfollower != null)
-                    {
-                        var _follower = new Follower(gfollower);
-                        Followers.Add(f, _follower);
+            BuildingIdsWithFollowerWorking.Clear();
+            CurrentActiveFollowers = 0;
 
-                        if (_follower.Status != GarrisonFollowerStatus.Inactive)
-                            CurrentActiveFollowers++;
-                        if (_follower.AssignedBuildingId > -1)
-                            BuildingIdsWithFollowerWorking.Add(_follower.AssignedBuildingId);
-                    }
-                }
+            foreach (var follower in GarrisonInfo.Followers)
+            {
+                var followerId = Convert.ToInt32(follower.Id);
+                var f = new Follower(follower);
+                
+                Followers.Add(followerId, f);
+                
+                if (f.Status != GarrisonFollowerStatus.Inactive)
+                    CurrentActiveFollowers++;
+                if (f.AssignedBuildingId > -1)
+                    BuildingIdsWithFollowerWorking.Add(f.AssignedBuildingId);
             }
 
             GarrisonBase.Log("Followers Active {0} / {1}", CurrentActiveFollowers, MaxActiveFollowers);
@@ -281,7 +278,6 @@ namespace Herbfunk.GarrisonBase.Garrison
         {
             RefreshBuildings();
             UpdateMissionIds();
-            RefreshFollowerIds();
 
             Mission mission = AvailableMissions.FirstOrDefault(m => m.Id == missionId);
             SimulateMission(mission);
@@ -380,30 +376,23 @@ namespace Herbfunk.GarrisonBase.Garrison
 
         public static List<int> BuildingIDs = new List<int>();
 
-        internal static void RefreshBuildingIDs()
-        {
-            GarrisonBase.Debug("Refreshing Building Ids..");
-
-            BuildingIDs.Clear();
-            BuildingIDs = LuaCommands.GetBuildingIds();
-            GarrisonBase.Log("Found a total of {0} building IDs", BuildingIDs.Count);
-        }
         internal static void RefreshBuildings()
         {
             GarrisonBase.Debug("Refreshing Buildings..");
 
+            BuildingIDs.Clear();
             Buildings.Clear();
             HasDisenchant = false;
             HasForge = false;
             ForgeBuilding = BuildingType.Unknown;
 
-            RefreshBuildingIDs();
-
-            
-
-            foreach (var id in BuildingIDs)
+            foreach (var building in GarrisonInfo.OwnedBuildings)
             {
-                var b = new Building(id);
+                var buildingId = Convert.ToInt32(building.GarrBuildingId);
+                BuildingIDs.Add(buildingId);
+
+                var b = new Building(buildingId);
+
                 Buildings.Add(b.Type, b);
                 if (b.Type == BuildingType.TheForge && !b.IsBuilding && !b.CanActivate)
                 {
@@ -422,7 +411,7 @@ namespace Herbfunk.GarrisonBase.Garrison
 
                     if (!Player.IsAlliance)
                     {
-                        if(b.Level==1)
+                        if (b.Level == 1)
                             DisenchantingEntryId = 237132;
                         else if (b.Level == 2)
                             DisenchantingEntryId = 237134;
@@ -433,7 +422,7 @@ namespace Herbfunk.GarrisonBase.Garrison
                     {
                         if (b.Level == 1)
                             DisenchantingEntryId = 237335;
-                        else if(b.Level == 2)
+                        else if (b.Level == 2)
                             DisenchantingEntryId = 228618;
                         else if (b.Level == 3)
                             DisenchantingEntryId = 228591;
@@ -442,8 +431,8 @@ namespace Herbfunk.GarrisonBase.Garrison
 
                 if (b.Type == BuildingType.Barracks && b.Level == 3)
                     MaxActiveFollowers = 25;
-                //GarrisonBase.Log("{0}", b.ToString());
             }
+
 
             //if not completed the quest to unlock than we manually insert the buildings (since they do not show up in the building ids)
             if (!Buildings.ContainsKey(BuildingType.Mines))
@@ -600,14 +589,14 @@ namespace Herbfunk.GarrisonBase.Garrison
             #endregion
 
             #region Professions
-            foreach (var skill in Player.Professions.ProfessionSkills)
+            foreach (var profession in Player.Professions.ProfessionSkills.Values.Where(p => p.DailyCooldownSpellIds!=null))
             {
-                if (skill == SkillLine.Inscription)
+                if (profession.Skill == SkillLine.Inscription)
                     retBehaviorList.Add(new BehaviorMilling());
 
-                int[] spellIds = PlayerProfessions.ProfessionDailyCooldownSpellIds[skill];
-                retBehaviorList.Add(new BehaviorCraftingProfession(skill, spellIds[1]));
-                retBehaviorList.Add(new BehaviorCraftingProfession(skill, spellIds[0]));
+                int[] spellIds = profession.DailyCooldownSpellIds;
+                retBehaviorList.Add(new BehaviorCraftingProfession(profession.Skill, spellIds[1]));
+                retBehaviorList.Add(new BehaviorCraftingProfession(profession.Skill, spellIds[0]));
             }
             #endregion
 
@@ -678,7 +667,7 @@ namespace Herbfunk.GarrisonBase.Garrison
 
             var forceBagCheck=new BehaviorCustomAction(() =>
             {
-                VendorBehavior.ForceBagCheck = true;
+                Common.ForceBagCheck = true;
             });
             retBehaviorList.Add(forceBagCheck);
 

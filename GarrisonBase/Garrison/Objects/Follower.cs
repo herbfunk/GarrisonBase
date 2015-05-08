@@ -284,7 +284,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 });
 
                 newArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                           !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                           !GarrisonManager.Followers.ContainsKey(followerid);
                 return newArray;
             }
 
@@ -321,7 +321,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     questBehavior
                 });
                 newArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                            !GarrisonManager.Followers.ContainsKey(followerid);
                 return newArray;
             }
 
@@ -400,7 +400,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 });
                 newArray.Criteria += () => !QuestHelper.QuestLogFull &&
                                             BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                            !GarrisonManager.Followers.ContainsKey(followerid);
                 return newArray;
             }
 
@@ -430,7 +430,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     clickStaticPop,
                 });
                 newArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                            !GarrisonManager.Followers.ContainsKey(followerid);
                 return newArray;
             }
 
@@ -611,7 +611,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 });
                 newArray.Criteria += () => !QuestHelper.QuestLogFull &&
                                             BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                            !GarrisonManager.Followers.ContainsKey(followerid);
                 return newArray;
             }
 
@@ -647,7 +647,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                 });
 
                 //
-                newArray.Criteria += () => !GarrisonManager.FollowerIdsCollected.Contains(followerid)
+                newArray.Criteria += () => !GarrisonManager.Followers.ContainsKey(followerid)
                             && BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid);
 
                 return newArray;
@@ -769,7 +769,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     barray_final
                 });
                 returnArray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                            !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                            !GarrisonManager.Followers.ContainsKey(followerid);
                 return returnArray;
             }
             #endregion
@@ -842,7 +842,7 @@ namespace Herbfunk.GarrisonBase.Garrison.Objects
                     daggFinalQuestArray
                 });
                 barray.Criteria += () => BaseSettings.CurrentSettings.FollowerOptionalList.Contains(followerid) &&
-                                           !GarrisonManager.FollowerIdsCollected.Contains(followerid);
+                                           !GarrisonManager.Followers.ContainsKey(followerid);
 
                 return barray;
             }

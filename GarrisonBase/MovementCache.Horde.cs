@@ -49,125 +49,31 @@ namespace Herbfunk.GarrisonBase
 
         internal static List<WoWPoint> Horde_Mine_LevelOne = new List<WoWPoint>
         {
-            new WoWPoint(5468.426, 4433.92, 145.5129),
-            new WoWPoint(5457.243, 4415.33, 137.0531),
-            new WoWPoint(5459.553, 4398.723, 128.9129),
-            new WoWPoint(5468.657, 4390.295, 124.7158),
-            new WoWPoint(5483.245, 4397.901, 115.8856),
-            new WoWPoint(5497.315, 4409.374, 110.7253),
-            new WoWPoint(5514.499, 4417.739, 105.8532),
-            new WoWPoint(5506.601, 4432.289, 99.24547),
-            new WoWPoint(5499.969, 4443.858, 93.44688),
-            new WoWPoint(5496.31, 4433.191, 94.49226),
-            new WoWPoint(5489.424, 4454.552, 88.95512),
-            new WoWPoint(5477.264, 4467.936, 87.17371),
-            new WoWPoint(5446.308, 4457.766, 84.45317),
-            new WoWPoint(5419.16, 4451.607, 83.18919),
-            new WoWPoint(5399.129, 4469.644, 80.91027),
-            new WoWPoint(5381.586, 4496.472, 73.38876),
-            new WoWPoint(5399.129, 4469.644, 80.91027),
-            new WoWPoint(5405.637, 4500.569, 73.15517),
-            //Back
-            new WoWPoint(5399.129, 4469.644, 80.91027),
-            new WoWPoint(5419.16, 4451.607, 83.18919),
-            new WoWPoint(5446.308, 4457.766, 84.45317),
-            new WoWPoint(5477.264, 4467.936, 87.17371),
-            new WoWPoint(5489.424, 4454.552, 88.95512),
-            new WoWPoint(5496.31, 4433.191, 94.49226),
-            new WoWPoint(5499.969, 4443.858, 93.44688),
-            new WoWPoint(5506.601, 4432.289, 99.24547),
-            new WoWPoint(5514.499, 4417.739, 105.8532),
-            new WoWPoint(5497.315, 4409.374, 110.7253),
-            new WoWPoint(5483.245, 4397.901, 115.8856),
-            new WoWPoint(5468.657, 4390.295, 124.7158),
-            new WoWPoint(5459.553, 4398.723, 128.9129),
-            new WoWPoint(5457.243, 4415.33, 137.0531),
-            new WoWPoint(5468.426, 4433.92, 145.5129),
+            new WoWPoint(5502.208, 4421.805, 93.72635),
+            new WoWPoint(5446.285, 4457.987, 84.45752),
+            new WoWPoint(5395.315, 4479.958, 78.5329),
         };
 
         internal static List<WoWPoint> Horde_Mine_LevelTwo = new List<WoWPoint>
         {
-            new WoWPoint(5468.114, 4433.229, 145.514),
-            new WoWPoint(5457.143, 4414.951, 136.8505),
-            new WoWPoint(5458.759, 4399.931, 129.7475),
-            new WoWPoint(5467.899, 4390.434, 124.8342),
-            new WoWPoint(5486.985, 4400.745, 113.3002),
-            new WoWPoint(5503.659, 4411.06, 110.8346),
-            new WoWPoint(5514.952, 4417.597, 105.8567),
-            new WoWPoint(5507.028, 4431.992, 99.24064),
-            new WoWPoint(5499.1, 4445.17, 93.0611),
-            new WoWPoint(5496.071, 4464.227, 88.99474),
-            new WoWPoint(5501.986, 4494.269, 84.59019),
-            new WoWPoint(5523.809, 4511.294, 80.05484),
-            new WoWPoint(5552.856, 4497.281, 80.43407),
-            new WoWPoint(5571.034, 4483.193, 74.93996),
-            new WoWPoint(5553.587, 4465.762, 75.57629),
-            new WoWPoint(5539.181, 4466.372, 75.23327),
-            new WoWPoint(5532.026, 4485.888, 79.3177),
-            new WoWPoint(5540.152, 4505.699, 80.53173),
-            new WoWPoint(5509.921, 4505.284, 81.24356),
-            new WoWPoint(5486.276, 4483.75, 85.4512),
-            new WoWPoint(5470.472, 4466.344, 86.39157),
-            new WoWPoint(5424.468, 4451.729, 82.85767),
-            new WoWPoint(5400.208, 4464.841, 81.54099),
-            new WoWPoint(5382.654, 4493.569, 74.20657),
-            new WoWPoint(5396.69, 4472.12, 79.98512),
-            new WoWPoint(5407.695, 4505.514, 72.06953),
-            new WoWPoint(5397.122, 4471.448, 80.14297),
-            new WoWPoint(5411.791, 4455.492, 83.54063),
-            new WoWPoint(5447.291, 4457.866, 84.51817),
-            new WoWPoint(5478.451, 4467.92, 87.34101),
-            new WoWPoint(5499.524, 4443.04, 93.60712),
-            new WoWPoint(5506.756, 4433.775, 99.26666),
-            new WoWPoint(5513.995, 4419.095, 105.9212),
-            new WoWPoint(5502.188, 4410.501, 110.8506),
-            new WoWPoint(5482.446, 4397.981, 116.346),
-            new WoWPoint(5467.989, 4388.934, 124.7328),
-            new WoWPoint(5456.43, 4404.632, 132.2067),
-            new WoWPoint(5464.164, 4428.584, 144.3604),
-            new WoWPoint(5472.642, 4441.37, 144.7324),
+            new WoWPoint(5502.208, 4421.805, 93.72635),
+            new WoWPoint(5446.285, 4457.987, 84.45752),
+            new WoWPoint(5395.315, 4479.958, 78.5329),
+
+            new WoWPoint(5578.059, 4483.099, 73.34812),
+            new WoWPoint(5540.541, 4463.336, 75.28194),
         };
 
         internal static List<WoWPoint> Horde_Mine_LevelThree = new List<WoWPoint>
         {
-            new WoWPoint(5470.184, 4437.162, 145.453),
-            new WoWPoint(5458.945, 4416.404, 138.0157),
-            new WoWPoint(5459.259, 4399.147, 129.2153),
-            new WoWPoint(5470.396, 4390.42, 124.2538),
-            new WoWPoint(5500.641, 4410.375, 110.8533),
-            new WoWPoint(5515.192, 4417.786, 105.8599),
-            new WoWPoint(5505.839, 4434.039, 99.26975),
-            new WoWPoint(5496.016, 4447.882, 92.11174),
-            new WoWPoint(5479.829, 4467.641, 87.40823),
-            new WoWPoint(5424.378, 4451.391, 82.71361),
-            new WoWPoint(5395.939, 4467.646, 81.1519),
-            new WoWPoint(5379.451, 4500.462, 72.22378),
-            new WoWPoint(5394.149, 4477.419, 78.70185),
-            new WoWPoint(5411.542, 4509.639, 70.82801),
-            new WoWPoint(5396.192, 4474.488, 79.34724),
-            new WoWPoint(5418.297, 4449.297, 83.47066),
-            new WoWPoint(5457.951, 4463.707, 85.12363),
-            new WoWPoint(5441.62, 4502.058, 84.39003),
-            new WoWPoint(5435.632, 4531.614, 81.21237),
-            new WoWPoint(5448.064, 4576.881, 81.71964),
-            new WoWPoint(5451.561, 4551.217, 82.198),
-            new WoWPoint(5435.033, 4529.121, 81.25176),
-            new WoWPoint(5458.1, 4463.685, 85.14763),
-            new WoWPoint(5522.53, 4516.111, 81.23506),
-            new WoWPoint(5554.668, 4495.281, 80.17819),
-            new WoWPoint(5579.444, 4480.768, 73.28632),
-            new WoWPoint(5542.817, 4464.619, 75.2293),
-            new WoWPoint(5530.515, 4483.024, 78.49503),
-            new WoWPoint(5538.352, 4503.316, 80.54839),
-            new WoWPoint(5513.248, 4507.157, 80.43447),
-            new WoWPoint(5501.109, 4489.634, 85.26486),
-            new WoWPoint(5495.56, 4449.341, 91.66743),
-            new WoWPoint(5506.939, 4432.216, 99.24582),
-            new WoWPoint(5515.266, 4417.694, 105.8614),
-            new WoWPoint(5500.292, 4408.67, 110.854),
-            new WoWPoint(5468.042, 4389.145, 124.7168),
-            new WoWPoint(5457.929, 4402.586, 131.0235),
-            new WoWPoint(5473.227, 4441.238, 144.7218)
+            new WoWPoint(5502.208, 4421.805, 93.72635),
+            new WoWPoint(5446.285, 4457.987, 84.45752),
+            new WoWPoint(5395.315, 4479.958, 78.5329),
+
+            new WoWPoint(5578.059, 4483.099, 73.34812),
+            new WoWPoint(5540.541, 4463.336, 75.28194),
+
+            new WoWPoint(5447.35, 4568.228, 81.78511),
         };
 
         #endregion
@@ -308,7 +214,7 @@ namespace Herbfunk.GarrisonBase
         {
             new WoWPoint(5619.303, 4510.864, 119.9594),
         };
-        
+
         #endregion
 
         #region Level 3
@@ -325,7 +231,7 @@ namespace Herbfunk.GarrisonBase
         {
             new WoWPoint(5619.353, 4511.691, 120.1383),
         };
-        
+
         #endregion
 
         #endregion
@@ -682,7 +588,7 @@ namespace Herbfunk.GarrisonBase
         {
            new WoWPoint(5619.601, 4511.941, 120.0808),
         };
-        
+
         #endregion
 
         #region Level 2

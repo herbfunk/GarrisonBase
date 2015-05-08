@@ -294,6 +294,10 @@ namespace Herbfunk.GarrisonBase.Character
         {
             return BagItems.Values.Where(i => i.ShouldVendor).ToList();
         }
+        public List<C_WoWItem> GetBagDisenchantingForgeItems()
+        {
+            return BagItems.Values.Where(i => i.ShouldDisenchantWithForge).ToList();
+        }
         public List<C_WoWItem> GetBagDisenchantingItems()
         {
             return BagItems.Values.Where(i => i.ShouldDisenchant).ToList();

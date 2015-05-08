@@ -88,7 +88,7 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             var removalList = new List<int>();
             foreach (var entry in _barnGossipWorkOrderEntries)
             {
-                if (Player.Inventory.GetCraftingReagentsById((int)entry).Count == 0)
+                if (Player.Inventory.GetCraftingReagentsById((int)entry, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).Count == 0)
                     removalList.Add(_barnGossipWorkOrderEntries.IndexOf(entry));
             }
 
@@ -252,8 +252,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
 
         private async Task<bool> Movement()
         {
-            if (Building.CheckedWorkOrderStartUp || WorkOrderObject == null)
+            if (Building.CheckedWorkOrderStartUp) return false;
+
+            if (WorkOrderObject == null)
             {
+                GarrisonBase.Err("Could not find Work Order Npc Id {0}", Building.WorkOrderNpcEntryId);
                 //Error Cannot find object!
                 Building.CheckedWorkOrderStartUp = true;
                 return false;
@@ -310,44 +313,11 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             }
 
 
-            //if (_specialMovement != null)
-            //{
-            //    //Special Movement for navigating inside buildings using Click To Move
-
-            //    if (_specialMovement.CurrentMovementQueue.Count > 0)
-            //    {
-            //        //find the nearest point to the npc in our special movement queue 
-            //        var nearestPoint = Coroutines.Movement.FindNearestPoint(WorkOrderObject.Location,
-            //            _specialMovement.CurrentMovementQueue.ToList());
-            //        //click to move.. but don't dequeue
-            //        var result = await _specialMovement.ClickToMove_Result(false);
-
-            //        if (!nearestPoint.Equals(_specialMovement.CurrentMovementQueue.Peek()))
-            //        {
-            //            //force dequeue now since its not nearest point
-            //            if (result == MoveResult.ReachedDestination)
-            //                _specialMovement.ForceDequeue(true);
-
-            //            return true;
-            //        }
-
-
-            //        //Last position was nearest and we reached our destination.. so lets finish special movement!
-            //        if (result == MoveResult.ReachedDestination)
-            //        {
-            //            _specialMovement.ForceDequeue(true);
-            //            _specialMovement.DequeueAll(false);
-            //        }
-            //    }
-            //}
-
-
-
             //Setup the NPC movement!
-            if (_movement == null)
-                _movement = new Movement(WorkOrderObject, 4f, WorkOrderObject.Name);
+            if (_movement == null || _movement.CurrentMovementQueue.Count==0)
+                _movement = new Movement(WorkOrderObject, WorkOrderObject.InteractRange-0.50f, WorkOrderObject.Name);
 
-            await _movement.MoveTo(false);
+            await _movement.MoveTo();
             return true;
         }
 
@@ -361,8 +331,8 @@ namespace Herbfunk.GarrisonBase.Coroutines.Behaviors
             if ((Building.Type != BuildingType.TradingPost && Building.Type != BuildingType.Barn) &&
                 Building.WorkOrder.TotalWorkorderStartups() == 0)
             {
+                GarrisonBase.Debug("Total Work Order Startup Count is Zero!");
                 Building.CheckedWorkOrderStartUp = true;
-                //if (_specialMovement != null) _specialMovement.UseDeqeuedPoints(true);
                 return false;
             }
 

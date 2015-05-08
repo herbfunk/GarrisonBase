@@ -227,7 +227,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {
@@ -269,7 +269,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Leather.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {
@@ -312,7 +312,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {
@@ -355,7 +355,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Fur.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {
@@ -397,7 +397,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_NonElite_Meat.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {
@@ -440,7 +440,7 @@ namespace Herbfunk.GarrisonBase.Coroutines
                 BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.MaximumItemCount >
                 PlayerInventory.GetTotalStackCount(
                     Player.Inventory.GetCraftingReagentsById(
-                        (int)BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.ItemType).ToArray()),
+                        (int)BaseSettings.CurrentSettings.TrapSettings_Elite_Leather.ItemType, !BaseSettings.CurrentSettings.IgnoreBankItems, !BaseSettings.CurrentSettings.IgnoreReagentBankItems).ToArray()),
 
             DisposalAction = () =>
             {

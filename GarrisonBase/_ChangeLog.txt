@@ -1,5 +1,13 @@
-﻿v1.4.0.1
+﻿v1.4.1.0
 
+Hearthing to garrison will now finish taxi behavior if successful.
+Added Option to disenchant using the players enchanting profession.
+Added Options to ignore Bank/Reagent Bank Items (used in Work Orders, Profession Skills, etc).
+Garrison Follower Refreshing will now use HB to refresh -- removed all Lua Commands.
+Added missing barn work order npcs to static cache!
+
+
+v1.4.0.1
 Mission Behavior will now use GarrisonMissionFrame to check visibility.
 Vendor Behavior will be checked before loot behavior now.
 Fixed vendor disenchanting failing after moving to object.
